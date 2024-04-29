@@ -8,6 +8,7 @@ class Mapa : public sf::Drawable
 private:
 	sf::Texture textureMapa1;
 	sf::RectangleShape mapa;
+	//sf::Sprite mapa;   //VER DE PASARNOS A ESTA OPCION
 	sf::SoundBuffer buffer;
 	sf::Sound sound;
 	bool musicPlaying;

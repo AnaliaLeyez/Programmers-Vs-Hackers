@@ -10,7 +10,7 @@ int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1024, 768), "Programmers Vs Hackers");
 	window.setFramerateLimit(60);
-	int vista = 1;
+	int vista = 2;
 
 	Menu menu;
 	menu.setSound(true);

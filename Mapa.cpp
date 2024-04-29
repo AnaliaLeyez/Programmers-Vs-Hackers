@@ -1,7 +1,10 @@
 #include "Mapa.h"
+#include "funcionesGlobales.h"
 
 Mapa::Mapa() {
 	//mapa
+	// SI USARAMOS SPRITE, SE REDUCE A UNA LINEA:
+	//cargarSprite(mapa, textureMapa1, "img/mapas/mapa1.png", 0,0, 1.05,1.2);
 	if (!textureMapa1.loadFromFile("img/mapas/mapa1.png")) {
 		std::cout << "Error al cargar img del mapa1";
 	};

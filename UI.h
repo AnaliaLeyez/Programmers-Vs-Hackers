@@ -5,9 +5,9 @@ class UI : public sf::Drawable
 {
 private:
 	sf::Texture textureMonedas;
-	sf::RectangleShape monedas;
+	sf::Sprite moneda;
 	sf::Texture textureRayo;
-	sf::RectangleShape rayo;
+	sf::Sprite rayo;
 	sf::Font font;
 	sf::Text text[3];
 public:
