@@ -1,6 +1,8 @@
 #include "Menu.h"
 #include "Mapa.h"
 #include "UI.h"
+#include "TorreLab.h"
+#include "HackerTrainee.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
@@ -17,6 +19,11 @@ int main()
 
 	Mapa mapa;
 	UI ui;
+
+	//Cosos:
+	TorreLab torrecitaPrueba;
+	torrecitaPrueba.setPosition(200, 200);
+	HackerTrainee kaker;
 
 	//Primer while
 	while (window.isOpen())
@@ -75,6 +82,10 @@ int main()
 				}
 			}
 		}
+		std::cout << kaker.getSalud() << std::endl;
+		
+		if (kaker.getSalud() < 0)
+			std::cout << "Listo lo hizo re cajeta ya " << std::endl;
 
 		//Render Cycle
 		window.clear();
@@ -85,8 +96,15 @@ int main()
 			window.draw(menu);
 			break;
 		case 2:
+			//Pruebas:
+			kaker.moverse();
+			torrecitaPrueba.verificarEnemigo(kaker);
+
 			window.draw(mapa);
 			window.draw(ui);
+			window.draw(torrecitaPrueba);
+			window.draw(kaker);
+
 		default:
 			break;
 		}

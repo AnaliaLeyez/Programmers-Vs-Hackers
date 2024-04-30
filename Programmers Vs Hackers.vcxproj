@@ -71,7 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Program Files\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include;$(IncludePath)</IncludePath>
+    <IncludePath>F:\UTN\02 - Segundo Cuatrimestre\Laboratorio 2\PRUEBAS Y EXPERIMENTOS SFML\PruebaSFML\SFML\include;C:\Program Files\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>F:\UTN\02 - Segundo Cuatrimestre\SFML\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>C:\Program Files\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include;$(IncludePath)</IncludePath>
@@ -138,15 +139,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="funcionesGlobales.cpp" />
+    <ClCompile Include="Hacker.cpp" />
+    <ClCompile Include="HackerTrainee.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mapa.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Torre.cpp" />
+    <ClCompile Include="TorreLab.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="funcionesGlobales.h" />
+    <ClInclude Include="Hacker.h" />
+    <ClInclude Include="HackerTrainee.h" />
     <ClInclude Include="Mapa.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Torre.h" />
+    <ClInclude Include="TorreLab.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
