@@ -1,3 +1,13 @@
+#include <SFML/Graphics.hpp>
+#include <list>
+
+#include "Collisionable.h"
+#include "Player.h"
+#include "Tower.h"
+#include "Hacker.h"
+#include "Bullet.h"
+
+
 #include "GamePlay.h"
 
 GamePlay* GamePlay::_currentInstance = nullptr;
@@ -14,7 +24,10 @@ GamePlay& GamePlay::getInstance() {
 
 void GamePlay::update()
 {
-	_player.update();
+	
+	_tower.update();
+	_hackers.update();
+
 	for (Bullet& bullet : _bullets) {
 		bullet.update();
 	}
@@ -24,12 +37,12 @@ void GamePlay::update()
 	while (it != _bullets.end()) {
 		Bullet& bullet = *it;
 		bullet.update();
-		if (bullet.getPosition().x > ) {
+	/*	if (bullet.getPosition().x > torrecitaPrueba.getRango().getLocalBounds().getSize().x) {
 			it = _bullets.erase(it);
 		}
 		else {
 			++it;
-		}
+		}*/
 
 	}
 }
@@ -42,7 +55,7 @@ void GamePlay::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	}
 }
 
-void GamePlay::shoot(sf::Vector2f position, Bullet::Direction direction)
+void GamePlay::shoot(sf::Vector2f position)
 {
-	_bullets.push_back(Bullet(position, direction));
+	_bullets.push_back(Bullet(position, _hacker.getPosition()));
 }

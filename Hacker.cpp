@@ -1,9 +1,28 @@
+#include <SFML/Graphics.hpp>
+#include <string>
+#include <iostream>
+
+#include "Collisionable.h"
+
 #include "Hacker.h"
 
-
-float& Hacker::getSalud()
+Hacker::Hacker(sf::Vector2f position, sf::Vector2f direction, int damage, sf::Vector2f velocity, std::string FileName)
 {
-	return _salud;
+	setPosition(position);
+	_direction = direction;
+	_damage = damage;
+	_velocity = velocity;
+
+	if (!_texture.loadFromFile("img/hackers/" + FileName)) {
+		std::cout << "NO CARGO" << std::endl;
+	}
+	_sprite.setTexture(_texture);
+	_sprite.setOrigin({ getBounds().left + getBounds().width / 2, getBounds().top + getBounds().height / 2 });
+}
+
+int& Hacker::getLife()
+{
+	return _life;
 }
 
 int Hacker::getTipoAtaque()
@@ -11,14 +30,24 @@ int Hacker::getTipoAtaque()
 	return _tipoAtaque;
 }
 
-float Hacker::getCantidadDanio()
+float Hacker::getDamage()
 {
-	return _cantidadDanio;
+	return _damage;
 }
 
-float Hacker::getVelocidadMovimiento()
+sf::Vector2f Hacker::getVelocity()
 {
-	return _velocidadMovimiento;
+	return _velocity;
+}
+
+sf::Vector2f Hacker::getDirection()
+{
+	return _direction;
+}
+
+sf::Vector2f Hacker::getPosition()
+{
+	return _position;
 }
 
 bool Hacker::getBoss()
@@ -26,15 +55,15 @@ bool Hacker::getBoss()
 	return _isABoss;
 }
 
-float Hacker::getDropOro()
+float Hacker::getGoldenDrop()
 {
-	return _dropOro;
+	return _goldenDrop;
 }
 
 //SETTERS
-void Hacker::setSalud(float salud)
+void Hacker::setLife(int salud)
 {
-	_salud = salud;
+	_life = salud;
 }
 
 void Hacker::setTipoAtaque(int tipo)
@@ -42,14 +71,24 @@ void Hacker::setTipoAtaque(int tipo)
 	_tipoAtaque = tipo;
 }
 
-void Hacker::setCantidadDanio(float danio)
+void Hacker::setDamage(float danio)
 {
-	_cantidadDanio = danio;
+	_damage = danio;
 }
 
-void Hacker::setVelocidadMovimiento(float velocidad)
+void Hacker::setVelocity(sf::Vector2f velocidad)
 {
-	_velocidadMovimiento = velocidad;
+	_velocity = velocidad;
+}
+
+void Hacker::setDirection(sf::Vector2f direccion)
+{
+	_direction = direccion;
+}
+
+void Hacker::setPosition(sf::Vector2f posicion)
+{
+	_position = posicion;
 }
 
 void Hacker::setBoos(bool boss = false)
@@ -57,54 +96,63 @@ void Hacker::setBoos(bool boss = false)
 	_isABoss = boss;
 }
 
-void Hacker::setDrop(float drop)
+void Hacker::setGoldenDrop(float drop)
 {
-	_dropOro = drop;
+	_goldenDrop = drop;
 }
 
-void Hacker::atacar(float* objetivo)
+void Hacker::attack(float* objetivo)
 {
-	*objetivo -= getCantidadDanio();
+	*objetivo -= getDamage();
 
+}
+
+sf::FloatRect Hacker::getBounds() const
+{
+	return _sprite.getGlobalBounds();
+}
+
+void Hacker::update()
+{
+	moveHacker();
 }
 
 void Hacker::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	states.transform *= getTransform();
 	target.draw(_sprite, states);
 }
 
 
 //DESARROLLO
-void Hacker::moverse()
+void Hacker::moveHacker()
 {
-	_sprite.move(_posicion);
-
-
+	move(getDirection());
 	if (_sprite.getPosition().x < 0)
 	{
 		//_sprite.setPosition(0, _sprite.getPosition().y);
-		_posicion.x = -_posicion.x * 1.1;
+		_position.x = -_position.x * 1.1;
 	}
 
 	//Limite superior
 	if (_sprite.getPosition().y < 0)
 	{
 		//_sprite.setPosition(_sprite.getPosition().x, 0);
-		_posicion.y = -_posicion.y;
+		_position.y = -_position.y;
 	}
 
 	//Limite derecho
 	if (_sprite.getPosition().x + _sprite.getGlobalBounds().width > 800)
 	{
 		//		_sprite.setPosition(800 - _sprite.getGlobalBounds().width, _sprite.getPosition().y);
-		_posicion.x = -_posicion.x;
+		_position.x = -_position.x;
 	}
 
 	//Limite inferior
 	if (_sprite.getPosition().y + _sprite.getGlobalBounds().width > 600)
 	{
 		//_sprite.setPosition(_sprite.getPosition().x, 600 - _sprite.getGlobalBounds().height);
-		_posicion.y = -_posicion.y;
+		_position.y = -_position.y;
 	}
 }
 

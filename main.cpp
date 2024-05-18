@@ -1,15 +1,20 @@
-#include "Menu.h"
-#include "Mapa.h"
-#include "UI.h"
-#include "TorreLab.h"
-#include "HackerTrainee.h"
-#include "GamePlay.h"
-#include "Player.h"
-#include "Bullet.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>
+
+#include "Menu.h"
+#include "Map.h"
+#include "UI.h"
+
+#include "GamePlay.h"
+#include "Player.h"
+#include "Bullet.h"
+#include "Hacker.h"
+#include "HackerTrainee.h"
+#include "Tower.h"
+#include "TowerLab.h"
+
 
 int main()
 {
@@ -21,11 +26,11 @@ int main()
 	Menu menu;
 	menu.setSound(true);
 
-	Mapa mapa;
+	Map mapa;
 	UI ui;
 
 	//Cosos:
-	TorreLab torrecitaPrueba;
+	TowerLab torrecitaPrueba;
 	torrecitaPrueba.setPosition(200, 200);
 	HackerTrainee kaker;
 
@@ -86,9 +91,9 @@ int main()
 				}
 			}
 		}
-		std::cout << kaker.getSalud() << std::endl;
+		std::cout << kaker.getLife() << std::endl;
 		
-		if (kaker.getSalud() < 0)
+		if (kaker.getLife() < 0)
 			std::cout << "Listo lo hizo re cajeta ya " << std::endl;
 
 		//Render Cycle
@@ -101,7 +106,7 @@ int main()
 			break;
 		case 2:
 			//Pruebas:
-			kaker.moverse();
+			kaker.moveHacker();
 			torrecitaPrueba.verificarEnemigo(kaker);
 
 			window.draw(mapa);

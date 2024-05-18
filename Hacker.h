@@ -1,56 +1,57 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <string>
 
-class Hacker :public sf::Drawable
+class Hacker :public sf::Drawable, public sf::Transformable, public Collisionable
 {
 protected:
 
 	sf::Sprite _sprite;
-	sf::Texture _texture;
-	std::string _nombre;
-
+	static sf::Texture _texture;
+	std::string _name;
+	sf::Vector2f _velocity;
+	sf::Vector2f _direction;
 	int _seniority;
-	float _salud;
-	int _tipoAtaque;
-	float _cantidadDanio;
-	float _velocidadMovimiento;
+	int _life;
+	int _tipoAtaque; //podriamos sacarlo
+	int _damage;
 	bool _isABoss;
-	float _dropOro;
-
-	//DESARROOLLO
-
-	sf::Vector2f _posicion;
-
-public:
+	int _goldenDrop;
 
 	//DESARROLLO
 
-	void moverse();
+	sf::Vector2f _position;
+
+public:
+	Hacker(sf::Vector2f position, sf::Vector2f direction,int damage, sf::Vector2f velocity, std::string FileName);
+	//DESARROLLO
+
+	void moveHacker();
 	sf::Sprite getSprite();
 
 	//Getters
-	float& getSalud();
-	int getTipoAtaque();
-	float getCantidadDanio();
-	float getVelocidadMovimiento();
+	int& getLife();
+	int getTipoAtaque(); //lo podriamos sacar
+	float getDamage();
+	sf::Vector2f getVelocity();
+	sf::Vector2f getDirection();
+	sf::Vector2f getPosition();
 	bool getBoss();
-	float getDropOro();
+	float getGoldenDrop();
 
 
 	//Setters
-	void setSalud(float);
-	void setTipoAtaque(int);
-	void setCantidadDanio(float);
-	void setVelocidadMovimiento(float);
+	void setLife(int);
+	void setTipoAtaque(int); //lo podriamos sacar
+	void setDamage(float);
+	void setVelocity(sf::Vector2f);
+	void setDirection(sf::Vector2f);
+	void setPosition(sf::Vector2f);
 	void setBoos(bool);
-	void setDrop(float);
+	void setGoldenDrop(float);
 	
 	//Comportamiento
-	void atacar(float*);
+	void attack(float*);
+	sf::FloatRect getBounds() const;
+	void update();
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-
-
-
 };
 

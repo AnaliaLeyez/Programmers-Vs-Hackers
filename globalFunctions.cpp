@@ -1,4 +1,4 @@
-#include "funcionesGlobales.h"
+#include "globalFunctions.h"
 
 void cargarSprite(sf::Sprite &sprite, sf::Texture &texture, std::string ruta, int posX, int posY, float scaleX, float scaleY) {
 

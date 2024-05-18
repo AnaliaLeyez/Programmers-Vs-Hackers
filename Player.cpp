@@ -1,5 +1,8 @@
-#include "Player.h"
+#include <SFML/Graphics.hpp>
+
 #include "GamePlay.h"
+
+#include "Player.h"
 
 Player::Player()
 {
@@ -11,7 +14,7 @@ void Player::update()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && _cooldown>60) {
 		GamePlay& gm = GamePlay::getInstance();
-		gm.shoot(getPosition(), Bullet::Direction::Right);
+		gm.shoot();
 		_cooldown = 0;
 	}
 

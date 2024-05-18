@@ -3,11 +3,11 @@
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>
 #include <iostream>
-class Mapa : public sf::Drawable
+class Map : public sf::Drawable
 {
 private:
-	sf::Texture textureMapa1;
-	sf::RectangleShape mapa;
+	sf::Texture _textureMap;
+	sf::RectangleShape _mapShape;
 	//sf::Sprite mapa;   //VER DE PASARNOS A ESTA OPCION
 	sf::SoundBuffer buffer;
 	sf::Sound sound;
@@ -15,9 +15,9 @@ private:
 	sf::Texture textureParlante;
 	sf::RectangleShape parlante;
 public:
-	Mapa();
+	Map();
 	virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
-	sf::RectangleShape getMapa() { return mapa; }
+	sf::RectangleShape getMap() { return _mapShape; }
 	sf::RectangleShape getParalante() { return parlante; }
 	sf::Texture getTextureParlante() { return textureParlante; }
 	void setTextureParlante(std::string ruta);
