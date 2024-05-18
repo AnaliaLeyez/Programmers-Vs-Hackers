@@ -1,26 +1,23 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio/SoundBuffer.hpp>
-#include <SFML/Audio/Sound.hpp>
-#include <iostream>
-class Map : public sf::Drawable
+
+class Map : public sf::Drawable, public sf::Transformable
 {
 private:
-	sf::Texture _textureMap;
-	sf::RectangleShape _mapShape;
-	//sf::Sprite mapa;   //VER DE PASARNOS A ESTA OPCION
-	sf::SoundBuffer buffer;
-	sf::Sound sound;
-	bool musicPlaying;
-	sf::Texture textureParlante;
-	sf::RectangleShape parlante;
+	sf::Sprite _sprite;
+	sf::Texture _tileMapa;
+	sf::SoundBuffer _buffer;
+	sf::Sound _sound;
+	bool _musicPlaying;
+	sf::Texture _textureUTN;
+	sf::RectangleShape _UTN;
+	sf::Texture _textureSpeaker;
+	sf::RectangleShape _speaker;
 public:
 	Map();
 	virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
-	sf::RectangleShape getMap() { return _mapShape; }
-	sf::RectangleShape getParalante() { return parlante; }
-	sf::Texture getTextureParlante() { return textureParlante; }
-	void setTextureParlante(std::string ruta);
+	sf::RectangleShape getSpeaker() { return _speaker; }
+	sf::Texture getTextureSpeaker() { return _textureSpeaker; }
+	void setTextureSpeaker(std::string ruta);
 
 	//MUSICA
 	bool getMusicPlaying();

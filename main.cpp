@@ -76,16 +76,16 @@ int main()
 						vista = 2;
 						mapa.setSound(true);
 					}
-					if (mapa.getParalante().getGlobalBounds().contains(mousex, mousey)) {
+					if (mapa.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
 						if (mapa.getMusicPlaying()) {
 							mapa.setSound(false);
 							mapa.setMusicPlaying(false);
-							mapa.setTextureParlante("img/complementarias/mute.png");
+							mapa.setTextureSpeaker("img/complementarias/mute.png");
 						}
 						else {
 							mapa.setSound(true);
 							mapa.setMusicPlaying(true);
-							mapa.setTextureParlante("img/complementarias/musicOn.png");
+							mapa.setTextureSpeaker("img/complementarias/musicOn.png");
 						}
 					}
 				}

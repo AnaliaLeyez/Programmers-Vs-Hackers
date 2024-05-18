@@ -4,8 +4,8 @@ class Tower : public sf::Drawable, public sf::Transformable, public Collisionabl
 {
 protected:
 	//Propiedades estéticas
-	sf::Sprite _sprite;
 	static sf::Texture _texture;
+	sf::Sprite _sprite;
 	sf::CircleShape _visualRange;
 	std::string _name;
 
@@ -33,10 +33,8 @@ public:
 	float getCostUpgrade();
 	float getSalesValue();
 	int getDamage();
-
 	int getRange();
 	int getSpeedAtack();
-	int getTipoAtaque(); // repito, no se si va esto al final
 
 	int getUpgradesAmount();
 
@@ -53,7 +51,6 @@ public:
 	void setCooldown(int);
 	
 	//Comportamiento
-
 	bool seekEnemy();
 	void verificarEnemigo(Hacker&);
 	sf::FloatRect getBounds() const;

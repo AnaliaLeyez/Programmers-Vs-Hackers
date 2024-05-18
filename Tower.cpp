@@ -55,10 +55,6 @@ int Tower::getSpeedAtack()
     return _speedAttack;
 }
 
-int Tower::getTipoAtaque()
-{
-    return _tipoAtaque;
-}
 
 int Tower::getUpgradesAmount()
 {
@@ -139,7 +135,6 @@ void Tower::verificarEnemigo(Hacker& enemy)
     }    
 }
 
-
 sf::FloatRect Tower::getBounds() const
 {
     return _sprite.getLocalBounds();
@@ -148,7 +143,6 @@ sf::FloatRect Tower::getBounds() const
 void Tower::update()
 {
    //actualizar hacker en rango:
-   //
    // _hackersOnRange.push_back();
    
    Hacker enemy(sf::Vector2f{0,0}, sf::Vector2f{ 0,0 }, 0, sf::Vector2f{ 0,0 }, "");

@@ -1,58 +1,74 @@
-#include "Mapa.h"
-#include "funcionesGlobales.h"
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Audio/Sound.hpp>
+#include <iostream>
 
-Mapa::Mapa() {
-	//mapa
-	// SI USARAMOS SPRITE, SE REDUCE A UNA LINEA:
-	//cargarSprite(mapa, textureMapa1, "img/mapas/mapa1.png", 0,0, 1.05,1.2);
-	if (!textureMapa1.loadFromFile("img/mapas/mapa1.png")) {
-		std::cout << "Error al cargar img del mapa1";
+#include "globalFunctions.h"
+#include "Map.h"
+
+Map::Map() {
+	_tileMapa.loadFromFile("img/mapas/mapa1.png");
+
+	for (int y = 0; y < 20; y++) {
+		for (int x = 0; x < 30; x++) {
+			sf::Sprite _sprite(_tileMapa);
+			_sprite.setTextureRect(sf::IntRect(x * 32, y * 32, 32, 32));
+			_sprite.setPosition(32 * x, 32 * y);
+		}
+	}
+
+	//UTN
+	if (!_textureUTN.loadFromFile("img/base.png")) {
+		std::cout << "Error al cargar img UTN";
 	};
-	mapa.setSize(sf::Vector2f(1024, 768));
-	mapa.setTexture(&textureMapa1);
-	mapa.setPosition(sf::Vector2f(0, 0));
+	_speaker.setSize(sf::Vector2f(80, 80));
+	_speaker.setTexture(&_textureSpeaker);
+	_speaker.setPosition(sf::Vector2f(900, 650));
+	_speaker.setOrigin(_speaker.getGlobalBounds().width / 2, _speaker.getGlobalBounds().height / 2);
 
 	//parlante
-	if (!textureParlante.loadFromFile("img/complementarias/musicOn.png")) {
+	if (!_textureSpeaker.loadFromFile("img/complementarias/musicOn.png")) {
 		std::cout << "Error al cargar img mute";
 	};
-	parlante.setSize(sf::Vector2f(80, 80));
-	parlante.setTexture(&textureParlante);
-	parlante.setPosition(sf::Vector2f(900, 650));
-	parlante.setOrigin(parlante.getGlobalBounds().width / 2, parlante.getGlobalBounds().height / 2);
+	_speaker.setSize(sf::Vector2f(80, 80));
+	_speaker.setTexture(&_textureSpeaker);
+	_speaker.setPosition(sf::Vector2f(900, 650));
+	_speaker.setOrigin(_speaker.getGlobalBounds().width / 2, _speaker.getGlobalBounds().height / 2);
 
 	//musica
-	if (!buffer.loadFromFile("music/nivel1.wav")) {
+	if (!_buffer.loadFromFile("music/nivel1.wav")) {
 		std::cout << "Error al cargar musica nivel 1";
 	};
-	sound.setBuffer(buffer);
-	sound.setVolume(100);
-	musicPlaying = true;
+	_sound.setBuffer(_buffer);
+	_sound.setVolume(100);
+	_musicPlaying = true;
+
 }
 
-void Mapa::draw(sf::RenderTarget& rt, sf::RenderStates rs)const {
-	rt.draw(mapa, rs);
-	rt.draw(parlante, rs);
+void Map::draw(sf::RenderTarget& target, sf::RenderStates states)const {
+	states.transform *= getTransform();
+	target.draw(_sprite, states);
+	target.draw(_speaker, states);
 }
 
-void Mapa::setTextureParlante(std::string ruta) {
-	if (!textureParlante.loadFromFile(ruta)) {
+void Map::setTextureSpeaker(std::string ruta) {
+	if (!_textureSpeaker.loadFromFile(ruta)) {
 		std::cout << "Error al cargar img mute";
 	};
-	parlante.setTexture(&textureParlante);
+	_speaker.setTexture(&_textureSpeaker);
 }
 
 //MUSICA
-bool Mapa::getMusicPlaying() { return musicPlaying; }
-void Mapa::setMusicPlaying(bool playing) { musicPlaying = playing; }
-sf::Sound Mapa::getSound() { return sound; }
-void Mapa::setSound(bool reproducir) {
+bool Map::getMusicPlaying() { return _musicPlaying; }
+void Map::setMusicPlaying(bool playing) { _musicPlaying = playing; }
+sf::Sound Map::getSound() { return _sound; }
+void Map::setSound(bool reproducir) {
 	if (reproducir) {
-		sound.play();
+		_sound.play();
 
 	}
 	else {
-		sound.pause();
+		_sound.pause();
 
 	}
 }
