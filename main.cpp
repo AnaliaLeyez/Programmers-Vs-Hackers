@@ -3,6 +3,9 @@
 #include "UI.h"
 #include "TorreLab.h"
 #include "HackerTrainee.h"
+#include "GamePlay.h"
+#include "Player.h"
+#include "Bullet.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
@@ -10,8 +13,9 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1024, 768), "Programmers Vs Hackers");
+	sf::RenderWindow window(sf::VideoMode(960, 640), "Programmers Vs Hackers");
 	window.setFramerateLimit(60);
+	GamePlay &gp = GamePlay::getInstance();
 	int vista = 2;
 
 	Menu menu;
