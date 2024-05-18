@@ -2,7 +2,7 @@
 
 class Map : public sf::Drawable, public sf::Transformable
 {
-private:
+protected:
 	sf::Sprite _sprite;
 	sf::Texture _tileMapa;
 	sf::SoundBuffer _buffer;
@@ -12,9 +12,9 @@ private:
 	sf::RectangleShape _UTN;
 	sf::Texture _textureSpeaker;
 	sf::RectangleShape _speaker;
+	int _level;
 public:
-	Map();
-	virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
+	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	sf::RectangleShape getSpeaker() { return _speaker; }
 	sf::Texture getTextureSpeaker() { return _textureSpeaker; }
 	void setTextureSpeaker(std::string ruta);

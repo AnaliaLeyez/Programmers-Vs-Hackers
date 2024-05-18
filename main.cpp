@@ -5,6 +5,7 @@
 
 #include "Menu.h"
 #include "Map.h"
+#include "Map1.h"
 #include "UI.h"
 
 #include "GamePlay.h"
@@ -26,12 +27,11 @@ int main()
 	Menu menu;
 	menu.setSound(true);
 
-	Map mapa;
+	Map1 mapa;
 	UI ui;
 
 	//Cosos:
-	TowerLab torrecitaPrueba;
-	torrecitaPrueba.setPosition(200, 200);
+	TowerLab torrePrueba({200.f,200.f});
 	HackerTrainee kaker;
 
 	//Primer while
@@ -54,47 +54,14 @@ int main()
 					// obtiene las coordenadas del clic
 					int mousex = ev.mouseButton.x;
 					int mousey = ev.mouseButton.y;
+					gp.validateClickOnMap(mousex, mousey, mapa);
+					gp.validateClickOnMenu(mousex, mousey, menu);
 
 					// verifica si las coordenadas del clic est n dentro del sprite
-					if (menu.getText4().getGlobalBounds().contains(mousex, mousey)) {
-						if (menu.getMusicPlaying()) {
-							menu.setSound(false);
-							menu.setMusicPlaying(false);
-						}
-						else {
-							menu.setSound(true);
-							menu.setMusicPlaying(true);
-						}
-					}
-					if (menu.getText5().getGlobalBounds().contains(mousex, mousey)) {
-						window.close();
-					}
-
-					if (menu.getText1().getGlobalBounds().contains(mousex, mousey)) {
-						menu.setSound(false);
-						menu.setMusicPlaying(false);
-						vista = 2;
-						mapa.setSound(true);
-					}
-					if (mapa.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
-						if (mapa.getMusicPlaying()) {
-							mapa.setSound(false);
-							mapa.setMusicPlaying(false);
-							mapa.setTextureSpeaker("img/complementarias/mute.png");
-						}
-						else {
-							mapa.setSound(true);
-							mapa.setMusicPlaying(true);
-							mapa.setTextureSpeaker("img/complementarias/musicOn.png");
-						}
-					}
+					
 				}
 			}
 		}
-		std::cout << kaker.getLife() << std::endl;
-		
-		if (kaker.getLife() < 0)
-			std::cout << "Listo lo hizo re cajeta ya " << std::endl;
 
 		//Render Cycle
 		window.clear();
@@ -107,11 +74,11 @@ int main()
 		case 2:
 			//Pruebas:
 			kaker.moveHacker();
-			torrecitaPrueba.verificarEnemigo(kaker);
+			torrePrueba.verificarEnemigo(kaker);
 
 			window.draw(mapa);
 			window.draw(ui);
-			window.draw(torrecitaPrueba);
+			window.draw(torrePrueba);
 			window.draw(kaker);
 
 		default:

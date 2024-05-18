@@ -147,6 +147,7 @@
     <ClCompile Include="HackerTrainee.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Map1.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Tower.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="Hacker.h" />
     <ClInclude Include="HackerTrainee.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Map1.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Tower.h" />

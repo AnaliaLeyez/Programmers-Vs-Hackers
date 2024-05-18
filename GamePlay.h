@@ -13,5 +13,7 @@ public:
 	void update();
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	void shoot(sf::Vector2f position);
+	void validateClickOnMap(int mousex, int mousey, Map mapa);
+	void GamePlay::validateClickOnMenu(int mousex, int mousey, Menu menu);
 };
 

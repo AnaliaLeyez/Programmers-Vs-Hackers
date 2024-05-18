@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <list>
 
+#include "Menu.h"
+#include "Map.h"
 #include "Collisionable.h"
 #include "Player.h"
 #include "Tower.h"
@@ -24,9 +26,8 @@ GamePlay& GamePlay::getInstance() {
 
 void GamePlay::update()
 {
-	
 	_tower.update();
-	_hackers.update();
+	//_hackers.update();
 
 	for (Bullet& bullet : _bullets) {
 		bullet.update();
@@ -49,7 +50,7 @@ void GamePlay::update()
 
 void GamePlay::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	target.draw(_player, states);
+	//target.draw(_player, states);
 	for (const Bullet& bullet : _bullets) {
 		target.draw(bullet, states);
 	}
@@ -57,5 +58,38 @@ void GamePlay::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void GamePlay::shoot(sf::Vector2f position)
 {
-	_bullets.push_back(Bullet(position, _hacker.getPosition()));
+	//_bullets.push_back(Bullet(position, _hacker.getPosition()));
+}
+
+void GamePlay::validateClickOnMap(int mousex, int mousey, Map mapa) {
+
+	if (mapa.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
+		if (mapa.getMusicPlaying()) {
+			mapa.setSound(false);
+			mapa.setMusicPlaying(false);
+			mapa.setTextureSpeaker("img/complementarias/mute.png");
+		}
+		else {
+			mapa.setSound(true);
+			mapa.setMusicPlaying(true);
+			mapa.setTextureSpeaker("img/complementarias/musicOn.png");
+		}
+	}
+}
+
+void GamePlay::validateClickOnMenu(int mousex, int mousey, Menu menu) {
+	if (menu.getText4().getGlobalBounds().contains(mousex, mousey)) {
+		if (menu.getMusicPlaying()) {
+			menu.setSound(false);
+			menu.setMusicPlaying(false);
+		}
+		else {
+			menu.setSound(true);
+			menu.setMusicPlaying(true);
+		}
+	}
+	//VER COMO INDICAR CON GAMEPLAY QUE CIERRE VENTANA
+	//if (menu.getText5().getGlobalBounds().contains(mousex, mousey)) {
+	//	window.close();
+	//}
 }
