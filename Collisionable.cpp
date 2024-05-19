@@ -2,7 +2,7 @@
 
 #include "Collisionable.h"
 
-bool Collisionable::collided(Collisionable& target) const
+bool Collisionable::isCollision(Collisionable& target) const
 {
     return getBounds().intersects(target.getBounds());
 }

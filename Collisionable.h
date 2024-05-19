@@ -4,6 +4,6 @@ class Collisionable
 {
 public:
 	virtual sf::FloatRect getBounds() const = 0;
-	bool collided(Collisionable&) const;
+	bool isCollision(Collisionable&) const;
 };
 

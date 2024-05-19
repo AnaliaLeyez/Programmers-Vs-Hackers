@@ -56,9 +56,7 @@ int main()
 					int mousey = ev.mouseButton.y;
 					gp.validateClickOnMap(mousex, mousey, mapa);
 					gp.validateClickOnMenu(mousex, mousey, menu, window, vista);
-
 					// verifica si las coordenadas del clic est n dentro del sprite
-					
 				}
 			}
 		}

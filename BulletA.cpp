@@ -5,7 +5,6 @@
 
 #include "BulletA.h"
 
-
 BulletA::BulletA(sf::Vector2f position, sf::Vector2f direction)
 {
 	setPosition(position);

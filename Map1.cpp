@@ -3,7 +3,6 @@
 #include <SFML/Audio/Sound.hpp>
 #include <iostream>
 
-#include "globalFunctions.h"
 #include "Map.h"
 
 #include "Map1.h"

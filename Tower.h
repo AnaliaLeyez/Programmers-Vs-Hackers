@@ -1,5 +1,4 @@
 #pragma once
-#include "Collisionable.h"
 #include "HackerTrainee.h"
 
 class Tower : public sf::Drawable, public sf::Transformable, public Collisionable
