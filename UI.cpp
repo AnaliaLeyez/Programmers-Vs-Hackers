@@ -1,5 +1,5 @@
 #include "UI.h"
-#include "funcionesGlobales.h"
+#include "globalFunctions.h"
 #include <iostream>
 
 UI::UI() {

@@ -1,4 +1,11 @@
 #pragma once
+#include <iostream>
+#include <list>
+#include "Tower.h"
+#include "Bullet.h"
+#include "Hacker.h"
+#include "Map.h"
+#include "Menu.h"
 
 class GamePlay : public sf::Drawable
 {
@@ -13,7 +20,7 @@ public:
 	void update();
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	void shoot(sf::Vector2f position);
-	void validateClickOnMap(int mousex, int mousey, Map mapa);
-	void GamePlay::validateClickOnMenu(int mousex, int mousey, Menu menu);
+	void validateClickOnMap(int mousex, int mousey, Map &mapa);
+	void validateClickOnMenu(int mousex, int mousey, Menu &menu, sf::RenderWindow& window);
 };
 

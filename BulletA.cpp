@@ -28,5 +28,5 @@ void BulletA::update1BulletA()
 void BulletA::update2BulletA()
 {
 	_damage = 4;
-	_velocity= {3.f,3.f}
+	_velocity = { 3.f,3.f };
 }

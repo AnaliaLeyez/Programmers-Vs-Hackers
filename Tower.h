@@ -1,10 +1,13 @@
 #pragma once
+#include "Collisionable.h"
+#include "HackerTrainee.h"
 
 class Tower : public sf::Drawable, public sf::Transformable, public Collisionable
 {
 protected:
 	//Propiedades estéticas
-	static sf::Texture _texture;
+	//static sf::Texture _texture;
+	sf::Texture _texture;
 	sf::Sprite _sprite;
 	sf::CircleShape _visualRange;
 	std::string _name;
@@ -47,12 +50,10 @@ public:
 	void setCostUpgrade(float);
 	void setSalesValue(float);
 	void setDamage(int);
-	void setRange(int);
 	void setCooldown(int);
 	
 	//Comportamiento
-	bool seekEnemy();
-	void verificarEnemigo(Hacker&);
+	void verificarEnemigo(HackerTrainee&);
 	sf::FloatRect getBounds() const;
 	void update();
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;

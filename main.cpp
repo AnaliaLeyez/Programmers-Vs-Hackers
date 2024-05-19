@@ -22,7 +22,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(960, 640), "Programmers Vs Hackers");
 	window.setFramerateLimit(60);
 	GamePlay &gp = GamePlay::getInstance();
-	int vista = 2;
+	int vista = 1;
 
 	Menu menu;
 	menu.setSound(true);
@@ -55,7 +55,7 @@ int main()
 					int mousex = ev.mouseButton.x;
 					int mousey = ev.mouseButton.y;
 					gp.validateClickOnMap(mousex, mousey, mapa);
-					gp.validateClickOnMenu(mousex, mousey, menu);
+					gp.validateClickOnMenu(mousex, mousey, menu, window);
 
 					// verifica si las coordenadas del clic est n dentro del sprite
 					

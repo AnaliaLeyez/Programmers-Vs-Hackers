@@ -6,20 +6,6 @@
 
 #include "Hacker.h"
 
-Hacker::Hacker(sf::Vector2f position, sf::Vector2f direction, int damage, sf::Vector2f velocity, std::string FileName)
-{
-	setPosition(position);
-	_direction = direction;
-	_damage = damage;
-	_velocity = velocity;
-
-	if (!_texture.loadFromFile("img/hackers/" + FileName)) {
-		std::cout << "NO CARGO" << std::endl;
-	}
-	_sprite.setTexture(_texture);
-	_sprite.setOrigin({ getBounds().left + getBounds().width / 2, getBounds().top + getBounds().height / 2 });
-}
-
 int& Hacker::getLife()
 {
 	return _life;

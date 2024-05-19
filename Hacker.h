@@ -1,11 +1,13 @@
 #pragma once
-
+#include "Collisionable.h"
+#include <SFML/Graphics.hpp>
 class Hacker :public sf::Drawable, public sf::Transformable, public Collisionable
 {
 protected:
 
 	sf::Sprite _sprite;
-	static sf::Texture _texture;
+	//static sf::Texture _texture;
+	sf::Texture _texture;
 	std::string _name;
 	sf::Vector2f _velocity;
 	sf::Vector2f _direction;
@@ -21,7 +23,6 @@ protected:
 	sf::Vector2f _position;
 
 public:
-	Hacker(sf::Vector2f position, sf::Vector2f direction,int damage, sf::Vector2f velocity, std::string FileName);
 	//DESARROLLO
 
 	void moveHacker();

@@ -1,10 +1,15 @@
 #pragma once
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Audio/Sound.hpp>
+#include <list>
 
 class Map : public sf::Drawable, public sf::Transformable
 {
 protected:
 	sf::Sprite _sprite;
-	sf::Texture _tileMapa;
+	sf::Texture _tileMap;
+	std::list<sf::Sprite> _tiles;
 	sf::SoundBuffer _buffer;
 	sf::Sound _sound;
 	bool _musicPlaying;
@@ -12,7 +17,6 @@ protected:
 	sf::RectangleShape _UTN;
 	sf::Texture _textureSpeaker;
 	sf::RectangleShape _speaker;
-	int _level;
 public:
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	sf::RectangleShape getSpeaker() { return _speaker; }

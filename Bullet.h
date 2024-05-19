@@ -1,10 +1,12 @@
 #pragma once
-
-class Bullet: public sf::Drawable, public sf::Transformable, public Collisionable
+#include "Collisionable.h"
+#include <SFML/Graphics.hpp>
+class Bullet: public Collisionable, public sf::Drawable, public sf::Transformable
 {
 protected:
 	sf::Sprite _sprite;
-	static sf::Texture _texture;
+	//static sf::Texture _texture;
+	sf::Texture _texture;
 	sf::Vector2f _direction;
 	int _damage;
 	sf::Vector2f _velocity;

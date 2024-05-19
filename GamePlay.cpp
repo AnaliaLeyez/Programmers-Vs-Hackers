@@ -61,7 +61,7 @@ void GamePlay::shoot(sf::Vector2f position)
 	//_bullets.push_back(Bullet(position, _hacker.getPosition()));
 }
 
-void GamePlay::validateClickOnMap(int mousex, int mousey, Map mapa) {
+void GamePlay::validateClickOnMap(int mousex, int mousey, Map &mapa) {
 
 	if (mapa.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
 		if (mapa.getMusicPlaying()) {
@@ -77,8 +77,14 @@ void GamePlay::validateClickOnMap(int mousex, int mousey, Map mapa) {
 	}
 }
 
-void GamePlay::validateClickOnMenu(int mousex, int mousey, Menu menu) {
-	if (menu.getText4().getGlobalBounds().contains(mousex, mousey)) {
+void GamePlay::validateClickOnMenu(int mousex, int mousey, Menu &menu, sf::RenderWindow& window) {
+	if (menu.getText1().getGlobalBounds().contains(mousex, mousey)) {
+		menu.setSound(false);
+		menu.setMusicPlaying(false);
+		//vista = 2;
+		//mapa.setSound(true);
+	}
+	else if (menu.getText4().getGlobalBounds().contains(mousex, mousey)) {
 		if (menu.getMusicPlaying()) {
 			menu.setSound(false);
 			menu.setMusicPlaying(false);
@@ -88,8 +94,7 @@ void GamePlay::validateClickOnMenu(int mousex, int mousey, Menu menu) {
 			menu.setMusicPlaying(true);
 		}
 	}
-	//VER COMO INDICAR CON GAMEPLAY QUE CIERRE VENTANA
-	//if (menu.getText5().getGlobalBounds().contains(mousex, mousey)) {
-	//	window.close();
-	//}
+	if (menu.getText5().getGlobalBounds().contains(mousex, mousey)) {
+		window.close();
+	}
 }

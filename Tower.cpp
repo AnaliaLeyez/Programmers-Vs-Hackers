@@ -5,7 +5,7 @@
 
 #include "Collisionable.h"
 #include "GamePlay.h"
-#include "Hacker.h"
+#include "HackerTrainee.h"
 
 #include "Tower.h"
 //Getters
@@ -87,11 +87,6 @@ void Tower::setDamage(int danio)
     _damage = danio;
 }
 
-void Tower::setRange(int alcance)
-{
-    _range = alcance;
-}
-
 void Tower::setCostUpgrade(float costo)
 {
     _costUpgrade = costo;
@@ -124,7 +119,7 @@ void Tower::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(_sprite, states);
 }
 
-void Tower::verificarEnemigo(Hacker& enemy)
+void Tower::verificarEnemigo(HackerTrainee& enemy)
 {
     // Calcula la distancia entre los centros de la torre y el objetivo
     float distancia = std::sqrt(std::pow(enemy.getPosition().x - getPosition().x, 2) + std::pow(enemy.getPosition().y - getPosition().y, 2));
@@ -145,6 +140,6 @@ void Tower::update()
    //actualizar hacker en rango:
    // _hackersOnRange.push_back();
    
-   Hacker enemy(sf::Vector2f{0,0}, sf::Vector2f{ 0,0 }, 0, sf::Vector2f{ 0,0 }, "");
+   HackerTrainee enemy;
    verificarEnemigo(enemy);
 }

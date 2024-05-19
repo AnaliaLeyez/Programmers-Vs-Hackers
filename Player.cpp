@@ -14,7 +14,7 @@ void Player::update()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && _cooldown>60) {
 		GamePlay& gm = GamePlay::getInstance();
-		gm.shoot();
+		gm.shoot({0,0});
 		_cooldown = 0;
 	}
 
