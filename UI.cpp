@@ -9,7 +9,6 @@ UI::UI() {
 	_coin.setPosition(510, 20);
 	_coin.setOrigin(_coin.getGlobalBounds().width / 2, _coin.getGlobalBounds().height / 2);
 
-
 	if (!_textureRay.loadFromFile("img/complementarias/energia.png")) {
 		std::cout << "Error al cargar img. Rayo";
 	}
@@ -17,6 +16,14 @@ UI::UI() {
 	_ray.setPosition(340, 25);
 	_ray.setOrigin( _ray.getGlobalBounds().width / 2, _ray.getGlobalBounds().height / 2);
 
+	//parlante
+	if (!_textureSpeaker.loadFromFile("img/complementarias/musicOn.png")) {
+		std::cout << "Error al cargar img mute";
+	};
+	_speaker.setSize(sf::Vector2f(80, 80));
+	_speaker.setTexture(&_textureSpeaker);
+	_speaker.setPosition(sf::Vector2f(900, 550));
+	_speaker.setOrigin(_speaker.getGlobalBounds().width / 2, _speaker.getGlobalBounds().height / 2);
 
 	if (!_font.loadFromFile("fuentes/fuenteMenu.ttf")) {
 		std::cout << "Error al cargar la fuente del Menu \n";
@@ -52,11 +59,19 @@ UI::UI() {
 		_text[i].setFillColor(sf::Color(255, 255, 255));
 	}
 }
-void UI::draw(sf::RenderTarget& rt, sf::RenderStates rs) const {
+sf::RectangleShape UI::getSpeaker() { return _speaker; }
+sf::Texture UI::getTextureSpeaker() { return _textureSpeaker; }
+void UI::setTextureSpeaker(std::string ruta) {
+	if (!_textureSpeaker.loadFromFile(ruta)) {
+		std::cout << "Error al cargar img mute";
+	};
+	_speaker.setTexture(&_textureSpeaker);
+}
+void UI::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	//rt.draw(monedas, rs);
-	rt.draw(_ray, rs);
-	rt.draw(_coin, rs);
+	target.draw(_ray, states);
+	target.draw(_coin, states);
 	for (int i = 0; i < 3; i++) {
-		rt.draw(_text[i], rs);
+		target.draw(_text[i], states);
 	}
 }

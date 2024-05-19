@@ -2,6 +2,7 @@
 #include <list>
 
 #include "Menu.h"
+#include "Level.h"
 #include "Map.h"
 #include "Collisionable.h"
 #include "Player.h"
@@ -23,11 +24,19 @@ GamePlay& GamePlay::getInstance() {
 	}
 	return *GamePlay::_currentInstance;
 }
+Level GamePlay::getLevel() {
+	return _level;
+}
+void GamePlay::setLevel(Level level) {
+	_level = level;
+}
 
 void GamePlay::update()
 {
 	_tower.update();
-	//_hackers.update();
+	for (Hacker& hacker : _hackers) {
+		hacker.update(_level.getMapArray());
+	}
 
 	for (Bullet& bullet : _bullets) {
 		bullet.update();
@@ -61,40 +70,46 @@ void GamePlay::shoot(sf::Vector2f position)
 	//_bullets.push_back(Bullet(position, _hacker.getPosition()));
 }
 
-void GamePlay::validateClickOnMap(int mousex, int mousey, Map &mapa) {
+void GamePlay::validateClick(int mousex, int mousey)
+{
 
-	if (mapa.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
-		if (mapa.getMusicPlaying()) {
-			mapa.setSound(false);
-			mapa.setMusicPlaying(false);
-			mapa.setTextureSpeaker("img/complementarias/mute.png");
-		}
-		else {
-			mapa.setSound(true);
-			mapa.setMusicPlaying(true);
-			mapa.setTextureSpeaker("img/complementarias/musicOn.png");
-		}
-	}
 }
 
-void GamePlay::validateClickOnMenu(int mousex, int mousey, Menu &menu, sf::RenderWindow& window,int &vista) {
-	if (menu.getText1().getGlobalBounds().contains(mousex, mousey)) {
-		menu.setSound(false);
-		menu.setMusicPlaying(false);
-		vista = 2;
-		//mapa.setSound(true);
-	}
-	else if (menu.getText4().getGlobalBounds().contains(mousex, mousey)) {
-		if (menu.getMusicPlaying()) {
-			menu.setSound(false);
-			menu.setMusicPlaying(false);
-		}
-		else {
-			menu.setSound(true);
-			menu.setMusicPlaying(true);
-		}
-	}
-	if (menu.getText5().getGlobalBounds().contains(mousex, mousey)) {
-		window.close();
-	}
-}
+//void GamePlay::validateClickOnMap(int mousex, int mousey, Map &mapa) {
+//
+//	if (mapa.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
+//		if (mapa.getMusicPlaying()) {
+//			mapa.setSound(false);
+//			mapa.setMusicPlaying(false);
+//			mapa.setTextureSpeaker("img/complementarias/mute.png");
+//		}
+//		else {
+//			mapa.setSound(true);
+//			mapa.setMusicPlaying(true);
+//			mapa.setTextureSpeaker("img/complementarias/musicOn.png");
+//		}
+//	}
+// 
+//}
+
+//void GamePlay::validateClickOnMenu(int mousex, int mousey, Menu &menu, sf::RenderWindow& window,int &vista) {
+//	if (menu.getText1().getGlobalBounds().contains(mousex, mousey)) {
+//		menu.setSound(false);
+//		menu.setMusicPlaying(false);
+//		vista = 2;
+//		//mapa.setSound(true);
+//	}
+//	else if (menu.getText4().getGlobalBounds().contains(mousex, mousey)) {
+//		if (menu.getMusicPlaying()) {
+//			menu.setSound(false);
+//			menu.setMusicPlaying(false);
+//		}
+//		else {
+//			menu.setSound(true);
+//			menu.setMusicPlaying(true);
+//		}
+//	}
+//	if (menu.getText5().getGlobalBounds().contains(mousex, mousey)) {
+//		window.close();
+//	}
+//}

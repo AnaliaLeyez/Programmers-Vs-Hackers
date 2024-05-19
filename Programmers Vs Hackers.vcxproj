@@ -144,6 +144,8 @@
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="Hacker.cpp" />
     <ClCompile Include="HackerTrainee.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="Level1.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Map1.cpp" />
@@ -160,6 +162,8 @@
     <ClInclude Include="GamePlay.h" />
     <ClInclude Include="Hacker.h" />
     <ClInclude Include="HackerTrainee.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="Level1.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Map1.h" />
     <ClInclude Include="Menu.h" />

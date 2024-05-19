@@ -15,18 +15,8 @@ protected:
 	bool _musicPlaying;
 	sf::Texture _textureUTN;
 	sf::RectangleShape _UTN;
-	sf::Texture _textureSpeaker;
-	sf::RectangleShape _speaker;
+	
 public:
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
-	sf::RectangleShape getSpeaker() { return _speaker; }
-	sf::Texture getTextureSpeaker() { return _textureSpeaker; }
-	void setTextureSpeaker(std::string ruta);
-
-	//MUSICA
-	bool getMusicPlaying();
-	void setMusicPlaying(bool playing);
-	sf::Sound getSound();
-	void setSound(bool reproducir);
 };
 
