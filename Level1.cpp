@@ -4,6 +4,7 @@
 #include "Tower.h"
 #include "TowerLab.h"
 #include "Level.h"
+#include "Wave.h"
 
 #include "Level1.h"
 

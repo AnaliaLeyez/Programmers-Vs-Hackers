@@ -15,8 +15,8 @@
 
 GamePlay* GamePlay::_currentInstance = nullptr;
 
-GamePlay::GamePlay() {
-
+GamePlay::GamePlay(int level) {
+	_level.setIdLevel(level); //El gamePlay nace con un nivel especifico
 }
 GamePlay& GamePlay::getInstance() {
 	if (GamePlay::_currentInstance == nullptr) {
@@ -33,6 +33,7 @@ void GamePlay::setLevel(Level level) {
 
 void GamePlay::update()
 {
+	_level.update();
 	_tower.update();
 	for (Hacker& hacker : _hackers) {
 		hacker.update(_level.getMapArray());
@@ -59,6 +60,7 @@ void GamePlay::update()
 
 void GamePlay::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	target.draw(_level, states);
 	//target.draw(_player, states);
 	for (const Bullet& bullet : _bullets) {
 		target.draw(bullet, states);

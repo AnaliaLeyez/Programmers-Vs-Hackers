@@ -8,6 +8,7 @@
 #include "UI.h"
 #include "Map.h"
 #include "Tower.h"
+#include "Wave.h"
 
 #include "Level.h"
 
@@ -19,7 +20,7 @@ int(*Level::getMapArray())[30]{ return _mapArray; }
 sf::SoundBuffer Level::getBuffer() const { return _buffer; }
 sf::Sound Level::getSound() const { return _sound; }
 bool Level::getMusicPlaying() const { return _musicPlaying; }
-//const std::list<Wave>& Level::getWaveList() const { return _waveList; }
+std::list<Wave> Level::getWaveList() const { return _waveList; }
 const std::list<Tower>& Level::getTowersAvailable() const {
 	return _towersAvailable;
 }
@@ -37,13 +38,17 @@ void Level::setSound(bool reproducir) {
 	else
 		_sound.pause();
 }
-//void Level::setWaveList(const std::list<Wave>& list) { _waveList = list; }
+void Level::setWaveList(const std::list<Wave>& list) { _waveList = list; }
 void Level::setTowersAvailable(const std::list<Tower>& towersAvailable) {
 	_towersAvailable = towersAvailable;
 }
 void Level::update() {
 	if (!getFinisheLevel()) {
-		//manejar las oleadas?
+		//IMPORTANTEEEEE VER EL TEMA OLEADAS!! ESTO DE ABAJO SE ROMPE
+		/*for (std::list<Wave> wave : _waveList) {
+			for (Hacker& hacker : wave)
+			hacker.update(getMapArray());
+		}*/
 	}
 	else {
 		//ver que sucede si se completa el nivel

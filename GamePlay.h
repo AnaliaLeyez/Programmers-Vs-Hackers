@@ -11,7 +11,7 @@
 class GamePlay : public sf::Drawable
 {
 private:
-	GamePlay();
+	GamePlay(int level = 1);
 	static GamePlay* _currentInstance;
 	Level _level;
 	Tower _tower;

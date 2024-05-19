@@ -1,5 +1,6 @@
 #pragma once
 #include "UI.h"
+#include "Wave.h"
 #include "Map.h"
 #include "Tower.h"
 class Level: public sf::Drawable
@@ -13,7 +14,7 @@ protected:
 	sf::SoundBuffer _buffer;
 	sf::Sound _sound;
 	bool _musicPlaying;
-	//std::list<Wave> _waveList;
+	std::list<Wave> _waveList;
 	std::list <Tower> _towersAvailable;
 public:
 	// Getters
@@ -25,7 +26,7 @@ public:
 	sf::SoundBuffer getBuffer() const;
 	bool getMusicPlaying() const;
 	sf::Sound getSound() const;
-	//const std::list<Wave>& getWaveList() const;
+	std::list<Wave> getWaveList() const;
 	const std::list<Tower>& getTowersAvailable() const;
 
 	// Setters
@@ -36,7 +37,7 @@ public:
 	void setMapArray(const int(&)[20][30]);
 	void setMusicPlaying(bool);
 	void setSound(bool);
-	//void setWaveList(const std::list<Wave>& list);
+	void setWaveList(const std::list<Wave>& list);
 	void setTowersAvailable(const std::list<Tower>&);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update();
