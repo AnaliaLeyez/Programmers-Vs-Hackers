@@ -77,11 +77,11 @@ void GamePlay::validateClickOnMap(int mousex, int mousey, Map &mapa) {
 	}
 }
 
-void GamePlay::validateClickOnMenu(int mousex, int mousey, Menu &menu, sf::RenderWindow& window) {
+void GamePlay::validateClickOnMenu(int mousex, int mousey, Menu &menu, sf::RenderWindow& window,int &vista) {
 	if (menu.getText1().getGlobalBounds().contains(mousex, mousey)) {
 		menu.setSound(false);
 		menu.setMusicPlaying(false);
-		//vista = 2;
+		vista = 2;
 		//mapa.setSound(true);
 	}
 	else if (menu.getText4().getGlobalBounds().contains(mousex, mousey)) {

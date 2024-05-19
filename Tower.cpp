@@ -98,6 +98,7 @@ void Tower::setCooldown(int valor)
     else
         _cooldown++;
 }
+
 //Comportamiento
 /*
 void Tower::shoot(Hacker& objetivo)

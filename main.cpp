@@ -55,14 +55,13 @@ int main()
 					int mousex = ev.mouseButton.x;
 					int mousey = ev.mouseButton.y;
 					gp.validateClickOnMap(mousex, mousey, mapa);
-					gp.validateClickOnMenu(mousex, mousey, menu, window);
+					gp.validateClickOnMenu(mousex, mousey, menu, window, vista);
 
 					// verifica si las coordenadas del clic est n dentro del sprite
 					
 				}
 			}
 		}
-
 		//Render Cycle
 		window.clear();
 		//RenderOjbects
