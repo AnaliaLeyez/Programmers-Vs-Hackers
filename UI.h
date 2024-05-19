@@ -4,12 +4,12 @@
 class UI : public sf::Drawable
 {
 private:
-	sf::Texture textureMonedas;
-	sf::Sprite moneda;
-	sf::Texture textureRayo;
-	sf::Sprite rayo;
-	sf::Font font;
-	sf::Text text[3];
+	sf::Texture _textureCoins;
+	sf::Sprite _coin;
+	sf::Texture _textureRay;
+	sf::Sprite _ray;
+	sf::Font _font;
+	sf::Text _text[3];
 public:
 	UI();
 	virtual void draw(sf::RenderTarget&, sf::RenderStates) const;

@@ -141,7 +141,6 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletA.cpp" />
     <ClCompile Include="Collisionable.cpp" />
-    <ClCompile Include="globalFunctions.cpp" />
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="Hacker.cpp" />
     <ClCompile Include="HackerTrainee.cpp" />
@@ -158,7 +157,6 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletA.h" />
     <ClInclude Include="Collisionable.h" />
-    <ClInclude Include="globalFunctions.h" />
     <ClInclude Include="GamePlay.h" />
     <ClInclude Include="Hacker.h" />
     <ClInclude Include="HackerTrainee.h" />

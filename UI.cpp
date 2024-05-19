@@ -1,18 +1,29 @@
 #include "UI.h"
-#include "globalFunctions.h"
 #include <iostream>
 
 UI::UI() {
-	cargarSprite(moneda, textureMonedas, "img/complementarias/oro.png", 510, 10, 0.1f, 0.1f);
-	cargarSprite(rayo, textureRayo, "img/complementarias/energia.png", 340, 15, 0.3f, 0.3f);
-	
-	//monedas.setOrigin(monedas.getGlobalBounds().width / 2, monedas.getGlobalBounds().height / 2);
-	if (!font.loadFromFile("fuentes/fuenteMenu.ttf")) {
+	if (!_textureCoins.loadFromFile("img/complementarias/oro.png")) {
+		std::cout << "Error al cargar img. Oro";
+	}
+	_coin.setTexture(_textureCoins);
+	_coin.setPosition(510, 20);
+	_coin.setOrigin(_coin.getGlobalBounds().width / 2, _coin.getGlobalBounds().height / 2);
+
+
+	if (!_textureRay.loadFromFile("img/complementarias/energia.png")) {
+		std::cout << "Error al cargar img. Rayo";
+	}
+	_ray.setTexture(_textureRay);
+	_ray.setPosition(340, 25);
+	_ray.setOrigin( _ray.getGlobalBounds().width / 2, _ray.getGlobalBounds().height / 2);
+
+
+	if (!_font.loadFromFile("fuentes/fuenteMenu.ttf")) {
 		std::cout << "Error al cargar la fuente del Menu \n";
 	}
 	for (int i = 0; i < 3; i++) {
-		text[i].setFont(font);
-		text[i].setCharacterSize(30);
+		_text[i].setFont(_font);
+		_text[i].setCharacterSize(30);
 		int posX, posY;
 		std::string texto;
 		switch (i)
@@ -35,17 +46,17 @@ UI::UI() {
 		default:
 			break;
 		}
-		text[i].setPosition(posX, posY);
-		text[i].setString(texto);
+		_text[i].setPosition(posX, posY);
+		_text[i].setString(texto);
 		//text[i].setOrigin(text[i].getGlobalBounds().getPosition().x / 2, text[i].getGlobalBounds().height / 2);
-		text[i].setFillColor(sf::Color(255, 255, 255));
+		_text[i].setFillColor(sf::Color(255, 255, 255));
 	}
 }
 void UI::draw(sf::RenderTarget& rt, sf::RenderStates rs) const {
 	//rt.draw(monedas, rs);
-	rt.draw(rayo, rs);
-	rt.draw(moneda, rs);
+	rt.draw(_ray, rs);
+	rt.draw(_coin, rs);
 	for (int i = 0; i < 3; i++) {
-		rt.draw(text[i], rs);
+		rt.draw(_text[i], rs);
 	}
 }
