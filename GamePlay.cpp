@@ -61,7 +61,6 @@ void GamePlay::update()
 void GamePlay::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(_level, states);
-	//target.draw(_player, states);
 	for (const Bullet& bullet : _bullets) {
 		target.draw(bullet, states);
 	}

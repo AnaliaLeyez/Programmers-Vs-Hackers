@@ -68,7 +68,6 @@ void UI::setTextureSpeaker(std::string ruta) {
 	_speaker.setTexture(&_textureSpeaker);
 }
 void UI::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-	//rt.draw(monedas, rs);
 	target.draw(_ray, states);
 	target.draw(_coin, states);
 	for (int i = 0; i < 3; i++) {
