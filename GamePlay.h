@@ -2,6 +2,7 @@
 #include <iostream>
 #include <list>
 #include "Level.h"
+#include "Level1.h"
 #include "Tower.h"
 #include "Bullet.h"
 #include "Hacker.h"
@@ -11,7 +12,7 @@
 class GamePlay : public sf::Drawable
 {
 private:
-	GamePlay(int level = 1);
+	GamePlay();
 	static GamePlay* _currentInstance;
 	Level _level;
 	Tower _tower;
@@ -20,7 +21,8 @@ private:
 public:
 	static GamePlay& getInstance();
 	Level getLevel();
-	void setLevel(Level);
+	//void setLevel(Level level = Level1()); //este funciona
+	void setLevel(int);
 	void update();
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	void shoot(sf::Vector2f position);

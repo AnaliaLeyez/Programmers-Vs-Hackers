@@ -15,8 +15,8 @@
 
 GamePlay* GamePlay::_currentInstance = nullptr;
 
-GamePlay::GamePlay(int level) {
-	_level.setIdLevel(level); //El gamePlay nace con un nivel especifico
+GamePlay::GamePlay() {
+	//setLevel(1);  //en cuanto hago esto, es decir, en cuanto especifico que sea nivel1, se rompe
 }
 GamePlay& GamePlay::getInstance() {
 	if (GamePlay::_currentInstance == nullptr) {
@@ -27,8 +27,17 @@ GamePlay& GamePlay::getInstance() {
 Level GamePlay::getLevel() {
 	return _level;
 }
-void GamePlay::setLevel(Level level) {
-	_level = level;
+//void GamePlay::setLevel(Level level) {
+//	_level = level;
+//}
+void GamePlay::setLevel(int IdLevel) {
+	switch (IdLevel)
+	{
+	case 1:
+		_level = Level1();
+	default:
+		break;
+	}
 }
 
 void GamePlay::update()

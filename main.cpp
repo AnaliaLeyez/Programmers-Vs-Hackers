@@ -23,6 +23,9 @@ int main()
 	window.setFramerateLimit(60);
 	GamePlay &gp = GamePlay::getInstance();
 	Menu menu;
+	Level level;
+	Level1 level1;
+	Map1 mapa1;
 	int view = 1;
 	bool flag = false;
 
@@ -69,7 +72,8 @@ int main()
 		break;
 		case 2:
 		{
-			window.draw(gp);
+			window.draw(level1);
+			//window.draw(gp);
 		}
 		break;
 		}
