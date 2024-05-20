@@ -93,25 +93,3 @@ void GamePlay::validateClick(int mousex, int mousey)
 //	}
 // 
 //}
-
-//void GamePlay::validateClickOnMenu(int mousex, int mousey, Menu &menu, sf::RenderWindow& window,int &vista) {
-//	if (menu.getText1().getGlobalBounds().contains(mousex, mousey)) {
-//		menu.setSound(false);
-//		menu.setMusicPlaying(false);
-//		vista = 2;
-//		//mapa.setSound(true);
-//	}
-//	else if (menu.getText4().getGlobalBounds().contains(mousex, mousey)) {
-//		if (menu.getMusicPlaying()) {
-//			menu.setSound(false);
-//			menu.setMusicPlaying(false);
-//		}
-//		else {
-//			menu.setSound(true);
-//			menu.setMusicPlaying(true);
-//		}
-//	}
-//	if (menu.getText5().getGlobalBounds().contains(mousex, mousey)) {
-//		window.close();
-//	}
-//}

@@ -7,8 +7,9 @@
 
 void Map::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	states.transform *= getTransform();
-	for (const auto& tile : _tiles) {
+	target.draw(_sprite, states);
+	/*for (const auto& tile : _tiles) {
 		target.draw(tile, states);
-	}
+	}*/
 	target.draw(_UTN, states);
 }

@@ -65,6 +65,29 @@ void Menu::draw(sf::RenderTarget& rt, sf::RenderStates rs)const {
 
 }
 
+void Menu::validateClick(int mousex, int mousey, Menu& menu, sf::RenderWindow& window, int &view)
+{
+	if (menu.getText1().getGlobalBounds().contains(mousex, mousey)) {
+				menu.setSound(false);
+				menu.setMusicPlaying(false);
+				//mapa.setSound(true);
+				view = 2;
+			}
+			else if (menu.getText4().getGlobalBounds().contains(mousex, mousey)) {
+				if (menu.getMusicPlaying()) {
+					menu.setSound(false);
+					menu.setMusicPlaying(false);
+				}
+				else {
+					menu.setSound(true);
+					menu.setMusicPlaying(true);
+				}
+			}
+			if (menu.getText5().getGlobalBounds().contains(mousex, mousey)) {
+				window.close();
+			}
+}
+
 bool Menu::getMusicPlaying() { return musicPlaying; }
 void Menu::setMusicPlaying(bool playing) { musicPlaying = playing; }
 sf::Sound Menu::getSound() { return sound; }
