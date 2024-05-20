@@ -14,7 +14,7 @@ class GamePlay : public sf::Drawable
 private:
 	GamePlay();
 	static GamePlay* _currentInstance;
-	Level _level;
+	Level *_level;
 	Tower _tower;
 	std::list<Hacker> _hackers;
 	std::list<Bullet> _bullets;

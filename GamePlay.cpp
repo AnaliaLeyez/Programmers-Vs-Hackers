@@ -16,7 +16,7 @@
 GamePlay* GamePlay::_currentInstance = nullptr;
 
 GamePlay::GamePlay() {
-	//setLevel(1);  //en cuanto hago esto, es decir, en cuanto especifico que sea nivel1, se rompe
+	setLevel(1);  //en cuanto hago esto, es decir, en cuanto especifico que sea nivel1, se rompe
 }
 GamePlay& GamePlay::getInstance() {
 	if (GamePlay::_currentInstance == nullptr) {
@@ -24,17 +24,18 @@ GamePlay& GamePlay::getInstance() {
 	}
 	return *GamePlay::_currentInstance;
 }
-//Level GamePlay::getLevel() {
-//	return _level;
-//}
+Level GamePlay::getLevel() {
+	return *_level;
+}
 //void GamePlay::setLevel(Level level) {
 //	_level = level;
 //}
+
 void GamePlay::setLevel(int IdLevel) {
 	switch (IdLevel)
 	{
 	case 1:
-		_level = Level1();
+		_level = new Level1();
 	default:
 		break;
 	}
@@ -42,10 +43,10 @@ void GamePlay::setLevel(int IdLevel) {
 
 void GamePlay::update()
 {
-	_level.update();
+	_level->update();
 	_tower.update();
 	for (Hacker& hacker : _hackers) {
-		hacker.update(_level.getMapArray());
+		hacker.update(_level->getMapArray());
 	}
 
 	for (Bullet& bullet : _bullets) {
@@ -69,7 +70,7 @@ void GamePlay::update()
 
 void GamePlay::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	target.draw(_level, states);
+	target.draw(*_level, states);
 	for (const Bullet& bullet : _bullets) {
 		target.draw(bullet, states);
 	}

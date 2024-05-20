@@ -24,12 +24,7 @@ int main()
 	window.setFramerateLimit(60);
 	GamePlay &gp = GamePlay::getInstance();
 	Menu menu;
-	Level level;
-	Level1 level1;
-	Map1 mapa1;
-	UI ui;
 	int view = 1;
-	bool flag = false;
 
 	//Primer while
 	while (window.isOpen())
@@ -74,10 +69,7 @@ int main()
 		break;
 		case 2:
 		{
-			window.draw(level1);
-			/*window.draw(mapa1);
-			window.draw(ui);*/
-			//window.draw(gp);
+			window.draw(gp);
 		}
 		break;
 		}
