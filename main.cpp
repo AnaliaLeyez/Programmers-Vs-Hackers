@@ -22,7 +22,7 @@ int main()
 {
 	sf::RenderWindow window(sf::VideoMode(960, 640), "Programmers Vs Hackers");
 	window.setFramerateLimit(60);
-	GamePlay &gp = GamePlay::getInstance();
+	//GamePlay &gp = GamePlay::getInstance();
 	Menu menu;
 	int view = 1;
 
@@ -44,17 +44,6 @@ int main()
 					int mousex = ev.mouseButton.x;
 					int mousey = ev.mouseButton.y;
 					menu.validateClick(mousex, mousey, menu, window, view);
-					//if (view == 2) {
-					//	if (!flag) {
-					//		GamePlay& gp = GamePlay::getInstance();
-					//		flag = true;
-					//	}
-					// 
-					// 
-						//aca la logica del nivel 1??
-						//gp.validateClick(mousex, mousey); //OBJETIVO: TENER ESTA FUNCION
-					//gp.validateClickOnMap(mousex, mousey, mapa);
-					//gp.validateClickOnMenu(mousex, mousey, menu, window, vista);
 					}
 					
 				}
@@ -69,6 +58,7 @@ int main()
 		break;
 		case 2:
 		{
+			GamePlay& gp = GamePlay::getInstance();
 			window.draw(gp);
 		}
 		break;

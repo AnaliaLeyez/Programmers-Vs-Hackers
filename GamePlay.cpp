@@ -15,8 +15,8 @@
 
 GamePlay* GamePlay::_currentInstance = nullptr;
 
-GamePlay::GamePlay() {
-	setLevel(1);  //en cuanto hago esto, es decir, en cuanto especifico que sea nivel1, se rompe
+GamePlay::GamePlay(int level) {
+	setLevel(level);  //en cuanto hago esto, es decir, en cuanto especifico que sea nivel1, se rompe
 }
 GamePlay& GamePlay::getInstance() {
 	if (GamePlay::_currentInstance == nullptr) {
