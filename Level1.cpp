@@ -13,8 +13,7 @@ Level1::Level1()
 {
 	_idLevel=1;
 	_finishedLevel = false;
-	//_ui =UI(); //esta linea genera el conflicto
-	_map =Map1(); //esta linea genera el conflicto
+	_map = new Map1();
 	int arr[20][30] = {
 	{0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},

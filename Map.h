@@ -10,9 +10,9 @@ protected:
 	sf::Sprite _sprite;
 	sf::Texture _tileMap;
 	std::list<sf::Sprite> _tiles;
-	sf::SoundBuffer _buffer;
-	sf::Sound _sound;
-	bool _musicPlaying;
+	sf::SoundBuffer _buffer;	//ESTO NO VA ACA
+	sf::Sound _sound;	//ESTO NO VA ACA
+	bool _musicPlaying;	//ESTO NO VA ACA
 	sf::Texture _textureUTN;
 	sf::RectangleShape _UTN;
 	

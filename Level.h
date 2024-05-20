@@ -9,7 +9,7 @@ protected:
 	int _idLevel;
 	bool _finishedLevel;
 	UI _ui;
-	Map _map;
+	Map *_map;
 	int _mapArray[20][30];
 	int _golden;
 	int _energy;

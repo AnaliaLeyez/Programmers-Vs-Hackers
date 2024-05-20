@@ -4,6 +4,7 @@
 #include <SFML/Audio/Sound.hpp>
 
 #include "Menu.h"
+#include "UI.h"
 #include "Map.h"
 #include "Map1.h"
 #include "UI.h"
@@ -26,6 +27,7 @@ int main()
 	Level level;
 	Level1 level1;
 	Map1 mapa1;
+	UI ui;
 	int view = 1;
 	bool flag = false;
 
@@ -73,6 +75,8 @@ int main()
 		case 2:
 		{
 			window.draw(level1);
+			/*window.draw(mapa1);
+			window.draw(ui);*/
 			//window.draw(gp);
 		}
 		break;

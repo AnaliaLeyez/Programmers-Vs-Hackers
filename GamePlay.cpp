@@ -24,9 +24,9 @@ GamePlay& GamePlay::getInstance() {
 	}
 	return *GamePlay::_currentInstance;
 }
-Level GamePlay::getLevel() {
-	return _level;
-}
+//Level GamePlay::getLevel() {
+//	return _level;
+//}
 //void GamePlay::setLevel(Level level) {
 //	_level = level;
 //}
