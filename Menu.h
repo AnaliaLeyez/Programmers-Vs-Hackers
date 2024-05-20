@@ -27,8 +27,8 @@ public:
 
 	//MUSICA   Podria heredarse de una clase Musica
 	bool getMusicPlaying();
-	void setMusicPlaying(bool playing);
+	void setMusicPlaying(bool);
 	sf::Sound getSound();
-	void setSound(bool reproducir);
+	void setSound(bool);
 };
 

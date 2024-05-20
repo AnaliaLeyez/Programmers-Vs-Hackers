@@ -22,23 +22,23 @@ Menu::Menu() {
 		{
 		case 0:
 			posY = 100;
-			texto = "Juego nuevo";
+			texto = "New Game";
 			break;
 		case 1:
 			posY = 200;
-			texto = "Reanudar partida";
+			texto = "Restart Game";
 			break;
 		case 2:
 			posY = 300;
-			texto = "Creditos";
+			texto = "About";
 			break;
 		case 3:
 			posY = 400;
-			texto = "Silenciar/reproducir";
+			texto = "Pause music";
 			break;
 		case 4:
 			posY = 500;
-			texto = "Salir";
+			texto = "Exit";
 			break;
 		default:
 			break;
@@ -68,14 +68,14 @@ void Menu::draw(sf::RenderTarget& rt, sf::RenderStates rs)const {
 bool Menu::getMusicPlaying() { return musicPlaying; }
 void Menu::setMusicPlaying(bool playing) { musicPlaying = playing; }
 sf::Sound Menu::getSound() { return sound; }
-void Menu::setSound(bool reproducir) {
-	if (reproducir) {
+void Menu::setSound(bool play) {
+	if (play) {
 		sound.play();
-		text[3].setString("Pausar música");
+		text[3].setString("Pause music");
 	}
 	else {
 		sound.pause();
-		text[3].setString("Reanudar música");
+		text[3].setString("Play music");
 	}
 }
 sf::Text Menu::getText1() { return text[0]; }

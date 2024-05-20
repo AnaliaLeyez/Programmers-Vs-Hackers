@@ -11,11 +11,11 @@
 Level1::Level1()
 {
 	_idLevel=1;
-	_finisheLevel = false;
+	_finishedLevel = false;
 	_ui =UI();
 	_map =Map();
 	int arr[20][30] = {
-	{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+	{0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -36,6 +36,8 @@ Level1::Level1()
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 	};
+	_golden = 500;
+	_energy = 500;
 	setMapArray(arr);
 	if (!_buffer.loadFromFile("music/nivel1.wav")) {
 		std::cout << "Error al cargar musica nivel 1";
@@ -44,5 +46,6 @@ Level1::Level1()
 	_sound.setVolume(100);
 	_musicPlaying = true;
 	//_waveList.push_back(.wave1, wave2,...);
+	_hackerStartPosition = { 960 / 32 * 9, 640 / 32 * 0.5 };
 	_towersAvailable.push_back(TowerLab());
 }
