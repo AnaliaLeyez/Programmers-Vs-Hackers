@@ -13,7 +13,6 @@ TowerLab::TowerLab(sf::Vector2f position)
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
-	//_sprite.setOrigin(_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().left + _sprite.getGlobalBounds().height / 2);
 	setPosition(position);
 
 	_name = "torre Laboratorio";
@@ -22,8 +21,6 @@ TowerLab::TowerLab(sf::Vector2f position)
 	_visualRange.setRadius(120);
 	_visualRange.setFillColor(sf::Color(0, 255, 0, 120));
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
-	//_visualRange.setOrigin(_visualRange.getGlobalBounds().left + _visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().top + _visualRange.getGlobalBounds().height / 2);
-	//_visualRange.setPosition(position);
 
 	_cost = 10;
 	_costUpgrade = 9;

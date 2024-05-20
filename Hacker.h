@@ -23,20 +23,15 @@ protected:
 	sf::Vector2f _position;
 
 public:
-	//DESARROLLO
-
-	void moveHacker();
-	sf::Sprite getSprite();
-
 	//Getters
-	int& getLife();
-	int getTipoAtaque(); //lo podriamos sacar
-	float getDamage();
-	sf::Vector2f getVelocity();
-	sf::Vector2f getDirection();
-	sf::Vector2f getPosition();
-	bool getBoss();
-	float getGoldenDrop();
+	sf::Sprite getSprite();
+	int getLife()const;
+	float getDamage()const;
+	sf::Vector2f getVelocity()const;
+	sf::Vector2f getDirection()const;
+	sf::Vector2f getPosition()const;
+	bool getBoss()const;
+	float getGoldenDrop()const;
 
 
 	//Setters
@@ -50,9 +45,10 @@ public:
 	void setGoldenDrop(float);
 	
 	//Comportamiento
+	void moveHacker(int arr[][30]);
 	void attack(float*);
 	sf::FloatRect getBounds() const;
-	void update();
+	void update(int arr[][30]);
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 };
 

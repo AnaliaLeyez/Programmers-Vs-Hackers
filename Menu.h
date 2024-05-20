@@ -26,9 +26,10 @@ public:
 	sf::Text getText5();
 
 	//MUSICA   Podria heredarse de una clase Musica
+	void validateClick(int, int, Menu&, sf::RenderWindow&, int &);
 	bool getMusicPlaying();
-	void setMusicPlaying(bool playing);
+	void setMusicPlaying(bool);
 	sf::Sound getSound();
-	void setSound(bool reproducir);
+	void setSound(bool);
 };
 

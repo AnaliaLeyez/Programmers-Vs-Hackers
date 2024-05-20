@@ -6,34 +6,15 @@
 
 #include "Bullet.h"
 
-sf::FloatRect Bullet::getBounds() const
-{
-	return _sprite.getGlobalBounds();
-}
-sf::Vector2f Bullet::getDirection()
-{
-	return _direction;
-}
-sf::Vector2f Bullet::getVelocity()
-{
-	return _velocity;
-}
-int Bullet::getDamage()
-{
-	return _damage;
-}
-void Bullet::setDirection(sf::Vector2f d)
-{
-	_direction = d;
-}
-void Bullet::setVelocity(sf::Vector2f velocity)
-{
-	_velocity = velocity;
-}
-void Bullet::setDamage(int damage)
-{
-	_damage = damage;
-}
+sf::FloatRect Bullet::getBounds() const { return _sprite.getGlobalBounds(); }
+sf::Vector2f Bullet::getDirection() const { return _direction; }
+sf::Vector2f Bullet::getVelocity() const { return _velocity; }
+int Bullet::getDamage() const { return _damage; }
+
+void Bullet::setDirection(sf::Vector2f d) { _direction = d; }
+void Bullet::setVelocity(sf::Vector2f velocity) { _velocity = velocity; }
+void Bullet::setDamage(int damage) { _damage = damage; }
+
 void Bullet::moveBullet(sf::Vector2f towerPosition, sf::Vector2f enemyPosition)
 {
 		// Calcular el vector de dirección entre la torre y el objetivo
