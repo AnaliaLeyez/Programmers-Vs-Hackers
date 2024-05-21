@@ -11,16 +11,13 @@ Manager::Manager(int level) {
 }
 Manager& Manager::getInstance() {
 	if (Manager::_currentInstance == nullptr) {
-		Manager::_currentInstance = new Manager();
+		Manager::_currentInstance = new Manager(); //el Manage nace con nivel=1
 	}
 	return *Manager::_currentInstance;
 }
 Level Manager::getLevel() const { return *_currentLevel; }
-//void GamePlay::setLevel(Level level) {
-//	_level = level;
-//}
 
-void Manager::setLevel(int IdLevel) {
+void Manager::setLevel(int IdLevel) { //aca se cambia de un nivel a otro, eliminando siempre el anterior para liberar memoria
 	if (_currentLevel != nullptr) {
 		delete _currentInstance;
 	}
@@ -40,63 +37,9 @@ void Manager::setLevel(int IdLevel) {
 void Manager::update()
 {
 	_currentLevel->update();
-	//TODO ESTO ES DEL NIVEL:
-	//_tower.update();
-	//for (Hacker& hacker : _hackers) {
-	//	hacker.update(_level->getMapArray());
-	//}
-
-	//for (Bullet& bullet : _bullets) {
-	//	bullet.update();
-	//}
-
-	//auto it = _bullets.begin();
-
-	//while (it != _bullets.end()) {
-	//	Bullet& bullet = *it;
-	//	bullet.update();
-	///*	if (bullet.getPosition().x > torrecitaPrueba.getRango().getLocalBounds().getSize().x) {
-	//		it = _bullets.erase(it);
-	//	}
-	//	else {
-	//		++it;
-	//	}*/
-	//}
-	
 }
 
 void Manager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(*_currentLevel, states);
-
-	//for (const Bullet& bullet : _bullets) {
-	//	target.draw(bullet, states);
-	//}
 }
-
-//void Manager::shoot(sf::Vector2f position)
-//{
-//	//_bullets.push_back(Bullet(position, _hacker.getPosition()));
-//}
-
-void Manager::validateClick(int mousex, int mousey)
-{
-
-}
-
-//void GamePlay::validateClickOnMap(int mousex, int mousey, Map &mapa) {
-//
-//	if (mapa.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
-//		if (mapa.getMusicPlaying()) {
-//			mapa.setSound(false);
-//			mapa.setMusicPlaying(false);
-//			mapa.setTextureSpeaker("img/complementarias/mute.png");
-//		}
-//		else {
-//			mapa.setSound(true);
-//			mapa.setMusicPlaying(true);
-//			mapa.setTextureSpeaker("img/complementarias/musicOn.png");
-//		}
-//	}
-// 
-//}

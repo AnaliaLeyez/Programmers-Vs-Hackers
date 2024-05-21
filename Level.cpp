@@ -38,8 +38,48 @@ void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
 void Level::setWaveList(const std::list<Wave>& list) { *_waveList = list; }
 void Level::setTowersAvailable(const std::list<Tower>& towersAvailable) { _towersAvailable = towersAvailable; }
+
+//void Level::shoot(sf::Vector2f position)
+//{
+//	//_bullets.push_back(Bullet(position, _hacker.getPosition()));
+//}
+
+void Level::validateClick(int mousex, int mousey)
+{
+//	if (mapa.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
+//		if (mapa.getMusicPlaying()) {
+//			mapa.setSound(false);
+//			mapa.setMusicPlaying(false);
+//			mapa.setTextureSpeaker("img/complementarias/mute.png");
+//		}
+//		else {
+//			mapa.setSound(true);
+//			mapa.setMusicPlaying(true);
+//			mapa.setTextureSpeaker("img/complementarias/musicOn.png");
+//		}
+//	}
+}
 void Level::update() {
 	if (!getFinisheLevel()) {
+	//_tower.update();
+
+	//for (Bullet& bullet : _bullets) {
+	//	bullet.update();
+	//}
+
+	//auto it = _bullets.begin();
+
+	//while (it != _bullets.end()) {
+	//	Bullet& bullet = *it;
+	//	bullet.update();
+	///*	if (bullet.getPosition().x > torrecitaPrueba.getRango().getLocalBounds().getSize().x) {
+	//		it = _bullets.erase(it);
+	//	}
+	//	else {
+	//		++it;
+	//	}*/
+	//}
+
 		//ver como hacer esta comprobacion, asi como lo escribi sirve para vectores pero no para listas
 		//auto it = *_waveList->begin();
 		//if ( it != *_waveList->end()) {}

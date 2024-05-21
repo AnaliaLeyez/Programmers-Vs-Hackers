@@ -12,7 +12,6 @@ int main()
 {
 	sf::RenderWindow window(sf::VideoMode(960, 640), "Programmers Vs Hackers");
 	window.setFramerateLimit(60);
-	//GamePlay &gp = GamePlay::getInstance();
 	Menu menu;
 	int view = 1;
 
@@ -48,10 +47,10 @@ int main()
 		break;
 		case 2:
 		{
-			Manager& gp = Manager::getInstance();
-			gp.update();
-			window.draw(gp);
-			
+			//la vista 2 representaria que estoy viendo ALGUN NIVEL, sin especificar cual(?
+			Manager& mg = Manager::getInstance();
+			mg.update();
+			window.draw(mg);
 		}
 		break;
 		}

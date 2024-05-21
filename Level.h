@@ -48,6 +48,10 @@ public:
 	void setSound(bool);
 	void setWaveList(const std::list<Wave>&);
 	void setTowersAvailable(const std::list<Tower>&);
+
+	//void shoot(sf::Vector2f position);
+
+	void validateClick(int mousex, int mousey);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update();
 };

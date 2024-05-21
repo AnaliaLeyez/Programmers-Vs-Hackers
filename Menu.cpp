@@ -83,7 +83,6 @@ void Menu::draw(sf::RenderTarget& rt, sf::RenderStates rs)const {
 	for (int i = 0; i < 5; i++) {
 		rt.draw(_text[i], rs);
 	}
-
 }
 
 void Menu::validateClick(int mousex, int mousey, Menu& menu, sf::RenderWindow& window, int &view)
