@@ -47,17 +47,17 @@ void Level::setTowersAvailable(const std::list<Tower>& towersAvailable) { _tower
 
 void Level::handlerEvent(const sf::Event& ev)
 {
-	if (ev.type == sf::Event::MouseButtonPressed && ev.mouseButton.button == sf::Mouse::Right)
+	if (ev.type == sf::Event::MouseButtonPressed && ev.mouseButton.button == sf::Mouse::Left)
 	{
 		int mousex = ev.mouseButton.x;
 		int mousey = ev.mouseButton.y;
-		_towerMenu.setPosition(mousex, mousey);
-		_towerMenu.show();
-		//validateClickRight(mousex, mousey);
+		if (_mapArray[mousey / 32][mousey / 32] == 6) {
+			_towerMenu.setPosition(mousex, mousey);
+			_towerMenu.show();
+		}
 	}
-	else if (ev.mouseButton.button == sf::Mouse::Left)
+	else if (ev.mouseButton.button == sf::Mouse::Right)
 	{
-		//validateClickLeft(mousex, mousey);
 		_towerMenu.hide();
 	}
 }
