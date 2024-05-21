@@ -141,7 +141,7 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletA.cpp" />
     <ClCompile Include="Collisionable.cpp" />
-    <ClCompile Include="GamePlay.cpp" />
+    <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Hacker.cpp" />
     <ClCompile Include="HackerTrainee.cpp" />
     <ClCompile Include="Level.cpp" />
@@ -150,7 +150,6 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Map1.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Tower.cpp" />
     <ClCompile Include="TowerLab.cpp" />
     <ClCompile Include="UI.cpp" />
@@ -160,7 +159,7 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletA.h" />
     <ClInclude Include="Collisionable.h" />
-    <ClInclude Include="GamePlay.h" />
+    <ClInclude Include="Manager.h" />
     <ClInclude Include="Hacker.h" />
     <ClInclude Include="HackerTrainee.h" />
     <ClInclude Include="Level.h" />
@@ -168,7 +167,6 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="Map1.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="Tower.h" />
     <ClInclude Include="TowerLab.h" />
     <ClInclude Include="UI.h" />

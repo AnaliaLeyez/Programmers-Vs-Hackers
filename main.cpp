@@ -9,8 +9,7 @@
 #include "Map1.h"
 #include "UI.h"
 
-#include "GamePlay.h"
-#include "Player.h"
+#include "Manager.h"
 #include "Bullet.h"
 #include "Hacker.h"
 #include "HackerTrainee.h"
@@ -58,8 +57,10 @@ int main()
 		break;
 		case 2:
 		{
-			GamePlay& gp = GamePlay::getInstance();
+			Manager& gp = Manager::getInstance();
+			gp.update();
 			window.draw(gp);
+			
 		}
 		break;
 		}

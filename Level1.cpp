@@ -45,7 +45,12 @@ Level1::Level1()
 	_sound.setBuffer(_buffer);
 	_sound.setVolume(100);
 	_musicPlaying = true;
-	//_waveList.push_back(.wave1, wave2,...);
+	//setWaveList(_List);
+	Wave wave;
+	wave.setWave(wave.getWave1());
+	wave.setWave(wave.getWave2());
+	wave.setWave(wave.getWave3());
+	_waveList->push_back(wave);
 	_hackerStartPosition = { 960 / 32 * 9, 640 / 32 * 0.5 };
 	_towersAvailable.push_back(TowerLab());
 }

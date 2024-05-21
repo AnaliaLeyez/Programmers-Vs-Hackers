@@ -22,7 +22,7 @@ int Level::getEnergy() { return _energy; }
 sf::SoundBuffer Level::getBuffer() const { return _buffer; }
 sf::Sound Level::getSound() const { return _sound; }
 bool Level::getMusicPlaying() const { return _musicPlaying; }
-std::list<Wave> Level::getWaveList() const { return _waveList; }
+std::list<Wave> Level::getWaveList() const { return *_waveList; }
 sf::Vector2f Level::getHackerStartPosition() const { return _hackerStartPosition; }
 const std::list<Tower>& Level::getTowersAvailable() const { return _towersAvailable;}
 
@@ -35,17 +35,23 @@ void Level::setGolden(int golden) { _golden = golden; }
 void Level::setEnergy(int energy) { _energy = energy; }
 void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
-void Level::setWaveList(const std::list<Wave>& list) { _waveList = list; }
+void Level::setWaveList(const std::list<Wave>& list) { *_waveList = list; }
 void Level::setTowersAvailable(const std::list<Tower>& towersAvailable) {
 	_towersAvailable = towersAvailable;
 }
 void Level::update() {
 	if (!getFinisheLevel()) {
-		//IMPORTANTEEEEE VER EL TEMA OLEADAS!! ESTO DE ABAJO SE ROMPE
-		/*for (std::list<Wave> wave : _waveList) {
-			for (Hacker& hacker : wave)
-			hacker.update(getMapArray());
-		}*/
+		//ver como hacer esta comprobacion, asi como lo escribi sirve para vectores pero no para listas
+		//auto it = *_waveList->begin();
+		//if ( it != *_waveList->end()) {}
+		
+		//actualizo cada oleada si es que coexisten:
+		//for (Wave& wave : *_waveList) {
+		//	for (Hacker& hacker : wave.getWave1())
+			//hacker.update(getMapArray());
+		//	for (Hacker& hacker : wave.getWave2())
+		//		hacker.update(getMapArray());
+		//}
 	}
 	else {
 		//ver que sucede si se completa el nivel

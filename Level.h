@@ -16,7 +16,7 @@ protected:
 	sf::SoundBuffer _buffer;
 	sf::Sound _sound;
 	bool _musicPlaying;
-	std::list<Wave> _waveList;
+	std::list<Wave> *_waveList;
 	sf::Vector2f _hackerStartPosition;
 	std::list <Tower> _towersAvailable;
 public:

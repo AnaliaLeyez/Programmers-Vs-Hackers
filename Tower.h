@@ -27,18 +27,16 @@ protected:
 	int _upgradesAmount;
 public:
 	//Getters
-	std::string getName();
-	sf::Sprite getSprite();
-	sf::CircleShape getVisualRange();
-
-	float getCost();
-	float getCostUpgrade();
-	float getSalesValue();
-	int getDamage();
-	int getRange();
-	int getSpeedAtack();
-
-	int getUpgradesAmount();
+	std::string getName()const;
+	sf::Sprite getSprite()const;
+	sf::CircleShape getVisualRange()const;
+	float getCost()const;
+	float getCostUpgrade()const;
+	float getSalesValue()const;
+	int getDamage()const;
+	int getRange()const;
+	int getSpeedAtack()const;
+	int getUpgradesAmount()const;
 
 	// Para desarrollo:
 

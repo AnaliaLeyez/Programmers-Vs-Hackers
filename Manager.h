@@ -9,19 +9,18 @@
 #include "Map.h"
 #include "Menu.h"
 
-class GamePlay : public sf::Drawable
+class Manager : public sf::Drawable
 {
 private:
-	GamePlay(int level=1);
-	static GamePlay* _currentInstance;
+	Manager(int level=1);
+	static Manager* _currentInstance;
 	Level *_level;
-	Tower _tower;
-	std::list<Hacker> _hackers;
-	std::list<Bullet> _bullets;
+	//Tower _tower;
+	//std::list<Hacker> _hackers;
+	//std::list<Bullet> _bullets;
 public:
-	static GamePlay& getInstance();
+	static Manager& getInstance();
 	Level getLevel();
-	//void setLevel(Level level = Level1()); //este funciona
 	void setLevel(int);
 	void update();
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
