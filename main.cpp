@@ -6,7 +6,7 @@
 #include "Menu.h"
 #include "UI.h"
 #include "Manager.h"
-
+#include "Level.h"
 
 int main()
 {
@@ -14,7 +14,8 @@ int main()
 	window.setFramerateLimit(60);
 	Menu menu;
 	int view = 1;
-
+	Manager& mg = Manager::getInstance();
+	Level level;
 	//Primer while
 	while (window.isOpen())
 	{
@@ -29,31 +30,32 @@ int main()
 
 			//CAPTURAR EVENTO CLICK
 			if (ev.type == sf::Event::MouseButtonPressed && ev.mouseButton.button == sf::Mouse::Left)
-				 {
-					int mousex = ev.mouseButton.x;
-					int mousey = ev.mouseButton.y;
-					menu.validateClick(mousex, mousey, menu, window, view);
-					}
-					
-				}
-		//Render Cycle
-		window.clear();
-		switch (view)
-		{
-		case 1:
-		{
-			window.draw(menu);
+			{
+				int mousex = ev.mouseButton.x;
+				int mousey = ev.mouseButton.y;
+				menu.validateClick(mousex, mousey, menu, window, view);
+				level.validateClickRight(mousex, mousey);
+			}
+			//Render Cycle
 		}
-		break;
-		case 2:
-		{
-			//la vista 2 representaria que estoy viendo ALGUN NIVEL, sin especificar cual(?
-			Manager& mg = Manager::getInstance();
-			mg.update();
-			window.draw(mg);
-		}
-		break;
-		}
+			window.clear();
+			switch (view)
+			{
+			case 1:
+			{
+				window.draw(menu);
+			}
+			break;
+			case 2:
+			{
+				//la vista 2 representaria que estoy viendo ALGUN NIVEL, sin especificar cual(?
+				//Manager& mg = Manager::getInstance();
+				mg.update();
+				window.draw(mg);
+			}
+			break;
+			}
+		
 		//RenderOjbects
 		window.display();
 	}

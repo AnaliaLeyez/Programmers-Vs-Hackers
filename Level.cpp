@@ -8,6 +8,7 @@
 #include "UI.h"
 #include "Map.h"
 #include "Manager.h"
+#include "TowerMenu.h"
 #include "Tower.h"
 #include "Wave.h"
 
@@ -44,8 +45,28 @@ void Level::setTowersAvailable(const std::list<Tower>& towersAvailable) { _tower
 //	//_bullets.push_back(Bullet(position, _hacker.getPosition()));
 //}
 
-void Level::validateClick(int mousex, int mousey)
+void Level::handlerEvent(const sf::Event& ev)
 {
+	if (ev.type == sf::Event::MouseButtonPressed && ev.mouseButton.button == sf::Mouse::Right)
+	{
+		int mousex = ev.mouseButton.x;
+		int mousey = ev.mouseButton.y;
+		_towerMenu.setPosition(mousex, mousey);
+		_towerMenu.show();
+		//validateClickRight(mousex, mousey);
+	}
+	else if (ev.mouseButton.button == sf::Mouse::Left)
+	{
+		//validateClickLeft(mousex, mousey);
+		_towerMenu.hide();
+	}
+}
+
+void Level::validateClickRight(int mousex, int mousey)
+{
+	_towerMenu.setPosition(mousex, mousey);
+	_towerMenu.show();
+
 	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
 		if (getMusicPlaying()) {
 			setSound(false);
@@ -103,6 +124,12 @@ void Level::update() {
 	}
 }
 void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
+	states.transform *= getTransform();
 	target.draw(*_map, states);
 	target.draw(_ui, states);
+	target.draw(_towerMenu, states);
 }
+
+//como mostrar el menu, sin tirar todo en main
+//como manejar la logica de Wave
+//verificar enemigo, ver como se refactoriza

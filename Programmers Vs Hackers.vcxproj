@@ -151,6 +151,7 @@
     <ClCompile Include="Map1.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Tower.cpp" />
+    <ClCompile Include="TowerMenu.cpp" />
     <ClCompile Include="TowerLab.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Wave.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="Map1.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Tower.h" />
+    <ClInclude Include="TowerMenu.h" />
     <ClInclude Include="TowerLab.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Wave.h" />
