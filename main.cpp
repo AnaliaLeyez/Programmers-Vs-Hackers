@@ -5,16 +5,7 @@
 
 #include "Menu.h"
 #include "UI.h"
-#include "Map.h"
-#include "Map1.h"
-#include "UI.h"
-
 #include "Manager.h"
-#include "Bullet.h"
-#include "Hacker.h"
-#include "HackerTrainee.h"
-#include "Tower.h"
-#include "TowerLab.h"
 
 
 int main()

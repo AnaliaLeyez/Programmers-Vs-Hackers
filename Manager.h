@@ -1,30 +1,24 @@
 #pragma once
 #include <iostream>
-#include <list>
 #include "Level.h"
-#include "Level1.h"
-#include "Tower.h"
-#include "Bullet.h"
-#include "Hacker.h"
-#include "Map.h"
-#include "Menu.h"
 
 class Manager : public sf::Drawable
 {
 private:
-	Manager(int level=1);
-	static Manager* _currentInstance;
-	Level *_level;
+	Manager(int level=1); //Singleton
+	static Manager* _currentInstance; //Singleton
+	//atributos:
+	Level *_currentLevel;
 	//Tower _tower;
 	//std::list<Hacker> _hackers;
 	//std::list<Bullet> _bullets;
 public:
-	static Manager& getInstance();
-	Level getLevel();
+	static Manager& getInstance(); //Singleton
+	Level getLevel() const;
 	void setLevel(int);
 	void update();
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-	void shoot(sf::Vector2f position);
+	void draw(sf::RenderTarget&, sf::RenderStates) const;
+	//void shoot(sf::Vector2f position); // esto es algo del nivel?
 	void validateClick(int mousex, int mousey);
 	//void validateClickOnMap(int mousex, int mousey, Map &mapa);
 	//void validateClickOnMenu(int mousex, int mousey, Menu &menu, sf::RenderWindow& window,int &vista);

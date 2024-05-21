@@ -1,15 +1,7 @@
 #include <SFML/Graphics.hpp>
-#include <list>
 
-#include "Menu.h"
 #include "Level.h"
-#include "Map.h"
-#include "Collisionable.h"
-#include "Tower.h"
-#include "Hacker.h"
-#include "Bullet.h"
-
-
+#include "Level1.h"
 #include "Manager.h"
 
 Manager* Manager::_currentInstance = nullptr;
@@ -23,18 +15,23 @@ Manager& Manager::getInstance() {
 	}
 	return *Manager::_currentInstance;
 }
-Level Manager::getLevel() {
-	return *_level;
-}
+Level Manager::getLevel() const { return *_currentLevel; }
 //void GamePlay::setLevel(Level level) {
 //	_level = level;
 //}
 
 void Manager::setLevel(int IdLevel) {
+	if (_currentLevel != nullptr) {
+		delete _currentInstance;
+	}
 	switch (IdLevel)
 	{
 	case 1:
-		_level = new Level1();
+		_currentLevel = new Level1();
+		break;
+	case 2:
+		//_currentLevel = new Level2();
+		break;
 	default:
 		break;
 	}
@@ -42,7 +39,7 @@ void Manager::setLevel(int IdLevel) {
 
 void Manager::update()
 {
-	_level->update();
+	_currentLevel->update();
 	//TODO ESTO ES DEL NIVEL:
 	//_tower.update();
 	//for (Hacker& hacker : _hackers) {
@@ -70,17 +67,17 @@ void Manager::update()
 
 void Manager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	target.draw(*_level, states);
+	target.draw(*_currentLevel, states);
 
 	//for (const Bullet& bullet : _bullets) {
 	//	target.draw(bullet, states);
 	//}
 }
 
-void Manager::shoot(sf::Vector2f position)
-{
-	//_bullets.push_back(Bullet(position, _hacker.getPosition()));
-}
+//void Manager::shoot(sf::Vector2f position)
+//{
+//	//_bullets.push_back(Bullet(position, _hacker.getPosition()));
+//}
 
 void Manager::validateClick(int mousex, int mousey)
 {

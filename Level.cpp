@@ -7,6 +7,7 @@
 
 #include "UI.h"
 #include "Map.h"
+#include "Manager.h"
 #include "Tower.h"
 #include "Wave.h"
 
@@ -15,10 +16,10 @@
 int Level::getIdLevel() const { return _idLevel; }
 bool Level::getFinisheLevel() const{ return _finishedLevel; }
 UI Level::getUI() const { return _ui; }
-Map Level::getMap() { return *_map; }
-int(*Level::getMapArray())[30]{ return _mapArray; }
-int Level::getGolden() { return _golden; }
-int Level::getEnergy() { return _energy; }
+Map Level::getMap() const { return *_map; }
+int(*Level::getMapArray())[30] { return _mapArray; }
+int Level::getGolden() const { return _golden; }
+int Level::getEnergy() const { return _energy; }
 sf::SoundBuffer Level::getBuffer() const { return _buffer; }
 sf::Sound Level::getSound() const { return _sound; }
 bool Level::getMusicPlaying() const { return _musicPlaying; }
@@ -36,9 +37,7 @@ void Level::setEnergy(int energy) { _energy = energy; }
 void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
 void Level::setWaveList(const std::list<Wave>& list) { *_waveList = list; }
-void Level::setTowersAvailable(const std::list<Tower>& towersAvailable) {
-	_towersAvailable = towersAvailable;
-}
+void Level::setTowersAvailable(const std::list<Tower>& towersAvailable) { _towersAvailable = towersAvailable; }
 void Level::update() {
 	if (!getFinisheLevel()) {
 		//ver como hacer esta comprobacion, asi como lo escribi sirve para vectores pero no para listas
@@ -54,7 +53,13 @@ void Level::update() {
 		//}
 	}
 	else {
-		//ver que sucede si se completa el nivel
+		if (getIdLevel() < 4) { //aca digo que solo puede llegar hasta el nivel 4
+			Manager::getInstance().setLevel(getIdLevel() + 1); //cambia al siguiente nivel
+		}
+		else {
+			//logica para cuando se termina el juego, cuando se pasaron todos los niveles
+		}
+		
 	}
 }
 void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {

@@ -4,7 +4,6 @@
 class Hacker :public sf::Drawable, public sf::Transformable, public Collisionable
 {
 protected:
-
 	sf::Sprite _sprite;
 	//static sf::Texture _texture;
 	sf::Texture _texture;
@@ -13,34 +12,23 @@ protected:
 	sf::Vector2f _direction;
 	int _seniority;
 	int _life;
-	int _tipoAtaque; //podriamos sacarlo
 	int _damage;
 	bool _isABoss;
 	int _goldenDrop;
-
-	//DESARROLLO
-
 	sf::Vector2f _position;
-
 public:
-	//Getters
-	sf::Sprite getSprite();
-	int getLife()const;
-	float getDamage()const;
-	sf::Vector2f getVelocity()const;
-	sf::Vector2f getDirection()const;
-	sf::Vector2f getPosition()const;
-	bool getBoss()const;
-	float getGoldenDrop()const;
+	//sf::Sprite getSprite() const;
+	int getLife() const;
+	float getDamage() const;
+	sf::Vector2f getVelocity() const;
+	sf::Vector2f getDirection() const;
+	bool getBoss() const;
+	float getGoldenDrop() const;
 
-
-	//Setters
 	void setLife(int);
-	void setTipoAtaque(int); //lo podriamos sacar
 	void setDamage(float);
 	void setVelocity(sf::Vector2f);
 	void setDirection(sf::Vector2f);
-	void setPosition(sf::Vector2f);
 	void setBoos(bool);
 	void setGoldenDrop(float);
 	
@@ -49,6 +37,6 @@ public:
 	void attack(float*);
 	sf::FloatRect getBounds() const;
 	void update(int arr[][30]);
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+	void draw(sf::RenderTarget&, sf::RenderStates) const;
 };
 

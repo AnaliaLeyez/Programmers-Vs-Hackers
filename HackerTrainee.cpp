@@ -8,7 +8,6 @@ HackerTrainee::HackerTrainee()
 
 	_seniority = 0;
 	_life = 100;
-	_tipoAtaque = 0;
 	_damage = 1;
 	_velocity = { 3,3 };
 	_goldenDrop = 10;
