@@ -7,20 +7,13 @@
 #include "HackerTrainee.h"
 #include "Wave.h"
 
-std::list<Hacker> Wave::getWave1()
-{
-	return _wave1;
-}
-std::list<Hacker> Wave::getWave2()
-{
-	return _wave2;
-}
-std::list<Hacker> Wave::getWave3()
-{
-	return _wave3;
-}
+std::list<Hacker> Wave::getWave1() const {	return _wave1; }
+std::list<Hacker> Wave::getWave2() const { return _wave2; }
+std::list<Hacker> Wave::getWave3() const { return _wave3; }
 
-void Wave::setWave(std::list<Hacker> wave)
+void Wave::setWave(std::list<Hacker> wave) { _wave.push_back(wave); }
+
+void Wave::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	_wave.push_back(wave);
+	//ver QUE va aca
 }

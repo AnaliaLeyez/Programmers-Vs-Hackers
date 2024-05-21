@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
 class UI : public sf::Drawable
 {
 private:
@@ -14,8 +13,8 @@ private:
 	sf::RectangleShape _speaker;
 public:
 	UI();
-	sf::RectangleShape getSpeaker();
-	sf::Texture getTextureSpeaker();
+	sf::RectangleShape getSpeaker() const;
+	sf::Texture getTextureSpeaker() const;
 	void setTextureSpeaker(std::string);
 
 	virtual void draw(sf::RenderTarget&, sf::RenderStates) const;

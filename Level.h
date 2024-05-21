@@ -1,4 +1,7 @@
 #pragma once
+#include "SFML/Graphics.hpp"
+#include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Audio/Sound.hpp>
 #include "UI.h"
 #include "Wave.h"
 #include "Map.h"
@@ -16,18 +19,17 @@ protected:
 	sf::SoundBuffer _buffer;
 	sf::Sound _sound;
 	bool _musicPlaying;
-	std::list<Wave> _waveList;
+	std::list<Wave> *_waveList;
 	sf::Vector2f _hackerStartPosition;
 	std::list <Tower> _towersAvailable;
 public:
-	// Getters
 	int getIdLevel() const;
 	bool getFinisheLevel()const;
 	UI getUI() const;
-	Map getMap();
+	Map getMap() const;
 	int(*getMapArray())[30];
-	int getGolden();
-	int getEnergy();
+	int getGolden() const;
+	int getEnergy() const;
 	sf::SoundBuffer getBuffer() const;
 	bool getMusicPlaying() const;
 	sf::Sound getSound() const;
@@ -35,7 +37,6 @@ public:
 	sf::Vector2f getHackerStartPosition() const;
 	const std::list<Tower>& getTowersAvailable() const;
 
-	// Setters
 	void setIdLevel(int);
 	void setFinishedLevel(bool);
 	void setUI(const UI&);
@@ -45,8 +46,12 @@ public:
 	void setEnergy(int);
 	void setMusicPlaying(bool);
 	void setSound(bool);
-	void setWaveList(const std::list<Wave>& list);
+	void setWaveList(const std::list<Wave>&);
 	void setTowersAvailable(const std::list<Tower>&);
+
+	//void shoot(sf::Vector2f position);
+
+	void validateClick(int mousex, int mousey);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update();
 };

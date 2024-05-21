@@ -1,21 +1,30 @@
+#include <iostream>
+
 #include "Menu.h"
 
 Menu::Menu() {
 	//fondo
-	if (!textureBanner.loadFromFile("img/banner/imgPortada.png")) {
+	if (!_textureBanner.loadFromFile("img/banner/imgPortada.png")) {
 		std::cout << "Error al cargar img Banner";
 	}
-	banner.setSize(sf::Vector2f(1024, 768));
-	banner.setTexture(&textureBanner);
-	banner.setPosition(sf::Vector2f(0, 0));
+	_banner.setSize(sf::Vector2f(1024, 768));
+	_banner.setTexture(&_textureBanner);
+	_banner.setPosition(sf::Vector2f(0, 0));
+
+	//musica
+	_buffer.loadFromFile("music/menuMusic.wav");
+	_sound.setBuffer(_buffer);
+	_sound.setVolume(100);
+	_musicPlaying = true;
+	_sound.play();
 
 	//texto
-	if (!font.loadFromFile("fuentes/fuenteMenu.ttf")) {
+	if (!_font.loadFromFile("fuentes/fuenteMenu.ttf")) {
 		std::cout << "Error al cargar la fuente del Menu \n";
 	}
 	for (int i = 0; i < 5; i++) {
-		text[i].setFont(font);
-		text[i].setCharacterSize(30);
+		_text[i].setFont(_font);
+		_text[i].setCharacterSize(30);
 		int posY;
 		string texto;
 		switch (i)
@@ -43,26 +52,37 @@ Menu::Menu() {
 		default:
 			break;
 		}
-		text[i].setPosition(250, posY);
-		text[i].setString(texto);
-		text[i].setOrigin(text[i].getGlobalBounds().getPosition().x / 2, text[i].getGlobalBounds().height / 2);
-		text[i].setFillColor(sf::Color(255, 255, 255));
-
-		//musica
-		buffer.loadFromFile("music/menuMusic.wav");
-		sound.setBuffer(buffer);
-		sound.setVolume(100);
-		musicPlaying = true;
+		_text[i].setPosition(250, posY);
+		_text[i].setString(texto);
+		_text[i].setOrigin(_text[i].getGlobalBounds().getPosition().x / 2, _text[i].getGlobalBounds().height / 2);
+		_text[i].setFillColor(sf::Color(255, 255, 255));
 	}
+}
+sf::Text Menu::getText1() const { return _text[0]; }
+sf::Text Menu::getText2() const { return _text[1]; }
+sf::Text Menu::getText3() const { return _text[2]; }
+sf::Text Menu::getText4() const { return _text[3]; }
+sf::Text Menu::getText5() const { return _text[4]; }
+bool Menu::getMusicPlaying() const { return _musicPlaying; }
+sf::Sound Menu::getSound() const { return _sound; }
+void Menu::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 
+void Menu::setSound(bool play) {
+	if (play) {
+		_sound.play();
+		_text[3].setString("Pause music");
+	}
+	else {
+		_sound.pause();
+		_text[3].setString("Play music");
+	}
 }
 
 void Menu::draw(sf::RenderTarget& rt, sf::RenderStates rs)const {
-	rt.draw(banner, rs);
+	rt.draw(_banner, rs);
 	for (int i = 0; i < 5; i++) {
-		rt.draw(text[i], rs);
+		rt.draw(_text[i], rs);
 	}
-
 }
 
 void Menu::validateClick(int mousex, int mousey, Menu& menu, sf::RenderWindow& window, int &view)
@@ -87,22 +107,3 @@ void Menu::validateClick(int mousex, int mousey, Menu& menu, sf::RenderWindow& w
 				window.close();
 			}
 }
-
-bool Menu::getMusicPlaying() { return musicPlaying; }
-void Menu::setMusicPlaying(bool playing) { musicPlaying = playing; }
-sf::Sound Menu::getSound() { return sound; }
-void Menu::setSound(bool play) {
-	if (play) {
-		sound.play();
-		text[3].setString("Pause music");
-	}
-	else {
-		sound.pause();
-		text[3].setString("Play music");
-	}
-}
-sf::Text Menu::getText1() { return text[0]; }
-sf::Text Menu::getText2() { return text[1]; }
-sf::Text Menu::getText3() { return text[2]; }
-sf::Text Menu::getText4() { return text[3]; }
-sf::Text Menu::getText5() { return text[4]; }

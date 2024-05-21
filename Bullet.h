@@ -12,9 +12,9 @@ protected:
 	sf::Vector2f _velocity;
 	sf::Vector2f _enemyPosition;  //dudo mucho que esto esté correcto tenerlo acá
 public:
-	sf::Vector2f getDirection()const;
-	sf::Vector2f getVelocity()const;
-	int getDamage()const;
+	sf::Vector2f getDirection() const;
+	sf::Vector2f getVelocity() const;
+	int getDamage() const;
 	void setDirection(sf::Vector2f);
 	void setVelocity(sf::Vector2f);
 	void setDamage(int);
@@ -23,6 +23,6 @@ public:
 
 	sf::FloatRect getBounds() const;
 	void update();
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	void draw(sf::RenderTarget&, sf::RenderStates) const;
 };
 

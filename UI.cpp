@@ -1,5 +1,7 @@
-#include "UI.h"
 #include <iostream>
+#include <SFML/Graphics.hpp>
+
+#include "UI.h"
 
 UI::UI() {
 	if (!_textureCoins.loadFromFile("img/complementarias/oro.png")) {
@@ -59,10 +61,10 @@ UI::UI() {
 		_text[i].setFillColor(sf::Color(255, 255, 255));
 	}
 }
-sf::RectangleShape UI::getSpeaker() { return _speaker; }
-sf::Texture UI::getTextureSpeaker() { return _textureSpeaker; }
-void UI::setTextureSpeaker(std::string ruta) {
-	if (!_textureSpeaker.loadFromFile(ruta)) {
+sf::RectangleShape UI::getSpeaker() const { return _speaker; }
+sf::Texture UI::getTextureSpeaker() const { return _textureSpeaker; }
+void UI::setTextureSpeaker(std::string path) {
+	if (!_textureSpeaker.loadFromFile(path)) {
 		std::cout << "Error al cargar img mute";
 	};
 	_speaker.setTexture(&_textureSpeaker);

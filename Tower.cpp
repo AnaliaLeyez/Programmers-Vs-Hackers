@@ -4,100 +4,29 @@
 #include <SFML/Graphics.hpp>
 
 #include "Collisionable.h"
-#include "GamePlay.h"
+#include "Manager.h" //ver si esto es necesario aca
 #include "HackerTrainee.h"
 
 #include "Tower.h"
-//Getters
 
-std::string Tower::getName()
-{
-    return _name;
-}
+std::string Tower::getName() const { return _name;}
+float Tower::getCost() const { return _cost; }
+float Tower::getCostUpgrade() const { return _costUpgrade; }
+float Tower::getSalesValue() const { return _salesValue; }
+sf::CircleShape Tower::getVisualRange() const { return _visualRange; }
+//sf::Sprite Tower::getSprite() const { return _sprite; }
+int Tower::getDamage() const { return _damage; }
+int Tower::getRange() const { return _range; }
+int Tower::getSpeedAtack() const { return _speedAttack; }
+int Tower::getUpgradesAmount() const { return _upgradesAmount; }
 
-float Tower::getCost()
-{
-    return _cost;
-}
-
-float Tower::getCostUpgrade()
-{
-    return _costUpgrade;
-}
-
-float Tower::getSalesValue()
-{
-    return _salesValue;
-}
-
-sf::CircleShape Tower::getVisualRange()
-{
-    return _visualRange;
-}
-
-sf::Sprite Tower::getSprite()
-{
-    return _sprite;
-}
-
-int Tower::getDamage()
-{
-    return _damage;
-}
-
-int Tower::getRange()
-{
-    return _range;
-}
-
-int Tower::getSpeedAtack()
-{
-    return _speedAttack;
-}
-
-
-int Tower::getUpgradesAmount()
-{
-    return _upgradesAmount;
-}
-
-//Setters
-void Tower::setRange(int rango)
-{
-    _range = rango;
-}
-
-void Tower::setName(std::string nombre)
-{
-    _name = nombre;
-}
-
-void Tower::setCost(float costo)
-{
-    _cost = costo;
-}
-
-void Tower::setSalesValue(float valor)
-{
-    _salesValue = valor;
-}
-
-void Tower::setDamage(int danio)
-{
-    _damage = danio;
-}
-
-void Tower::setCostUpgrade(float costo)
-{
-    _costUpgrade = costo;
-}
-void Tower::setCooldown(int valor)
-{
-    if (valor == 0)
-        _cooldown = 0;
-    else
-        _cooldown++;
-}
+void Tower::setRange(int range) { _range = range; }
+void Tower::setName(std::string name) { _name = name; }
+void Tower::setCost(float cost) { _cost = cost; }
+void Tower::setSalesValue(float value) { _salesValue = value; }
+void Tower::setDamage(int damage) { _damage = damage; }
+void Tower::setCostUpgrade(float cost) { _costUpgrade = cost; }
+void Tower::setCooldown(int value) { (value == 0) ? _cooldown = 0 : _cooldown++; }
 
 //Comportamiento
 /*
@@ -131,16 +60,12 @@ void Tower::verificarEnemigo(HackerTrainee& enemy)
     }    
 }
 
-sf::FloatRect Tower::getBounds() const
-{
-    return _sprite.getLocalBounds();
-}
+sf::FloatRect Tower::getBounds() const { return _sprite.getLocalBounds(); }
 
 void Tower::update()
 {
    //actualizar hacker en rango:
-   // _hackersOnRange.push_back();
-   
+   // _hackersOnRange.push_back();  
    HackerTrainee enemy;
    verificarEnemigo(enemy);
 }

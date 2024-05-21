@@ -5,24 +5,13 @@
 
 #include "Menu.h"
 #include "UI.h"
-#include "Map.h"
-#include "Map1.h"
-#include "UI.h"
-
-#include "GamePlay.h"
-#include "Player.h"
-#include "Bullet.h"
-#include "Hacker.h"
-#include "HackerTrainee.h"
-#include "Tower.h"
-#include "TowerLab.h"
+#include "Manager.h"
 
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(960, 640), "Programmers Vs Hackers");
 	window.setFramerateLimit(60);
-	//GamePlay &gp = GamePlay::getInstance();
 	Menu menu;
 	int view = 1;
 
@@ -58,8 +47,10 @@ int main()
 		break;
 		case 2:
 		{
-			GamePlay& gp = GamePlay::getInstance();
-			window.draw(gp);
+			//la vista 2 representaria que estoy viendo ALGUN NIVEL, sin especificar cual(?
+			Manager& mg = Manager::getInstance();
+			mg.update();
+			window.draw(mg);
 		}
 		break;
 		}
