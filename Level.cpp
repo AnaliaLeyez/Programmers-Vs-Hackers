@@ -46,18 +46,18 @@ void Level::setTowersAvailable(const std::list<Tower>& towersAvailable) { _tower
 
 void Level::validateClick(int mousex, int mousey)
 {
-//	if (mapa.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
-//		if (mapa.getMusicPlaying()) {
-//			mapa.setSound(false);
-//			mapa.setMusicPlaying(false);
-//			mapa.setTextureSpeaker("img/complementarias/mute.png");
-//		}
-//		else {
-//			mapa.setSound(true);
-//			mapa.setMusicPlaying(true);
-//			mapa.setTextureSpeaker("img/complementarias/musicOn.png");
-//		}
-//	}
+	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
+		if (getMusicPlaying()) {
+			setSound(false);
+			setMusicPlaying(false);
+			_ui.setTextureSpeaker("img/complementarias/mute.png");
+		}
+		else {
+			setSound(true);
+			setMusicPlaying(true);
+			_ui.setTextureSpeaker("img/complementarias/musicOn.png");
+		}
+	}
 }
 void Level::update() {
 	if (!getFinisheLevel()) {
