@@ -1,4 +1,7 @@
 #pragma once
+#include "SFML/Graphics.hpp"
+#include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Audio/Sound.hpp>
 #include "UI.h"
 #include "Wave.h"
 #include "Map.h"

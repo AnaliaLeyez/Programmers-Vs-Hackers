@@ -11,6 +11,13 @@ Menu::Menu() {
 	_banner.setTexture(&_textureBanner);
 	_banner.setPosition(sf::Vector2f(0, 0));
 
+	//musica
+	_buffer.loadFromFile("music/menuMusic.wav");
+	_sound.setBuffer(_buffer);
+	_sound.setVolume(100);
+	_musicPlaying = true;
+	_sound.play();
+
 	//texto
 	if (!_font.loadFromFile("fuentes/fuenteMenu.ttf")) {
 		std::cout << "Error al cargar la fuente del Menu \n";
@@ -49,14 +56,7 @@ Menu::Menu() {
 		_text[i].setString(texto);
 		_text[i].setOrigin(_text[i].getGlobalBounds().getPosition().x / 2, _text[i].getGlobalBounds().height / 2);
 		_text[i].setFillColor(sf::Color(255, 255, 255));
-
-		//musica
-		_buffer.loadFromFile("music/menuMusic.wav");
-		_sound.setBuffer(_buffer);
-		_sound.setVolume(100);
-		_musicPlaying = true;
 	}
-
 }
 sf::Text Menu::getText1() const { return _text[0]; }
 sf::Text Menu::getText2() const { return _text[1]; }
