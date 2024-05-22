@@ -4,6 +4,7 @@
 #include <SFML/Audio/Sound.hpp>
 
 #include "Menu.h"
+#include "MenuAbstract.h"
 #include "UI.h"
 #include "Manager.h"
 #include "Level.h"
@@ -31,8 +32,8 @@ int main()
 				{
 				case 1:
 				{
-					Menu& menu = Menu::getInstance();
-					menu.validateClick(mousex, mousey, menu, window, view);
+					MenuAbstract& menu = MenuAbstract::getInstance();
+					menu.validateClick(mousex, mousey, window, view);
 				}
 				break;
 				case 2:
@@ -51,7 +52,8 @@ int main()
 			{
 			case 1:
 			{
-				Menu& menu = Menu::getInstance();
+				//Menu& menu = Menu::getInstance();
+				MenuAbstract& menu = MenuAbstract::getInstance();
 				window.draw(menu);
 			}
 			break;

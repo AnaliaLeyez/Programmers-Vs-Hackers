@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-#include "Tower.h" // borrar
 #include "Level.h"
 
 class Manager : public sf::Drawable
