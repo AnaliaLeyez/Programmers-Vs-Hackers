@@ -45,27 +45,12 @@ void Level::setTowersAvailable(const std::list<Tower>& towersAvailable) { _tower
 //	//_bullets.push_back(Bullet(position, _hacker.getPosition()));
 //}
 
-void Level::handlerEvent(const sf::Event& ev)
+void Level::validateClick(int mousex, int mousey)
 {
-	if (ev.type == sf::Event::MouseButtonPressed && ev.mouseButton.button == sf::Mouse::Left)
-	{
-		int mousex = ev.mouseButton.x;
-		int mousey = ev.mouseButton.y;
-		if (_mapArray[mousey / 32][mousex / 32] == 6) {
-			_towerMenu.setPosition(mousex, mousey);
-			_towerMenu.show();
-		}
+	if (_mapArray[mousey/32][mousex/32] == 6) {
+		_towerMenu.setPosition(mousex, mousey);
+		_towerMenu.show();
 	}
-	else if (ev.mouseButton.button == sf::Mouse::Right)
-	{
-		_towerMenu.hide();
-	}
-}
-
-void Level::validateClickRight(int mousex, int mousey)
-{
-	_towerMenu.setPosition(mousex, mousey);
-	_towerMenu.show();
 
 	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
 		if (getMusicPlaying()) {
@@ -80,6 +65,7 @@ void Level::validateClickRight(int mousex, int mousey)
 		}
 	}
 }
+
 void Level::update() {
 	if (!getFinisheLevel()) {
 	//_tower.update();

@@ -39,7 +39,7 @@ int main()
 				case 2:
 				{
 					Manager& mg = Manager::getInstance();
-					mg.validateClickRight(mousex, mousey);
+					mg.validateClick(mousex, mousey);
 				}
 				break;
 				}

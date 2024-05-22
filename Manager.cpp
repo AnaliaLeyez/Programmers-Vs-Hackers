@@ -36,8 +36,8 @@ void Manager::setLevel(int IdLevel) {
 	}
 }
 
-void Manager::validateClickRight(int mousex, int mousey) {
-
+void Manager::validateClick(int mousex, int mousey) {
+	_currentLevel->validateClick(mousex, mousey);
 }
 void Manager::update()
 {

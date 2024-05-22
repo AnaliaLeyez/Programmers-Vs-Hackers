@@ -12,7 +12,7 @@ public:
 	static Manager& getInstance(); //Singleton
 	Level getLevel() const;
 	void setLevel(int);
-	void validateClickRight(int, int);
+	void validateClick(int, int);
 	void update();
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 };

@@ -54,7 +54,7 @@ public:
 	//void shoot(sf::Vector2f position);
 	void handlerEvent(const sf::Event&);
 
-	void validateClickRight(int, int);
+	void validateClick(int, int);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update();
 };
