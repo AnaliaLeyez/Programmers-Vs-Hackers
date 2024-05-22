@@ -5,8 +5,9 @@
 #include "UI.h"
 #include "Wave.h"
 #include "Map.h"
+#include "TowerMenu.h"
 #include "Tower.h"
-class Level: public sf::Drawable
+class Level: public sf::Drawable, public sf::Transformable
 {
 protected:
 	int _idLevel;
@@ -22,6 +23,7 @@ protected:
 	std::list<Wave> *_waveList;
 	sf::Vector2f _hackerStartPosition;
 	std::list <Tower> _towersAvailable;
+	TowerMenu _towerMenu;
 public:
 	int getIdLevel() const;
 	bool getFinisheLevel()const;
@@ -50,8 +52,9 @@ public:
 	void setTowersAvailable(const std::list<Tower>&);
 
 	//void shoot(sf::Vector2f position);
+	void handlerEvent(const sf::Event&);
 
-	void validateClick(int mousex, int mousey);
+	void validateClick(int, int);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update();
 };

@@ -23,13 +23,13 @@ public:
 	sf::Text getText4() const;
 	sf::Text getText5() const;
 
-	//MUSICA   Podria heredarse de una clase Musica
+	//MUSICA Podria heredarse de una clase Musica
 	void validateClick(int, int, Menu&, sf::RenderWindow&, int &);
 	bool getMusicPlaying() const;
 	void setMusicPlaying(bool);
 	sf::Sound getSound() const;
 	void setSound(bool);
 
-	virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
+	void update() {}
+	void draw(sf::RenderTarget&, sf::RenderStates) const;
 };
-

@@ -8,6 +8,7 @@
 #include "UI.h"
 #include "Map.h"
 #include "Manager.h"
+#include "TowerMenu.h"
 #include "Tower.h"
 #include "Wave.h"
 
@@ -46,6 +47,17 @@ void Level::setTowersAvailable(const std::list<Tower>& towersAvailable) { _tower
 
 void Level::validateClick(int mousex, int mousey)
 {
+	if (!_towerMenu.getIsVisible() && _mapArray[mousey / 32][mousex / 32] == 6) { 
+		{
+			_towerMenu.setPosition(mousex, mousey); //ver como hacemos que la posicion de la torre quede siempre centrada en spot
+			_towerMenu.show();
+		}
+	}
+	else {
+		//aca habra que chequear si quiere ocultar o se selecciono una torre
+		_towerMenu.hide();
+	}
+
 	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
 		if (getMusicPlaying()) {
 			setSound(false);
@@ -59,6 +71,7 @@ void Level::validateClick(int mousex, int mousey)
 		}
 	}
 }
+
 void Level::update() {
 	if (!getFinisheLevel()) {
 	//_tower.update();
@@ -103,6 +116,9 @@ void Level::update() {
 	}
 }
 void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
+	states.transform *= getTransform();
 	target.draw(*_map, states);
 	target.draw(_ui, states);
+	target.draw(_towerMenu, states);
 }
+

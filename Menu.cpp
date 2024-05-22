@@ -58,6 +58,7 @@ Menu::Menu() {
 		_text[i].setFillColor(sf::Color(255, 255, 255));
 	}
 }
+
 sf::Text Menu::getText1() const { return _text[0]; }
 sf::Text Menu::getText2() const { return _text[1]; }
 sf::Text Menu::getText3() const { return _text[2]; }
@@ -78,32 +79,9 @@ void Menu::setSound(bool play) {
 	}
 }
 
-void Menu::draw(sf::RenderTarget& rt, sf::RenderStates rs)const {
-	rt.draw(_banner, rs);
+void Menu::draw(sf::RenderTarget& target, sf::RenderStates states)const {
+	target.draw(_banner, states);
 	for (int i = 0; i < 5; i++) {
-		rt.draw(_text[i], rs);
+		target.draw(_text[i], states);
 	}
-}
-
-void Menu::validateClick(int mousex, int mousey, Menu& menu, sf::RenderWindow& window, int &view)
-{
-	if (menu.getText1().getGlobalBounds().contains(mousex, mousey)) {
-				menu.setSound(false);
-				menu.setMusicPlaying(false);
-				//mapa.setSound(true);
-				view = 2;
-			}
-			else if (menu.getText4().getGlobalBounds().contains(mousex, mousey)) {
-				if (menu.getMusicPlaying()) {
-					menu.setSound(false);
-					menu.setMusicPlaying(false);
-				}
-				else {
-					menu.setSound(true);
-					menu.setMusicPlaying(true);
-				}
-			}
-			if (menu.getText5().getGlobalBounds().contains(mousex, mousey)) {
-				window.close();
-			}
 }
