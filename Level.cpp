@@ -51,7 +51,7 @@ void Level::handlerEvent(const sf::Event& ev)
 	{
 		int mousex = ev.mouseButton.x;
 		int mousey = ev.mouseButton.y;
-		if (_mapArray[mousey / 32][mousey / 32] == 6) {
+		if (_mapArray[mousey / 32][mousex / 32] == 6) {
 			_towerMenu.setPosition(mousex, mousey);
 			_towerMenu.show();
 		}

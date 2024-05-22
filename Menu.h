@@ -8,15 +8,18 @@ using namespace std;
 class Menu : public sf::Drawable
 {
 private:
+	Menu(); //Singleton
+	static Menu* _currentInstance; //Singleton
 	sf::Texture _textureBanner;
-	sf::RectangleShape _banner;
+	sf::RectangleShape *_banner;
 	sf::Font _font;
 	sf::Text _text[5];
 	sf::SoundBuffer _buffer;
 	sf::Sound _sound;
 	bool _musicPlaying;
 public:
-	Menu();
+	//Menu();
+	static Menu& getInstance(); //Singleton
 	sf::Text getText1() const;
 	sf::Text getText2() const;
 	sf::Text getText3() const;

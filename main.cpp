@@ -12,14 +12,9 @@ int main()
 {
 	sf::RenderWindow window(sf::VideoMode(960, 640), "Programmers Vs Hackers");
 	window.setFramerateLimit(60);
-	Menu menu;
 	int view = 1;
-	Manager& mg = Manager::getInstance();
-	Level level;
-	//Primer while
 	while (window.isOpen())
 	{
-		//Segundowhile eventlistener
 		sf::Event ev;
 		while (window.pollEvent(ev))
 		{
@@ -28,13 +23,26 @@ int main()
 			if (ev.key.code == sf::Keyboard::Key::Escape)
 				window.close();
 
-			//CAPTURAR EVENTO CLICK
 			if (ev.type == sf::Event::MouseButtonPressed && ev.mouseButton.button == sf::Mouse::Left)
 			{
 				int mousex = ev.mouseButton.x;
 				int mousey = ev.mouseButton.y;
-				menu.validateClick(mousex, mousey, menu, window, view);
-				level.validateClickRight(mousex, mousey);
+				switch (view)
+				{
+				case 1:
+				{
+					Menu& menu = Menu::getInstance();
+					menu.validateClick(mousex, mousey, menu, window, view);
+				}
+				break;
+				case 2:
+				{
+					Manager& mg = Manager::getInstance();
+					mg.validateClickRight(mousex, mousey);
+				}
+				break;
+				}
+				
 			}
 			//Render Cycle
 		}
@@ -43,13 +51,13 @@ int main()
 			{
 			case 1:
 			{
+				Menu& menu = Menu::getInstance();
 				window.draw(menu);
 			}
 			break;
 			case 2:
 			{
-				//la vista 2 representaria que estoy viendo ALGUN NIVEL, sin especificar cual(?
-				//Manager& mg = Manager::getInstance();
+				Manager& mg = Manager::getInstance();
 				mg.update();
 				window.draw(mg);
 			}

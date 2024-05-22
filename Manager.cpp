@@ -6,18 +6,20 @@
 
 Manager* Manager::_currentInstance = nullptr;
 
-Manager::Manager(int level) {
-	setLevel(level);  //en cuanto hago esto, es decir, en cuanto especifico que sea nivel1, se rompe
-}
 Manager& Manager::getInstance() {
 	if (Manager::_currentInstance == nullptr) {
-		Manager::_currentInstance = new Manager(); //el Manage nace con nivel=1
+		Manager::_currentInstance = new Manager(); //el Manager nace con nivel=1
 	}
 	return *Manager::_currentInstance;
 }
+
+Manager::Manager(int level) {
+	setLevel(level);
+}
+
 Level Manager::getLevel() const { return *_currentLevel; }
 
-void Manager::setLevel(int IdLevel) { //aca se cambia de un nivel a otro, eliminando siempre el anterior para liberar memoria
+void Manager::setLevel(int IdLevel) {
 	if (_currentLevel != nullptr) {
 		delete _currentInstance;
 	}
@@ -34,6 +36,9 @@ void Manager::setLevel(int IdLevel) { //aca se cambia de un nivel a otro, elimin
 	}
 }
 
+void Manager::validateClickRight(int mousex, int mousey) {
+
+}
 void Manager::update()
 {
 	_currentLevel->update();

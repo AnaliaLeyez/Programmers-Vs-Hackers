@@ -2,14 +2,23 @@
 
 #include "Menu.h"
 
+Menu* Menu::_currentInstance = nullptr;
+
+Menu& Menu::getInstance() {
+	if (Menu::_currentInstance == nullptr) {
+		Menu::_currentInstance = new Menu();
+		return *Menu::_currentInstance;
+	}
+}
+
 Menu::Menu() {
 	//fondo
 	if (!_textureBanner.loadFromFile("img/banner/imgPortada.png")) {
 		std::cout << "Error al cargar img Banner";
 	}
-	_banner.setSize(sf::Vector2f(1024, 768));
-	_banner.setTexture(&_textureBanner);
-	_banner.setPosition(sf::Vector2f(0, 0));
+	_banner->setSize(sf::Vector2f(1024, 768));
+	_banner->setTexture(&_textureBanner);
+	_banner->setPosition(sf::Vector2f(0, 0));
 
 	//musica
 	_buffer.loadFromFile("music/menuMusic.wav");
@@ -58,6 +67,7 @@ Menu::Menu() {
 		_text[i].setFillColor(sf::Color(255, 255, 255));
 	}
 }
+
 sf::Text Menu::getText1() const { return _text[0]; }
 sf::Text Menu::getText2() const { return _text[1]; }
 sf::Text Menu::getText3() const { return _text[2]; }
@@ -78,11 +88,13 @@ void Menu::setSound(bool play) {
 	}
 }
 
-void Menu::draw(sf::RenderTarget& rt, sf::RenderStates rs)const {
-	rt.draw(_banner, rs);
-	for (int i = 0; i < 5; i++) {
-		rt.draw(_text[i], rs);
-	}
+void Menu::draw(sf::RenderTarget& target, sf::RenderStates states)const {
+	//target.draw(*_currentInstance, states);
+
+	target.draw(*_banner, states);
+	//for (int i = 0; i < 5; i++) {
+	//	target.draw(_text[i], states);
+	//}
 }
 
 void Menu::validateClick(int mousex, int mousey, Menu& menu, sf::RenderWindow& window, int &view)
@@ -90,7 +102,6 @@ void Menu::validateClick(int mousex, int mousey, Menu& menu, sf::RenderWindow& w
 	if (menu.getText1().getGlobalBounds().contains(mousex, mousey)) {
 				menu.setSound(false);
 				menu.setMusicPlaying(false);
-				//mapa.setSound(true);
 				view = 2;
 			}
 			else if (menu.getText4().getGlobalBounds().contains(mousex, mousey)) {
