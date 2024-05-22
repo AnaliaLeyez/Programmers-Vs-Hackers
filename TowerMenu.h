@@ -8,6 +8,7 @@ private:
 	bool _isVisible;
 public:
 	TowerMenu();
+	bool getIsVisible();
 	void hide();
 	void show();
 

@@ -14,6 +14,11 @@ TowerMenu::TowerMenu()
 	_sprite.setScale(0.5, 0.5);
 }
 
+bool TowerMenu::getIsVisible()
+{
+	return _isVisible;
+}
+
 void TowerMenu::hide() {
 	_isVisible = false; 
 }
