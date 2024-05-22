@@ -47,10 +47,9 @@ void Level::setTowersAvailable(const std::list<Tower>& towersAvailable) { _tower
 
 void Level::validateClick(int mousex, int mousey)
 {
-	if (!_towerMenu.getIsVisible()) {
-	if (_mapArray[mousey/32][mousex/32] == 6) 
+	if (!_towerMenu.getIsVisible() && _mapArray[mousey / 32][mousex / 32] == 6) { 
 		{
-			_towerMenu.setPosition(mousex, mousey);
+			_towerMenu.setPosition(mousex, mousey); //ver como hacemos que la posicion de la torre quede siempre centrada en spot
 			_towerMenu.show();
 		}
 	}
@@ -123,6 +122,3 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	target.draw(_towerMenu, states);
 }
 
-//como mostrar el menu, sin tirar todo en main
-//como manejar la logica de Wave
-//verificar enemigo, ver como se refactoriza
