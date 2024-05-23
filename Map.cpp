@@ -10,5 +10,5 @@ void Map::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	for (const auto& tile : _tiles) {
 		target.draw(tile, states);
 	}
-	target.draw(_UTN, states);
+	//target.draw(_UTN, states);  //la idea es que la UTN cambia de color
 }

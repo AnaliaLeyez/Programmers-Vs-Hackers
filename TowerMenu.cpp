@@ -51,10 +51,11 @@ void TowerMenu::show() {
 }
 
 void TowerMenu::validateClickOnTower(int mousex, int mousey) {
-	for (const auto& button : _buttons) {
-		auto bounds = button.getSprite().getGlobalBounds();
-		if (button.getSprite().getGlobalBounds().contains(mousex,mousey)) {
+	for (int i = 0; i < 4; i++) {
+		std::cout << "Mouse clicked at: (" << mousex << ", " << mousey << ")" << std::endl;
+		if (_buttons[i].getSprite().getGlobalBounds().contains(mousex,mousey)) {
 			std::cout << "funciona";
+			//obtener el tipo de boton para luego crear esa torre
 		}
 	}
 }
@@ -71,10 +72,13 @@ void TowerMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
 		states.transform *= getTransform();
 		target.draw(_sprite, states);
-		for (const auto& button : _buttons)
-		{
-			target.draw(button, states);
+		for (int i = 0; i < 4; i++) {
+			target.draw(_buttons[i], states);
 		}
+		//for (const auto& button : _buttons)
+		//{
+		//	target.draw(button, states);
+		//}
 	}
 	
 }

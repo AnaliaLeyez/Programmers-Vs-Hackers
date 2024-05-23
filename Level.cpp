@@ -56,7 +56,7 @@ void Level::validateClick(int mousex, int mousey)
 	}
 	else if (_towerMenu.getIsVisible()) {
 		_towerMenu.validateClickOnTower(mousex, mousey);
-			_towerMenu.hide();
+		_towerMenu.hide();
 	} 
 
 	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {

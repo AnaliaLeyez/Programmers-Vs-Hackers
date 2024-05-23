@@ -72,6 +72,7 @@ void UI::setTextureSpeaker(std::string path) {
 void UI::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(_ray, states);
 	target.draw(_coin, states);
+	target.draw(_speaker, states);
 	for (int i = 0; i < 3; i++) {
 		target.draw(_text[i], states);
 	}

@@ -12,9 +12,11 @@ TowerMenuButton::TowerMenuButton()
 	_spriteHover.setTexture(_textureHover);
 	setPosition(sf::Vector2f(100.f, 100.f));
 }
+
 const sf::Sprite& TowerMenuButton::getSprite() const {  // Cambiado a const
 	return _sprite;
 }
+
 void TowerMenuButton::setTexture(std::string path)
 {
 	if (!_texture.loadFromFile(path))

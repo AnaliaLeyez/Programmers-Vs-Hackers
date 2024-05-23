@@ -19,12 +19,12 @@ Map1::Map1() {
 			_tiles.push_back(_sprite);
 		}
 	}
-	//UTN
-	if (!_textureUTN.loadFromFile("img/towers/utn1.png")) {
+	//UTN   - aca se pone la img de UTN q cambia de color.. serian dos img que cambian segun un switch
+	/*if (!_textureUTN.loadFromFile("img/towers/utn1.png")) {
 		std::cout << "Error al cargar img UTN";
 	};
 	_UTN.setSize(sf::Vector2f(80, 80));
 	_UTN.setTexture(&_textureUTN);
 	_UTN.setPosition(sf::Vector2f(850, 200));
-	_UTN.setOrigin(_UTN.getGlobalBounds().width / 2, _UTN.getGlobalBounds().height / 2);
+	_UTN.setOrigin(_UTN.getGlobalBounds().width / 2, _UTN.getGlobalBounds().height / 2);*/
 }
