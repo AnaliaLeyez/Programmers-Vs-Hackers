@@ -3,11 +3,8 @@
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>
 
-#include "Menu.h"
 #include "MenuAbstract.h"
-#include "UI.h"
 #include "Manager.h"
-#include "Level.h"
 
 int main()
 {
