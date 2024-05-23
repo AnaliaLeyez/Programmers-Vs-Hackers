@@ -47,16 +47,17 @@ void Level::setTowersAvailable(const std::list<Tower>& towersAvailable) { _tower
 
 void Level::validateClick(int mousex, int mousey)
 {
+	
 	if (!_towerMenu.getIsVisible() && _mapArray[mousey / 32][mousex / 32] == 6) { 
 		{
 			_towerMenu.setPosition(mousex, mousey); //ver como hacemos que la posicion de la torre quede siempre centrada en spot
 			_towerMenu.show();
 		}
 	}
-	else {
-		//aca habra que chequear si quiere ocultar o se selecciono una torre
-		_towerMenu.hide();
-	}
+	else if (_towerMenu.getIsVisible()) {
+		_towerMenu.validateClickOnTower(mousex, mousey);
+			_towerMenu.hide();
+	} 
 
 	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
 		if (getMusicPlaying()) {
