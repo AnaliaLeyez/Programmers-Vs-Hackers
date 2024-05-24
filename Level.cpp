@@ -117,7 +117,9 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	states.transform *= getTransform();
 	target.draw(*_map, states);
 	target.draw(_ui, states);
-	//target.draw(_spots, states);
+	for (Spot spot : *_spots) {
+		target.draw(spot, states);
+	}
 	target.draw(_towerMenu, states);
 }
 
