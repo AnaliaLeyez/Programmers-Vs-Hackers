@@ -7,6 +7,8 @@
 #include "Map.h"
 #include "TowerMenu.h"
 #include "Tower.h"
+#include "Spot.h"
+
 class Level: public sf::Drawable, public sf::Transformable
 {
 protected:
@@ -17,6 +19,7 @@ protected:
 	sf::Sprite _spriteUTN;
 	Map *_map;
 	int _mapArray[20][30];
+	std::list<Spot> *_spots;
 	int _golden;
 	int _energy;
 	sf::SoundBuffer _buffer;

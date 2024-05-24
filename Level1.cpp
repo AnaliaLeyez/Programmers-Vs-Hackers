@@ -5,8 +5,20 @@
 #include "TowerBrian.h"
 #include "Level.h"
 #include "Wave.h"
-
+#include "Spot.h"
 #include "Level1.h"
+
+void setSpots(std::list<Spot> &spots) {
+	Spot sp;
+	sp.setSpotNumber(1);
+	sp.setOccupied(false);
+	sp.setPosition(sf::Vector2f(200, 200));
+	spots.push_back(sp);
+	sp.setSpotNumber(2);
+	sp.setOccupied(true);
+	sp.setPosition(sf::Vector2f(400, 400));
+	spots.push_back(sp);
+}
 
 Level1::Level1()
 {
@@ -36,6 +48,7 @@ Level1::Level1()
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 
 	};
+	setSpots(*_spots);
 	_golden = 500;
 	_energy = 500;
 	setMapArray(arr);
