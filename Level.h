@@ -19,7 +19,7 @@ protected:
 	sf::Sprite _spriteUTN;
 	Map *_map;
 	int _mapArray[20][30];
-	std::list<Spot> *_spots;
+	std::list<Spot> _spots;
 	int _golden;
 	int _energy;
 	sf::SoundBuffer _buffer;
@@ -37,6 +37,7 @@ public:
 	int(*getMapArray())[30];
 	int getGolden() const;
 	int getEnergy() const;
+	sf::Sprite getUTN() { return _spriteUTN; } //borrar
 	sf::SoundBuffer getBuffer() const;
 	bool getMusicPlaying() const;
 	sf::Sound getSound() const;
@@ -58,7 +59,7 @@ public:
 
 	//void shoot(sf::Vector2f position);
 	void handlerEvent(const sf::Event&);
-
+	void mouseCheck(sf::RenderWindow&);
 	void validateClick(int, int);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update();

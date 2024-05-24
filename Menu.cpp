@@ -12,7 +12,7 @@ Menu::Menu() {
 	//musica
 	_buffer.loadFromFile("music/menuMusic.wav");
 	_sound.setBuffer(_buffer);
-	_sound.setVolume(100);
+	_sound.setVolume(5);
 	_musicPlaying = true;
 	_sound.play();
 
