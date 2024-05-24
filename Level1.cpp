@@ -15,6 +15,7 @@ void setSpots(std::list<Spot> &spots) {
 	spots.push_back(sp);
 	sp.setSpotNumber(2);
 	sp.setPosition(sf::Vector2f(400, 400));
+	sp.setOccupied(true);
 	spots.push_back(sp);
 }
 
@@ -47,7 +48,6 @@ Level1::Level1()
 
 	};
 	setSpots(_spots);
-	_spots = {};
 	_golden = 500;
 	_energy = 500;
 	setMapArray(arr);
