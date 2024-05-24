@@ -55,16 +55,14 @@ void TowerMenu::show() {
 }
 
 void TowerMenu::validateClickOnTower(int mousex, int mousey, sf::RenderWindow& window) {
-	sf::Vector2f worldPos = window.mapPixelToCoords(sf::Vector2i(mousex, mousey));
 	for (int i = 0; i < 4; i++) {
 		//std::cout << "Button bounds: (" << _buttons[i].getSprite().getGlobalBounds().left << ", " << _buttons[i].getSprite().getGlobalBounds().top << ", " << _buttons[i].getSprite().getGlobalBounds().width << ", " << _buttons[i].getSprite().getGlobalBounds().height << ")";
 		if (_buttons[i]->getGlobalBounds().contains(getPosition().x - static_cast<float>(mousex), getPosition().y- static_cast<float>(mousey))) {
-			std::cout << std::endl << "FUNCIONA1" << std::endl;
+			std::cout << "se clickeo en: " << _buttons[i]->getTower().getName() << std::endl;
 		}
 		
-		if (_buttons[i]->getGlobalBounds().contains(worldPos)) {
+		if (_buttons[i]->getGlobalBounds().contains(mousex, mousey)) {
 			std::cout << "FUNCIONA (intento original)" << std::endl;
-			//obtener el tipo de boton para luego crear esa torre
 		}
 	}
 }

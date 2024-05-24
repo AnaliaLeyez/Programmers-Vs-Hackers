@@ -12,7 +12,7 @@ protected:
 
 public:
 	//void isMouseOver();
-
+	Tower getTower();
 	void update();
 
 	void draw(sf::RenderTarget&, sf::RenderStates) const;

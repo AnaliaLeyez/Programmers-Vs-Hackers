@@ -10,6 +10,11 @@
 //
 //}
 
+Tower TowerMenuButton::getTower()
+{
+	return *_tower;
+}
+
 void TowerMenuButton::update()
 {
 	//isMouseOver();
