@@ -3,19 +3,18 @@
 
 #include "Hacker.h"
 #include "Tower.h"
+#include "TowerKloster.h"
 
-#include "TowerLab.h"
-
-TowerLab::TowerLab(sf::Vector2f position)
+TowerKloster::TowerKloster(sf::Vector2f position)
 {
-	if (!_texture.loadFromFile("img/towers/torreA_1.png")) {
+	if (!_texture.loadFromFile("img/towers/torreC_1.png")) {
 		std::cout << "NO CARGO" << std::endl;
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 	setPosition(position);
 
-	_name = "torre Laboratorio";
+	_name = "Torre SPD";
 
 	//Rango de ataque:
 	_visualRange.setRadius(120);
@@ -31,7 +30,7 @@ TowerLab::TowerLab(sf::Vector2f position)
 	_upgradesAmount = 2;
 }
 
-void TowerLab::updateLabo2()
+void TowerKloster::update1()
 {
 	_costUpgrade = 9;
 	_salesValue = 7;

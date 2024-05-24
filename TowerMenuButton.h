@@ -2,8 +2,8 @@
 #include "Tower.h"
 class TowerMenuButton : public sf::Drawable, public sf::Transformable
 {
-private:
-	Tower _tower; //Nuevo, para que cada boton tenga la torre que representa
+protected:
+	Tower* _tower; //Nuevo, para que cada boton tenga la torre que representa
 	sf::Texture _texture;
 	sf::Sprite _sprite;
 	sf::Texture _textureHover;
@@ -11,11 +11,6 @@ private:
 	bool _mouseOver;
 
 public:
-	TowerMenuButton();
-	const sf::Sprite& getSprite() const;
-
-	void setTexture(std::string);
-
 	//void isMouseOver();
 
 	void update();

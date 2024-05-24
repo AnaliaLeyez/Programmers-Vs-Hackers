@@ -140,6 +140,10 @@
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletA.cpp" />
+    <ClCompile Include="ButtomBrian.cpp" />
+    <ClCompile Include="ButtomKloster.cpp" />
+    <ClCompile Include="ButtomMaxiSar.cpp" />
+    <ClCompile Include="ButtomMaxiWenner.cpp" />
     <ClCompile Include="Collisionable.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Hacker.cpp" />
@@ -153,14 +157,21 @@
     <ClCompile Include="MenuAbstract.cpp" />
     <ClCompile Include="Tower.cpp" />
     <ClCompile Include="TowerMenu.cpp" />
-    <ClCompile Include="TowerLab.cpp" />
+    <ClCompile Include="TowerBrian.cpp" />
     <ClCompile Include="TowerMenuButton.cpp" />
+    <ClCompile Include="TowerSarF.cpp" />
+    <ClCompile Include="TowerKloster.cpp" />
+    <ClCompile Include="TowerWenner.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Wave.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletA.h" />
+    <ClInclude Include="ButtomBrian.h" />
+    <ClInclude Include="ButtomKloster.h" />
+    <ClInclude Include="ButtomMaxiSar.h" />
+    <ClInclude Include="ButtomMaxiWenner.h" />
     <ClInclude Include="Collisionable.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Hacker.h" />
@@ -174,8 +185,11 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Tower.h" />
     <ClInclude Include="TowerMenu.h" />
-    <ClInclude Include="TowerLab.h" />
+    <ClInclude Include="TowerBrian.h" />
     <ClInclude Include="TowerMenuButton.h" />
+    <ClInclude Include="TowerSarF.h" />
+    <ClInclude Include="TowerKloster.h" />
+    <ClInclude Include="TowerWenner.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Wave.h" />
   </ItemGroup>
