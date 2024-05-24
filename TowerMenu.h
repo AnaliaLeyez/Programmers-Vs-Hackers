@@ -14,7 +14,7 @@ public:
 	const TowerMenuButton* getButtons() const;
 	void hide();
 	void show();
-	void validateClickOnTower(int, int, sf::RenderWindow& window);
+	void validateClickOnTower(int, int);
 	void update();
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 

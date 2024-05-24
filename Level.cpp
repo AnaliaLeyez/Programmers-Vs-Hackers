@@ -45,7 +45,7 @@ void Level::setTowersAvailable(const std::list<Tower>& towersAvailable) { _tower
 //	//_bullets.push_back(Bullet(position, _hacker.getPosition()));
 //}
 
-void Level::validateClick(int mousex, int mousey, sf::RenderWindow& window)
+void Level::validateClick(int mousex, int mousey)
 {
 	
 	if (!_towerMenu.getIsVisible() && _mapArray[mousey / 32][mousex / 32] == 6) { 
@@ -55,7 +55,7 @@ void Level::validateClick(int mousex, int mousey, sf::RenderWindow& window)
 		}
 	}
 	else if (_towerMenu.getIsVisible()) {
-		_towerMenu.validateClickOnTower(mousex, mousey, window);
+		_towerMenu.validateClickOnTower(mousex, mousey);
 		_towerMenu.hide();
 	} 
 

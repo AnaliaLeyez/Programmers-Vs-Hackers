@@ -29,9 +29,9 @@ TowerMenu::TowerMenu()
 	_buttons[3]->setPosition(-100, 0);
 
 	// Set the positions relative to the menu
-	for (int x = 0; x < 4; x++) {
-		_buttons[x]->move(_sprite.getPosition()); // This assumes _sprite's position is the menu's position
-	}
+	//for (int x = 0; x < 4; x++) {
+	//	_buttons[x]->move(_sprite.getPosition()); // This assumes _sprite's position is the menu's position
+	//}
 	//_buttons[0].setPosition(0 + getPosition().x, -115);  //sumar la posicion relativa del menu
 	//_buttons[1].setPosition(115 + getPosition().x, 0 + getPosition().y);
 	//_buttons[2].setPosition(0 + getPosition().x, 115 + getPosition().y);
@@ -54,7 +54,7 @@ void TowerMenu::show() {
 	_isVisible = true;
 }
 
-void TowerMenu::validateClickOnTower(int mousex, int mousey, sf::RenderWindow& window) {
+void TowerMenu::validateClickOnTower(int mousex, int mousey) {
 	for (int i = 0; i < 4; i++) {
 		//std::cout << "Button bounds: (" << _buttons[i].getSprite().getGlobalBounds().left << ", " << _buttons[i].getSprite().getGlobalBounds().top << ", " << _buttons[i].getSprite().getGlobalBounds().width << ", " << _buttons[i].getSprite().getGlobalBounds().height << ")";
 		if (_buttons[i]->getGlobalBounds().contains(getPosition().x - static_cast<float>(mousex), getPosition().y- static_cast<float>(mousey))) {

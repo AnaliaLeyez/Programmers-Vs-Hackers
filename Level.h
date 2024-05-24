@@ -13,6 +13,8 @@ protected:
 	int _idLevel;
 	bool _finishedLevel;
 	UI _ui;
+	sf::Texture _textureUTN;
+	sf::Sprite _spriteUTN;
 	Map *_map;
 	int _mapArray[20][30];
 	int _golden;
@@ -54,7 +56,7 @@ public:
 	//void shoot(sf::Vector2f position);
 	void handlerEvent(const sf::Event&);
 
-	void validateClick(int, int, sf::RenderWindow& window);
+	void validateClick(int, int);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update();
 };

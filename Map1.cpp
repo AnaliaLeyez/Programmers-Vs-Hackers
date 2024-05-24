@@ -19,12 +19,21 @@ Map1::Map1() {
 			_tiles.push_back(_sprite);
 		}
 	}
-	//UTN   - aca se pone la img de UTN q cambia de color.. serian dos img que cambian segun un switch
-	/*if (!_textureUTN.loadFromFile("img/towers/utn1.png")) {
+	//UTN 
+	_dying = true;
+	if (!_textureUTN.loadFromFile("img/towers/facu.png")) {
 		std::cout << "Error al cargar img UTN";
 	};
-	_UTN.setSize(sf::Vector2f(80, 80));
+	_UTN.setSize(sf::Vector2f(200, 173));
 	_UTN.setTexture(&_textureUTN);
-	_UTN.setPosition(sf::Vector2f(850, 200));
-	_UTN.setOrigin(_UTN.getGlobalBounds().width / 2, _UTN.getGlobalBounds().height / 2);*/
+	_UTN.setPosition(sf::Vector2f(850, 130));
+	_UTN.setOrigin(_UTN.getGlobalBounds().width / 2, _UTN.getGlobalBounds().height / 2);
+
+	if (!_textureUTNRed.loadFromFile("img/towers/facuRed.png")) {
+		std::cout << "Error al cargar img UTN";
+	};
+	_UTNRed.setSize(sf::Vector2f(200, 173));
+	_UTNRed.setTexture(&_textureUTNRed);
+	_UTNRed.setPosition(sf::Vector2f(850, 130));
+	_UTNRed.setOrigin(_UTNRed.getGlobalBounds().width / 2, _UTNRed.getGlobalBounds().height / 2);
 }

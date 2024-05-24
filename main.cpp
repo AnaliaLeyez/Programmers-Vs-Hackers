@@ -13,14 +13,13 @@ int main()
 	int view = 1;
 	while (window.isOpen())
 	{
+		
 		sf::Event ev;
 		while (window.pollEvent(ev))
 		{
-			if (ev.type == sf::Event::EventType::Closed)
-				window.close();
-			if (ev.key.code == sf::Keyboard::Key::Escape)
-				window.close();
+			//movi window close al final para que no pase por aca innecesariamente si ya se dio click en cerrar...
 
+			
 			if (ev.type == sf::Event::MouseButtonPressed && ev.mouseButton.button == sf::Mouse::Left)
 			{
 				int mousex = ev.mouseButton.x;
@@ -36,14 +35,15 @@ int main()
 				case 2:
 				{
 					Manager& mg = Manager::getInstance();
-					mg.validateClick(mousex, mousey, window);
+					mg.validateClick(mousex, mousey);
 				}
 				break;
 				}
 				
 			}
-			//Render Cycle
+			
 		}
+		
 			window.clear();
 			switch (view)
 			{
@@ -65,7 +65,17 @@ int main()
 		
 		//RenderOjbects
 		window.display();
-	}
+		if (ev.type == sf::Event::EventType::Closed) {
+			MenuAbstract& menu = MenuAbstract::getInstance();
+			Manager& mg = Manager::getInstance();
+			delete& menu;   //puse delete a ver si se corregia lo de "device not closed"
+			delete& mg;
+			window.close();
+		}
 
+		if (ev.key.code == sf::Keyboard::Key::Escape)
+			window.close();
+
+	}
 	return 0;
 }
