@@ -1,9 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
-#include <iostream>
 
 #include "Collisionable.h"
-
 #include "Hacker.h"
 
 //sf::Sprite Hacker::getSprite() const { return _sprite; }

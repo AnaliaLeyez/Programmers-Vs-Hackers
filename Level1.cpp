@@ -1,9 +1,8 @@
-#include <iostream>
 #include "UI.h"
 #include "Map.h"
 #include "Map1.h"
 #include "Tower.h"
-#include "TowerLab.h"
+#include "TowerBrian.h"
 #include "Level.h"
 #include "Wave.h"
 
@@ -41,7 +40,7 @@ Level1::Level1()
 	_energy = 500;
 	setMapArray(arr);
 	if (!_buffer.loadFromFile("music/nivel1.wav")) {
-		std::cout << "Error al cargar musica nivel 1";
+		throw std::runtime_error("Error al cargar musica nivel 1");
 	};
 	_sound.setBuffer(_buffer);
 	_sound.setVolume(100);
@@ -53,5 +52,5 @@ Level1::Level1()
 	wave.setWave(wave.getWave3());
 	//_waveList->push_back(wave); //esta linea rompe todo
 	_hackerStartPosition = { 960 / 32 * 9, 640 / 32 * 0.5 };
-	_towersAvailable.push_back(TowerLab());
+	_towersAvailable.push_back(TowerBrian());
 }

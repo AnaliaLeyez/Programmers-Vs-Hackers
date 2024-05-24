@@ -1,21 +1,19 @@
-#include <iostream>
 #include <SFML/Graphics.hpp>
 
 #include "Hacker.h"
 #include "Tower.h"
+#include "TowerBrian.h"
 
-#include "TowerLab.h"
-
-TowerLab::TowerLab(sf::Vector2f position)
+TowerBrian::TowerBrian(sf::Vector2f position)
 {
 	if (!_texture.loadFromFile("img/towers/torreA_1.png")) {
-		std::cout << "NO CARGO" << std::endl;
+		throw std::runtime_error("Error img Torre Brian");
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 	setPosition(position);
 
-	_name = "torre Laboratorio";
+	_name = "Torre Laboratorio 1";
 
 	//Rango de ataque:
 	_visualRange.setRadius(120);
@@ -32,8 +30,9 @@ TowerLab::TowerLab(sf::Vector2f position)
 	_upgradesAmount = 2;
 }
 
-void TowerLab::updateLabo2()
+void TowerBrian::update1()
 {
+	_name = "Laboratorio 2";
 	_costUpgrade = 9;
 	_salesValue = 7;
 	_damage = 12;

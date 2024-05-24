@@ -13,6 +13,8 @@ protected:
 	int _idLevel;
 	bool _finishedLevel;
 	UI _ui;
+	sf::Texture _textureUTN;
+	sf::Sprite _spriteUTN;
 	Map *_map;
 	int _mapArray[20][30];
 	int _golden;

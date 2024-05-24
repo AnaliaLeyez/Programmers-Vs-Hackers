@@ -1,6 +1,4 @@
-#include <iostream>
 #include <list>
-
 #include "SFML/Graphics.hpp"
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>
@@ -11,7 +9,6 @@
 #include "TowerMenu.h"
 #include "Tower.h"
 #include "Wave.h"
-
 #include "Level.h"
 
 int Level::getIdLevel() const { return _idLevel; }
@@ -47,16 +44,17 @@ void Level::setTowersAvailable(const std::list<Tower>& towersAvailable) { _tower
 
 void Level::validateClick(int mousex, int mousey)
 {
+	
 	if (!_towerMenu.getIsVisible() && _mapArray[mousey / 32][mousex / 32] == 6) { 
 		{
 			_towerMenu.setPosition(mousex, mousey); //ver como hacemos que la posicion de la torre quede siempre centrada en spot
 			_towerMenu.show();
 		}
 	}
-	else {
-		//aca habra que chequear si quiere ocultar o se selecciono una torre
+	else if (_towerMenu.getIsVisible()) {
+		_towerMenu.validateClickOnTower(mousex, mousey);
 		_towerMenu.hide();
-	}
+	} 
 
 	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
 		if (getMusicPlaying()) {
