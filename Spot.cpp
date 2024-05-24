@@ -16,6 +16,7 @@ Spot::Spot()
 	}
 	_spriteB.setTexture(_textureB);
 	_spriteB.setOrigin(_spriteB.getGlobalBounds().width / 2, _spriteB.getGlobalBounds().height / 2);
+	_occupied = false;
 }
 
 int Spot::getSpotNumber(){ return 0; }
