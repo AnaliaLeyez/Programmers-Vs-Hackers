@@ -9,7 +9,7 @@ ButtomMaxiSar::ButtomMaxiSar()
 	_mouseOver = false;
 	if (!_texture.loadFromFile("img/menuContextual/button_tower_menu_maxiSar.png"))
 	{
-		std::cout << "Loading error. " << std::endl;
+		throw std::runtime_error("Error img Buttom Sar F");
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setScale(0.7f, 0.7f);

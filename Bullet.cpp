@@ -1,9 +1,7 @@
 #include "SFML/Graphics.hpp"
-#include <iostream>
 
 #include "Collisionable.h"
 #include "Hacker.h"
-
 #include "Bullet.h"
 
 sf::FloatRect Bullet::getBounds() const { return _sprite.getGlobalBounds(); }

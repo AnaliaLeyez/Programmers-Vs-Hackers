@@ -9,7 +9,7 @@ ButtomKloster::ButtomKloster()
 	_mouseOver = false;
 	if (!_texture.loadFromFile("img/menuContextual/button_tower_menu_kloster.png"))
 	{
-		std::cout << "Loading error. " << std::endl;
+		throw std::runtime_error("Error img Buttom Kloster");
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setScale(0.7f, 0.7f);

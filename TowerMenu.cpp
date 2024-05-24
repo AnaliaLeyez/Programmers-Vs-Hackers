@@ -55,15 +55,14 @@ void TowerMenu::show() {
 }
 
 void TowerMenu::validateClickOnTower(int mousex, int mousey) {
+
+	sf::Vector2f mousePos = sf::Vector2f(static_cast<float>(mousex), static_cast<float>(mousey));
+	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousePos);
 	for (int i = 0; i < 4; i++) {
-		//std::cout << "Button bounds: (" << _buttons[i].getSprite().getGlobalBounds().left << ", " << _buttons[i].getSprite().getGlobalBounds().top << ", " << _buttons[i].getSprite().getGlobalBounds().width << ", " << _buttons[i].getSprite().getGlobalBounds().height << ")";
-		if (_buttons[i]->getGlobalBounds().contains(getPosition().x - static_cast<float>(mousex), getPosition().y- static_cast<float>(mousey))) {
+	//	sf::FloatRect buttonBounds =;
+		if (_buttons[i]->getGlobalBounds().contains(transformedMousePos)) {
 			std::cout << "se clickeo en: " << _buttons[i]->getTower().getName() << std::endl;
 			//validateSale();
-		}
-		
-		if (_buttons[i]->getGlobalBounds().contains(mousex, mousey)) {
-			std::cout << "FUNCIONA (intento original)" << std::endl;
 		}
 	}
 }
