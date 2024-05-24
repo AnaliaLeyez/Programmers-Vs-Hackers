@@ -1,10 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>
-#include <iostream>
 
 #include "Map.h"
-
 #include "Map1.h"
 
 Map1::Map1() {
@@ -22,7 +20,7 @@ Map1::Map1() {
 	//UTN 
 	_dying = true;
 	if (!_textureUTN.loadFromFile("img/towers/facu.png")) {
-		std::cout << "Error al cargar img UTN";
+		throw std::runtime_error("Error al cargar img UTN");
 	};
 	_UTN.setSize(sf::Vector2f(200, 173));
 	_UTN.setTexture(&_textureUTN);
@@ -30,7 +28,7 @@ Map1::Map1() {
 	_UTN.setOrigin(_UTN.getGlobalBounds().width / 2, _UTN.getGlobalBounds().height / 2);
 
 	if (!_textureUTNRed.loadFromFile("img/towers/facuRed.png")) {
-		std::cout << "Error al cargar img UTN";
+		throw std::runtime_error("Error al cargar img UTN");
 	};
 	_UTNRed.setSize(sf::Vector2f(200, 173));
 	_UTNRed.setTexture(&_textureUTNRed);

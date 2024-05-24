@@ -1,18 +1,17 @@
-#include <iostream>
 #include <SFML/Graphics.hpp>
 
 #include "UI.h"
 
 UI::UI() {
 	if (!_textureCoins.loadFromFile("img/complementarias/oro.png")) {
-		std::cout << "Error al cargar img. Oro";
+		throw std::runtime_error("Error al cargar img Oro");
 	}
 	_coin.setTexture(_textureCoins);
 	_coin.setPosition(510, 20);
 	_coin.setOrigin(_coin.getGlobalBounds().width / 2, _coin.getGlobalBounds().height / 2);
 
 	if (!_textureRay.loadFromFile("img/complementarias/energia.png")) {
-		std::cout << "Error al cargar img. Rayo";
+		throw std::runtime_error("Error al cargar img Rayo");
 	}
 	_ray.setTexture(_textureRay);
 	_ray.setPosition(340, 25);
@@ -20,7 +19,7 @@ UI::UI() {
 
 	//parlante
 	if (!_textureSpeaker.loadFromFile("img/complementarias/musicOn.png")) {
-		std::cout << "Error al cargar img mute";
+		throw std::runtime_error("Error al cargar img mute");
 	};
 	_speaker.setSize(sf::Vector2f(80, 80));
 	_speaker.setTexture(&_textureSpeaker);
@@ -28,7 +27,7 @@ UI::UI() {
 	_speaker.setOrigin(_speaker.getGlobalBounds().width / 2, _speaker.getGlobalBounds().height / 2);
 
 	if (!_font.loadFromFile("fuentes/fuenteMenu.ttf")) {
-		std::cout << "Error al cargar la fuente del Menu \n";
+		throw std::runtime_error("Error al cargar la fuente del Menu \n");
 	}
 	for (int i = 0; i < 3; i++) {
 		_text[i].setFont(_font);
@@ -65,7 +64,7 @@ sf::RectangleShape UI::getSpeaker() const { return _speaker; }
 sf::Texture UI::getTextureSpeaker() const { return _textureSpeaker; }
 void UI::setTextureSpeaker(std::string path) {
 	if (!_textureSpeaker.loadFromFile(path)) {
-		std::cout << "Error al cargar img mute";
+		throw std::runtime_error("Error al cargar img mute");
 	};
 	_speaker.setTexture(&_textureSpeaker);
 }

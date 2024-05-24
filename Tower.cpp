@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string>
 #include <list>
 #include <SFML/Graphics.hpp>
@@ -6,7 +5,6 @@
 #include "Collisionable.h"
 #include "Manager.h" //ver si esto es necesario aca
 #include "HackerTrainee.h"
-
 #include "Tower.h"
 
 std::string Tower::getName() const { return _name;}

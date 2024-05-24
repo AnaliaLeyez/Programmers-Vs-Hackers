@@ -1,11 +1,9 @@
-#include <iostream>
-
 #include "Menu.h"
 
 Menu::Menu() {
 	//fondo
 	if (!_textureBanner.loadFromFile("img/banner/imgPortada.png")) {
-		std::cout << "Error al cargar img Banner";
+		throw std::runtime_error("Error al cargar img Banner");
 	}
 	_banner.setSize(sf::Vector2f(1024, 768));
 	_banner.setTexture(&_textureBanner);
@@ -20,7 +18,7 @@ Menu::Menu() {
 
 	//texto
 	if (!_font.loadFromFile("fuentes/fuenteMenu.ttf")) {
-		std::cout << "Error al cargar la fuente del Menu \n";
+		throw std::runtime_error("Error al cargar la fuente del Menu \n");
 	}
 	for (int i = 0; i < 5; i++) {
 		_text[i].setFont(_font);

@@ -1,4 +1,3 @@
-#include <iostream>
 #include <SFML/Graphics.hpp>
 
 #include "Hacker.h"
@@ -8,7 +7,7 @@
 TowerWenner::TowerWenner(sf::Vector2f position)
 {
 	if (!_texture.loadFromFile("img/towers/torreB_1.png")) {
-		std::cout << "NO CARGO" << std::endl;
+		throw std::runtime_error("Error img Tower Wenner");
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);

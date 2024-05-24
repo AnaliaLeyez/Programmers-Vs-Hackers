@@ -1,6 +1,4 @@
-#include <iostream>
 #include <list>
-
 #include "SFML/Graphics.hpp"
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>
@@ -11,7 +9,6 @@
 #include "TowerMenu.h"
 #include "Tower.h"
 #include "Wave.h"
-
 #include "Level.h"
 
 int Level::getIdLevel() const { return _idLevel; }

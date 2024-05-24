@@ -1,4 +1,3 @@
-#include <iostream>
 #include <SFML/Graphics.hpp>
 
 #include "Hacker.h"
@@ -8,7 +7,7 @@
 TowerSarF::TowerSarF(sf::Vector2f position)
 {
 	if (!_texture.loadFromFile("img/towers/torreD_1.png")) {
-		std::cout << "NO CARGO" << std::endl;
+		throw std::runtime_error("Error img Sar F");
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);

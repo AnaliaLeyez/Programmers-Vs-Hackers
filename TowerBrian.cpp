@@ -1,4 +1,3 @@
-#include <iostream>
 #include <SFML/Graphics.hpp>
 
 #include "Hacker.h"
@@ -8,7 +7,7 @@
 TowerBrian::TowerBrian(sf::Vector2f position)
 {
 	if (!_texture.loadFromFile("img/towers/torreA_1.png")) {
-		std::cout << "NO CARGO" << std::endl;
+		throw std::runtime_error("Error img Torre Brian");
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
@@ -32,6 +31,7 @@ TowerBrian::TowerBrian(sf::Vector2f position)
 
 void TowerBrian::update1()
 {
+	_name = "Laboratorio 2";
 	_costUpgrade = 9;
 	_salesValue = 7;
 	_damage = 12;

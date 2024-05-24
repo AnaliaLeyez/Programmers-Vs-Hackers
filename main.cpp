@@ -1,4 +1,3 @@
-#include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>

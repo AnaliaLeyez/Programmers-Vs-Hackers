@@ -1,4 +1,3 @@
-#include <iostream>
 #include "UI.h"
 #include "Map.h"
 #include "Map1.h"
@@ -41,7 +40,7 @@ Level1::Level1()
 	_energy = 500;
 	setMapArray(arr);
 	if (!_buffer.loadFromFile("music/nivel1.wav")) {
-		std::cout << "Error al cargar musica nivel 1";
+		throw std::runtime_error("Error al cargar musica nivel 1");
 	};
 	_sound.setBuffer(_buffer);
 	_sound.setVolume(100);

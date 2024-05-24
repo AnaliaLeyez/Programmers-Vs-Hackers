@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
+#include <iostream> //una vez que todo funcione, esta libreria se va
 #include "TowerMenuButton.h"
 #include "ButtomBrian.h"
 #include "ButtomKloster.h"
@@ -11,7 +11,7 @@ TowerMenu::TowerMenu()
 {
 	_isVisible = false;
 	if (!_texture.loadFromFile("img/menuContextual/tower_menu_circle.png")) {
-		std::cout << "NO CARGO" << std::endl;
+		throw std::runtime_error("Error img Menu Circle");
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getLocalBounds().width / 2, _sprite.getLocalBounds().height / 2);
@@ -59,6 +59,7 @@ void TowerMenu::validateClickOnTower(int mousex, int mousey) {
 		//std::cout << "Button bounds: (" << _buttons[i].getSprite().getGlobalBounds().left << ", " << _buttons[i].getSprite().getGlobalBounds().top << ", " << _buttons[i].getSprite().getGlobalBounds().width << ", " << _buttons[i].getSprite().getGlobalBounds().height << ")";
 		if (_buttons[i]->getGlobalBounds().contains(getPosition().x - static_cast<float>(mousex), getPosition().y- static_cast<float>(mousey))) {
 			std::cout << "se clickeo en: " << _buttons[i]->getTower().getName() << std::endl;
+			//validateSale();
 		}
 		
 		if (_buttons[i]->getGlobalBounds().contains(mousex, mousey)) {
