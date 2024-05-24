@@ -1,8 +1,9 @@
 #pragma once
-
+#include "Tower.h"
 class TowerMenuButton : public sf::Drawable, public sf::Transformable
 {
 private:
+	Tower _tower; //Nuevo, para que cada boton tenga la torre que representa
 	sf::Texture _texture;
 	sf::Sprite _sprite;
 	sf::Texture _textureHover;
