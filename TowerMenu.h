@@ -14,7 +14,11 @@ public:
 	const TowerMenuButton* getButtons() const;
 	void hide();
 	void show();
-	void validateClickOnTower(int, int);
+	void validateClickOnTower(int, int, sf::RenderWindow& window);
 	void update();
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
+
+	sf::FloatRect getGlobalBounds() const {								//-----BORRAR------//
+		return getTransform().transformRect(_sprite.getGlobalBounds());
+	}
 };

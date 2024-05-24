@@ -20,4 +20,8 @@ public:
 	void update();
 
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
+
+	sf::FloatRect getGlobalBounds() const {								//-----BORRAR------//
+		return getTransform().transformRect(_sprite.getGlobalBounds());
+	}
 };

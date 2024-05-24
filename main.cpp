@@ -36,7 +36,7 @@ int main()
 				case 2:
 				{
 					Manager& mg = Manager::getInstance();
-					mg.validateClick(mousex, mousey);
+					mg.validateClick(mousex, mousey, window);
 				}
 				break;
 				}
