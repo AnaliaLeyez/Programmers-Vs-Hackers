@@ -39,3 +39,5 @@ void TowerMenuButton::draw(sf::RenderTarget& target, sf::RenderStates states) co
 		target.draw(_spriteHover, states);
 	}
 }
+
+sf::FloatRect TowerMenuButton::getGlobalBounds() const { return getTransform().transformRect(_sprite.getGlobalBounds()); }

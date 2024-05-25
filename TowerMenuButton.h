@@ -18,7 +18,5 @@ public:
 	void setSpriteHover();
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 
-	sf::FloatRect getGlobalBounds() const {								//-----BORRAR------//
-		return getTransform().transformRect(_sprite.getGlobalBounds());
-	}
+	sf::FloatRect getGlobalBounds() const;
 };

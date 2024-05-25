@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream> //una vez que todo funcione, esta libreria se va
+#include "Manager.h"
+#include "Level.h"
 #include "TowerMenuButton.h"
 #include "ButtomBrian.h"
 #include "ButtomKloster.h"
@@ -61,8 +63,16 @@ void TowerMenu::validateClickOnTower(int mousex, int mousey) {
 	for (int i = 0; i < 4; i++) {
 	//	sf::FloatRect buttonBounds =;
 		if (_buttons[i]->getGlobalBounds().contains(transformedMousePos)) {
-			std::cout << "se clickeo en: " << _buttons[i]->getTower().getName() << std::endl;
-			//validateSale();
+			int price = _buttons[i]->getTower().getPrice();
+			//validateSale(price){}  todo lo q sigue va en esta funcion
+			Manager& mg = Manager::getInstance();
+			Level level = mg.getInstance().getLevel();
+			std::cout << "Oro anterior: " << level.getGolden() << std::endl;
+			if (price <= level.getGolden()) {
+				level.setGolden(level.getGolden() - price);
+				std::cout << "Oro actual: " << level.getGolden() << std::endl;
+				mg.getInstance().setLevel(level);
+			}
 		}
 	}
 }

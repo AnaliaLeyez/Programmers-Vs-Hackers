@@ -34,7 +34,7 @@ public:
 	UI getUI() const;
 	Map getMap() const;
 	int(*getMapArray())[30];
-	int getGolden() const;
+	int getGolden();
 	int getEnergy() const;
 	sf::Sprite getUTN() { return _spriteUTN; } //borrar
 	sf::SoundBuffer getBuffer() const;

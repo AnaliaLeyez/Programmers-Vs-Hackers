@@ -20,8 +20,8 @@ TowerBrian::TowerBrian(sf::Vector2f position)
 	_visualRange.setFillColor(sf::Color(0, 255, 0, 120));
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
-	_cost = 10;
-	_costUpgrade = 9;
+	_price = 10;
+	_priceUpgrade = 9;
 	_salesValue = 5;
 	_damage = 10;
 	_range = 9;
@@ -32,7 +32,7 @@ TowerBrian::TowerBrian(sf::Vector2f position)
 void TowerBrian::update1()
 {
 	_name = "Laboratorio 2";
-	_costUpgrade = 9;
+	_priceUpgrade = 9;
 	_salesValue = 7;
 	_damage = 12;
 	_speedAttack = 2;

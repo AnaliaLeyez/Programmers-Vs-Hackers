@@ -7,9 +7,9 @@
 #include "Tower.h"
 
 std::string Tower::getName() const { return _name;}
-float Tower::getCost() const { return _cost; }
-float Tower::getCostUpgrade() const { return _costUpgrade; }
-float Tower::getSalesValue() const { return _salesValue; }
+int Tower::getPrice() const { return _price; }
+int Tower::getPriceUpgrade() const { return _priceUpgrade; }
+int Tower::getSalesValue() const { return _salesValue; }
 sf::CircleShape Tower::getVisualRange() const { return _visualRange; }
 //sf::Sprite Tower::getSprite() const { return _sprite; }
 int Tower::getDamage() const { return _damage; }
@@ -19,10 +19,10 @@ int Tower::getUpgradesAmount() const { return _upgradesAmount; }
 
 void Tower::setRange(int range) { _range = range; }
 void Tower::setName(std::string name) { _name = name; }
-void Tower::setCost(float cost) { _cost = cost; }
-void Tower::setSalesValue(float value) { _salesValue = value; }
+void Tower::setPrice(int price) { _price = price; }
+void Tower::setSalesValue(int value) { _salesValue = value; }
 void Tower::setDamage(int damage) { _damage = damage; }
-void Tower::setCostUpgrade(float cost) { _costUpgrade = cost; }
+void Tower::setPriceUpgrade(int price) { _priceUpgrade = price; }
 void Tower::setCooldown(int value) { (value == 0) ? _cooldown = 0 : _cooldown++; }
 
 //Comportamiento

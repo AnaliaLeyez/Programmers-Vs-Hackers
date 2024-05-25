@@ -16,7 +16,7 @@ bool Level::getFinisheLevel() const{ return _finishedLevel; }
 UI Level::getUI() const { return _ui; }
 Map Level::getMap() const { return *_map; }
 int(*Level::getMapArray())[30] { return _mapArray; }
-int Level::getGolden() const { return _golden; }
+int Level::getGolden() { return _golden; }
 int Level::getEnergy() const { return _energy; }
 sf::SoundBuffer Level::getBuffer() const { return _buffer; }
 sf::Sound Level::getSound() const { return _sound; }
@@ -78,6 +78,7 @@ void Level::validateClick(int mousex, int mousey)
 void Level::update(sf::Vector2i& mousePosition) {
 	if (!getFinisheLevel()) {
 		_towerMenu.update(mousePosition);
+		
 	//_tower.update();
 
 	//for (Bullet& bullet : _bullets) {
@@ -111,7 +112,7 @@ void Level::update(sf::Vector2i& mousePosition) {
 	}
 	else {
 		if (getIdLevel() < 4) { //aca digo que solo puede llegar hasta el nivel 4
-			Manager::getInstance().setLevel(getIdLevel() + 1); //cambia al siguiente nivel
+			Manager::getInstance().setNumberLevel(getIdLevel() + 1); //cambia al siguiente nivel
 		}
 		else {
 			//logica para cuando se termina el juego, cuando se pasaron todos los niveles

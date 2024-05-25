@@ -14,12 +14,17 @@ Manager& Manager::getInstance() {
 }
 
 Manager::Manager(int level) {
-	setLevel(level);
+	setNumberLevel(level);
 }
 
 Level Manager::getLevel() const { return *_currentLevel; }
 
-void Manager::setLevel(int IdLevel) {
+void Manager::setLevel(Level& level)
+{
+	*_currentLevel = level;
+}
+
+void Manager::setNumberLevel(int IdLevel) {
 	if (_currentLevel != nullptr) {
 		delete _currentInstance;
 	}

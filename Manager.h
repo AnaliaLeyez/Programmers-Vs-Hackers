@@ -11,7 +11,8 @@ private:
 public:
 	static Manager& getInstance(); //Singleton
 	Level getLevel() const;
-	void setLevel(int);
+	void setLevel(Level&);
+	void setNumberLevel(int);
 	void validateClick(int, int, sf::RenderWindow&);
 	void mouseCheck(sf::RenderWindow&);
 	void update(sf::Vector2i&);
