@@ -21,6 +21,16 @@ void TowerMenuButton::update()
 void TowerMenuButton::setMouseHover(bool state) {
 	_mouseHover = state;
 }
+void TowerMenuButton::setSpriteHover()
+{
+	if (!_textureHover.loadFromFile("img/menuContextual/button_tower_menu_hover.png"))
+	{
+		throw std::runtime_error("Error img button Hover");
+	}
+	_spriteHover.setTexture(_textureHover);
+	_spriteHover.setScale(0.7f, 0.7f);
+	_spriteHover.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
+}
 void TowerMenuButton::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();

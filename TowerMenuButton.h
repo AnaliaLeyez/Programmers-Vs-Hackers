@@ -15,6 +15,7 @@ public:
 	Tower getTower();
 	void update();
 	void setMouseHover(bool);
+	void setSpriteHover();
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 
 	sf::FloatRect getGlobalBounds() const {								//-----BORRAR------//
