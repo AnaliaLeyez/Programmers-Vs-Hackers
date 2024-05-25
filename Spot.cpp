@@ -2,6 +2,9 @@
 
 #include "Spot.h"
 
+sf::Texture Spot::_textureA;
+sf::Texture Spot::_textureB;
+
 Spot::Spot()
 {
     _mouseHover = false;
