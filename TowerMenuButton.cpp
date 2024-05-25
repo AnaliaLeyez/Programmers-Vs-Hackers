@@ -18,9 +18,14 @@ void TowerMenuButton::update()
 {
 	//isMouseOver();
 }
-
+void TowerMenuButton::setMouseHover(bool state) {
+	_mouseHover = state;
+}
 void TowerMenuButton::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
 	target.draw(_sprite, states);
+	if (_mouseHover) {
+		target.draw(_spriteHover, states);
+	}
 }

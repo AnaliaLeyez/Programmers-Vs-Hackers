@@ -5,7 +5,7 @@
 
 ButtomMaxiWenner::ButtomMaxiWenner()
 {
-	_mouseOver = false;
+	_mouseHover = false;
 	if (!_texture.loadFromFile("img/menuContextual/button_tower_menu_maxiWen.png"))
 	{
 		throw std::runtime_error("Error img Buttom Wenner");

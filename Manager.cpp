@@ -44,9 +44,9 @@ void Manager::mouseCheck(sf::RenderWindow& window)
 {
 	_currentLevel->mouseCheck(window);
 }
-void Manager::update()
+void Manager::update(sf::Vector2i& mousePosition)
 {
-	_currentLevel->update();
+	_currentLevel->update(mousePosition);
 }
 
 void Manager::draw(sf::RenderTarget& target, sf::RenderStates states) const

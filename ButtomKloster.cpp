@@ -6,7 +6,7 @@
 
 ButtomKloster::ButtomKloster()
 {
-	_mouseOver = false;
+	_mouseHover = false;
 	if (!_texture.loadFromFile("img/menuContextual/button_tower_menu_kloster.png"))
 	{
 		throw std::runtime_error("Error img Buttom Kloster");

@@ -67,11 +67,15 @@ void TowerMenu::validateClickOnTower(int mousex, int mousey) {
 	}
 }
 
-void TowerMenu::update() {
-	//for (auto& button : _buttons)
-	//{
-	//	button.update();
-	//}
+void TowerMenu::update(sf::Vector2i& mousePosition) {
+	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
+
+	for (auto& button : _buttons)
+	{
+		button->getGlobalBounds().contains(transformedMousePos) ? button->setMouseHover(true) : button->setMouseHover(false);
+		
+		//button->update();
+	}
 }
 void TowerMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {

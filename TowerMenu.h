@@ -15,7 +15,7 @@ public:
 	void hide();
 	void show();
 	void validateClickOnTower(int, int);
-	void update();
+	void update(sf::Vector2i&);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 
 	sf::FloatRect getGlobalBounds() const {								//-----BORRAR------//

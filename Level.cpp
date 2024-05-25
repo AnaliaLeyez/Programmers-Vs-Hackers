@@ -75,8 +75,9 @@ void Level::validateClick(int mousex, int mousey)
 	}
 }
 
-void Level::update() {
+void Level::update(sf::Vector2i& mousePosition) {
 	if (!getFinisheLevel()) {
+		_towerMenu.update(mousePosition);
 	//_tower.update();
 
 	//for (Bullet& bullet : _bullets) {

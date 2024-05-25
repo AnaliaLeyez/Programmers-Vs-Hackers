@@ -59,6 +59,6 @@ public:
 	void mouseCheck(sf::RenderWindow&);
 	void validateClick(int, int);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
-	void update();
+	void update(sf::Vector2i&);
 };
 

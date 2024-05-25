@@ -8,13 +8,13 @@ protected:
 	sf::Sprite _sprite;
 	sf::Texture _textureHover;
 	sf::Sprite _spriteHover;
-	bool _mouseOver;
+	bool _mouseHover;
 
 public:
 	//void isMouseOver();
 	Tower getTower();
 	void update();
-
+	void setMouseHover(bool);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 
 	sf::FloatRect getGlobalBounds() const {								//-----BORRAR------//

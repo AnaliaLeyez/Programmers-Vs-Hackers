@@ -29,13 +29,9 @@ int Spot::getSpotNumber(){ return 0; }
 
 void Spot::setSpotNumber(int n){ _spotNumber = n; }
 
-sf::Vector2f Spot::getPosition(){ return _position; }
-
 bool Spot::getIsOccupied(){ return _occupied; }
 
 Tower Spot::getCurrentTower(){ return _currentTower; }
-
-void Spot::setPosition(sf::Vector2f pos){ _position = pos; }
 
 void Spot::setOccupied(bool status){ _occupied = status; }
 
@@ -51,5 +47,6 @@ void Spot::validateClick(int mousex, int mousey)
 
 void Spot::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	states.transform *= getTransform();
     _mouseHover ? target.draw(_spriteB, states) : target.draw(_spriteA, states);
 }
