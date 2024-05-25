@@ -5,8 +5,7 @@ class Hacker :public sf::Drawable, public sf::Transformable, public Collisionabl
 {
 protected:
 	sf::Sprite _sprite;
-	//static sf::Texture _texture;
-	sf::Texture _texture;
+	static sf::Texture _texture;
 	std::string _name;
 	sf::Vector2f _velocity;
 	sf::Vector2f _direction;
@@ -19,11 +18,11 @@ protected:
 public:
 	//sf::Sprite getSprite() const;
 	int getLife() const;
-	float getDamage() const;
+	int getDamage() const;
 	sf::Vector2f getVelocity() const;
 	sf::Vector2f getDirection() const;
 	bool getBoss() const;
-	float getGoldenDrop() const;
+	int getGoldenDrop() const;
 
 	void setLife(int);
 	void setDamage(float);

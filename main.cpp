@@ -14,11 +14,11 @@ int main()
 	while (window.isOpen())
 	{
 		//prueba mas directa, una vez que funcione, esto va en level:
-		//Manager& mg = Manager::getInstance();
-		//mg.mouseCheck(window);
-		//if (mg.getInstance().getLevel().getUTN().getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(window)))) {
-		//	std::cout << "FUNCIONA";
-		//}
+		Manager& mg = Manager::getInstance();
+		mg.mouseCheck(window);
+		if (mg.getInstance().getLevel().getUTN().getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(window)))) {
+			std::cout << "FUNCIONA";
+		}
 
 		sf::Event ev;
 		while (window.pollEvent(ev))

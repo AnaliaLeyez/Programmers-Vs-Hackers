@@ -9,7 +9,6 @@
 #include "Manager.h"
 #include "TowerMenu.h"
 #include "Tower.h"
-#include "Wave.h"
 #include "Level.h"
 
 int Level::getIdLevel() const { return _idLevel; }
@@ -22,7 +21,6 @@ int Level::getEnergy() const { return _energy; }
 sf::SoundBuffer Level::getBuffer() const { return _buffer; }
 sf::Sound Level::getSound() const { return _sound; }
 bool Level::getMusicPlaying() const { return _musicPlaying; }
-std::list<Wave> Level::getWaveList() const { return *_waveList; }
 sf::Vector2f Level::getHackerStartPosition() const { return _hackerStartPosition; }
 const std::list<Tower>& Level::getTowersAvailable() const { return _towersAvailable;}
 
@@ -35,7 +33,6 @@ void Level::setGolden(int golden) { _golden = golden; }
 void Level::setEnergy(int energy) { _energy = energy; }
 void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
-void Level::setWaveList(const std::list<Wave>& list) { *_waveList = list; }
 void Level::setTowersAvailable(const std::list<Tower>& towersAvailable) { _towersAvailable = towersAvailable; }
 
 //void Level::shoot(sf::Vector2f position)
@@ -126,6 +123,11 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	target.draw(_ui, states);
 	for (Spot spot : _spots) {
 		target.draw(spot, states);
+	}
+	for (std::list<Hacker> wave : _waves) {
+		for (Hacker hacker : wave) {
+			target.draw(hacker, states);
+		}
 	}
 	target.draw(_towerMenu, states);
 }

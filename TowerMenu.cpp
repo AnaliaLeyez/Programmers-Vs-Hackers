@@ -15,7 +15,7 @@ TowerMenu::TowerMenu()
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getLocalBounds().width / 2, _sprite.getLocalBounds().height / 2);
-	_sprite.setScale(0.4, 0.4);
+	_sprite.setScale(0.4f, 0.4f);
 
 	//Buttons initialization
 	_buttons[0] = new ButtomBrian();

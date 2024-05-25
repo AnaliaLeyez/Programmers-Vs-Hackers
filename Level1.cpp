@@ -4,7 +4,6 @@
 #include "Tower.h"
 #include "TowerBrian.h"
 #include "Level.h"
-#include "Wave.h"
 #include "Spot.h"
 #include "Level1.h"
 
@@ -16,6 +15,18 @@ void setSpots(std::list<Spot> &spots) {
 	sp.setSpotNumber(2);
 	sp.setPosition(sf::Vector2f(400, 400));
 	spots.push_back(sp);
+}
+
+void setWaves(std::list<std::list<Hacker>> &waves) {
+	std::list<Hacker> hackers1;
+	hackers1.push_back(HackerTrainee());
+	hackers1.push_back(HackerTrainee());
+	hackers1.push_back(HackerTrainee());
+	waves.push_back(hackers1);
+	std::list<Hacker> hackers2;
+	hackers2.push_back(HackerTrainee());
+	hackers2.push_back(HackerTrainee());
+	waves.push_back(hackers2);
 }
 
 Level1::Level1()
@@ -57,11 +68,7 @@ Level1::Level1()
 	_sound.setVolume(5);
 	_sound.play();
 	_musicPlaying = true;
-	Wave wave;
-	wave.setWave(wave.getWave1());
-	wave.setWave(wave.getWave2());
-	wave.setWave(wave.getWave3());
-	//_waveList->push_back(wave); //esta linea rompe todo
-	_hackerStartPosition = { 960 / 32 * 9, 640 / 32 * 0.5 };
+	setWaves(_waves);
+	_hackerStartPosition = { 960 / 32 * 9, 640 / 32 * 1 };
 	_towersAvailable.push_back(TowerBrian());
 }

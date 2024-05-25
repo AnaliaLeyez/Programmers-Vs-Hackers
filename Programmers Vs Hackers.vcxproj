@@ -164,7 +164,6 @@
     <ClCompile Include="TowerKloster.cpp" />
     <ClCompile Include="TowerWenner.cpp" />
     <ClCompile Include="UI.cpp" />
-    <ClCompile Include="Wave.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -193,7 +192,6 @@
     <ClInclude Include="TowerKloster.h" />
     <ClInclude Include="TowerWenner.h" />
     <ClInclude Include="UI.h" />
-    <ClInclude Include="Wave.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Programmers Vs Hackers.rc" />

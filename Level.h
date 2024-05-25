@@ -3,7 +3,6 @@
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>
 #include "UI.h"
-#include "Wave.h"
 #include "Map.h"
 #include "TowerMenu.h"
 #include "Tower.h"
@@ -25,7 +24,7 @@ protected:
 	sf::SoundBuffer _buffer;
 	sf::Sound _sound;
 	bool _musicPlaying;
-	std::list<Wave> *_waveList;
+	std::list<std::list<Hacker>> _waves;
 	sf::Vector2f _hackerStartPosition;
 	std::list <Tower> _towersAvailable;
 	TowerMenu _towerMenu;
@@ -41,7 +40,6 @@ public:
 	sf::SoundBuffer getBuffer() const;
 	bool getMusicPlaying() const;
 	sf::Sound getSound() const;
-	std::list<Wave> getWaveList() const;
 	sf::Vector2f getHackerStartPosition() const;
 	const std::list<Tower>& getTowersAvailable() const;
 
@@ -54,7 +52,6 @@ public:
 	void setEnergy(int);
 	void setMusicPlaying(bool);
 	void setSound(bool);
-	void setWaveList(const std::list<Wave>&);
 	void setTowersAvailable(const std::list<Tower>&);
 
 	//void shoot(sf::Vector2f position);

@@ -6,11 +6,11 @@
 
 //sf::Sprite Hacker::getSprite() const { return _sprite; }
 int Hacker::getLife() const { return _life; }
-float Hacker::getDamage() const { return _damage; }
+int Hacker::getDamage() const { return _damage; }
 sf::Vector2f Hacker::getVelocity() const { return _velocity; }
 sf::Vector2f Hacker::getDirection() const { return _direction; }
 bool Hacker::getBoss() const { return _isABoss; }
-float Hacker::getGoldenDrop() const { return _goldenDrop; }
+int Hacker::getGoldenDrop() const { return _goldenDrop; }
 
 void Hacker::setLife(int life) { _life = life; }
 void Hacker::setDamage(float damage) { _damage = damage; }

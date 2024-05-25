@@ -3,7 +3,6 @@
 class Spot : public sf::Drawable
 {
 private:
-
 	static sf::Texture _textureA, _textureB;
 	sf::Sprite _spriteA, _spriteB;
 	int _spotNumber;

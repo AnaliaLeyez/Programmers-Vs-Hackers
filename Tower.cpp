@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 
 #include "Collisionable.h"
-#include "Manager.h" //ver si esto es necesario aca
 #include "HackerTrainee.h"
 #include "Tower.h"
 
@@ -50,7 +49,7 @@ void Tower::draw(sf::RenderTarget& target, sf::RenderStates states) const
 void Tower::verificarEnemigo(HackerTrainee& enemy)
 {
     // Calcula la distancia entre los centros de la torre y el objetivo
-    float distancia = std::sqrt(std::pow(enemy.getPosition().x - getPosition().x, 2) + std::pow(enemy.getPosition().y - getPosition().y, 2));
+    double distancia = std::sqrt(std::pow(enemy.getPosition().x - getPosition().x, 2) + std::pow(enemy.getPosition().y - getPosition().y, 2));
 
     if (distancia <= _visualRange.getRadius())
     {
