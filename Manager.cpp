@@ -36,8 +36,12 @@ void Manager::setLevel(int IdLevel) {
 	}
 }
 
-void Manager::validateClick(int mousex, int mousey) {
+void Manager::validateClick(int mousex, int mousey, sf::RenderWindow& window) {
 	_currentLevel->validateClick(mousex, mousey);
+}
+void Manager::mouseCheck(sf::RenderWindow& window)
+{
+	_currentLevel->mouseCheck(window);
 }
 void Manager::update()
 {

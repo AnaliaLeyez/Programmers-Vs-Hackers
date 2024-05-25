@@ -5,8 +5,18 @@
 #include "TowerBrian.h"
 #include "Level.h"
 #include "Wave.h"
-
+#include "Spot.h"
 #include "Level1.h"
+
+void setSpots(std::list<Spot> &spots) {
+	Spot sp;
+	sp.setSpotNumber(1);
+	sp.setPosition(sf::Vector2f(200., 200));
+	spots.push_back(sp);
+	sp.setSpotNumber(2);
+	sp.setPosition(sf::Vector2f(400, 400));
+	spots.push_back(sp);
+}
 
 Level1::Level1()
 {
@@ -36,6 +46,7 @@ Level1::Level1()
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 
 	};
+	setSpots(_spots);
 	_golden = 500;
 	_energy = 500;
 	setMapArray(arr);
@@ -43,7 +54,7 @@ Level1::Level1()
 		throw std::runtime_error("Error al cargar musica nivel 1");
 	};
 	_sound.setBuffer(_buffer);
-	_sound.setVolume(100);
+	_sound.setVolume(5);
 	_sound.play();
 	_musicPlaying = true;
 	Wave wave;

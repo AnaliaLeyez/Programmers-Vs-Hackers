@@ -1,3 +1,4 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>
@@ -12,13 +13,18 @@ int main()
 	int view = 1;
 	while (window.isOpen())
 	{
-		
+		//prueba mas directa, una vez que funcione, esto va en level:
+		//Manager& mg = Manager::getInstance();
+		//mg.mouseCheck(window);
+		//if (mg.getInstance().getLevel().getUTN().getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(window)))) {
+		//	std::cout << "FUNCIONA";
+		//}
+
 		sf::Event ev;
 		while (window.pollEvent(ev))
 		{
-			//movi window close al final para que no pase por aca innecesariamente si ya se dio click en cerrar...
-
 			
+			//movi window close al final para que no pase por aca innecesariamente si ya se dio click en cerrar...
 			if (ev.type == sf::Event::MouseButtonPressed && ev.mouseButton.button == sf::Mouse::Left)
 			{
 				int mousex = ev.mouseButton.x;
@@ -34,7 +40,7 @@ int main()
 				case 2:
 				{
 					Manager& mg = Manager::getInstance();
-					mg.validateClick(mousex, mousey);
+					mg.validateClick(mousex, mousey, window);
 				}
 				break;
 				}

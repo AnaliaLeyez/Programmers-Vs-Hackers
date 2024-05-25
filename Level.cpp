@@ -1,3 +1,4 @@
+#include <iostream> //borrar
 #include <list>
 #include "SFML/Graphics.hpp"
 #include <SFML/Audio/SoundBuffer.hpp>
@@ -41,6 +42,13 @@ void Level::setTowersAvailable(const std::list<Tower>& towersAvailable) { _tower
 //{
 //	//_bullets.push_back(Bullet(position, _hacker.getPosition()));
 //}
+
+void Level::mouseCheck(sf::RenderWindow& window)
+{
+	if (_spriteUTN.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(window)))) {
+		std::cout << "FUNCIONA";
+	}
+}
 
 void Level::validateClick(int mousex, int mousey)
 {
@@ -110,13 +118,15 @@ void Level::update() {
 		else {
 			//logica para cuando se termina el juego, cuando se pasaron todos los niveles
 		}
-		
 	}
 }
 void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	states.transform *= getTransform();
 	target.draw(*_map, states);
 	target.draw(_ui, states);
+	for (Spot spot : _spots) {
+		target.draw(spot, states);
+	}
 	target.draw(_towerMenu, states);
 }
 
