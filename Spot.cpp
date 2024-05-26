@@ -15,13 +15,13 @@ Spot::Spot()
 	}
 	_spriteA.setTexture(_textureA);
 	_spriteA.setOrigin(_spriteA.getGlobalBounds().width / 2, _spriteA.getGlobalBounds().height / 2);
-	_spriteA.setScale(1.5f, 1.5f);
+	_spriteA.setScale(1.4f, 1.4f);
 	if (!_textureB.loadFromFile("img/maps/spot_martillo_hover.png")) {
 		throw std::runtime_error("Error img Torre Brian");
 	}
 	_spriteB.setTexture(_textureB);
 	_spriteB.setOrigin(_spriteB.getGlobalBounds().width / 2, _spriteB.getGlobalBounds().height / 2);
-	_spriteB.setScale(1.5f, 1.5f);
+	_spriteB.setScale(1.4f, 1.4f);
 	_occupied = false;
 }
 

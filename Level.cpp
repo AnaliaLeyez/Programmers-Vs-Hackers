@@ -25,11 +25,7 @@ sf::Sound Level::getSound() const { return _sound; }
 bool Level::getMusicPlaying() const { return _musicPlaying; }
 sf::Vector2f Level::getHackerStartPosition() const { return _hackerStartPosition; }
 const std::list<Tower> Level::getTowersAvailable() const { return _towersAvailable;}
-
-std::list<Tower> Level::getActiveTowers() const
-{
-	return _activeTowers;
-}
+std::list<Tower> Level::getActiveTowers() const { return _activeTowers; }
 
 void Level::setIdLevel(int idLevel) { _idLevel = idLevel; }
 void Level::setFinishedLevel(bool finished) { _finishedLevel = finished; }
@@ -41,21 +37,26 @@ void Level::setEnergy(int energy) { _energy = energy; }
 void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
 void Level::setTowersAvailable(Tower towerAvailable) { _towersAvailable.push_back(towerAvailable); }
-
-void Level::setActiveTowers(Tower tower)
-{
-	_activeTowers.push_back(tower);
-}
+void Level::setActiveTowers(Tower tower) { _activeTowers.push_back(tower); }
 
 //void Level::shoot(sf::Vector2f position)
 //{
 //	//_bullets.push_back(Bullet(position, _hacker.getPosition()));
 //}
 
-void Level::mouseCheck(sf::RenderWindow& window)
+void Level::mouseCheck(sf::Vector2i& mousePosition)
 {
-	if (_spriteUTN.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(window)))) {
-		std::cout << "FUNCIONA";
+	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
+	for (auto& spot : _spots)
+	{
+		if (spot.getGlobalBounds().contains(transformedMousePos))
+		{
+			spot.setMouseHover(true);
+		}
+		else
+		{
+			spot.setMouseHover(false);
+		}
 	}
 }
 void Level::validateClick(int mousex, int mousey)
@@ -117,18 +118,8 @@ void Level::manageOutOfSpotClick(int mousex, int mousey) {
 void Level::update(sf::Vector2i& mousePosition) {
 	if (!getFinisheLevel()) {
 		_towerMenu.update(mousePosition);
-		sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
-		for (auto& spot : _spots)
-		{
-			if (spot.getGlobalBounds().contains(transformedMousePos))
-			{
-				spot.setMouseHover(true);
-			}
-			else
-			{
-				spot.setMouseHover(false);
-			}
-		}
+	
+		mouseCheck(mousePosition);
 	//_tower.update();
 
 	//for (Bullet& bullet : _bullets) {

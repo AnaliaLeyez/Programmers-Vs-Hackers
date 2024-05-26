@@ -10,10 +10,10 @@
 void setSpots(std::list<Spot> &spots) {
 	Spot sp;
 	sp.setSpotNumber(1);
-	sp.setPosition(sf::Vector2f(200, 200));
+	sp.setPosition(sf::Vector2f(200, 330));
 	spots.push_back(sp);
 	sp.setSpotNumber(2);
-	sp.setPosition(sf::Vector2f(400, 400));
+	sp.setPosition(sf::Vector2f(435, 489));
 	spots.push_back(sp);
 }
 

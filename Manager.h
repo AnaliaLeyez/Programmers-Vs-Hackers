@@ -14,7 +14,7 @@ public:
 	void setLevel(Level&);
 	void setNumberLevel(int);
 	void validateClick(int, int, sf::RenderWindow&);
-	void mouseCheck(sf::RenderWindow&);
+	void mouseCheck(sf::Vector2i&);
 	void update(sf::Vector2i&);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 };

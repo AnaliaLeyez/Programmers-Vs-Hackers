@@ -60,7 +60,7 @@ public:
 
 	//void shoot(sf::Vector2f position);
 	void handlerEvent(const sf::Event&);
-	void mouseCheck(sf::RenderWindow&);
+	void mouseCheck(sf::Vector2i&);
 	void validateClick(int, int);
 	Spot validateClickOnSpot(int mousex, int mousey);
 	void manageClickOnSpot(int, int, Spot&);
