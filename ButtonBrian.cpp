@@ -1,20 +1,19 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "TowerSarF.h"
+#include "TowerBrian.h"
 #include "TowerMenuButton.h"
-#include "ButtomMaxiSar.h"
+#include "ButtonBrian.h"
 
-ButtomMaxiSar::ButtomMaxiSar()
+ButtonBrian::ButtonBrian()
 {
 	_mouseHover = false;
-	if (!_texture.loadFromFile("img/menuContextual/button_tower_menu_maxiSar.png"))
+	if (!_texture.loadFromFile("img/menuContextual/button_tower_menu_brian.png"))
 	{
-		throw std::runtime_error("Error img Buttom Sar F");
+		throw std::runtime_error("Error img Buttom Brian");
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setScale(0.7f, 0.7f);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
+	_tower = new TowerBrian();
 	setSpriteHover();
-	_tower = new TowerSarF();
 }
-

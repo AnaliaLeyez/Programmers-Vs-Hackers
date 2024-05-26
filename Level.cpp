@@ -8,6 +8,7 @@
 #include "Map.h"
 #include "Manager.h"
 #include "TowerMenu.h"
+#include "Spot.h"
 #include "Tower.h"
 #include "Level.h"
 
@@ -16,6 +17,7 @@ bool Level::getFinisheLevel() const{ return _finishedLevel; }
 UI Level::getUI() const { return _ui; }
 Map Level::getMap() const { return *_map; }
 int(*Level::getMapArray())[30] { return _mapArray; }
+const std::list<Spot> Level::getSpots() const{ return _spots; }
 int Level::getGolden() { return _golden; }
 int Level::getEnergy() const { return _energy; }
 sf::SoundBuffer Level::getBuffer() const { return _buffer; }
@@ -47,19 +49,43 @@ void Level::mouseCheck(sf::RenderWindow& window)
 	}
 }
 
-void Level::validateClick(int mousex, int mousey)
-{
-	
-	if (!_towerMenu.getIsVisible() && _mapArray[mousey / 32][mousex / 32] == 6) { 
-		{
-			_towerMenu.setPosition(mousex, mousey); //ver como hacemos que la posicion de la torre quede siempre centrada en spot
-			_towerMenu.show();
+Spot Level::validateClickOnSpot(int mousex, int mousey) {
+	if (!_towerMenu.getIsVisible()) {
+		for (auto& spot : _spots) {
+			if (spot.getGlobalBounds().contains(mousex, mousey)) {
+				return spot;
+			}
 		}
 	}
-	else if (_towerMenu.getIsVisible()) {
-		_towerMenu.validateClickOnTower(mousex, mousey);
+	Spot spot;
+	spot.setSpotNumber(0);
+	return spot;  //seria como decir "no se clickeo en ningun spot"
+}
+void Level::manageClickOnSpot(int mousex, int mousey, Spot sp) {
+	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
+	_towerMenu.setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
+	_towerMenu.show();
+	_towerMenu.setCurrentSpot(sp); //guardo el nro de spot en el tower Menu;
+	if (!_towerMenu.getIsVisible()) { //se clickeo en un spot y el menu no era visible
+		sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
+		_towerMenu.setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
+		_towerMenu.show();
+	}
+}
+void Level::manageOutOfSpotClick(int mousex, int mousey, Spot sp) {
+	if (_towerMenu.getIsVisible()) { //pero el towerMenu esta visible
+		_towerMenu.validateClickOnButton(mousex, mousey, _towerMenu.getCurrentSpot()); //Debo enviar _towerMenu.getCurrentSpot() y NO sp, porque sp se resetea todo el tiempo
 		_towerMenu.hide();
-	} 
+	}
+	else { //y no estaba el towerMenu visible
+		sp.setSpotNumber(0);
+		_towerMenu.setCurrentSpot(sp); //si el tower menu no estaba visible, borro el currentSpot del towerMenu, "lo reseteo"
+	}
+}
+void Level::validateClick(int mousex, int mousey)
+{
+	Spot sp= validateClickOnSpot(mousex, mousey); //si NO se clickeo spot el spotNumber es 0
+	sp.getSpotNumber() != 0 ? manageClickOnSpot(mousex, mousey, sp) : manageOutOfSpotClick(mousex, mousey, sp);
 
 	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
 		if (getMusicPlaying()) {

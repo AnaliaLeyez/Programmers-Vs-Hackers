@@ -34,6 +34,7 @@ public:
 	UI getUI() const;
 	Map getMap() const;
 	int(*getMapArray())[30];
+	const std::list<Spot> getSpots() const;
 	int getGolden();
 	int getEnergy() const;
 	sf::Sprite getUTN() { return _spriteUTN; } //borrar
@@ -58,6 +59,9 @@ public:
 	void handlerEvent(const sf::Event&);
 	void mouseCheck(sf::RenderWindow&);
 	void validateClick(int, int);
+	Spot validateClickOnSpot(int mousex, int mousey);
+	void manageClickOnSpot(int, int, Spot);
+	void manageOutOfSpotClick(int, int, Spot);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update(sf::Vector2i&);
 };

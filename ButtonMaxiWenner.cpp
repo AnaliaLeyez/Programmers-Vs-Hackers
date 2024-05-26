@@ -1,9 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include "TowerWenner.h"
 #include "TowerMenuButton.h"
-#include "ButtomMaxiWenner.h"
+#include "ButtonMaxiWenner.h"
 
-ButtomMaxiWenner::ButtomMaxiWenner()
+ButtonMaxiWenner::ButtonMaxiWenner()
 {
 	_mouseHover = false;
 	if (!_texture.loadFromFile("img/menuContextual/button_tower_menu_maxiWen.png"))

@@ -11,6 +11,7 @@ protected:
 	bool _mouseHover;
 public:
 	Spot();
+	//sf::Sprite getSprite();
 	int getSpotNumber();
 	void setSpotNumber(int);
 	bool getIsOccupied();
@@ -20,5 +21,7 @@ public:
 	void validateMouseHover(bool&);
 	void validateClick(int, int);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
+
+	sf::FloatRect getGlobalBounds() const;
 };
 

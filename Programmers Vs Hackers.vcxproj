@@ -140,10 +140,10 @@
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletA.cpp" />
-    <ClCompile Include="ButtomBrian.cpp" />
-    <ClCompile Include="ButtomKloster.cpp" />
-    <ClCompile Include="ButtomMaxiSar.cpp" />
-    <ClCompile Include="ButtomMaxiWenner.cpp" />
+    <ClCompile Include="ButtonBrian.cpp" />
+    <ClCompile Include="ButtonKloster.cpp" />
+    <ClCompile Include="ButtonMaxiSar.cpp" />
+    <ClCompile Include="ButtonMaxiWenner.cpp" />
     <ClCompile Include="Collisionable.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Hacker.cpp" />
@@ -168,10 +168,10 @@
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletA.h" />
-    <ClInclude Include="ButtomBrian.h" />
-    <ClInclude Include="ButtomKloster.h" />
-    <ClInclude Include="ButtomMaxiSar.h" />
-    <ClInclude Include="ButtomMaxiWenner.h" />
+    <ClInclude Include="ButtonBrian.h" />
+    <ClInclude Include="ButtonKloster.h" />
+    <ClInclude Include="ButtonMaxiSar.h" />
+    <ClInclude Include="ButtonMaxiWenner.h" />
     <ClInclude Include="Collisionable.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Hacker.h" />

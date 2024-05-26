@@ -7,25 +7,30 @@ sf::Texture Spot::_textureB;
 
 Spot::Spot()
 {
+	_spotNumber = 0;
     _mouseHover = false;
 	if (!_textureA.loadFromFile("img/maps/spot_martillo.png")) {
 		throw std::runtime_error("Error img Torre Brian");
 	}
 	_spriteA.setTexture(_textureA);
 	_spriteA.setOrigin(_spriteA.getGlobalBounds().width / 2, _spriteA.getGlobalBounds().height / 2);
-	_spriteA.setScale(1.f, 1.f); //borrar?
-	_spriteA.setPosition(sf::Vector2f(200.f, 200.f));   //borrar
+	_spriteA.setScale(1.5f, 1.5f);
 	if (!_textureB.loadFromFile("img/maps/spot_martillo_hover.png")) {
 		throw std::runtime_error("Error img Torre Brian");
 	}
 	_spriteB.setTexture(_textureB);
 	_spriteB.setOrigin(_spriteB.getGlobalBounds().width / 2, _spriteB.getGlobalBounds().height / 2);
-	_spriteB.setScale(1.f, 1.f);  //borrar?
-	_spriteB.setPosition(sf::Vector2f(300.f, 300.f));   //borrar
+	_spriteB.setScale(1.5f, 1.5f);
 	_occupied = false;
 }
 
-int Spot::getSpotNumber(){ return 0; }
+//sf::Sprite Spot::getSprite()   //para mi que esta mal
+//{
+//	if (_mouseHover) return _spriteB;
+//	else return _spriteA;
+//}
+
+int Spot::getSpotNumber(){ return _spotNumber; }
 
 void Spot::setSpotNumber(int n){ _spotNumber = n; }
 
@@ -49,4 +54,8 @@ void Spot::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
     _mouseHover ? target.draw(_spriteB, states) : target.draw(_spriteA, states);
+}
+
+sf::FloatRect Spot::getGlobalBounds() const {
+	return getTransform().transformRect(_spriteA.getGlobalBounds());
 }
