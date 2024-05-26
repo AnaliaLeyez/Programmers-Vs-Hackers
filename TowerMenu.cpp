@@ -85,13 +85,9 @@ bool TowerMenu::validateSale(TowerMenuButton* button, Spot& spot) {
 	return false;
 }
 void TowerMenu::update(sf::Vector2i& mousePosition) {
-	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
-
 	for (auto& button : _buttons)
 	{
-		button->getGlobalBounds().contains(transformedMousePos) ? button->setMouseHover(true) : button->setMouseHover(false);
-		
-		//button->update();
+		button->update(mousePosition);
 	}
 }
 void TowerMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const

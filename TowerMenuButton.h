@@ -3,7 +3,7 @@
 class TowerMenuButton : public sf::Drawable, public sf::Transformable
 {
 protected:
-	Tower* _tower; //Nuevo, para que cada boton tenga la torre que representa
+	Tower* _tower;
 	sf::Texture _texture;
 	sf::Sprite _sprite;
 	sf::Texture _textureHover;
@@ -13,7 +13,7 @@ protected:
 public:
 	//void isMouseOver();
 	Tower getTower();
-	void update();
+	void update(sf::Vector2i&);
 	void setMouseHover(bool);
 	void setSpriteHover();
 	void draw(sf::RenderTarget&, sf::RenderStates) const;

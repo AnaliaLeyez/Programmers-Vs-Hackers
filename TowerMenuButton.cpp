@@ -1,26 +1,15 @@
 #include <SFML/Graphics.hpp>
 #include "TowerMenuButton.h"
 
-//void TowerMenuButton::isMouseOver()
-//{
-//	sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
-//
-//	std::cout << "POS X: " << mousePosition.x << "POS Y: " << mousePosition.y << std::endl;
-//
-//}
+Tower TowerMenuButton::getTower() { return *_tower; }
 
-Tower TowerMenuButton::getTower()
-{
-	return *_tower;
-}
-
-void TowerMenuButton::update()
+void TowerMenuButton::update(sf::Vector2i& mousePosition)
 {
 	//isMouseOver();
+	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
+		getGlobalBounds().contains(transformedMousePos) ? setMouseHover(true) : setMouseHover(false);
 }
-void TowerMenuButton::setMouseHover(bool state) {
-	_mouseHover = state;
-}
+void TowerMenuButton::setMouseHover(bool state) { _mouseHover = state; }
 void TowerMenuButton::setSpriteHover()
 {
 	if (!_textureHover.loadFromFile("img/menuContextual/button_tower_menu_hover.png"))

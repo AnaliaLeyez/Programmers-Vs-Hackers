@@ -62,9 +62,10 @@ public:
 	void handlerEvent(const sf::Event&);
 	void mouseCheck(sf::Vector2i&);
 	void validateClick(int, int);
-	Spot validateClickOnSpot(int mousex, int mousey);
+	Spot validateClickOnSpot(int, int);
 	void manageClickOnSpot(int, int, Spot&);
 	void manageOutOfSpotClick(int, int);
+	void validateClickOnSpeaker(int, int);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update(sf::Vector2i&);
 };

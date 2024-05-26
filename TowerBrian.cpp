@@ -4,15 +4,13 @@
 #include "Tower.h"
 #include "TowerBrian.h"
 
-TowerBrian::TowerBrian(sf::Vector2f position)
+TowerBrian::TowerBrian()
 {
 	if (!_texture.loadFromFile("img/towers/torreA_1.png")) {
 		throw std::runtime_error("Error img Torre Brian");
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
-	setPosition(position);
-
 	_name = "Torre Laboratorio 1";
 
 	//Rango de ataque:

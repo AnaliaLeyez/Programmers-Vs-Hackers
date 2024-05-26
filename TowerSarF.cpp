@@ -4,14 +4,14 @@
 #include "Tower.h"
 #include "TowerSarF.h"
 
-TowerSarF::TowerSarF(sf::Vector2f position)
+TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 {
 	if (!_texture.loadFromFile("img/towers/torreD_1.png")) {
 		throw std::runtime_error("Error img Sar F");
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
-	setPosition(position);
+	//setPosition(position);
 
 	_name = "Torre Programacion 1";
 

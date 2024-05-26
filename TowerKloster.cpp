@@ -4,15 +4,13 @@
 #include "Tower.h"
 #include "TowerKloster.h"
 
-TowerKloster::TowerKloster(sf::Vector2f position)
+TowerKloster::TowerKloster()
 {
 	if (!_texture.loadFromFile("img/towers/torreC_1.png")) {
 		throw std::runtime_error("Error img Tower Kloster");
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
-	setPosition(position);
-
 	_name = "Torre SPD";
 
 	//Rango de ataque:

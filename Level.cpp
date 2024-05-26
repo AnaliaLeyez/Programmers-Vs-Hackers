@@ -63,7 +63,7 @@ void Level::validateClick(int mousex, int mousey)
 {
 	Spot sp = validateClickOnSpot(mousex, mousey); //si NO se clickeo spot el spotNumber es 0
 	sp.getSpotNumber() != 0 ? manageClickOnSpot(mousex, mousey, sp) : manageOutOfSpotClick(mousex, mousey);
-
+	validateClickOnSpeaker(mousex, mousey);
 	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
 		if (getMusicPlaying()) {
 			setSound(false);
@@ -113,7 +113,20 @@ void Level::manageOutOfSpotClick(int mousex, int mousey) {
 		_towerMenu.setCurrentSpot(sp); //si el tower menu no estaba visible, borro el currentSpot del towerMenu, "lo reseteo"
 	}
 }
-
+void Level::validateClickOnSpeaker(int mousex, int mousey) {
+	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
+		if (getMusicPlaying()) {
+			setSound(false);
+			setMusicPlaying(false);
+			_ui.setTextureSpeaker("img/complementarias/mute.png");
+		}
+		else {
+			setSound(true);
+			setMusicPlaying(true);
+			_ui.setTextureSpeaker("img/complementarias/musicOn.png");
+		}
+	}
+}
 
 void Level::update(sf::Vector2i& mousePosition) {
 	if (!getFinisheLevel()) {
