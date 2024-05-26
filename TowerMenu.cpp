@@ -43,33 +43,43 @@ void TowerMenu::hide() { _isVisible = false; }
 
 void TowerMenu::show() { _isVisible = true; }
 
-void TowerMenu::validateClickOnButton(int mousex, int mousey, Spot spot) {//tiene que recibir el spot
+void TowerMenu::validateClickOnButton(int mousex, int mousey, Spot& spot) {//tiene que recibir el spot
 
 	sf::Vector2f mousePos = sf::Vector2f(static_cast<float>(mousex), static_cast<float>(mousey));
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousePos);
 	for (int i = 0; i < 4; i++) {
 		if (_buttons[i]->getGlobalBounds().contains(transformedMousePos)) {
-			int price = _buttons[i]->getTower().getPrice();
-			//validateSale(price){}  todo lo q sigue va en esta funcion
-			Manager& mg = Manager::getInstance();
-			Level level = mg.getInstance().getLevel();
-			std::cout << "Oro anterior: " << level.getGolden() << std::endl;
-			if (price <= level.getGolden()) {
-				level.setGolden(level.getGolden() - price);
-				std::cout << "se clickeo en: " << _buttons[i]->getTower().getName() << std::endl;
-				std::cout << "Oro actual: " << level.getGolden() << std::endl;
-				std::list<Spot> spots= level.getSpots();
-
-				std::cout << "Nro de spot clickeado: " << spot.getSpotNumber() << std::endl;
-
-
-
-				mg.getInstance().setLevel(level);
+			if (validateSale(_buttons[i],spot)) {
+				std::cout << "Venta exitosa ";
+				Tower tower= _buttons[i]->getTower();
+				tower.setPosition(spot.getPosition());
+				spot.setCurrentTower(tower);
+				
+				//spot.setCurrentTower(_buttons[i]->getTower());
+				spot.setOccupied(true);
 			}
+			else {
+				std::cout << "Sos pobre: ";
+			}
+				std::cout << "Nro de spot clickeado: " << spot.getSpotNumber() << std::endl;
 		}
 	}
 }
 
+bool TowerMenu::validateSale(TowerMenuButton* button, Spot& spot) {
+	int price = button->getTower().getPrice();
+	Manager& mg = Manager::getInstance();
+	Level level = mg.getInstance().getLevel();
+	std::cout << "Oro anterior: " << level.getGolden() << std::endl;
+	if (price <= level.getGolden()) {
+		level.setGolden(level.getGolden() - price);
+		std::cout << "se clickeo en: " << button->getTower().getName() << std::endl;
+		std::cout << "Oro actual: " << level.getGolden() << std::endl;
+		mg.getInstance().setLevel(level);
+		return true;
+	}
+	return false;
+}
 void TowerMenu::update(sf::Vector2i& mousePosition) {
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
 

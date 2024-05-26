@@ -8,6 +8,7 @@ sf::Texture Spot::_textureB;
 Spot::Spot()
 {
 	_spotNumber = 0;
+	_currentTower.setPrice(0);
     _mouseHover = false;
 	if (!_textureA.loadFromFile("img/maps/spot_martillo.png")) {
 		throw std::runtime_error("Error img Torre Brian");

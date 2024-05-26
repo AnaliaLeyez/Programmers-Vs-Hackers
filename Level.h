@@ -60,8 +60,8 @@ public:
 	void mouseCheck(sf::RenderWindow&);
 	void validateClick(int, int);
 	Spot validateClickOnSpot(int mousex, int mousey);
-	void manageClickOnSpot(int, int, Spot);
-	void manageOutOfSpotClick(int, int, Spot);
+	void manageClickOnSpot(int, int, Spot&);
+	void manageOutOfSpotClick(int, int);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update(sf::Vector2i&);
 };
