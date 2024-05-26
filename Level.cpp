@@ -24,7 +24,12 @@ sf::SoundBuffer Level::getBuffer() const { return _buffer; }
 sf::Sound Level::getSound() const { return _sound; }
 bool Level::getMusicPlaying() const { return _musicPlaying; }
 sf::Vector2f Level::getHackerStartPosition() const { return _hackerStartPosition; }
-const std::list<Tower>& Level::getTowersAvailable() const { return _towersAvailable;}
+const std::list<Tower> Level::getTowersAvailable() const { return _towersAvailable;}
+
+std::list<Tower> Level::getActiveTowers() const
+{
+	return _activeTowers;
+}
 
 void Level::setIdLevel(int idLevel) { _idLevel = idLevel; }
 void Level::setFinishedLevel(bool finished) { _finishedLevel = finished; }
@@ -35,7 +40,12 @@ void Level::setGolden(int golden) { _golden = golden; }
 void Level::setEnergy(int energy) { _energy = energy; }
 void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
-void Level::setTowersAvailable(const std::list<Tower>& towersAvailable) { _towersAvailable = towersAvailable; }
+void Level::setTowersAvailable(Tower towerAvailable) { _towersAvailable.push_back(towerAvailable); }
+
+void Level::setActiveTowers(Tower tower)
+{
+	_activeTowers.push_back(tower);
+}
 
 //void Level::shoot(sf::Vector2f position)
 //{
@@ -154,9 +164,12 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	target.draw(_ui, states);
 	for (Spot spot : _spots) {
 		target.draw(spot, states);
-		if (spot.getIsOccupied()) {
+		/*if (spot.getIsOccupied()) {
 			target.draw(spot.getCurrentTower(), states);
-		}
+		}*/
+	}
+	for (Tower tower : _activeTowers) {
+		target.draw(tower, states);
 	}
 	for (std::list<Hacker> wave : _waves) {
 		for (Hacker hacker : wave) {

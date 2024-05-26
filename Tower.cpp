@@ -6,6 +6,7 @@
 #include "HackerTrainee.h"
 #include "Tower.h"
 
+sf::Texture Tower::_texture;
 std::string Tower::getName() const { return _name;}
 int Tower::getPrice() const { return _price; }
 int Tower::getPriceUpgrade() const { return _priceUpgrade; }

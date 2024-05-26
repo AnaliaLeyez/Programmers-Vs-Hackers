@@ -27,6 +27,7 @@ protected:
 	std::list<std::list<Hacker>> _waves;
 	sf::Vector2f _hackerStartPosition;
 	std::list <Tower> _towersAvailable;
+	std::list <Tower> _activeTowers;
 	TowerMenu _towerMenu;
 public:
 	int getIdLevel() const;
@@ -42,7 +43,8 @@ public:
 	bool getMusicPlaying() const;
 	sf::Sound getSound() const;
 	sf::Vector2f getHackerStartPosition() const;
-	const std::list<Tower>& getTowersAvailable() const;
+	const std::list<Tower> getTowersAvailable() const;
+	std::list <Tower> getActiveTowers() const;
 
 	void setIdLevel(int);
 	void setFinishedLevel(bool);
@@ -53,7 +55,8 @@ public:
 	void setEnergy(int);
 	void setMusicPlaying(bool);
 	void setSound(bool);
-	void setTowersAvailable(const std::list<Tower>&);
+	void setTowersAvailable(Tower);
+	void setActiveTowers(Tower);
 
 	//void shoot(sf::Vector2f position);
 	void handlerEvent(const sf::Event&);

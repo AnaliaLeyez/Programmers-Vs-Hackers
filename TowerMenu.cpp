@@ -54,9 +54,13 @@ void TowerMenu::validateClickOnButton(int mousex, int mousey, Spot& spot) {//tie
 				Tower tower= _buttons[i]->getTower();
 				tower.setPosition(spot.getPosition());
 				spot.setCurrentTower(tower);
-				
 				//spot.setCurrentTower(_buttons[i]->getTower());
 				spot.setOccupied(true);
+
+				Manager& mg = Manager::getInstance();
+				Level level = mg.getInstance().getLevel();
+				level.setActiveTowers(tower);
+				mg.getInstance().setLevel(level);
 			}
 			else {
 				std::cout << "Sos pobre: ";
