@@ -59,6 +59,8 @@ void TowerMenu::validateClickOnButton(int mousex, int mousey, Spot& spot) {//tie
 
 				Manager& mg = Manager::getInstance();
 				Level level = mg.getInstance().getLevel();
+				//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado
+				level.setSpot(spot, spot.getSpotNumber());
 				level.setActiveTowers(tower);
 				mg.getInstance().setLevel(level);
 			}

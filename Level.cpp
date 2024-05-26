@@ -1,4 +1,5 @@
 #include <iostream> //borrar
+#include <vector>
 #include <list>
 #include "SFML/Graphics.hpp"
 #include <SFML/Audio/SoundBuffer.hpp>
@@ -38,6 +39,14 @@ void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
 void Level::setTowersAvailable(Tower towerAvailable) { _towersAvailable.push_back(towerAvailable); }
 void Level::setActiveTowers(Tower tower) { _activeTowers.push_back(tower); }
+void Level::setSpot(Spot sp, int nroSpot) {
+	for (auto& spot : _spots) {
+		if (spot.getSpotNumber() == nroSpot) {
+			spot = sp;
+			break;
+		}
+	}
+}
 
 //void Level::shoot(sf::Vector2f position)
 //{
@@ -80,13 +89,22 @@ Spot Level::validateClickOnSpot(int mousex, int mousey) {
 void Level::manageClickOnSpot(int mousex, int mousey, Spot& sp) {
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
 	_towerMenu.setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
-	_towerMenu.show();
-	_towerMenu.setCurrentSpot(sp); //guardo el nro de spot en el tower Menu;
-	if (!_towerMenu.getIsVisible()) { //se clickeo en un spot y el menu no era visible
-		sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
-		_towerMenu.setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
-		_towerMenu.show();
+	//validar si el spot esta ocupado o no:
+	if (sp.getIsOccupied()) { //spot ocupado
+		//se muestra OTRO menu
+		std::cout << "LA LA LA";
 	}
+	else {  //spot libre
+		_towerMenu.show();
+		_towerMenu.setCurrentSpot(sp); //guardo el nro de spot en el tower Menu;
+		sp= _towerMenu.getCurrentSpot();
+		if (!_towerMenu.getIsVisible()) { //se clickeo en un spot y el menu no era visible
+			sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
+			_towerMenu.setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
+			_towerMenu.show();
+		}
+	}
+	
 }
 void Level::manageOutOfSpotClick(int mousex, int mousey) {
 	Spot sp;

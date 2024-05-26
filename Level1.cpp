@@ -1,3 +1,4 @@
+#include <iostream>
 #include "UI.h"
 #include "Map.h"
 #include "Map1.h"
@@ -34,7 +35,6 @@ Level1::Level1()
 	_idLevel=1;
 	_finishedLevel = false;
 	_map = new Map1();
-	//borrar los 6 de la matriz
 	int arr[20][30] = {
 {0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -59,6 +59,26 @@ Level1::Level1()
 
 	};
 	setSpots(_spots);
+	//Spot spot;
+	//for (int x = 0; x < 5; x++)
+	//{
+	//	_spots.push_back(spot);
+	//}
+	////Ubicar spots
+	//int index = 0;
+	//for (int x = 0; x < 20; x++)
+	//{
+	//	for (int y = 0; y < 30; y++)
+	//	{
+	//		if (arr[x][y] == 6)
+	//		{
+	//			_spots[index].setPosition(960 / 32 * y, 640 / 32 * x);
+	//			std::cout << "x = " << x << " y = " << y << std::endl;
+	//			index++;
+	//		}
+	//	}
+	//}
+
 	_golden = 500;
 	_energy = 500;
 	setMapArray(arr);

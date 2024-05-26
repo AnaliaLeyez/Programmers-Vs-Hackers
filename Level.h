@@ -1,4 +1,5 @@
 #pragma once
+
 #include "SFML/Graphics.hpp"
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>
@@ -57,6 +58,7 @@ public:
 	void setSound(bool);
 	void setTowersAvailable(Tower);
 	void setActiveTowers(Tower);
+	void setSpot(Spot, int);
 
 	//void shoot(sf::Vector2f position);
 	void handlerEvent(const sf::Event&);
