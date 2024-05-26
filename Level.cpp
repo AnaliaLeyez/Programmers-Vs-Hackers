@@ -117,7 +117,18 @@ void Level::manageOutOfSpotClick(int mousex, int mousey) {
 void Level::update(sf::Vector2i& mousePosition) {
 	if (!getFinisheLevel()) {
 		_towerMenu.update(mousePosition);
-		
+		sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
+		for (auto& spot : _spots)
+		{
+			if (spot.getGlobalBounds().contains(transformedMousePos))
+			{
+				spot.setMouseHover(true);
+			}
+			else
+			{
+				spot.setMouseHover(false);
+			}
+		}
 	//_tower.update();
 
 	//for (Bullet& bullet : _bullets) {

@@ -11,11 +11,13 @@ protected:
 	bool _mouseHover;
 public:
 	Spot();
-	//sf::Sprite getSprite();
-	int getSpotNumber();
+	int getSpotNumber() const;
+	bool getIsOccupied() const;
+	Tower getCurrentTower() const;
+	bool getMouseHover() const;
+
 	void setSpotNumber(int);
-	bool getIsOccupied();
-	Tower getCurrentTower();
+	void setMouseHover(bool);
 	void setOccupied(bool);
 	void setCurrentTower(Tower);
 	void validateMouseHover(bool&);

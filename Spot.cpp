@@ -25,19 +25,17 @@ Spot::Spot()
 	_occupied = false;
 }
 
-//sf::Sprite Spot::getSprite()   //para mi que esta mal
-//{
-//	if (_mouseHover) return _spriteB;
-//	else return _spriteA;
-//}
+int Spot::getSpotNumber() const { return _spotNumber; }
 
-int Spot::getSpotNumber(){ return _spotNumber; }
+bool Spot::getIsOccupied() const { return _occupied; }
 
-void Spot::setSpotNumber(int n){ _spotNumber = n; }
+Tower Spot::getCurrentTower() const { return _currentTower; }
 
-bool Spot::getIsOccupied(){ return _occupied; }
+bool Spot::getMouseHover() const { return _mouseHover; }
 
-Tower Spot::getCurrentTower(){ return _currentTower; }
+void Spot::setSpotNumber(int n) { _spotNumber = n; }
+
+void Spot::setMouseHover(bool state) { _mouseHover = state; }
 
 void Spot::setOccupied(bool status){ _occupied = status; }
 
