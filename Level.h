@@ -19,8 +19,6 @@ protected:
 	sf::Sprite _spriteUTN;
 	Map *_map;
 	int _mapArray[20][30];
-
-	//std::list<Spot> _spots;
 	std::vector<Spot*> _spots;
 
 	int _golden;
@@ -39,10 +37,8 @@ public:
 	UI getUI() const;
 	Map getMap() const;
 	int(*getMapArray())[30];
-
-	//const std::list<Spot> getSpots() const;
 	const std::vector<Spot*> getSpots() const;
-
+	Spot getSpotByNumber(int) const;
 	int getGolden();
 	int getEnergy() const;
 	sf::Sprite getUTN() { return _spriteUTN; } //borrar

@@ -15,11 +15,11 @@ public:
 	bool getIsVisible();
 	const TowerMenuButton* getButtons() const;
 	Spot getCurrentSpot() const;
-	void setCurrentSpot(Spot);
+	void setCurrentSpot(Spot&);
 	void hide();
 	void show();
 	void validateClickOnButton(int, int, Spot*);
-	bool validateSale(TowerMenuButton*, Spot*);
+	bool validateSale(TowerMenuButton*);
 	void update(sf::Vector2i&);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 

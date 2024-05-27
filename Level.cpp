@@ -22,6 +22,16 @@ int(*Level::getMapArray())[30] { return _mapArray; }
 //const std::list<Spot> Level::getSpots() const{ return _spots; }
 const std::vector<Spot*> Level::getSpots() const { return _spots; }
 
+Spot Level::getSpotByNumber(int spotNumber) const
+{
+	for (auto& spot : _spots) {
+		if (spot->getSpotNumber() == spotNumber) {
+			return *spot;
+		}
+	}
+	//return Spot();
+}
+
 int Level::getGolden() { return _golden; }
 int Level::getEnergy() const { return _energy; }
 sf::SoundBuffer Level::getBuffer() const { return _buffer; }
@@ -42,9 +52,9 @@ void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
 void Level::setTowersAvailable(Tower towerAvailable) { _towersAvailable.push_back(towerAvailable); }
 void Level::setActiveTowers(Tower tower) { _activeTowers.push_back(tower); }
-void Level::setSpot(Spot* sp, int nroSpot) {
+void Level::setSpot(Spot* sp, int spotNumber) {
 	for (auto& spot : _spots) {
-		if (spot->getSpotNumber() == nroSpot) {
+		if (spot->getSpotNumber() == spotNumber) {
 			spot = sp;
 			break;
 		}
@@ -96,11 +106,12 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& sp) {
 	if (sp.getIsOccupied()) { //spot ocupado
 		//se muestra OTRO menu
 		std::cout << "LA LA LA";
+		_towerMenu.hide(); //no deberia ir esto
 	}
 	else {  //spot libre
 		_towerMenu.show();
 		_towerMenu.setCurrentSpot(sp); //guardo el nro de spot en el tower Menu;
-		sp= _towerMenu.getCurrentSpot();
+		//sp= _towerMenu.getCurrentSpot();
 		if (!_towerMenu.getIsVisible()) { //se clickeo en un spot y el menu no era visible
 			sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
 			_towerMenu.setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
@@ -116,7 +127,7 @@ void Level::manageOutOfSpotClick(int mousex, int mousey) {
 		_towerMenu.validateClickOnButton(mousex, mousey, &sp);
 		_towerMenu.hide();
 	}
-	else { //y no estaba el towerMenu visible
+	else { //si no estaba el towerMenu visible
 		Spot sp;
 		sp.setSpotNumber(0);
 		_towerMenu.setCurrentSpot(sp); //si el tower menu no estaba visible, borro el currentSpot del towerMenu, "lo reseteo"
@@ -142,6 +153,7 @@ void Level::update(sf::Vector2i& mousePosition) {
 		_towerMenu.update(mousePosition);
 	
 		mouseCheck(mousePosition);
+
 	//_tower.update();
 
 	//for (Bullet& bullet : _bullets) {
@@ -186,7 +198,7 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	states.transform *= getTransform();
 	target.draw(*_map, states);
 	target.draw(_ui, states);
-	for (Spot* spot : _spots) {
+	for (Spot* spot : _spots) {  //luego de "comprar" torre, el spot trae basura
 		target.draw(*spot, states);
 		if (spot->getIsOccupied()) {
 			target.draw(spot->getCurrentTower(), states);

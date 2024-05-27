@@ -33,7 +33,12 @@ Tower Spot::getCurrentTower() const { return _currentTower; }
 
 bool Spot::getMouseHover() const { return _mouseHover; }
 
-void Spot::setSpotNumber(int n) { this->_spotNumber = n; }
+void Spot::setSpot(int spotNumber, bool status) {
+	_spotNumber = spotNumber;
+	_occupied = status;
+}
+
+void Spot::setSpotNumber(int n) { _spotNumber = n; }
 
 void Spot::setMouseHover(bool state) { _mouseHover = state; }
 
@@ -54,6 +59,11 @@ void Spot::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	states.transform *= getTransform();
     _mouseHover ? target.draw(_spriteB, states) : target.draw(_spriteA, states);
 }
+
+//void Spot::update(Spot sp)
+//{
+//	 //pensarlo..
+//}
 
 sf::FloatRect Spot::getGlobalBounds() const {
 	return getTransform().transformRect(_spriteA.getGlobalBounds());
