@@ -4,6 +4,8 @@ class Spot : public sf::Drawable, public sf::Transformable
 {
 protected:
 	static sf::Texture _textureA, _textureB;
+	//sf::Texture _textureA, _textureB;
+
 	sf::Sprite _spriteA, _spriteB;
 	int _spotNumber;
 	bool _occupied;

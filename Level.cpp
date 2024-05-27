@@ -18,7 +18,10 @@ bool Level::getFinisheLevel() const{ return _finishedLevel; }
 UI Level::getUI() const { return _ui; }
 Map Level::getMap() const { return *_map; }
 int(*Level::getMapArray())[30] { return _mapArray; }
-const std::list<Spot> Level::getSpots() const{ return _spots; }
+
+//const std::list<Spot> Level::getSpots() const{ return _spots; }
+const std::vector<Spot*> Level::getSpots() const { return _spots; }
+
 int Level::getGolden() { return _golden; }
 int Level::getEnergy() const { return _energy; }
 sf::SoundBuffer Level::getBuffer() const { return _buffer; }
@@ -39,9 +42,9 @@ void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
 void Level::setTowersAvailable(Tower towerAvailable) { _towersAvailable.push_back(towerAvailable); }
 void Level::setActiveTowers(Tower tower) { _activeTowers.push_back(tower); }
-void Level::setSpot(Spot sp, int nroSpot) {
+void Level::setSpot(Spot* sp, int nroSpot) {
 	for (auto& spot : _spots) {
-		if (spot.getSpotNumber() == nroSpot) {
+		if (spot->getSpotNumber() == nroSpot) {
 			spot = sp;
 			break;
 		}
@@ -58,33 +61,33 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
 	for (auto& spot : _spots)
 	{
-		if (spot.getGlobalBounds().contains(transformedMousePos))
+		if (spot->getGlobalBounds().contains(transformedMousePos))
 		{
-			spot.setMouseHover(true);
+			spot->setMouseHover(true);
 		}
 		else
 		{
-			spot.setMouseHover(false);
+			spot->setMouseHover(false);
 		}
 	}
 }
 void Level::validateClick(int mousex, int mousey)
 {
-	Spot sp = validateClickOnSpot(mousex, mousey); //si NO se clickeo spot el spotNumber es 0
-	sp.getSpotNumber() != 0 ? manageClickOnSpot(mousex, mousey, sp) : manageOutOfSpotClick(mousex, mousey);
+	Spot* sp = validateClickOnSpot(mousex, mousey); //si NO se clickeo spot el spotNumber es 0
+	sp->getSpotNumber() != 0 ? manageClickOnSpot(mousex, mousey, *sp) : manageOutOfSpotClick(mousex, mousey);
 	validateClickOnSpeaker(mousex, mousey);
 }
-Spot Level::validateClickOnSpot(int mousex, int mousey) {
+Spot* Level::validateClickOnSpot(int mousex, int mousey) {
 	if (!_towerMenu.getIsVisible()) {
 		for (auto& spot : _spots) {
-			if (spot.getGlobalBounds().contains(mousex, mousey)) {
+			if (spot->getGlobalBounds().contains(mousex, mousey)) {
 				return spot;
 			}
 		}
 	}
 	Spot spot;
 	spot.setSpotNumber(0);
-	return spot;  //seria como decir "no se clickeo en ningun spot"
+	return &spot;  //seria como decir "no se clickeo en ningun spot"
 }
 void Level::manageClickOnSpot(int mousex, int mousey, Spot& sp) {
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
@@ -110,7 +113,7 @@ void Level::manageOutOfSpotClick(int mousex, int mousey) {
 	Spot sp;
 	if (_towerMenu.getIsVisible()) { //pero el towerMenu esta visible
 		sp = _towerMenu.getCurrentSpot(); //Debo enviar _towerMenu.getCurrentSpot() y NO el sp q viaja por parametros, porque sp se resetea todo el tiempo
-		_towerMenu.validateClickOnButton(mousex, mousey, sp); 
+		_towerMenu.validateClickOnButton(mousex, mousey, &sp);
 		_towerMenu.hide();
 	}
 	else { //y no estaba el towerMenu visible
@@ -183,11 +186,11 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	states.transform *= getTransform();
 	target.draw(*_map, states);
 	target.draw(_ui, states);
-	for (Spot spot : _spots) {
-		target.draw(spot, states);
-		/*if (spot.getIsOccupied()) {
-			target.draw(spot.getCurrentTower(), states);
-		}*/
+	for (Spot* spot : _spots) {
+		target.draw(*spot, states);
+		if (spot->getIsOccupied()) {
+			target.draw(spot->getCurrentTower(), states);
+		}
 	}
 	for (Tower tower : _activeTowers) {
 		target.draw(tower, states);

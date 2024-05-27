@@ -19,7 +19,10 @@ protected:
 	sf::Sprite _spriteUTN;
 	Map *_map;
 	int _mapArray[20][30];
-	std::list<Spot> _spots;
+
+	//std::list<Spot> _spots;
+	std::vector<Spot*> _spots;
+
 	int _golden;
 	int _energy;
 	sf::SoundBuffer _buffer;
@@ -36,7 +39,10 @@ public:
 	UI getUI() const;
 	Map getMap() const;
 	int(*getMapArray())[30];
-	const std::list<Spot> getSpots() const;
+
+	//const std::list<Spot> getSpots() const;
+	const std::vector<Spot*> getSpots() const;
+
 	int getGolden();
 	int getEnergy() const;
 	sf::Sprite getUTN() { return _spriteUTN; } //borrar
@@ -58,13 +64,13 @@ public:
 	void setSound(bool);
 	void setTowersAvailable(Tower);
 	void setActiveTowers(Tower);
-	void setSpot(Spot, int);
+	void setSpot(Spot*, int);
 
 	//void shoot(sf::Vector2f position);
 	void handlerEvent(const sf::Event&);
 	void mouseCheck(sf::Vector2i&);
 	void validateClick(int, int);
-	Spot validateClickOnSpot(int, int);
+	Spot* validateClickOnSpot(int, int);
 	void manageClickOnSpot(int, int, Spot&);
 	void manageOutOfSpotClick(int, int);
 	void validateClickOnSpeaker(int, int);

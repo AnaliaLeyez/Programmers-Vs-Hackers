@@ -33,7 +33,7 @@ Tower Spot::getCurrentTower() const { return _currentTower; }
 
 bool Spot::getMouseHover() const { return _mouseHover; }
 
-void Spot::setSpotNumber(int n) { _spotNumber = n; }
+void Spot::setSpotNumber(int n) { this->_spotNumber = n; }
 
 void Spot::setMouseHover(bool state) { _mouseHover = state; }
 

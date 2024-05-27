@@ -8,14 +8,44 @@
 #include "Spot.h"
 #include "Level1.h"
 
-void setSpots(std::list<Spot> &spots) {
-	Spot sp;
+void setSpots(int arr[][30], std::vector<Spot*> &spots) {
+	Spot *sp;
+for (int i = 0; i < 5; i++)
+{
+	sp = new Spot();
+	//sp->setSpotNumber(i + 1);
+	spots.push_back(sp);
+}
+
+//Ubicar spots
+	int index = 0;
+	for (int x = 0; x < 30; x++)
+	{
+		for (int y = 0; y < 20; y++)
+		{
+			if (arr[y][x] == 6 && index<5)
+			{				
+				spots[index]->setPosition(960 / 32 * x, 640 / 32 * y);
+				spots[index]->setSpotNumber(index + 1);
+				std::cout << "x = " << x << " y = " << y << std::endl;
+				std::cout << "Nro de spot: " << index + 1 << std::endl;
+				std::cout << "Posicion en x: " << 960 / 32 * x << std::endl;
+				std::cout << "Posicion en y: " << 960 / 32 * y << std::endl;
+				index++;
+			}
+		}
+	}
+	//delete sp;  //con esta linea se rompe
+	
+	
+	//ESTO ERA MIO, FUNCIONABA BIEN:
+	/*Spot sp;
 	sp.setSpotNumber(1);
 	sp.setPosition(sf::Vector2f(200, 330));
 	spots.push_back(sp);
 	sp.setSpotNumber(2);
 	sp.setPosition(sf::Vector2f(435, 489));
-	spots.push_back(sp);
+	spots.push_back(sp);*/
 }
 
 void setWaves(std::list<std::list<Hacker>> &waves) {
@@ -58,27 +88,7 @@ Level1::Level1()
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 
 	};
-	setSpots(_spots);
-	//Spot spot;
-	//for (int x = 0; x < 5; x++)
-	//{
-	//	_spots.push_back(spot);
-	//}
-	////Ubicar spots
-	//int index = 0;
-	//for (int x = 0; x < 20; x++)
-	//{
-	//	for (int y = 0; y < 30; y++)
-	//	{
-	//		if (arr[x][y] == 6)
-	//		{
-	//			_spots[index].setPosition(960 / 32 * y, 640 / 32 * x);
-	//			std::cout << "x = " << x << " y = " << y << std::endl;
-	//			index++;
-	//		}
-	//	}
-	//}
-
+	setSpots(arr, _spots);
 	_golden = 500;
 	_energy = 500;
 	setMapArray(arr);
