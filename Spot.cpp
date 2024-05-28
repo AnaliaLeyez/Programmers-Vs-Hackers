@@ -34,8 +34,8 @@ Tower Spot::getCurrentTower() const { return _currentTower; }
 bool Spot::getMouseHover() const { return _mouseHover; }
 
 void Spot::setSpot(int spotNumber, bool status) {
-	_spotNumber = spotNumber;
-	_occupied = status;
+	setSpotNumber(spotNumber);
+	setOccupied(status);
 }
 
 void Spot::setSpotNumber(int n) { _spotNumber = n; }

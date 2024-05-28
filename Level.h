@@ -20,6 +20,7 @@ protected:
 	Map *_map;
 	int _mapArray[20][30];
 	std::vector<Spot*> _spots;
+	TowerMenu *_currentMenu;  //nuevo
 
 	int _golden;
 	int _energy;
@@ -30,7 +31,7 @@ protected:
 	sf::Vector2f _hackerStartPosition;
 	std::list <Tower> _towersAvailable;
 	std::list <Tower> _activeTowers;
-	TowerMenu _towerMenu;
+	//TowerMenu _towerMenu;
 public:
 	int getIdLevel() const;
 	bool getFinisheLevel()const;
@@ -60,13 +61,16 @@ public:
 	void setSound(bool);
 	void setTowersAvailable(Tower);
 	void setActiveTowers(Tower);
-	void setSpot(Spot*, int);
+	//void setSpot(Spot*, int);
+	//void setCurrentSpot(Spot&);
+	//void setCurrentSpot(int, bool);
+
 
 	//void shoot(sf::Vector2f position);
 	void handlerEvent(const sf::Event&);
 	void mouseCheck(sf::Vector2i&);
 	void validateClick(int, int);
-	Spot* validateClickOnSpot(int, int);
+	int validateClickOnSpot(int, int);
 	void manageClickOnSpot(int, int, Spot&);
 	void manageOutOfSpotClick(int, int);
 	void validateClickOnSpeaker(int, int);

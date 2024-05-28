@@ -9,10 +9,9 @@
 #include "Level1.h"
 
 void setSpots(int arr[][30], std::vector<Spot*> &spots) {
-	Spot *sp;
 for (int i = 0; i < 5; i++)
 {
-	sp = new Spot();
+	Spot* sp = new Spot();
 	spots.push_back(sp);
 }
 //Ubicar spots
@@ -25,15 +24,10 @@ for (int i = 0; i < 5; i++)
 			{				
 				spots[index]->setPosition(32 * x, 32 * y);
 				spots[index]->setSpotNumber(index + 1);
-				std::cout << "x = " << x << " y = " << y << std::endl;
-				std::cout << "Nro de spot: " << index + 1 << std::endl;
-				std::cout << "Posicion en x: " << 960 / 32 * x << std::endl;
-				std::cout << "Posicion en y: " << 960 / 32 * y << std::endl;
 				index++;
 			}
 		}
 	}
-	//delete sp;  //con esta linea se rompe
 }
 
 void setWaves(std::list<std::list<Hacker>> &waves) {

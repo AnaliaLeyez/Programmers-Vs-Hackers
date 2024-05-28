@@ -10,6 +10,16 @@
 #include "ButtonMaxiWenner.h"
 #include "TowerMenu.h"
 
+TowerMenu* TowerMenu::_currentMenu = nullptr;
+
+TowerMenu& TowerMenu::getInstance()
+{
+	if (TowerMenu::_currentMenu == nullptr) {
+		TowerMenu::_currentMenu = new TowerMenu(); //el Manager nace con nivel=1
+	}
+	return *TowerMenu::_currentMenu;
+}
+
 TowerMenu::TowerMenu()
 {
 	_isVisible = false;
@@ -30,14 +40,23 @@ TowerMenu::TowerMenu()
 	_buttons[1]->setPosition(85, 0);
 	_buttons[2]->setPosition(0, 85);
 	_buttons[3]->setPosition(-100, 0);
+
+	Spot sp;
+	setCurrentSpot(sp);
 }
 
 bool TowerMenu::getIsVisible(){	return _isVisible; }
 const TowerMenuButton* TowerMenu::getButtons() const { return *_buttons; }
 
-Spot TowerMenu::getCurrentSpot() const { return _currentSpot; }
+Spot TowerMenu::getCurrentSpot() const { return *_currentSpot; }
+void TowerMenu::setCurrentSpot(Spot& sp) {
+	if (_currentSpot == nullptr) {
+		_currentSpot = new Spot();
+	}
+	*_currentSpot = sp;
+}
 
-void TowerMenu::setCurrentSpot(Spot& sp) { _currentSpot = sp; }
+//void TowerMenu::setCurrentSpot(Spot& sp) { _currentSpot->setInstance(&sp); }
 
 void TowerMenu::hide() { _isVisible = false; }
 
@@ -62,7 +81,11 @@ void TowerMenu::validateClickOnButton(int mousex, int mousey, Spot* spot) {//tie
 				//mg.getInstance().getLevel().getSpotByNumber(spot->getSpotNumber()).update(spot);
 				mg.getInstance().getLevel().getSpotByNumber(spot->getSpotNumber()).setSpot(spot->getSpotNumber(), true);
 				//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado
-				//level.setSpot(spot, spot->getSpotNumber());
+				
+				//level.getTowerMenu().setCurrentSpot(*spot);   //hacer?
+				
+				
+				//level.setCurrentSpot(*spot);
 				level.setActiveTowers(tower);
 				mg.getInstance().setLevel(level);
 			}
