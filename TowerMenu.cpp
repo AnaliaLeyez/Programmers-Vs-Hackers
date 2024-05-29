@@ -15,9 +15,19 @@ TowerMenu* TowerMenu::_currentMenu = nullptr;
 TowerMenu& TowerMenu::getInstance()
 {
 	if (TowerMenu::_currentMenu == nullptr) {
-		TowerMenu::_currentMenu = new TowerMenu(); //el Manager nace con nivel=1
+		TowerMenu::_currentMenu = new TowerMenu();
 	}
 	return *TowerMenu::_currentMenu;
+}
+
+void TowerMenu::setInstance(TowerMenu& menu) 
+{
+	if (TowerMenu::_currentMenu == nullptr) {
+		TowerMenu::_currentMenu = new TowerMenu();
+	}
+	*TowerMenu::_currentMenu = menu;
+
+
 }
 
 TowerMenu::TowerMenu()
@@ -41,6 +51,9 @@ TowerMenu::TowerMenu()
 	_buttons[2]->setPosition(0, 85);
 	_buttons[3]->setPosition(-100, 0);
 
+	for (int i = 0; i < 4; i++) {
+		_buttons[i]->setBtnNumber(i + 1);
+	}
 	Spot sp;
 	setCurrentSpot(sp);
 }
@@ -56,13 +69,11 @@ void TowerMenu::setCurrentSpot(Spot& sp) {
 	*_currentSpot = sp;
 }
 
-//void TowerMenu::setCurrentSpot(Spot& sp) { _currentSpot->setInstance(&sp); }
-
 void TowerMenu::hide() { _isVisible = false; }
 
 void TowerMenu::show() { _isVisible = true; }
 
-void TowerMenu::validateClickOnButton(int mousex, int mousey, Spot* spot) {//tiene que recibir el spot
+void TowerMenu::validateClickOnButton(int mousex, int mousey, Spot* spot) {
 
 	sf::Vector2f mousePos = sf::Vector2f(static_cast<float>(mousex), static_cast<float>(mousey));
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousePos);
@@ -78,16 +89,13 @@ void TowerMenu::validateClickOnButton(int mousex, int mousey, Spot* spot) {//tie
 
 				Manager& mg = Manager::getInstance();
 				Level level = mg.getInstance().getLevel();
-				//mg.getInstance().getLevel().getSpotByNumber(spot->getSpotNumber()).update(spot);
-				mg.getInstance().getLevel().getSpotByNumber(spot->getSpotNumber()).setSpot(spot->getSpotNumber(), true);
-				//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado
-				
-				//level.getTowerMenu().setCurrentSpot(*spot);   //hacer?
-				
-				
-				//level.setCurrentSpot(*spot);
+				//mg.getInstance().getLevel().getSpotByNumber(spot->getSpotNumber()).setSpot(spot->getSpotNumber(), true);
+				//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
 				level.setActiveTowers(tower);
-				mg.getInstance().setLevel(level);
+		//		level.setCurrentMenu(*this);  //no me deja
+				level.setSpot(spot, spot->getSpotNumber());
+				mg.setLevel(level);
+				Manager::setInstance(mg);
 			}
 			else {
 				std::cout << "Sos pobre: ";
@@ -106,7 +114,8 @@ bool TowerMenu::validateSale(TowerMenuButton* button) { //antes: Spot* spot
 		level.setGolden(level.getGolden() - price);
 		std::cout << "se clickeo en: " << button->getTower().getName() << std::endl;
 		std::cout << "Oro actual: " << level.getGolden() << std::endl;
-		mg.getInstance().setLevel(level);
+		mg.setLevel(level);
+		Manager::setInstance(mg);
 		return true;
 	}
 	return false;

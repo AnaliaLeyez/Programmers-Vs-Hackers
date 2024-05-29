@@ -20,7 +20,7 @@ protected:
 	Map *_map;
 	int _mapArray[20][30];
 	std::vector<Spot*> _spots;
-	TowerMenu *_currentMenu;  //nuevo
+	TowerMenu *_currentMenu;  //el nivel tiene UN solo menu mostrandose
 
 	int _golden;
 	int _energy;
@@ -31,7 +31,6 @@ protected:
 	sf::Vector2f _hackerStartPosition;
 	std::list <Tower> _towersAvailable;
 	std::list <Tower> _activeTowers;
-	//TowerMenu _towerMenu;
 public:
 	int getIdLevel() const;
 	bool getFinisheLevel()const;
@@ -39,7 +38,6 @@ public:
 	Map getMap() const;
 	int(*getMapArray())[30];
 	const std::vector<Spot*> getSpots() const;
-	Spot getSpotByNumber(int) const;
 	int getGolden();
 	int getEnergy() const;
 	sf::Sprite getUTN() { return _spriteUTN; } //borrar
@@ -61,10 +59,15 @@ public:
 	void setSound(bool);
 	void setTowersAvailable(Tower);
 	void setActiveTowers(Tower);
-	//void setSpot(Spot*, int);
-	//void setCurrentSpot(Spot&);
-	//void setCurrentSpot(int, bool);
-
+	void setSpot(Spot*, int);
+	//no se como armarlo para q no salte excepcion:
+	//void setCurrentMenu(TowerMenu& menu) {
+	//	if (_currentMenu == nullptr) {
+	//		*_currentMenu = TowerMenu::getInstance();
+	//	}
+	//	*_currentMenu =menu;
+	//	TowerMenu::setInstance(*_currentMenu);
+	//};
 
 	//void shoot(sf::Vector2f position);
 	void handlerEvent(const sf::Event&);

@@ -13,6 +13,14 @@ Manager& Manager::getInstance() {
 	return *Manager::_currentInstance;
 }
 
+void Manager::setInstance(Manager& mg)
+{
+	if (Manager::_currentInstance == nullptr) {
+		Manager::_currentInstance = new Manager();
+	}
+	*_currentInstance = mg;
+}
+
 Manager::Manager(int level) {
 	setNumberLevel(level);
 }
@@ -44,7 +52,7 @@ void Manager::setNumberLevel(int IdLevel) {
 
 void Manager::validateClick(int mousex, int mousey, sf::RenderWindow& window) {
 	_currentLevel->validateClick(mousex, mousey);
-	setLevel(*_currentLevel);
+	//setLevel(*_currentLevel);
 }
 void Manager::mouseCheck(sf::Vector2i& mousePosition)
 {

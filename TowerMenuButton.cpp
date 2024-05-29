@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "TowerMenu.h"
 #include "TowerMenuButton.h"
 
 Tower TowerMenuButton::getTower() { return *_tower; }
@@ -8,6 +9,9 @@ void TowerMenuButton::update(sf::Vector2i& mousePosition)
 	//isMouseOver();
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
 		getGlobalBounds().contains(transformedMousePos) ? setMouseHover(true) : setMouseHover(false);
+		/*TowerMenu& currentMenu = TowerMenu::getInstance();
+		currentMenu.setButton(*this, this->getBtnNumber());
+		TowerMenu::setInstance(currentMenu);*/
 }
 void TowerMenuButton::setMouseHover(bool state) { _mouseHover = state; }
 void TowerMenuButton::setSpriteHover()

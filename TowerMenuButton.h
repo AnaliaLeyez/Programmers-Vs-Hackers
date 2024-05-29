@@ -9,13 +9,15 @@ protected:
 	sf::Texture _textureHover;
 	sf::Sprite _spriteHover;
 	bool _mouseHover;
-
+	int _btnNumber;
 public:
 	//void isMouseOver();
 	Tower getTower();
-	void update(sf::Vector2i&);
+	int getBtnNumber() { return _btnNumber; }
+	void setBtnNumber(int n) { _btnNumber = n; }
 	void setMouseHover(bool);
 	void setSpriteHover();
+	void update(sf::Vector2i&);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 
 	sf::FloatRect getGlobalBounds() const;

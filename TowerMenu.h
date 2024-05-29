@@ -11,14 +11,15 @@ protected:
 	bool _isVisible;
 	std::string _pathTextures[4];
 	TowerMenuButton* _buttons[4];
-	Spot *_currentSpot;
+	Spot *_currentSpot;  //el spot por el cual se muestra el menu en ese momento
 public:
-	//TowerMenu();
 	static TowerMenu& getInstance(); //Singleton
+	static void setInstance(TowerMenu&);
 	bool getIsVisible();
 	const TowerMenuButton* getButtons() const;
 	Spot getCurrentSpot() const;
 	void setCurrentSpot(Spot&);
+	void setButton(TowerMenuButton btn, int nro) { *_buttons[nro - 1] = btn; }
 	void hide();
 	void show();
 	void validateClickOnButton(int, int, Spot*);
