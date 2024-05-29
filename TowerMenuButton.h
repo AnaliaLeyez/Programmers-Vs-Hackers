@@ -13,8 +13,8 @@ protected:
 public:
 	//void isMouseOver();
 	Tower getTower();
-	int getBtnNumber() { return _btnNumber; }
-	void setBtnNumber(int n) { _btnNumber = n; }
+	int getBtnNumber();
+	void setBtnNumber(int);
 	void setMouseHover(bool);
 	void setSpriteHover();
 	void update(sf::Vector2i&);

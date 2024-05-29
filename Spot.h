@@ -3,8 +3,6 @@
 class Spot : public sf::Drawable, public sf::Transformable
 {
 protected:
-	//Spot(); //Singleton
-	//static Spot* _currentSpot; //Singleton
 	static sf::Texture _textureA, _textureB;
 	sf::Sprite _spriteA, _spriteB;
 	int _spotNumber;
@@ -13,10 +11,7 @@ protected:
 	bool _mouseHover;
 public:
 	Spot();
-	//static Spot& getInstance(); //Singleton
-	//void setInstance(Spot);
 	void setSpot(int, bool);
-
 	int getSpotNumber() const;
 	bool getIsOccupied() const;
 	Tower getCurrentTower() const;

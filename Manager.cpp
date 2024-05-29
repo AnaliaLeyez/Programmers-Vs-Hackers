@@ -13,13 +13,13 @@ Manager& Manager::getInstance() {
 	return *Manager::_currentInstance;
 }
 
-void Manager::setInstance(Manager& mg)
-{
-	if (Manager::_currentInstance == nullptr) {
-		Manager::_currentInstance = new Manager();
-	}
-	*_currentInstance = mg;
-}
+//void Manager::setInstance(Manager& mg)
+//{
+//	if (Manager::_currentInstance == nullptr) {
+//		Manager::_currentInstance = new Manager();
+//	}
+//	*_currentInstance = mg;
+//}
 
 Manager::Manager(int level) {
 	setNumberLevel(level);

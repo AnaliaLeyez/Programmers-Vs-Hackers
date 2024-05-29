@@ -38,9 +38,11 @@ public:
 	Map getMap() const;
 	int(*getMapArray())[30];
 	const std::vector<Spot*> getSpots() const;
+	Spot getCurrentSpot() const;
+	Spot getSpotByNumber(int) const;
 	int getGolden();
 	int getEnergy() const;
-	sf::Sprite getUTN() { return _spriteUTN; } //borrar
+	sf::Sprite getUTN(); //borrar
 	sf::SoundBuffer getBuffer() const;
 	bool getMusicPlaying() const;
 	sf::Sound getSound() const;
@@ -60,14 +62,7 @@ public:
 	void setTowersAvailable(Tower);
 	void setActiveTowers(Tower);
 	void setSpot(Spot*, int);
-	//no se como armarlo para q no salte excepcion:
-	//void setCurrentMenu(TowerMenu& menu) {
-	//	if (_currentMenu == nullptr) {
-	//		*_currentMenu = TowerMenu::getInstance();
-	//	}
-	//	*_currentMenu =menu;
-	//	TowerMenu::setInstance(*_currentMenu);
-	//};
+	void setCurrentSpot(Spot);
 
 	//void shoot(sf::Vector2f position);
 	void handlerEvent(const sf::Event&);
@@ -75,7 +70,7 @@ public:
 	void validateClick(int, int);
 	int validateClickOnSpot(int, int);
 	void manageClickOnSpot(int, int, Spot&);
-	void manageOutOfSpotClick(int, int);
+	Spot manageOutOfSpotClick(int, int);
 	void validateClickOnSpeaker(int, int);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update(sf::Vector2i&);

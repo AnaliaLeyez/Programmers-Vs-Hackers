@@ -84,4 +84,7 @@ Level1::Level1()
 	setWaves(_waves);
 	_hackerStartPosition = { 960 / 32 * 9, 640 / 32 * 1 };
 	_towersAvailable.push_back(TowerBrian());
+	
+	TowerMenu currentMenu = TowerMenu::getInstance();
+	_currentMenu = &currentMenu;
 }

@@ -10,25 +10,23 @@
 #include "ButtonMaxiWenner.h"
 #include "TowerMenu.h"
 
-TowerMenu* TowerMenu::_currentMenu = nullptr;
+TowerMenu* TowerMenu::_currentInstance = nullptr;
 
 TowerMenu& TowerMenu::getInstance()
 {
-	if (TowerMenu::_currentMenu == nullptr) {
-		TowerMenu::_currentMenu = new TowerMenu();
+	if (TowerMenu::_currentInstance == nullptr) {
+		TowerMenu::_currentInstance = new TowerMenu();
 	}
-	return *TowerMenu::_currentMenu;
+	return *TowerMenu::_currentInstance;
 }
 
-void TowerMenu::setInstance(TowerMenu& menu) 
-{
-	if (TowerMenu::_currentMenu == nullptr) {
-		TowerMenu::_currentMenu = new TowerMenu();
-	}
-	*TowerMenu::_currentMenu = menu;
-
-
-}
+//void TowerMenu::setInstance(TowerMenu& menu) 
+//{
+//	if (TowerMenu::_currentInstance == nullptr) {
+//		TowerMenu::_currentInstance = new TowerMenu();
+//	}
+//	*TowerMenu::_currentInstance = menu;
+//}
 
 TowerMenu::TowerMenu()
 {
@@ -52,7 +50,7 @@ TowerMenu::TowerMenu()
 	_buttons[3]->setPosition(-100, 0);
 
 	for (int i = 0; i < 4; i++) {
-		_buttons[i]->setBtnNumber(i + 1);
+		_buttons[i]->setBtnNumber(i);
 	}
 	Spot sp;
 	setCurrentSpot(sp);
@@ -60,6 +58,8 @@ TowerMenu::TowerMenu()
 
 bool TowerMenu::getIsVisible(){	return _isVisible; }
 const TowerMenuButton* TowerMenu::getButtons() const { return *_buttons; }
+
+TowerMenuButton* TowerMenu::getButtonByIndex(int i) const { return _buttons[i]; }
 
 Spot TowerMenu::getCurrentSpot() const { return *_currentSpot; }
 void TowerMenu::setCurrentSpot(Spot& sp) {
@@ -74,7 +74,8 @@ void TowerMenu::hide() { _isVisible = false; }
 void TowerMenu::show() { _isVisible = true; }
 
 void TowerMenu::validateClickOnButton(int mousex, int mousey, Spot* spot) {
-
+	Manager& mg = Manager::getInstance();
+	Level level = mg.getInstance().getLevel();
 	sf::Vector2f mousePos = sf::Vector2f(static_cast<float>(mousex), static_cast<float>(mousey));
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousePos);
 	for (int i = 0; i < 4; i++) {
@@ -82,25 +83,24 @@ void TowerMenu::validateClickOnButton(int mousex, int mousey, Spot* spot) {
 			if (validateSale(_buttons[i])) {
 				std::cout << "Venta exitosa ";
 				Tower tower= _buttons[i]->getTower();
-				tower.setPosition(spot->getPosition());
+
+				//tower.setPosition(spot->getPosition());
+				//tower.setPosition(spot->getInverseTransform().transformRect((spot->getGlobalBounds())).getPosition());
 				spot->setCurrentTower(tower);
 				//spot.setCurrentTower(_buttons[i]->getTower());
 				spot->setOccupied(true);
 
-				Manager& mg = Manager::getInstance();
-				Level level = mg.getInstance().getLevel();
+				
 				//mg.getInstance().getLevel().getSpotByNumber(spot->getSpotNumber()).setSpot(spot->getSpotNumber(), true);
 				//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
 				level.setActiveTowers(tower);
 		//		level.setCurrentMenu(*this);  //no me deja
 				level.setSpot(spot, spot->getSpotNumber());
 				mg.setLevel(level);
-				Manager::setInstance(mg);
 			}
 			else {
 				std::cout << "Sos pobre: ";
 			}
-				std::cout << "Nro de spot clickeado: " << spot->getSpotNumber() << std::endl;
 		}
 	}
 }
@@ -115,7 +115,6 @@ bool TowerMenu::validateSale(TowerMenuButton* button) { //antes: Spot* spot
 		std::cout << "se clickeo en: " << button->getTower().getName() << std::endl;
 		std::cout << "Oro actual: " << level.getGolden() << std::endl;
 		mg.setLevel(level);
-		Manager::setInstance(mg);
 		return true;
 	}
 	return false;

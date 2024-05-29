@@ -19,8 +19,21 @@ UI Level::getUI() const { return _ui; }
 Map Level::getMap() const { return *_map; }
 int(*Level::getMapArray())[30] { return _mapArray; }
 const std::vector<Spot*> Level::getSpots() const { return _spots; }
+Spot Level::getCurrentSpot() const
+{
+	return _currentMenu->getCurrentSpot();
+}
+Spot Level::getSpotByNumber(int n) const
+{
+	for (auto& spot : _spots) {
+		if (spot->getSpotNumber() == n) {
+			return *spot;
+		}
+	}
+}
 int Level::getGolden() { return _golden; }
 int Level::getEnergy() const { return _energy; }
+sf::Sprite Level::getUTN() { return _spriteUTN; }
 sf::SoundBuffer Level::getBuffer() const { return _buffer; }
 sf::Sound Level::getSound() const { return _sound; }
 bool Level::getMusicPlaying() const { return _musicPlaying; }
@@ -39,13 +52,20 @@ void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
 void Level::setTowersAvailable(Tower towerAvailable) { _towersAvailable.push_back(towerAvailable); }
 void Level::setActiveTowers(Tower tower) { _activeTowers.push_back(tower); }
-void Level::setSpot(Spot* sp, int spotNumber) {
+void Level::setSpot(Spot* sp, int n) {
 	for (auto& spot : _spots) {
-		if (spot->getSpotNumber() == spotNumber) {
-			spot = sp;
+		if (spot->getSpotNumber() == n) {
+			spot->setOccupied(sp->getIsOccupied());
+			spot->setCurrentTower(sp->getCurrentTower());
+			//spot=sp;
 			break;
 		}
 	}
+}
+void Level::setCurrentSpot(Spot sp)
+{
+		TowerMenu tw = TowerMenu::getInstance();
+		tw.setCurrentSpot(sp);
 }
 //void Level::setCurrentSpot(Spot& sp){
 //	*_currentSpot = sp;
@@ -69,29 +89,51 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 			spot->setMouseHover(false);
 		}
 	}
+	
+	if (_currentMenu->getGlobalBounds().contains(transformedMousePos))
+	{
+		for (int i = 0; i < 4; i++) {
+			if (_currentMenu->getButtonByIndex(i)->getGlobalBounds().contains(transformedMousePos)) {
+				_currentMenu->setButton(true, i);
+			}
+			else {
+				_currentMenu->setButton(true, i);
+			}
+		}
+	}
+
+	if (_spriteUTN.getGlobalBounds().contains(transformedMousePos)) {
+		std::cout << "FUNCIONA";
+	}
 }
 void Level::validateClick(int mousex, int mousey)
 {
-	TowerMenu& currentMenu= TowerMenu::getInstance();
-	Spot currentSpot = currentMenu.getCurrentSpot();
-	int clickSpot = validateClickOnSpot(mousex, mousey);
-	if (clickSpot != 0) { //si NO se clickeo spot el spotNumber es 0
-		currentSpot.setSpotNumber(clickSpot); //solo quiero guardar nro de spot !=0
-	}
-	
-	currentMenu.setCurrentSpot(currentSpot);
-	if(clickSpot!=0){ //si se clickeo spot
-		manageClickOnSpot(mousex, mousey, currentSpot);
-	}else { //si NO se clickeo spot
-		manageOutOfSpotClick(mousex, mousey);
-	}
-	TowerMenu::setInstance(currentMenu);
 	Manager& mg = Manager::getInstance();
-	Level level = mg.getInstance().getLevel();
+	Level level = mg.getLevel();
+	TowerMenu& currentMenu= TowerMenu::getInstance(); //si es el primer click el spot estara en cero
+	Spot currentSpot = currentMenu.getCurrentSpot(); //si es el primer click el spot estara en cero //currentSpot tiene el nro de spot ¿y el estado?
+	int clickSpot = validateClickOnSpot(mousex, mousey);
+	if (clickSpot != 0) { //si se clickeo spot
+		currentSpot.setSpotNumber(clickSpot);
+		//currentSpot.setOccupied(level.getCurrentSpot().getIsOccupied());
+		currentSpot.setOccupied(level.getSpotByNumber(currentSpot.getSpotNumber()).getIsOccupied());
+		currentMenu.setCurrentSpot(currentSpot);  //si se clickeo en spot e estoy diciendo a menu q se asocie a ese spot, sino nose
+		manageClickOnSpot(mousex, mousey, currentSpot); //currentSpot tiene el nro de spot y el estado
+	}
+	else { //si NO se clickeo spot
+		currentSpot = manageOutOfSpotClick(mousex, mousey);
+	}
+	//currentMenu.setCurrentSpot(currentSpot);  //si se clickeo en spot le estoy diciendo a menu q se asocie a ese spot, sino nose
+	
+	//if(clickSpot!=0){ //si se clickeo spot
+	//	manageClickOnSpot(mousex, mousey, currentSpot); //currentSpot tiene el nro de spot ¿y el estado?
+	//}else { //si NO se clickeo spot
+	//	manageOutOfSpotClick(mousex, mousey);
+	//}
+	
 	//level.setCurrentMenu(currentMenu); //no me deja, si no hago esto la info del current menu se pierde
 	level.setSpot(&currentSpot, currentSpot.getSpotNumber());
 	mg.setLevel(level);
-	Manager::setInstance(mg);
 	validateClickOnSpeaker(mousex, mousey);
 }
 int Level::validateClickOnSpot(int mousex, int mousey) {
@@ -106,9 +148,14 @@ int Level::validateClickOnSpot(int mousex, int mousey) {
 	return 0;  //seria como decir "no se clickeo en ningun spot"
 }
 void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
-	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
+	Manager& mg = Manager::getInstance();
+	Level level = mg.getLevel();
 	TowerMenu& currentMenu = TowerMenu::getInstance();
+	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
+	currentSp.getSpotNumber();
 	currentMenu.setCurrentSpot(currentSp);
+	
+	//currentSp=level.getCurrentSpot();
 	currentMenu.setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
 	//validar si el spot esta ocupado o no:
 	if (currentSp.getIsOccupied()) { //spot ocupado
@@ -127,26 +174,30 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 		else { //se clickeo en un spot libre y el menu era visible
 			currentMenu.hide();
 		}
-		TowerMenu::setInstance(currentMenu);  //actualizo estado del current menu
-		Manager& mg = Manager::getInstance();
-		Level level = mg.getInstance().getLevel();
-		level.setSpot(&currentSp, currentSp.getSpotNumber());
+		/*level.setSpot(&currentSp, currentSp.getSpotNumber());*/
 	//	level.setCurrentMenu(currentMenu); //no me deja, si no hago esto la info del current menu se pierde
-		mg.setLevel(level);
-		Manager::setInstance(mg);
+		/*mg.setLevel(level);*/
 	}
-	
+	level.setCurrentSpot(currentSp);
+	level.setSpot(&currentSp, currentSp.getSpotNumber());
+	mg.setLevel(level);
 }
-void Level::manageOutOfSpotClick(int mousex, int mousey) {
+Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
+	Manager& mg = Manager::getInstance(); //guardo la informacion del spot en el nivel
+	Level level = mg.getLevel();
 	TowerMenu& currentMenu = TowerMenu::getInstance();
-	Spot sp = currentMenu.getCurrentSpot();
+	Spot sp = currentMenu.getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
 	if (currentMenu.getIsVisible()) { //click fuera de spot y towerMenu estaba visible
-		currentMenu.validateClickOnButton(mousex, mousey, &sp);
+		currentMenu.validateClickOnButton(mousex, mousey, &sp); //sp regresa con estado y torre de spot
 		currentMenu.hide();
 	}
-	sp.setSpot(sp.getSpotNumber(), sp.getIsOccupied());
-	currentMenu.setCurrentSpot(sp);
-	TowerMenu::setInstance(currentMenu);
+	//sp.setSpot(sp.getSpotNumber(), sp.getIsOccupied());
+
+	currentMenu.setCurrentSpot(sp); //guardo la informacion del spot en el Menu
+	
+	level.setSpot(&sp, sp.getSpotNumber());
+	mg.setLevel(level);
+	return sp;
 }
 void Level::validateClickOnSpeaker(int mousex, int mousey) {
 	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
@@ -167,7 +218,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 	if (!getFinisheLevel()) {
 		TowerMenu& currentMenu = TowerMenu::getInstance();
 		currentMenu.update(mousePosition);
-		TowerMenu::setInstance(currentMenu);
 		mouseCheck(mousePosition);
 
 	//_tower.update();
@@ -210,16 +260,18 @@ void Level::update(sf::Vector2i& mousePosition) {
 		}
 	}
 }
+
 void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	states.transform *= getTransform();
 	target.draw(*_map, states);
 	target.draw(_ui, states);
-	for (Spot* spot : _spots) {  //luego de "comprar" torre, el spot trae basura
-		target.draw(*spot, states);
-		/*if (spot->getIsOccupied()) {
-			target.draw(spot->getCurrentTower(), states);
-		}*/
-	}
+	//for (Spot* spot : _spots) {  //luego de "comprar" torre, el spot trae basura. ahora con solo clickear ya se rompe
+	//	target.draw(*spot, states);
+	//	/*if (spot->getIsOccupied()) {
+	//		target.draw(spot->getCurrentTower(), states);
+	//	}*/
+	//}
+	
 	for (Tower tower : _activeTowers) {
 		target.draw(tower, states);
 	}

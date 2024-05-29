@@ -5,7 +5,7 @@ class TowerMenu : public sf::Drawable, public sf::Transformable
 {
 protected:
 	TowerMenu(); //Singleton
-	static TowerMenu* _currentMenu; //Singleton
+	static TowerMenu* _currentInstance; //Singleton
 	sf::Sprite _sprite;
 	sf::Texture _texture;
 	bool _isVisible;
@@ -14,12 +14,13 @@ protected:
 	Spot *_currentSpot;  //el spot por el cual se muestra el menu en ese momento
 public:
 	static TowerMenu& getInstance(); //Singleton
-	static void setInstance(TowerMenu&);
+	//static void setInstance(TowerMenu&);
 	bool getIsVisible();
 	const TowerMenuButton* getButtons() const;
+	TowerMenuButton* getButtonByIndex(int i) const;
 	Spot getCurrentSpot() const;
 	void setCurrentSpot(Spot&);
-	void setButton(TowerMenuButton btn, int nro) { *_buttons[nro - 1] = btn; }
+	void setButton(bool states, int i){ _buttons[i]->setMouseHover(states); }
 	void hide();
 	void show();
 	void validateClickOnButton(int, int, Spot*);

@@ -4,6 +4,8 @@
 
 Tower TowerMenuButton::getTower() { return *_tower; }
 
+int TowerMenuButton::getBtnNumber() { return _btnNumber; }
+
 void TowerMenuButton::update(sf::Vector2i& mousePosition)
 {
 	//isMouseOver();
@@ -13,6 +15,7 @@ void TowerMenuButton::update(sf::Vector2i& mousePosition)
 		currentMenu.setButton(*this, this->getBtnNumber());
 		TowerMenu::setInstance(currentMenu);*/
 }
+void TowerMenuButton::setBtnNumber(int n) { _btnNumber = n; }
 void TowerMenuButton::setMouseHover(bool state) { _mouseHover = state; }
 void TowerMenuButton::setSpriteHover()
 {
@@ -33,4 +36,6 @@ void TowerMenuButton::draw(sf::RenderTarget& target, sf::RenderStates states) co
 	}
 }
 
-sf::FloatRect TowerMenuButton::getGlobalBounds() const { return getTransform().transformRect(_sprite.getGlobalBounds()); }
+sf::FloatRect TowerMenuButton::getGlobalBounds() const {
+	return getTransform().transformRect(_sprite.getGlobalBounds()); 
+}

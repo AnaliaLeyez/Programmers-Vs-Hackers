@@ -10,7 +10,7 @@ private:
 	Level *_currentLevel;
 public:
 	static Manager& getInstance(); //Singleton
-	static void setInstance(Manager&);
+	//static void setInstance(Manager&);
 	Level getLevel() const;
 	void setLevel(Level&);
 	void setNumberLevel(int);
