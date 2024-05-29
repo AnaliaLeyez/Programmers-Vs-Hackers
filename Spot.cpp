@@ -57,7 +57,7 @@ void Spot::validateClick(int mousex, int mousey)
 void Spot::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
-    _mouseHover ? target.draw(_spriteB, states) : target.draw(_spriteA, states);
+	_mouseHover ? target.draw(_spriteB, states) : target.draw(_spriteA, states);
 }
 
 //void Spot::update(Spot sp)
@@ -68,3 +68,12 @@ void Spot::draw(sf::RenderTarget& target, sf::RenderStates states) const
 sf::FloatRect Spot::getGlobalBounds() const {
 	return getTransform().transformRect(_spriteA.getGlobalBounds());
 }
+
+//sf::FloatRect Spot::getGlobalBounds() const {
+//	if (_mouseHover) {
+//		return getTransform().transformRect(_spriteA.getGlobalBounds());
+//	}
+//	else {
+//		return getTransform().transformRect(_spriteB.getGlobalBounds());
+//	}
+//}

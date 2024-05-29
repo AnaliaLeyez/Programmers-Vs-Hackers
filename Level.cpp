@@ -90,19 +90,19 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 		}
 	}
 	
-	if (_currentMenu->getGlobalBounds().contains(transformedMousePos))
+	if (_currentMenu->getIsVisible() && _currentMenu->getGlobalBounds().contains(transformedMousePos))
 	{
 		for (int i = 0; i < 4; i++) {
 			if (_currentMenu->getButtonByIndex(i)->getGlobalBounds().contains(transformedMousePos)) {
 				_currentMenu->setButton(true, i);
 			}
 			else {
-				_currentMenu->setButton(true, i);
+				_currentMenu->setButton(false, i);
 			}
 		}
 	}
 
-	if (_spriteUTN.getGlobalBounds().contains(transformedMousePos)) {
+	if (_spriteUTN.getGlobalBounds().contains(sf::Vector2f(mousePosition))) {
 		std::cout << "FUNCIONA";
 	}
 }
@@ -216,8 +216,11 @@ void Level::validateClickOnSpeaker(int mousex, int mousey) {
 
 void Level::update(sf::Vector2i& mousePosition) {
 	if (!getFinisheLevel()) {
-		TowerMenu& currentMenu = TowerMenu::getInstance();
-		currentMenu.update(mousePosition);
+		TowerMenu tw= TowerMenu::getInstance();
+		_currentMenu = &tw;
+		if (_currentMenu->getIsVisible()) {
+			_currentMenu->update(mousePosition);
+		}
 		mouseCheck(mousePosition);
 
 	//_tower.update();
@@ -265,13 +268,12 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	states.transform *= getTransform();
 	target.draw(*_map, states);
 	target.draw(_ui, states);
-	//for (Spot* spot : _spots) {  //luego de "comprar" torre, el spot trae basura. ahora con solo clickear ya se rompe
-	//	target.draw(*spot, states);
-	//	/*if (spot->getIsOccupied()) {
-	//		target.draw(spot->getCurrentTower(), states);
-	//	}*/
-	//}
-	
+	for (Spot* spot : _spots) {  //luego de "comprar" torre, el spot trae basura. ahora con solo clickear ya se rompe
+		target.draw(*spot, states);
+		if (spot->getIsOccupied()) {
+			target.draw(spot->getCurrentTower(), states);
+		}
+	}
 	for (Tower tower : _activeTowers) {
 		target.draw(tower, states);
 	}
@@ -280,6 +282,8 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 			target.draw(hacker, states);
 		}
 	}
-	TowerMenu& currentMenu = TowerMenu::getInstance();
-	target.draw(currentMenu, states);
+	//target.draw(*_currentMenu, states);
+	/*if (_currentMenu->getIsVisible()) {
+		target.draw(*_currentMenu, states);
+	}*/
 }

@@ -105,7 +105,7 @@ void TowerMenu::validateClickOnButton(int mousex, int mousey, Spot* spot) {
 	}
 }
 
-bool TowerMenu::validateSale(TowerMenuButton* button) { //antes: Spot* spot
+bool TowerMenu::validateSale(TowerMenuButton* button) {
 	int price = button->getTower().getPrice();
 	Manager& mg = Manager::getInstance();
 	Level level = mg.getInstance().getLevel();
@@ -120,15 +120,15 @@ bool TowerMenu::validateSale(TowerMenuButton* button) { //antes: Spot* spot
 	return false;
 }
 void TowerMenu::update(sf::Vector2i& mousePosition) {
-	for (auto& button : _buttons)
-	{
-		button->update(mousePosition);
+	if (getIsVisible()) {
+		for (auto& button : _buttons)
+		{
+			button->update(mousePosition);
+		}
 	}
 }
 void TowerMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	if (_isVisible)
-	{
 		states.transform *= getTransform();
 		target.draw(_sprite, states);
 		for (int i = 0; i < 4; i++) {
@@ -138,8 +138,6 @@ void TowerMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 		//{
 		//	target.draw(button, states);
 		//}
-	}
-	
 }
 
 sf::FloatRect TowerMenu::getGlobalBounds() const {

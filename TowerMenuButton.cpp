@@ -2,18 +2,19 @@
 #include "TowerMenu.h"
 #include "TowerMenuButton.h"
 
+sf::Texture TowerMenuButton::_texture;
+sf::Texture TowerMenuButton::_textureHover;
+
 Tower TowerMenuButton::getTower() { return *_tower; }
 
 int TowerMenuButton::getBtnNumber() { return _btnNumber; }
 
 void TowerMenuButton::update(sf::Vector2i& mousePosition)
 {
-	//isMouseOver();
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
 		getGlobalBounds().contains(transformedMousePos) ? setMouseHover(true) : setMouseHover(false);
 		/*TowerMenu& currentMenu = TowerMenu::getInstance();
-		currentMenu.setButton(*this, this->getBtnNumber());
-		TowerMenu::setInstance(currentMenu);*/
+		currentMenu.setButton(*this, this->getBtnNumber());*/
 }
 void TowerMenuButton::setBtnNumber(int n) { _btnNumber = n; }
 void TowerMenuButton::setMouseHover(bool state) { _mouseHover = state; }
@@ -32,9 +33,22 @@ void TowerMenuButton::draw(sf::RenderTarget& target, sf::RenderStates states) co
 	states.transform *= getTransform();
 	target.draw(_sprite, states);
 	if (_mouseHover) {
-		target.draw(_spriteHover, states);
+	//	target.draw(_spriteHover, states);
 	}
 }
+
+//sf::FloatRect TowerMenuButton::getGlobalBounds() const {
+//	sf::FloatRect bounds1 = getTransform().transformRect(_sprite.getGlobalBounds());
+//	sf::FloatRect bounds2 = getTransform().transformRect(_spriteHover.getGlobalBounds());
+//
+//	sf::FloatRect combinedBounds = bounds1;
+//	combinedBounds.left = std::min(bounds1.left, bounds2.left);
+//	combinedBounds.top = std::min(bounds1.top, bounds2.top);
+//	combinedBounds.width = std::max(bounds1.left + bounds1.width, bounds2.left + bounds2.width) - combinedBounds.left;
+//	combinedBounds.height = std::max(bounds1.top + bounds1.height, bounds2.top + bounds2.height) - combinedBounds.top;
+//
+//	return combinedBounds;
+//}
 
 sf::FloatRect TowerMenuButton::getGlobalBounds() const {
 	return getTransform().transformRect(_sprite.getGlobalBounds()); 
