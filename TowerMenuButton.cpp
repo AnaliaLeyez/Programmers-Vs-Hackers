@@ -31,7 +31,7 @@ void TowerMenuButton::draw(sf::RenderTarget& target, sf::RenderStates states) co
 	states.transform *= getTransform();
 	target.draw(_sprite, states);
 	if (_mouseHover) {
-	//	target.draw(_spriteHover, states);
+		target.draw(_spriteHover, states);
 	}
 }
 

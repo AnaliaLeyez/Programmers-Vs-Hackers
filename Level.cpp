@@ -104,15 +104,12 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 }
 void Level::validateClick(int mousex, int mousey)
 {
-	Manager& mg = Manager::getInstance();
-	Level level = mg.getLevel();
-	
 	Spot currentSpot = _currentMenu->getCurrentSpot(); //si es el primer click el spot estara en cero //currentSpot tiene el nro de spot ¿y el estado?
 	int clickSpot = validateClickOnSpot(mousex, mousey);
 	if (clickSpot != 0) { //si se clickeo spot, esto devuelve el nro de spot
 		currentSpot.setSpotNumber(clickSpot);
 		//currentSpot.setOccupied(level.getCurrentSpot().getIsOccupied());
-		currentSpot.setOccupied(level.getSpotByNumber(currentSpot.getSpotNumber()).getIsOccupied());
+		currentSpot.setOccupied(getSpotByNumber(currentSpot.getSpotNumber()).getIsOccupied());
 		_currentMenu->setCurrentSpot(currentSpot);  //si se clickeo en spot e estoy diciendo a menu q se asocie a ese spot, sino nose
 		manageClickOnSpot(mousex, mousey, currentSpot); //currentSpot tiene el nro de spot y el estado
 	}
@@ -128,8 +125,7 @@ void Level::validateClick(int mousex, int mousey)
 	//}
 	
 	//level.setCurrentMenu(currentMenu); //no me deja, si no hago esto la info del current menu se pierde
-	level.setSpot(&currentSpot, currentSpot.getSpotNumber());
-	mg.setLevel(level);
+	setSpot(&currentSpot, currentSpot.getSpotNumber());
 	validateClickOnSpeaker(mousex, mousey);
 }
 int Level::validateClickOnSpot(int mousex, int mousey) {
@@ -143,8 +139,6 @@ int Level::validateClickOnSpot(int mousex, int mousey) {
 	return 0;  //seria como decir "no se clickeo en ningun spot"
 }
 void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
-	Manager& mg = Manager::getInstance();
-	Level level = mg.getLevel();
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
 	currentSp.getSpotNumber();
 	_currentMenu->setCurrentSpot(currentSp);
@@ -172,24 +166,19 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 	//	level.setCurrentMenu(currentMenu); //no me deja, si no hago esto la info del current menu se pierde
 		/*mg.setLevel(level);*/
 	}
-	level.setCurrentSpot(currentSp);
-	level.setSpot(&currentSp, currentSp.getSpotNumber());
-	mg.setLevel(level);
+	setCurrentSpot(currentSp);
+	setSpot(&currentSp, currentSp.getSpotNumber());
 }
 Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
-	Manager& mg = Manager::getInstance(); //guardo la informacion del spot en el nivel
-	Level level = mg.getLevel();
 	Spot sp = _currentMenu->getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
 	if (_currentMenu->getIsVisible()) { //click fuera de spot y towerMenu estaba visible
 		_currentMenu->validateClickOnButton(mousex, mousey, sp); //sp regresa con estado y torre de spot
 		_currentMenu->hide();
 	}
 	//sp.setSpot(sp.getSpotNumber(), sp.getIsOccupied());
-
-	_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
 	
-	level.setSpot(&sp, sp.getSpotNumber());
-	mg.setLevel(level);
+	_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
+	setSpot(&sp, sp.getSpotNumber());
 	return sp;
 }
 void Level::validateClickOnSpeaker(int mousex, int mousey) {
