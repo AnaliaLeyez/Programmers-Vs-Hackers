@@ -88,14 +88,7 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 	
 	if (_currentMenu->getIsVisible() ) // al if le saque && _currentMenu->getGlobalBounds().contains(transformedMousePos) a ver si asi funcionaba el mouseHover para button
 	{
-		for (int i = 0; i < 4; i++) {
-			if (_currentMenu->getButtonByIndex(i)->getGlobalBounds().contains(transformedMousePos)) {
-				_currentMenu->setButton(true, i);
-			}
-			else {
-				_currentMenu->setButton(false, i);
-			}
-		}
+		_currentMenu->mouseCheck(mousePosition);
 	}
 
 	if (_spriteUTN.getGlobalBounds().contains(transformedMousePos)) {

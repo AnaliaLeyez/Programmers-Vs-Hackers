@@ -48,6 +48,22 @@ void TowerMenu::setCurrentSpot(Spot sp) { _currentSpot = sp; }
 void TowerMenu::hide() { _isVisible = false; }
 void TowerMenu::show() { _isVisible = true; }
 
+void TowerMenu::mouseCheck(sf::Vector2i& mousePosition)
+{
+	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
+	for (auto& button : _buttons)
+	{
+		if (button->getGlobalBounds().contains(transformedMousePos))
+		{
+			button->setMouseHover(true);
+		}
+		else
+		{
+			button->setMouseHover(false);
+		}
+	}
+}
+
 void TowerMenu::validateClickOnButton(int mousex, int mousey, Spot& spot) {
 	Manager& mg = Manager::getInstance();
 	Level level = mg.getLevel();
@@ -69,9 +85,12 @@ void TowerMenu::validateClickOnButton(int mousex, int mousey, Spot& spot) {
 
 void TowerMenu::update(sf::Vector2i& mousePosition) {
 	if (getIsVisible()) {
-		for (auto& button : _buttons)
-		{
-			button->update(mousePosition);
+		//for (auto& button : _buttons)
+		//{
+		//	button->update(mousePosition);
+		//}
+		for (int i = 0; i < 4; i++) {
+			_buttons[i]->update(mousePosition);
 		}
 	}
 }

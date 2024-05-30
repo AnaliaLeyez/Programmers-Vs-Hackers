@@ -46,13 +46,13 @@ void Spot::setOccupied(bool status){ _occupied = status; }
 
 void Spot::setCurrentTower(Tower tower){ _currentTower = tower; }
 
-void Spot::validateMouseHover(bool &_mouseHover)
-{
-}
-
-void Spot::validateClick(int mousex, int mousey)
-{
-}
+//void Spot::validateMouseHover(bool &_mouseHover)
+//{
+//}
+//
+//void Spot::validateClick(int mousex, int mousey)
+//{
+//}
 
 void Spot::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
