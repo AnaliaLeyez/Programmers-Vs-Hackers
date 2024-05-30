@@ -15,8 +15,16 @@ protected:
 	int _idLevel;
 	bool _finishedLevel;
 	UI _ui;
+	//sf::Texture _textureUTN;
+	//sf::Sprite _spriteUTN;
+	//NUEVO
 	sf::Texture _textureUTN;
-	sf::Sprite _spriteUTN;
+	sf::RectangleShape _UTN;
+	sf::Texture _textureUTNRed;
+	sf::RectangleShape _UTNRed;
+	bool _dying;
+	//NUEVO
+
 	Map *_map;
 	int _mapArray[20][30];
 	std::vector<Spot*> _spots;
@@ -44,7 +52,6 @@ public:
 
 	int getGolden();
 	int getEnergy() const;
-	sf::Sprite getUTN(); //borrar
 	sf::SoundBuffer getBuffer() const;
 	bool getMusicPlaying() const;
 	sf::Sound getSound() const;

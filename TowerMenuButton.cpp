@@ -31,19 +31,6 @@ void TowerMenuButton::draw(sf::RenderTarget& target, sf::RenderStates states) co
 	}
 }
 
-//sf::FloatRect TowerMenuButton::getGlobalBounds() const {
-//	sf::FloatRect bounds1 = getTransform().transformRect(_sprite.getGlobalBounds());
-//	sf::FloatRect bounds2 = getTransform().transformRect(_spriteHover.getGlobalBounds());
-//
-//	sf::FloatRect combinedBounds = bounds1;
-//	combinedBounds.left = std::min(bounds1.left, bounds2.left);
-//	combinedBounds.top = std::min(bounds1.top, bounds2.top);
-//	combinedBounds.width = std::max(bounds1.left + bounds1.width, bounds2.left + bounds2.width) - combinedBounds.left;
-//	combinedBounds.height = std::max(bounds1.top + bounds1.height, bounds2.top + bounds2.height) - combinedBounds.top;
-//
-//	return combinedBounds;
-//}
-
 sf::FloatRect TowerMenuButton::getGlobalBounds() const {
 	return getTransform().transformRect(_sprite.getGlobalBounds()); 
 }

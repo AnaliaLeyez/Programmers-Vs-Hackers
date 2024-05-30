@@ -34,7 +34,6 @@ Spot Level::getSpotByNumber(int n) const
 TowerMenu Level::getCurrentMenu() const { return *_currentMenu; }
 int Level::getGolden() { return _golden; }
 int Level::getEnergy() const { return _energy; }
-sf::Sprite Level::getUTN() { return _spriteUTN; }
 sf::SoundBuffer Level::getBuffer() const { return _buffer; }
 sf::Sound Level::getSound() const { return _sound; }
 bool Level::getMusicPlaying() const { return _musicPlaying; }
@@ -86,14 +85,20 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 		}
 	}
 	
-	if (_currentMenu->getIsVisible() ) // al if le saque && _currentMenu->getGlobalBounds().contains(transformedMousePos) a ver si asi funcionaba el mouseHover para button
+	if (_currentMenu->getIsVisible() && _currentMenu->getGlobalBounds().contains(transformedMousePos))
 	{
 		_currentMenu->mouseCheck(mousePosition);
+		_dying = true; //ESTO NO VA ACA, ES SOLO PARA VER QUE EL SWITCH DEL SPRITE DE UTN FUNCIONA, PERO ESO NO DEPENDERA DEL MOUSE
 	}
+	else {
+		_dying = false; //ESTO NO VA ACA, ES SOLO PARA VER QUE EL SWITCH DEL SPRITE DE UTN FUNCIONA, PERO ESO NO DEPENDERA DEL MOUSE
+	}
+	//sprite UTN es del mapa, tengo que chequear si mapa
+	// 
+	//if (_spriteUTN.getGlobalBounds().contains(transformedMousePos)) { //tambien probe pasarle sf::Vector2f(mousePosition) y nada
+	//	std::cout << "FUNCIONA";
+	//}
 
-	if (_spriteUTN.getGlobalBounds().contains(transformedMousePos)) {
-		std::cout << "FUNCIONA";
-	}
 }
 void Level::validateClick(int mousex, int mousey)
 {
@@ -109,15 +114,6 @@ void Level::validateClick(int mousex, int mousey)
 	else { //si NO se clickeo spot
 		currentSpot = manageOutOfSpotClick(mousex, mousey);
 	}
-	//currentMenu.setCurrentSpot(currentSpot);  //si se clickeo en spot le estoy diciendo a menu q se asocie a ese spot, sino nose
-	
-	//if(clickSpot!=0){ //si se clickeo spot
-	//	manageClickOnSpot(mousex, mousey, currentSpot); //currentSpot tiene el nro de spot ¿y el estado?
-	//}else { //si NO se clickeo spot
-	//	manageOutOfSpotClick(mousex, mousey);
-	//}
-	
-	//level.setCurrentMenu(currentMenu); //no me deja, si no hago esto la info del current menu se pierde
 	setSpot(&currentSpot, currentSpot.getSpotNumber());
 	validateClickOnSpeaker(mousex, mousey);
 }
@@ -135,8 +131,6 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
 	currentSp.getSpotNumber();
 	_currentMenu->setCurrentSpot(currentSp);
-	
-	//currentSp=level.getCurrentSpot();
 	_currentMenu->setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
 	//validar si el spot esta ocupado o no:
 	if (currentSp.getIsOccupied()) { //spot ocupado
@@ -144,8 +138,7 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 	}
 	else {  //spot libre
 		_currentMenu->setCurrentSpot(currentSp); //guardo el nro de spot en el tower Menu;
-	//	if(currentMenu.getCurrentSpot().getSpotNumber()!=0) //no deberia necesitar esta linea... estoy probando si cambia en algo
-			currentSp.setCurrentTower(_currentMenu->getCurrentSpot().getCurrentTower()); //me aseguro que el currentSpot esta asociado a la tower ahora
+		currentSp.setCurrentTower(_currentMenu->getCurrentSpot().getCurrentTower()); //me aseguro que el currentSpot esta asociado a la tower ahora
 		if (!_currentMenu->getIsVisible()) { //se clickeo en un spot libre y el menu no era visible
 			sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
 			_currentMenu->setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
@@ -282,4 +275,6 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	if (_currentMenu->getIsVisible()) {
 		target.draw(*_currentMenu, states);
 	}
+
+	_dying ? target.draw(_UTNRed, states) : target.draw(_UTN, states);
 }
