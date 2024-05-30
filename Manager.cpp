@@ -13,13 +13,26 @@ Manager& Manager::getInstance() {
 	return *Manager::_currentInstance;
 }
 
+//void Manager::setInstance(Manager& mg)
+//{
+//	if (Manager::_currentInstance == nullptr) {
+//		Manager::_currentInstance = new Manager();
+//	}
+//	*_currentInstance = mg;
+//}
+
 Manager::Manager(int level) {
-	setLevel(level);
+	setNumberLevel(level);
 }
 
 Level Manager::getLevel() const { return *_currentLevel; }
 
-void Manager::setLevel(int IdLevel) {
+void Manager::setLevel(Level& level)
+{
+	*_currentLevel = level;
+}
+
+void Manager::setNumberLevel(int IdLevel) {
 	if (_currentLevel != nullptr) {
 		delete _currentInstance;
 	}
@@ -27,6 +40,7 @@ void Manager::setLevel(int IdLevel) {
 	{
 	case 1:
 		_currentLevel = new Level1();
+		_currentLevel->getHackerStartPosition(); //ver como el manager informa a la oleada desde donde empezar
 		break;
 	case 2:
 		//_currentLevel = new Level2();
@@ -38,14 +52,15 @@ void Manager::setLevel(int IdLevel) {
 
 void Manager::validateClick(int mousex, int mousey, sf::RenderWindow& window) {
 	_currentLevel->validateClick(mousex, mousey);
+	//setLevel(*_currentLevel);
 }
-void Manager::mouseCheck(sf::RenderWindow& window)
+void Manager::mouseCheck(sf::Vector2i& mousePosition)
 {
-	_currentLevel->mouseCheck(window);
+	_currentLevel->mouseCheck(mousePosition);
 }
-void Manager::update()
+void Manager::update(sf::Vector2i& mousePosition)
 {
-	_currentLevel->update();
+	_currentLevel->update(mousePosition);
 }
 
 void Manager::draw(sf::RenderTarget& target, sf::RenderStates states) const

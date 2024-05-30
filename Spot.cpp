@@ -7,35 +7,40 @@ sf::Texture Spot::_textureB;
 
 Spot::Spot()
 {
+	_spotNumber = 0;
+	_currentTower.setPrice(0);
     _mouseHover = false;
 	if (!_textureA.loadFromFile("img/maps/spot_martillo.png")) {
 		throw std::runtime_error("Error img Torre Brian");
 	}
 	_spriteA.setTexture(_textureA);
 	_spriteA.setOrigin(_spriteA.getGlobalBounds().width / 2, _spriteA.getGlobalBounds().height / 2);
-	_spriteA.setScale(1.f, 1.f); //borrar?
-	_spriteA.setPosition(sf::Vector2f(200.f, 200.f));   //borrar
+	_spriteA.setScale(1.4f, 1.4f);
 	if (!_textureB.loadFromFile("img/maps/spot_martillo_hover.png")) {
 		throw std::runtime_error("Error img Torre Brian");
 	}
 	_spriteB.setTexture(_textureB);
 	_spriteB.setOrigin(_spriteB.getGlobalBounds().width / 2, _spriteB.getGlobalBounds().height / 2);
-	_spriteB.setScale(1.f, 1.f);  //borrar?
-	_spriteB.setPosition(sf::Vector2f(300.f, 300.f));   //borrar
+	_spriteB.setScale(1.4f, 1.4f);
 	_occupied = false;
 }
 
-int Spot::getSpotNumber(){ return 0; }
+int Spot::getSpotNumber() const { return _spotNumber; }
 
-void Spot::setSpotNumber(int n){ _spotNumber = n; }
+bool Spot::getIsOccupied() const { return _occupied; }
 
-sf::Vector2f Spot::getPosition(){ return _position; }
+Tower Spot::getCurrentTower() const { return _currentTower; }
 
-bool Spot::getIsOccupied(){ return _occupied; }
+bool Spot::getMouseHover() const { return _mouseHover; }
 
-Tower Spot::getCurrentTower(){ return _currentTower; }
+void Spot::setSpot(int spotNumber, bool status) {
+	setSpotNumber(spotNumber);
+	setOccupied(status);
+}
 
-void Spot::setPosition(sf::Vector2f pos){ _position = pos; }
+void Spot::setSpotNumber(int n) { _spotNumber = n; }
+
+void Spot::setMouseHover(bool state) { _mouseHover = state; }
 
 void Spot::setOccupied(bool status){ _occupied = status; }
 
@@ -51,5 +56,26 @@ void Spot::validateClick(int mousex, int mousey)
 
 void Spot::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    _mouseHover ? target.draw(_spriteB, states) : target.draw(_spriteA, states);
+	states.transform *= getTransform();
+	if (getIsOccupied()) {
+		target.draw(_currentTower, states);
+	}
+	else {
+		_mouseHover ? target.draw(_spriteB, states) : target.draw(_spriteA, states);
+	}
+	
 }
+
+
+sf::FloatRect Spot::getGlobalBounds() const {
+	return getTransform().transformRect(_spriteA.getGlobalBounds());
+}
+
+//sf::FloatRect Spot::getGlobalBounds() const {
+//	if (_mouseHover) {
+//		return getTransform().transformRect(_spriteA.getGlobalBounds());
+//	}
+//	else {
+//		return getTransform().transformRect(_spriteB.getGlobalBounds());
+//	}
+//}

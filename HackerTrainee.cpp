@@ -1,10 +1,15 @@
 #include "HackerTrainee.h"
 
+sf::Texture HackerTrainee::_texture;
 HackerTrainee::HackerTrainee()
 {
-	_texture.loadFromFile("kaker.png");
+	if (!_texture.loadFromFile("img/hackers/Trainee.png")) {
+		throw std::runtime_error("Error img Hacker Trainee");
+	}
 	_sprite.setTexture(_texture);
-	_name = "Kakercito";
+	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
+	_sprite.setPosition(sf::Vector2f(300, 200)); //esto HAY QUE BORRARLO, lo puse solo para ver al hacker ahora
+	_name = "Trainee";
 
 	_seniority = 0;
 	_life = 100;

@@ -4,15 +4,13 @@
 #include "Tower.h"
 #include "TowerWenner.h"
 
-TowerWenner::TowerWenner(sf::Vector2f position)
+TowerWenner::TowerWenner()
 {
 	if (!_texture.loadFromFile("img/towers/torreB_1.png")) {
 		throw std::runtime_error("Error img Tower Wenner");
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
-	setPosition(position);
-
 	_name = "Torre Matematica";
 
 	//Rango de ataque:
@@ -20,8 +18,8 @@ TowerWenner::TowerWenner(sf::Vector2f position)
 	_visualRange.setFillColor(sf::Color(0, 255, 0, 120));
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
-	_cost = 10;
-	_costUpgrade = 9;
+	_price = 10;
+	_priceUpgrade = 9;
 	_salesValue = 5;
 	_damage = 10;
 	_range = 9;
@@ -31,7 +29,7 @@ TowerWenner::TowerWenner(sf::Vector2f position)
 
 void TowerWenner::update1()
 {
-	_costUpgrade = 9;
+	_priceUpgrade = 9;
 	_salesValue = 7;
 	_damage = 12;
 	_speedAttack = 2;

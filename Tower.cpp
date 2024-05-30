@@ -3,28 +3,29 @@
 #include <SFML/Graphics.hpp>
 
 #include "Collisionable.h"
-#include "Manager.h" //ver si esto es necesario aca
 #include "HackerTrainee.h"
 #include "Tower.h"
 
 std::string Tower::getName() const { return _name;}
-float Tower::getCost() const { return _cost; }
-float Tower::getCostUpgrade() const { return _costUpgrade; }
-float Tower::getSalesValue() const { return _salesValue; }
+int Tower::getPrice() const { return _price; }
+int Tower::getPriceUpgrade() const { return _priceUpgrade; }
+int Tower::getSalesValue() const { return _salesValue; }
 sf::CircleShape Tower::getVisualRange() const { return _visualRange; }
 //sf::Sprite Tower::getSprite() const { return _sprite; }
 int Tower::getDamage() const { return _damage; }
 int Tower::getRange() const { return _range; }
 int Tower::getSpeedAtack() const { return _speedAttack; }
 int Tower::getUpgradesAmount() const { return _upgradesAmount; }
+int Tower::getSpotNumber() const { return _spotNumber; }
 
 void Tower::setRange(int range) { _range = range; }
 void Tower::setName(std::string name) { _name = name; }
-void Tower::setCost(float cost) { _cost = cost; }
-void Tower::setSalesValue(float value) { _salesValue = value; }
+void Tower::setPrice(int price) { _price = price; }
+void Tower::setSalesValue(int value) { _salesValue = value; }
 void Tower::setDamage(int damage) { _damage = damage; }
-void Tower::setCostUpgrade(float cost) { _costUpgrade = cost; }
+void Tower::setPriceUpgrade(int price) { _priceUpgrade = price; }
 void Tower::setCooldown(int value) { (value == 0) ? _cooldown = 0 : _cooldown++; }
+void Tower::setSpotNumber(int n) { _spotNumber = n; }
 
 //Comportamiento
 /*
@@ -50,7 +51,7 @@ void Tower::draw(sf::RenderTarget& target, sf::RenderStates states) const
 void Tower::verificarEnemigo(HackerTrainee& enemy)
 {
     // Calcula la distancia entre los centros de la torre y el objetivo
-    float distancia = std::sqrt(std::pow(enemy.getPosition().x - getPosition().x, 2) + std::pow(enemy.getPosition().y - getPosition().y, 2));
+    double distancia = std::sqrt(std::pow(enemy.getPosition().x - getPosition().x, 2) + std::pow(enemy.getPosition().y - getPosition().y, 2));
 
     if (distancia <= _visualRange.getRadius())
     {

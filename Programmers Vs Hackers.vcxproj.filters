@@ -57,25 +57,22 @@
     <ClCompile Include="Level1.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Wave.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="TowerMenu.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="MenuAbstract.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="ButtomBrian.cpp">
+    <ClCompile Include="ButtonBrian.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="ButtomKloster.cpp">
+    <ClCompile Include="ButtonKloster.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="ButtomMaxiSar.cpp">
+    <ClCompile Include="ButtonMaxiSar.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="ButtomMaxiWenner.cpp">
+    <ClCompile Include="ButtonMaxiWenner.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="TowerBrian.cpp">
@@ -137,9 +134,6 @@
     <ClInclude Include="Level1.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Wave.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="TowerMenu.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -149,16 +143,16 @@
     <ClInclude Include="MenuAbstract.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="ButtomBrian.h">
+    <ClInclude Include="ButtonBrian.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="ButtomKloster.h">
+    <ClInclude Include="ButtonKloster.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="ButtomMaxiSar.h">
+    <ClInclude Include="ButtonMaxiSar.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="ButtomMaxiWenner.h">
+    <ClInclude Include="ButtonMaxiWenner.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="TowerBrian.h">

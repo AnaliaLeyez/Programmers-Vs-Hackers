@@ -11,14 +11,10 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(960, 640), "Programmers Vs Hackers");
 	window.setFramerateLimit(60);
 	int view = 1;
+	sf::Vector2i mousePosition; //xq no es 2f? si despues lo terminamos pasando a 2f siempre...
 	while (window.isOpen())
 	{
-		//prueba mas directa, una vez que funcione, esto va en level:
-		//Manager& mg = Manager::getInstance();
-		//mg.mouseCheck(window);
-		//if (mg.getInstance().getLevel().getUTN().getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(window)))) {
-		//	std::cout << "FUNCIONA";
-		//}
+		mousePosition = sf::Mouse::getPosition(window);
 
 		sf::Event ev;
 		while (window.pollEvent(ev))
@@ -62,7 +58,7 @@ int main()
 			case 2:
 			{
 				Manager& mg = Manager::getInstance();
-				mg.update();
+				mg.update(mousePosition);
 				window.draw(mg);
 			}
 			break;
