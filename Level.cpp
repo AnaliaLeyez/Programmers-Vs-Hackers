@@ -75,6 +75,8 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
 	for (auto& spot : _spots)
 	{
+		//spot->mouseCheck(mousePosition);  //por que si lo hago con esta linea no funciona? 
+		// deberia ser un pasamanos igual que lo es con currentMenu e igual que validateClick
 		if (spot->getGlobalBounds().contains(transformedMousePos))
 		{
 			spot->setMouseHover(true);
@@ -84,7 +86,6 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 			spot->setMouseHover(false);
 		}
 	}
-	
 	if (_currentMenu->getIsVisible() && _currentMenu->getGlobalBounds().contains(transformedMousePos))
 	{
 		_currentMenu->mouseCheck(mousePosition);
@@ -93,12 +94,6 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 	else {
 		_dying = false; //ESTO NO VA ACA, ES SOLO PARA VER QUE EL SWITCH DEL SPRITE DE UTN FUNCIONA, PERO ESO NO DEPENDERA DEL MOUSE
 	}
-	//sprite UTN es del mapa, tengo que chequear si mapa
-	// 
-	//if (_spriteUTN.getGlobalBounds().contains(transformedMousePos)) { //tambien probe pasarle sf::Vector2f(mousePosition) y nada
-	//	std::cout << "FUNCIONA";
-	//}
-
 }
 void Level::validateClick(int mousex, int mousey)
 {
@@ -193,14 +188,13 @@ Level Level::sell(Tower tower, Spot& currentSpot) {
 	setGolden(getGolden() - price);
 	std::cout << "se compro: " << tower.getName() << std::endl;
 	std::cout << "Oro actual: " << getGolden() << std::endl;
-	tower.setPosition(currentSpot.getPosition());
+	//tower.setPosition(currentSpot.getPosition());
 	//tower.setPosition(currentSpot.getInverseTransform().transformRect((currentSpot.getGlobalBounds())).getPosition());
 	currentSpot.setCurrentTower(tower);
 	currentSpot.setCurrentTower(tower);
 	currentSpot.setOccupied(true);
 
 
-	//mg.getInstance().getLevel().getSpotByNumber(spot->getSpotNumber()).setSpot(spot->getSpotNumber(), true);
 	//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
 	setActiveTowers(tower);
 	setSpot(&currentSpot, currentSpot.getSpotNumber());

@@ -46,13 +46,19 @@ void Spot::setOccupied(bool status){ _occupied = status; }
 
 void Spot::setCurrentTower(Tower tower){ _currentTower = tower; }
 
-//void Spot::validateMouseHover(bool &_mouseHover)
-//{
-//}
-//
-//void Spot::validateClick(int mousex, int mousey)
-//{
-//}
+void Spot::mouseCheck(sf::Vector2i& mousePosition) { //no funciona si lo pongo aca... por qué? deberia estar acá...
+	//sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
+	//if (getGlobalBounds().contains(transformedMousePos))
+	//{
+	//	_mouseHover = true;
+	//	setMouseHover(true);
+	//}
+	//else
+	//{
+	//	_mouseHover = false;
+	//	setMouseHover(false);
+	//}
+}
 
 void Spot::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
