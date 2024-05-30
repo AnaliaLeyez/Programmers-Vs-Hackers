@@ -4,6 +4,9 @@
 #include "Map1.h"
 #include "Tower.h"
 #include "TowerBrian.h"
+#include "TowerKloster.h"
+#include "TowerSarF.h"
+#include "TowerWenner.h"
 #include "Level.h"
 #include "Spot.h"
 #include "Level1.h"
@@ -84,7 +87,7 @@ Level1::Level1()
 	setWaves(_waves);
 	_hackerStartPosition = { 960 / 32 * 9, 640 / 32 * 1 };
 	_towersAvailable.push_back(TowerBrian());
-	
-	/*TowerMenu currentMenu;
-	_currentMenu = &currentMenu;*/
+	_towersAvailable.push_back(TowerKloster());
+	_towersAvailable.push_back(TowerSarF());
+	_towersAvailable.push_back(TowerWenner());
 }
