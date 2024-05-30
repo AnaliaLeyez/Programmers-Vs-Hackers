@@ -147,7 +147,6 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 	_currentMenu->setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
 	//validar si el spot esta ocupado o no:
 	if (currentSp.getIsOccupied()) { //spot ocupado
-		//se muestra OTRO menu
 		std::cout << "aca va el menu2";
 	}
 	else {  //spot libre
@@ -162,9 +161,6 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 		else { //se clickeo en un spot libre y el menu era visible
 			_currentMenu->hide();
 		}
-		/*level.setSpot(&currentSp, currentSp.getSpotNumber());*/
-	//	level.setCurrentMenu(currentMenu); //no me deja, si no hago esto la info del current menu se pierde
-		/*mg.setLevel(level);*/
 	}
 	setCurrentSpot(currentSp);
 	setSpot(&currentSp, currentSp.getSpotNumber());
@@ -176,7 +172,7 @@ Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 		_currentMenu->hide();
 	}
 	//sp.setSpot(sp.getSpotNumber(), sp.getIsOccupied());
-	
+	sp = _currentMenu->getCurrentSpot();
 	_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
 	setSpot(&sp, sp.getSpotNumber());
 	return sp;
@@ -211,8 +207,8 @@ Level Level::sell(Tower tower, Spot& currentSpot) {
 	setGolden(getGolden() - price);
 	std::cout << "se compro: " << tower.getName() << std::endl;
 	std::cout << "Oro actual: " << getGolden() << std::endl;
-	//tower.setPosition(currentSpot.getPosition());
-	tower.setPosition(currentSpot.getInverseTransform().transformRect((currentSpot.getGlobalBounds())).getPosition());
+	tower.setPosition(currentSpot.getPosition());
+	//tower.setPosition(currentSpot.getInverseTransform().transformRect((currentSpot.getGlobalBounds())).getPosition());
 	currentSpot.setCurrentTower(tower);
 	currentSpot.setCurrentTower(tower);
 	currentSpot.setOccupied(true);
