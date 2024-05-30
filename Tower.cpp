@@ -2,7 +2,6 @@
 #include <list>
 #include <SFML/Graphics.hpp>
 
-#include "Spot.h"
 #include "Collisionable.h"
 #include "HackerTrainee.h"
 #include "Tower.h"
@@ -19,8 +18,6 @@ int Tower::getRange() const { return _range; }
 int Tower::getSpeedAtack() const { return _speedAttack; }
 int Tower::getUpgradesAmount() const { return _upgradesAmount; }
 
-int Tower::getSpotNumber() const { return _spotNumber; }
-
 void Tower::setRange(int range) { _range = range; }
 void Tower::setName(std::string name) { _name = name; }
 void Tower::setPrice(int price) { _price = price; }
@@ -28,8 +25,6 @@ void Tower::setSalesValue(int value) { _salesValue = value; }
 void Tower::setDamage(int damage) { _damage = damage; }
 void Tower::setPriceUpgrade(int price) { _priceUpgrade = price; }
 void Tower::setCooldown(int value) { (value == 0) ? _cooldown = 0 : _cooldown++; }
-
-void Tower::setSpotNumber(int n) { _spotNumber = n; }
 
 //Comportamiento
 /*

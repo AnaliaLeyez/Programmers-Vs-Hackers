@@ -1,5 +1,4 @@
 #pragma once
-#include "Collisionable.h"
 #include "HackerTrainee.h"
 
 class Tower : public sf::Drawable, public sf::Transformable, public Collisionable
@@ -20,8 +19,6 @@ protected:
 	int _speedAttack;
 	unsigned int _cooldown;
 	int _upgradesAmount;
-
-	int _spotNumber;
 public:
 	//Getters
 	std::string getName() const;
@@ -35,8 +32,6 @@ public:
 	int getSpeedAtack() const;
 	int getUpgradesAmount() const;
 
-	int getSpotNumber() const;
-
 	void setRange(int);
 	void setName(std::string);
 	void setPrice(int);
@@ -45,8 +40,6 @@ public:
 	void setDamage(int);
 	void setCooldown(int);
 	
-	void setSpotNumber(int);
-
 	//Comportamiento
 	void verificarEnemigo(HackerTrainee&);
 	sf::FloatRect getBounds() const;

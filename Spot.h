@@ -21,8 +21,7 @@ public:
 	void setMouseHover(bool);
 	void setOccupied(bool);
 	void setCurrentTower(Tower);
-
-	void mouseCheck(sf::Vector2i&);
+	void validateMouseHover(bool&);
 	void validateClick(int, int);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 

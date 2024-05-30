@@ -193,8 +193,8 @@ Level Level::sell(Tower tower, Spot& currentSpot) {
 	currentSpot.setCurrentTower(tower);
 	currentSpot.setCurrentTower(tower);
 	currentSpot.setOccupied(true);
-
-
+	//tower.setSpotNumber(currentSpot.getSpotNumber());
+	//tower.setSpotOfTower(currentSpot);
 	//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
 	setActiveTowers(tower);
 	setSpot(&currentSpot, currentSpot.getSpotNumber());
