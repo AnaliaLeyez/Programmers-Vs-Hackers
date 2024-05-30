@@ -40,6 +40,8 @@ public:
 	const std::vector<Spot*> getSpots() const;
 	Spot getCurrentSpot() const;
 	Spot getSpotByNumber(int) const;
+	TowerMenu getCurrentMenu() const;  //nuevo
+
 	int getGolden();
 	int getEnergy() const;
 	sf::Sprite getUTN(); //borrar
@@ -62,7 +64,8 @@ public:
 	void setTowersAvailable(Tower);
 	void setActiveTowers(Tower);
 	void setSpot(Spot*, int);
-	void setCurrentSpot(Spot);
+	void setCurrentSpot(Spot); //para que el currentMenu tenga su Spot asociado
+	void setCurrentMenu(TowerMenu*);
 
 	//void shoot(sf::Vector2f position);
 	void handlerEvent(const sf::Event&);
@@ -74,5 +77,7 @@ public:
 	void validateClickOnSpeaker(int, int);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update(sf::Vector2i&);
+
+	bool validateSale(TowerMenuButton*); //nuevo
 };
 

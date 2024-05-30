@@ -31,6 +31,7 @@ Spot Level::getSpotByNumber(int n) const
 		}
 	}
 }
+TowerMenu Level::getCurrentMenu() const { return *_currentMenu; }
 int Level::getGolden() { return _golden; }
 int Level::getEnergy() const { return _energy; }
 sf::Sprite Level::getUTN() { return _spriteUTN; }
@@ -62,14 +63,9 @@ void Level::setSpot(Spot* sp, int n) {
 		}
 	}
 }
-void Level::setCurrentSpot(Spot sp)
-{
-		TowerMenu tw = TowerMenu::getInstance();
-		tw.setCurrentSpot(sp);
-}
-//void Level::setCurrentSpot(Spot& sp){
-//	*_currentSpot = sp;
-//}
+void Level::setCurrentSpot(Spot sp) { _currentMenu->setCurrentSpot(sp); }
+void Level::setCurrentMenu(TowerMenu* menu) { _currentMenu = menu; }
+
 //void Level::shoot(sf::Vector2f position)
 //{
 //	//_bullets.push_back(Bullet(position, _hacker.getPosition()));
@@ -90,7 +86,7 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 		}
 	}
 	
-	if (_currentMenu->getIsVisible() && _currentMenu->getGlobalBounds().contains(transformedMousePos))
+	if (_currentMenu->getIsVisible() ) // al if le saque && _currentMenu->getGlobalBounds().contains(transformedMousePos) a ver si asi funcionaba el mouseHover para button
 	{
 		for (int i = 0; i < 4; i++) {
 			if (_currentMenu->getButtonByIndex(i)->getGlobalBounds().contains(transformedMousePos)) {
@@ -102,7 +98,7 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 		}
 	}
 
-	if (_spriteUTN.getGlobalBounds().contains(sf::Vector2f(mousePosition))) {
+	if (_spriteUTN.getGlobalBounds().contains(transformedMousePos)) {
 		std::cout << "FUNCIONA";
 	}
 }
@@ -110,14 +106,14 @@ void Level::validateClick(int mousex, int mousey)
 {
 	Manager& mg = Manager::getInstance();
 	Level level = mg.getLevel();
-	TowerMenu& currentMenu= TowerMenu::getInstance(); //si es el primer click el spot estara en cero
-	Spot currentSpot = currentMenu.getCurrentSpot(); //si es el primer click el spot estara en cero //currentSpot tiene el nro de spot ¿y el estado?
+	
+	Spot currentSpot = _currentMenu->getCurrentSpot(); //si es el primer click el spot estara en cero //currentSpot tiene el nro de spot ¿y el estado?
 	int clickSpot = validateClickOnSpot(mousex, mousey);
-	if (clickSpot != 0) { //si se clickeo spot
+	if (clickSpot != 0) { //si se clickeo spot, esto devuelve el nro de spot
 		currentSpot.setSpotNumber(clickSpot);
 		//currentSpot.setOccupied(level.getCurrentSpot().getIsOccupied());
 		currentSpot.setOccupied(level.getSpotByNumber(currentSpot.getSpotNumber()).getIsOccupied());
-		currentMenu.setCurrentSpot(currentSpot);  //si se clickeo en spot e estoy diciendo a menu q se asocie a ese spot, sino nose
+		_currentMenu->setCurrentSpot(currentSpot);  //si se clickeo en spot e estoy diciendo a menu q se asocie a ese spot, sino nose
 		manageClickOnSpot(mousex, mousey, currentSpot); //currentSpot tiene el nro de spot y el estado
 	}
 	else { //si NO se clickeo spot
@@ -137,8 +133,7 @@ void Level::validateClick(int mousex, int mousey)
 	validateClickOnSpeaker(mousex, mousey);
 }
 int Level::validateClickOnSpot(int mousex, int mousey) {
-	TowerMenu& currentMenu = TowerMenu::getInstance();
-	if (!currentMenu.getIsVisible()) {
+	if (!_currentMenu->getIsVisible()) {
 		for (auto& spot : _spots) {
 			if (spot->getGlobalBounds().contains(mousex, mousey)) {
 				return spot->getSpotNumber();
@@ -150,29 +145,28 @@ int Level::validateClickOnSpot(int mousex, int mousey) {
 void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 	Manager& mg = Manager::getInstance();
 	Level level = mg.getLevel();
-	TowerMenu& currentMenu = TowerMenu::getInstance();
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
 	currentSp.getSpotNumber();
-	currentMenu.setCurrentSpot(currentSp);
+	_currentMenu->setCurrentSpot(currentSp);
 	
 	//currentSp=level.getCurrentSpot();
-	currentMenu.setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
+	_currentMenu->setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
 	//validar si el spot esta ocupado o no:
 	if (currentSp.getIsOccupied()) { //spot ocupado
 		//se muestra OTRO menu
 		std::cout << "aca va el menu2";
 	}
 	else {  //spot libre
-		currentMenu.setCurrentSpot(currentSp); //guardo el nro de spot en el tower Menu;
+		_currentMenu->setCurrentSpot(currentSp); //guardo el nro de spot en el tower Menu;
 	//	if(currentMenu.getCurrentSpot().getSpotNumber()!=0) //no deberia necesitar esta linea... estoy probando si cambia en algo
-			currentSp.setCurrentTower(currentMenu.getCurrentSpot().getCurrentTower()); //me aseguro que el currentSpot esta asociado a la tower ahora
-		if (!currentMenu.getIsVisible()) { //se clickeo en un spot libre y el menu no era visible
+			currentSp.setCurrentTower(_currentMenu->getCurrentSpot().getCurrentTower()); //me aseguro que el currentSpot esta asociado a la tower ahora
+		if (!_currentMenu->getIsVisible()) { //se clickeo en un spot libre y el menu no era visible
 			sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
-			currentMenu.setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
-			currentMenu.show();
+			_currentMenu->setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
+			_currentMenu->show();
 		}
 		else { //se clickeo en un spot libre y el menu era visible
-			currentMenu.hide();
+			_currentMenu->hide();
 		}
 		/*level.setSpot(&currentSp, currentSp.getSpotNumber());*/
 	//	level.setCurrentMenu(currentMenu); //no me deja, si no hago esto la info del current menu se pierde
@@ -185,15 +179,14 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 	Manager& mg = Manager::getInstance(); //guardo la informacion del spot en el nivel
 	Level level = mg.getLevel();
-	TowerMenu& currentMenu = TowerMenu::getInstance();
-	Spot sp = currentMenu.getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
-	if (currentMenu.getIsVisible()) { //click fuera de spot y towerMenu estaba visible
-		currentMenu.validateClickOnButton(mousex, mousey, &sp); //sp regresa con estado y torre de spot
-		currentMenu.hide();
+	Spot sp = _currentMenu->getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
+	if (_currentMenu->getIsVisible()) { //click fuera de spot y towerMenu estaba visible
+		_currentMenu->validateClickOnButton(mousex, mousey, sp); //sp regresa con estado y torre de spot
+		_currentMenu->hide();
 	}
 	//sp.setSpot(sp.getSpotNumber(), sp.getIsOccupied());
 
-	currentMenu.setCurrentSpot(sp); //guardo la informacion del spot en el Menu
+	_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
 	
 	level.setSpot(&sp, sp.getSpotNumber());
 	mg.setLevel(level);
@@ -214,10 +207,23 @@ void Level::validateClickOnSpeaker(int mousex, int mousey) {
 	}
 }
 
+bool Level::validateSale(TowerMenuButton* button) {
+	int price = button->getTower().getPrice();
+	Manager& mg = Manager::getInstance();
+	Level level = mg.getInstance().getLevel();
+	std::cout << "Oro anterior: " << level.getGolden() << std::endl;
+	if (price <= level.getGolden()) {
+		level.setGolden(level.getGolden() - price);
+		std::cout << "se clickeo en: " << button->getTower().getName() << std::endl;
+		std::cout << "Oro actual: " << level.getGolden() << std::endl;
+		mg.setLevel(level);
+		return true;
+	}
+	return false;
+}
+
 void Level::update(sf::Vector2i& mousePosition) {
 	if (!getFinisheLevel()) {
-		TowerMenu tw= TowerMenu::getInstance();
-		_currentMenu = &tw;
 		if (_currentMenu->getIsVisible()) {
 			_currentMenu->update(mousePosition);
 		}
@@ -282,8 +288,8 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 			target.draw(hacker, states);
 		}
 	}
-	//target.draw(*_currentMenu, states);
-	/*if (_currentMenu->getIsVisible()) {
+	/*target.draw(*_currentMenu, states);
+	if (_currentMenu->getIsVisible()) {
 		target.draw(*_currentMenu, states);
 	}*/
 }

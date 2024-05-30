@@ -11,10 +11,8 @@ int TowerMenuButton::getBtnNumber() { return _btnNumber; }
 
 void TowerMenuButton::update(sf::Vector2i& mousePosition)
 {
-	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
-		getGlobalBounds().contains(transformedMousePos) ? setMouseHover(true) : setMouseHover(false);
-		/*TowerMenu& currentMenu = TowerMenu::getInstance();
-		currentMenu.setButton(*this, this->getBtnNumber());*/
+	//sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
+	//	getGlobalBounds().contains(transformedMousePos) ? setMouseHover(true) : setMouseHover(false);
 }
 void TowerMenuButton::setBtnNumber(int n) { _btnNumber = n; }
 void TowerMenuButton::setMouseHover(bool state) { _mouseHover = state; }

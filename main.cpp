@@ -11,7 +11,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(960, 640), "Programmers Vs Hackers");
 	window.setFramerateLimit(60);
 	int view = 1;
-	sf::Vector2i mousePosition;
+	sf::Vector2i mousePosition; //xq no es 2f? si despues lo terminamos pasando a 2f siempre...
 	while (window.isOpen())
 	{
 		mousePosition = sf::Mouse::getPosition(window);
