@@ -5,7 +5,7 @@ class Tower : public sf::Drawable, public sf::Transformable, public Collisionabl
 {
 protected:
 	//Propiedades estéticas
-	static sf::Texture _texture;
+	sf::Texture _texture;
 	sf::Sprite _sprite;
 	sf::CircleShape _visualRange;
 	std::string _name;

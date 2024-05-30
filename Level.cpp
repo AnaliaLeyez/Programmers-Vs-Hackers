@@ -258,15 +258,13 @@ void Level::update(sf::Vector2i& mousePosition) {
 void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	states.transform *= getTransform();
 	target.draw(*_map, states);
+	_dying ? target.draw(_UTNRed, states) : target.draw(_UTN, states);
 	target.draw(_ui, states);
 	for (Spot* spot : _spots) {  //luego de "comprar" torre, el spot trae basura. ahora con solo clickear ya se rompe
 		target.draw(*spot, states);
-		if (spot->getIsOccupied()) {
+		/*if (spot->getIsOccupied()) {
 			target.draw(spot->getCurrentTower(), states);
-		}
-	}
-	for (Tower tower : _activeTowers) {
-		target.draw(tower, states);
+		}*/
 	}
 	for (std::list<Hacker> wave : _waves) {
 		for (Hacker hacker : wave) {
@@ -277,5 +275,5 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 		target.draw(*_currentMenu, states);
 	}
 
-	_dying ? target.draw(_UTNRed, states) : target.draw(_UTN, states);
+	
 }
