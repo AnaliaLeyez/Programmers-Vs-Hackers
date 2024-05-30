@@ -262,9 +262,6 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	target.draw(_ui, states);
 	for (Spot* spot : _spots) {  //luego de "comprar" torre, el spot trae basura. ahora con solo clickear ya se rompe
 		target.draw(*spot, states);
-		/*if (spot->getIsOccupied()) {
-			target.draw(spot->getCurrentTower(), states);
-		}*/
 	}
 	for (std::list<Hacker> wave : _waves) {
 		for (Hacker hacker : wave) {
