@@ -12,7 +12,6 @@ protected:
 	bool _mouseHover;
 	int _btnNumber;
 public:
-	//void isMouseOver();
 	Tower getTower();
 	int getBtnNumber();
 	void setBtnNumber(int);

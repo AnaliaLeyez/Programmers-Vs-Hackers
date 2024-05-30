@@ -20,7 +20,7 @@ protected:
 	Map *_map;
 	int _mapArray[20][30];
 	std::vector<Spot*> _spots;
-	TowerMenu *_currentMenu;  //el nivel tiene UN solo menu mostrandose
+	TowerMenu *_currentMenu =new TowerMenu();  //el nivel tiene UN solo menu mostrandose
 
 	int _golden;
 	int _energy;
@@ -63,7 +63,7 @@ public:
 	void setSound(bool);
 	void setTowersAvailable(Tower);
 	void setActiveTowers(Tower);
-	void setSpot(Spot*, int);
+	void setSpot(Spot*, int); //setea la info de un spot en particular
 	void setCurrentSpot(Spot); //para que el currentMenu tenga su Spot asociado
 	void setCurrentMenu(TowerMenu*);
 
@@ -79,5 +79,6 @@ public:
 	void update(sf::Vector2i&);
 
 	bool validateSale(TowerMenuButton*); //nuevo
+	Level sell(Tower, Spot&);
 };
 

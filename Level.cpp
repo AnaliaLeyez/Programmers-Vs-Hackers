@@ -209,19 +209,32 @@ void Level::validateClickOnSpeaker(int mousex, int mousey) {
 
 bool Level::validateSale(TowerMenuButton* button) {
 	int price = button->getTower().getPrice();
-	Manager& mg = Manager::getInstance();
-	Level level = mg.getInstance().getLevel();
-	std::cout << "Oro anterior: " << level.getGolden() << std::endl;
-	if (price <= level.getGolden()) {
-		level.setGolden(level.getGolden() - price);
-		std::cout << "se clickeo en: " << button->getTower().getName() << std::endl;
-		std::cout << "Oro actual: " << level.getGolden() << std::endl;
-		mg.setLevel(level);
+	std::cout << "Oro anterior: " << getGolden() << std::endl;
+	if (price <= getGolden()) {
+		std::cout << "Venta Autorizada" << std::endl;
 		return true;
 	}
 	return false;
 }
+Level Level::sell(Tower tower, Spot& currentSpot) {
+	std::cout << "Vamos a comprar la torre... " << std::endl;
+	int price = tower.getPrice();
+	setGolden(getGolden() - price);
+	std::cout << "se compro: " << tower.getName() << std::endl;
+	std::cout << "Oro actual: " << getGolden() << std::endl;
+	//tower.setPosition(currentSpot.getPosition());
+	tower.setPosition(currentSpot.getInverseTransform().transformRect((currentSpot.getGlobalBounds())).getPosition());
+	currentSpot.setCurrentTower(tower);
+	currentSpot.setCurrentTower(tower);
+	currentSpot.setOccupied(true);
 
+
+	//mg.getInstance().getLevel().getSpotByNumber(spot->getSpotNumber()).setSpot(spot->getSpotNumber(), true);
+	//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
+	setActiveTowers(tower);
+	setSpot(&currentSpot, currentSpot.getSpotNumber());
+	return *this;
+}
 void Level::update(sf::Vector2i& mousePosition) {
 	if (!getFinisheLevel()) {
 		if (_currentMenu->getIsVisible()) {
@@ -288,8 +301,7 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 			target.draw(hacker, states);
 		}
 	}
-	/*target.draw(*_currentMenu, states);
 	if (_currentMenu->getIsVisible()) {
 		target.draw(*_currentMenu, states);
-	}*/
+	}
 }
