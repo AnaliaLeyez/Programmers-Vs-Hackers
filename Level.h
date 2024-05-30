@@ -35,7 +35,18 @@ protected:
 	sf::SoundBuffer _buffer;
 	sf::Sound _sound;
 	bool _musicPlaying;
-	std::list<std::list<Hacker>> _waves;
+
+	std::vector<Hacker*> _enemies;
+	int _currentWave;
+	//cantidad de oleadas
+	int _enemiesPerWave;
+	int _timeBetweenWaves;
+	int _timeBetweenEnemies;
+	sf::Clock _waveClock;
+	sf::Clock _enemyClock;
+
+
+	//std::list<std::list<Hacker>> _waves;
 	sf::Vector2f _hackerStartPosition;
 	std::list <Tower> _towersAvailable;
 	std::list <Tower> _activeTowers;
@@ -74,7 +85,8 @@ public:
 	void setCurrentSpot(Spot); //para que el currentMenu tenga su Spot asociado
 	void setCurrentMenu(TowerMenu*);
 
-	//void shoot(sf::Vector2f position);
+	void spawnWave();
+
 	void handlerEvent(const sf::Event&);
 	void mouseCheck(sf::Vector2i&);
 	void validateClick(int, int);

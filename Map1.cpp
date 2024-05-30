@@ -6,7 +6,7 @@
 #include "Map1.h"
 
 Map1::Map1() {
-	if (!_tileMap.loadFromFile("img/maps/mapa1.png")) {
+	if (!_tileMap.loadFromFile("img/maps/map1.png")) {
 		throw std::runtime_error("Error al cargar la textura del tilest");
 	}
 	for (int y = 0; y < 20; y++) {

@@ -33,20 +33,52 @@ for (int i = 0; i < 5; i++)
 	}
 }
 
-void setWaves(std::list<std::list<Hacker>> &waves) {
-	std::list<Hacker> hackers1;
-	hackers1.push_back(HackerTrainee());
-	hackers1.push_back(HackerTrainee());
-	hackers1.push_back(HackerTrainee());
-	waves.push_back(hackers1);
-	std::list<Hacker> hackers2;
-	hackers2.push_back(HackerTrainee());
-	hackers2.push_back(HackerTrainee());
-	waves.push_back(hackers2);
+//void setWaves(std::list<std::list<Hacker>> &waves) {
+//	std::list<Hacker> hackers1;
+//	hackers1.push_back(HackerTrainee());
+//	hackers1.push_back(HackerTrainee());
+//	hackers1.push_back(HackerTrainee());
+//	waves.push_back(hackers1);
+//	std::list<Hacker> hackers2;
+//	hackers2.push_back(HackerTrainee());
+//	hackers2.push_back(HackerTrainee());
+//	waves.push_back(hackers2);
+//}
+
+void Level::spawnWave() {
+	static int enemyIndex = 0;
+
+	// Verifico si todavía hay enemigos para agregar en esta oleada
+	if (enemyIndex < _enemiesPerWave) {
+		// Genero un nuevo enemigo
+		if (_enemyClock.getElapsedTime().asSeconds() >= _timeBetweenEnemies) {
+
+			HackerTrainee* hacker = new HackerTrainee();
+			_enemies.push_back(hacker);
+			//std::cout << "Wave " << _currentWave << ": Enemigo " << enemyIndex + 1 << " de " << _enemiesPerWave << std::endl;
+			_enemyClock.restart();
+			++enemyIndex;
+		}
+	}
+	else {
+		// Si ya agregue todos los enemigos de esta oleada
+		enemyIndex = 0; // Reinicio el índice para la próxima oleada
+		_enemiesPerWave += 10; // Incremento la cantidad de enemigos para la próxima oleada
+		++_currentWave; // Incremento el número de oleada
+		/*std::cout << "Comenzando Wave " << _currentWave << std::endl;*/
+		_waveClock.restart(); // Reinicio el temporizador de la oleada
+	}
 }
 
 Level1::Level1()
 {
+	_currentWave = 1;
+	_enemiesPerWave = 5;
+	_timeBetweenWaves = 10;
+	_timeBetweenEnemies = 2;
+	_waveClock.restart();
+	_enemyClock.restart();
+
 	_idLevel=1;
 	_finishedLevel = false;
 	_map = new Map1();
@@ -55,19 +87,19 @@ Level1::Level1()
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,1,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,2,1,1,1,5},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,6,0,0,0,0,0,0,0,0,6,0},
-{0,0,0,0,0,0,6,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,6,0,1,0,0,0,0,0,0,0,0,1,0,0,6,0,0,0,0,0,0,6,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,3,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
@@ -101,7 +133,7 @@ Level1::Level1()
 	_sound.setVolume(5);
 	_sound.play();
 	_musicPlaying = true;
-	setWaves(_waves);
+	/*setWaves(_waves);*/
 	_hackerStartPosition = { 960 / 32 * 9, 640 / 32 * 1 };
 	_towersAvailable.push_back(TowerBrian());
 	_towersAvailable.push_back(TowerKloster());

@@ -19,10 +19,7 @@ UI Level::getUI() const { return _ui; }
 Map Level::getMap() const { return *_map; }
 int(*Level::getMapArray())[30] { return _mapArray; }
 const std::vector<Spot*> Level::getSpots() const { return _spots; }
-Spot Level::getCurrentSpot() const
-{
-	return _currentMenu->getCurrentSpot();
-}
+Spot Level::getCurrentSpot() const { return _currentMenu->getCurrentSpot(); }
 Spot Level::getSpotByNumber(int n) const
 {
 	for (auto& spot : _spots) {
@@ -209,13 +206,30 @@ void Level::sell(Tower tower, Spot& currentSpot) {
 }
 void Level::update(sf::Vector2i& mousePosition) {
 	if (!getFinisheLevel()) {
+
+		if (_waveClock.getElapsedTime().asSeconds() >= _timeBetweenWaves && _currentWave <= 3) {  /// cambiar el 3 por cantidad de oleadas
+			spawnWave(); // Generar una nueva oleada de enemigos
+		}
+		// Actualizar los enemigos en el nivel
+		for (auto& hacker : _enemies) {
+
+			hacker->update(getMapArray());
+			//agregar más lógica para las colisiones
+		}
+
+		// Verificar si se ha completado el nivel
+		if (_currentWave > 3 && _enemies.empty()) {
+			setFinishedLevel(true);
+		}
+		
 		if (_currentMenu->getIsVisible()) {
 			_currentMenu->update(mousePosition);
 		}
 		mouseCheck(mousePosition);
+	}
+	
 
 	//_tower.update();
-
 	//for (Bullet& bullet : _bullets) {
 	//	bullet.update();
 	//}
@@ -232,7 +246,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 	//		++it;
 	//	}*/
 	//}
-
 		//ver como hacer esta comprobacion, asi como lo escribi sirve para vectores pero no para listas
 		//auto it = *_waveList->begin();
 		//if ( it != *_waveList->end()) {}
@@ -244,7 +257,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 		//	for (Hacker& hacker : wave.getWave2())
 		//		hacker.update(getMapArray());
 		//}
-	}
 	else {
 		if (getIdLevel() < 4) { //aca digo que solo puede llegar hasta el nivel 4
 			Manager::getInstance().setNumberLevel(getIdLevel() + 1); //cambia al siguiente nivel
@@ -263,14 +275,12 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	for (Spot* spot : _spots) {  //luego de "comprar" torre, el spot trae basura. ahora con solo clickear ya se rompe
 		target.draw(*spot, states);
 	}
-	for (std::list<Hacker> wave : _waves) {
-		for (Hacker hacker : wave) {
-			target.draw(hacker, states);
+	for (const auto& hacker : _enemies) {
+		if (hacker->getLife() > 0) {
+			target.draw(*hacker, states);
 		}
 	}
 	if (_currentMenu->getIsVisible()) {
 		target.draw(*_currentMenu, states);
 	}
-
-	
 }

@@ -8,7 +8,7 @@ HackerTrainee::HackerTrainee()
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
-	_sprite.setPosition(sf::Vector2f(300, 200)); //esto HAY QUE BORRARLO, lo puse solo para ver al hacker ahora
+	_sprite.setPosition(sf::Vector2f(960/32*9.5, 640 / 32 * 0.5));
 	_name = "Trainee";
 
 	_seniority = 0;
@@ -18,5 +18,5 @@ HackerTrainee::HackerTrainee()
 	_goldenDrop = 10;
 
 	//DESARROLLO
-	_position = { 3,3 };
+	_position = {  };
 }

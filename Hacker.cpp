@@ -58,5 +58,5 @@ void Hacker::moveHacker(int arr[][30])
 	default:
 		break;
 	}
-	move(_direction);
+	_sprite.move(_direction);
 }
