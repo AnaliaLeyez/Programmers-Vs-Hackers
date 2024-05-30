@@ -82,10 +82,10 @@ void TowerMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 		for (int i = 0; i < 4; i++) {
 			target.draw(*_buttons[i], states);
 		}
-		for (auto& button : _buttons)
+		/*for (auto& button : _buttons)
 		{
 			target.draw(*button, states);
-		}
+		}*/
 }
 
 sf::FloatRect TowerMenu::getGlobalBounds() const {

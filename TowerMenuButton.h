@@ -4,10 +4,10 @@ class TowerMenuButton : public sf::Drawable, public sf::Transformable
 {
 protected:
 	Tower* _tower;
-	//sf::Texture _texture;
-	static sf::Texture _texture, _textureHover;
+	sf::Texture _texture;
+	//static sf::Texture _texture, _textureHover;
 	sf::Sprite _sprite;
-	//sf::Texture _textureHover;
+	sf::Texture _textureHover;
 	sf::Sprite _spriteHover;
 	bool _mouseHover;
 	int _btnNumber;

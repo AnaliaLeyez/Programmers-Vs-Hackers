@@ -2,8 +2,8 @@
 #include "TowerMenu.h"
 #include "TowerMenuButton.h"
 
-sf::Texture TowerMenuButton::_texture;
-sf::Texture TowerMenuButton::_textureHover;
+//sf::Texture TowerMenuButton::_texture;
+//sf::Texture TowerMenuButton::_textureHover;
 
 Tower TowerMenuButton::getTower() { return *_tower; }
 
