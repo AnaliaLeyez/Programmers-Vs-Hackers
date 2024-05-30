@@ -64,23 +64,17 @@ void TowerMenu::mouseCheck(sf::Vector2i& mousePosition)
 	}
 }
 
-void TowerMenu::validateClickOnButton(int mousex, int mousey, Spot& spot) {
-	Manager& mg = Manager::getInstance();
-	Level level = mg.getLevel();
+TowerMenuButton TowerMenu::validateClickOnButton(int mousex, int mousey, Spot& spot) {
 	sf::Vector2f mousePos = sf::Vector2f(static_cast<float>(mousex), static_cast<float>(mousey));
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousePos);
-
 	for (int i = 0; i < 4; i++) {
 		if (_buttons[i]->getGlobalBounds().contains(transformedMousePos)) {
-			if (level.validateSale(_buttons[i])) {
-				level= level.sell(_buttons[i]->getTower(), _currentSpot);
-				mg.setLevel(level);
-			}
-			else {
-				std::cout << "Sos pobre: ";
-			}
+			return *_buttons[i];
 		}
 	}
+	TowerMenuButton btn;
+	btn.setBtnNumber(-1);
+	return btn;
 }
 
 void TowerMenu::update(sf::Vector2i& mousePosition) {

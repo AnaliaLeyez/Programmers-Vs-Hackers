@@ -86,6 +86,6 @@ public:
 	void update(sf::Vector2i&);
 
 	bool validateSale(TowerMenuButton*); //nuevo
-	Level sell(Tower, Spot&);
+	void sell(Tower, Spot&);
 };
 

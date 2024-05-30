@@ -150,10 +150,25 @@ Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 	Spot sp = _currentMenu->getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
 	if (_currentMenu->getIsVisible()) { //click fuera de spot y towerMenu estaba visible
 		_currentMenu->validateClickOnButton(mousex, mousey, sp); //sp regresa con estado y torre de spot
+		TowerMenuButton btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
+		if (btn.getBtnNumber() != -1) {  //se hizo click en un boton
+			if (validateSale(&btn)) { //veo si habilito venta
+				Tower tower = btn.getTower();
+				sell(tower, sp);
+				tower.setSpotNumber(sp.getSpotNumber());
+				//tower.setPosition(currentSpot.getPosition());
+				//tower.setPosition(currentSpot.getInverseTransform().transformRect((currentSpot.getGlobalBounds())).getPosition());
+				//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
+				setActiveTowers(tower);
+				setSpot(&sp, sp.getSpotNumber());
+			}
+			else {
+				std::cout << "Sos pobre: ";
+			}
+		}
 		_currentMenu->hide();
 	}
-	//sp.setSpot(sp.getSpotNumber(), sp.getIsOccupied());
-	sp = _currentMenu->getCurrentSpot();
+	//sp = _currentMenu->getCurrentSpot();
 	_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
 	setSpot(&sp, sp.getSpotNumber());
 	return sp;
@@ -182,23 +197,15 @@ bool Level::validateSale(TowerMenuButton* button) {
 	}
 	return false;
 }
-Level Level::sell(Tower tower, Spot& currentSpot) {
+void Level::sell(Tower tower, Spot& currentSpot) {
 	std::cout << "Vamos a comprar la torre... " << std::endl;
 	int price = tower.getPrice();
 	setGolden(getGolden() - price);
 	std::cout << "se compro: " << tower.getName() << std::endl;
 	std::cout << "Oro actual: " << getGolden() << std::endl;
-	//tower.setPosition(currentSpot.getPosition());
-	//tower.setPosition(currentSpot.getInverseTransform().transformRect((currentSpot.getGlobalBounds())).getPosition());
 	currentSpot.setCurrentTower(tower);
 	currentSpot.setCurrentTower(tower);
 	currentSpot.setOccupied(true);
-	//tower.setSpotNumber(currentSpot.getSpotNumber());
-	//tower.setSpotOfTower(currentSpot);
-	//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
-	setActiveTowers(tower);
-	setSpot(&currentSpot, currentSpot.getSpotNumber());
-	return *this;
 }
 void Level::update(sf::Vector2i& mousePosition) {
 	if (!getFinisheLevel()) {

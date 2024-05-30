@@ -21,7 +21,7 @@ public:
 	void hide();
 	void show();
 	void mouseCheck(sf::Vector2i&);
-	void validateClickOnButton(int, int, Spot&);
+	TowerMenuButton validateClickOnButton(int, int, Spot&);
 	void update(sf::Vector2i&);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 

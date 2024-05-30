@@ -90,7 +90,6 @@ Level1::Level1()
 	_UTNRed.setPosition(sf::Vector2f(850, 130));
 	_UTNRed.setOrigin(_UTNRed.getGlobalBounds().width / 2, _UTNRed.getGlobalBounds().height / 2);
 
-
 	setSpots(arr, _spots);
 	_golden = 500;
 	_energy = 500;

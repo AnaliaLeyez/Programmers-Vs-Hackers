@@ -19,6 +19,8 @@ protected:
 	int _speedAttack;
 	unsigned int _cooldown;
 	int _upgradesAmount;
+
+	int _spotNumber;
 public:
 	//Getters
 	std::string getName() const;
@@ -31,6 +33,7 @@ public:
 	int getRange() const;
 	int getSpeedAtack() const;
 	int getUpgradesAmount() const;
+	int getSpotNumber() const;
 
 	void setRange(int);
 	void setName(std::string);
@@ -39,6 +42,7 @@ public:
 	void setSalesValue(int);
 	void setDamage(int);
 	void setCooldown(int);
+	void setSpotNumber(int);
 	
 	//Comportamiento
 	void verificarEnemigo(HackerTrainee&);
