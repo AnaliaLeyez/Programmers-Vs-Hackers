@@ -15,8 +15,6 @@ protected:
 	int _idLevel;
 	bool _finishedLevel;
 	UI _ui;
-	//sf::Texture _textureUTN;
-	//sf::Sprite _spriteUTN;
 	//NUEVO
 	sf::Texture _textureUTN;
 	sf::RectangleShape _UTN;
@@ -45,8 +43,6 @@ protected:
 	sf::Clock _waveClock;
 	sf::Clock _enemyClock;
 
-
-	//std::list<std::list<Hacker>> _waves;
 	sf::Vector2f _hackerStartPosition;
 	std::list <Tower> _towersAvailable;
 	std::list <Tower> _activeTowers;

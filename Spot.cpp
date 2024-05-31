@@ -62,8 +62,7 @@ void Spot::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	}
 	else {
 		_mouseHover ? target.draw(_spriteB, states) : target.draw(_spriteA, states);
-	}
-	
+	}	
 }
 
 

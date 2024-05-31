@@ -85,7 +85,7 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 	}
 	if (_currentMenu->getIsVisible() && _currentMenu->getGlobalBounds().contains(transformedMousePos))
 	{
-		_currentMenu->mouseCheck(mousePosition);
+		_currentMenu->mouseCheck(mousePosition);  //OJOOO ESTOY CHEQUEANDO DOS VECES EL MOUSE
 		_dying = true; //ESTO NO VA ACA, ES SOLO PARA VER QUE EL SWITCH DEL SPRITE DE UTN FUNCIONA, PERO ESO NO DEPENDERA DEL MOUSE
 	}
 	else {
@@ -98,7 +98,6 @@ void Level::validateClick(int mousex, int mousey)
 	int clickSpot = validateClickOnSpot(mousex, mousey);
 	if (clickSpot != 0) { //si se clickeo spot, esto devuelve el nro de spot
 		currentSpot.setSpotNumber(clickSpot);
-		//currentSpot.setOccupied(level.getCurrentSpot().getIsOccupied());
 		currentSpot.setOccupied(getSpotByNumber(currentSpot.getSpotNumber()).getIsOccupied());
 		_currentMenu->setCurrentSpot(currentSpot);  //si se clickeo en spot e estoy diciendo a menu q se asocie a ese spot, sino nose
 		manageClickOnSpot(mousex, mousey, currentSpot); //currentSpot tiene el nro de spot y el estado
@@ -107,6 +106,7 @@ void Level::validateClick(int mousex, int mousey)
 		currentSpot = manageOutOfSpotClick(mousex, mousey);
 	}
 	setSpot(&currentSpot, currentSpot.getSpotNumber());
+	
 	validateClickOnSpeaker(mousex, mousey);
 }
 int Level::validateClickOnSpot(int mousex, int mousey) {
@@ -121,7 +121,7 @@ int Level::validateClickOnSpot(int mousex, int mousey) {
 }
 void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
-	currentSp.getSpotNumber();
+	//currentSp.getSpotNumber();
 	_currentMenu->setCurrentSpot(currentSp);
 	_currentMenu->setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
 	//validar si el spot esta ocupado o no:
@@ -146,7 +146,7 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 	Spot sp = _currentMenu->getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
 	if (_currentMenu->getIsVisible()) { //click fuera de spot y towerMenu estaba visible
-		_currentMenu->validateClickOnButton(mousex, mousey, sp); //sp regresa con estado y torre de spot
+		//_currentMenu->validateClickOnButton(mousex, mousey, sp); //sp regresa con estado y torre de spot
 		TowerMenuButton btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
 		if (btn.getBtnNumber() != -1) {  //se hizo click en un boton
 			if (validateSale(&btn)) { //veo si habilito venta
@@ -201,7 +201,6 @@ void Level::sell(Tower tower, Spot& currentSpot) {
 	std::cout << "se compro: " << tower.getName() << std::endl;
 	std::cout << "Oro actual: " << getGolden() << std::endl;
 	currentSpot.setCurrentTower(tower);
-	currentSpot.setCurrentTower(tower);
 	currentSpot.setOccupied(true);
 }
 void Level::update(sf::Vector2i& mousePosition) {
@@ -227,7 +226,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 		}
 		mouseCheck(mousePosition);
 	}
-	
 
 	//_tower.update();
 	//for (Bullet& bullet : _bullets) {
