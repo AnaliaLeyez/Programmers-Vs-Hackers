@@ -61,6 +61,10 @@ UI::UI() {
 	}
 }
 sf::RectangleShape UI::getSpeaker() const { return _speaker; }
+void UI::setText(int i, std::string text)
+{
+	_text[i].setString(text);
+}
 sf::Texture UI::getTextureSpeaker() const { return _textureSpeaker; }
 void UI::setTextureSpeaker(std::string path) {
 	if (!_textureSpeaker.loadFromFile(path)) {
