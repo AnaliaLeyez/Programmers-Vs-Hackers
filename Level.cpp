@@ -94,15 +94,17 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 }
 void Level::validateClick(int mousex, int mousey)
 {
-	Spot currentSpot = _currentMenu->getCurrentSpot(); //si es el primer click el spot estara en cero //currentSpot tiene el nro de spot ¿y el estado?
+	Spot currentSpot; //nuevo
 	int clickSpot = validateClickOnSpot(mousex, mousey);
 	if (clickSpot != 0) { //si se clickeo spot, esto devuelve el nro de spot
+		currentSpot = getSpotByNumber(clickSpot);
 		currentSpot.setSpotNumber(clickSpot);
 		currentSpot.setOccupied(getSpotByNumber(currentSpot.getSpotNumber()).getIsOccupied());
 		_currentMenu->setCurrentSpot(currentSpot);  //si se clickeo en spot e estoy diciendo a menu q se asocie a ese spot, sino nose
 		manageClickOnSpot(mousex, mousey, currentSpot); //currentSpot tiene el nro de spot y el estado
 	}
 	else { //si NO se clickeo spot
+		currentSpot = _currentMenu->getCurrentSpot();
 		currentSpot = manageOutOfSpotClick(mousex, mousey);
 	}
 	setSpot(&currentSpot, currentSpot.getSpotNumber());
@@ -121,7 +123,6 @@ int Level::validateClickOnSpot(int mousex, int mousey) {
 }
 void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
-	//currentSp.getSpotNumber();
 	_currentMenu->setCurrentSpot(currentSp);
 	_currentMenu->setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
 	//validar si el spot esta ocupado o no:
@@ -146,7 +147,6 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 	Spot sp = _currentMenu->getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
 	if (_currentMenu->getIsVisible()) { //click fuera de spot y towerMenu estaba visible
-		//_currentMenu->validateClickOnButton(mousex, mousey, sp); //sp regresa con estado y torre de spot
 		TowerMenuButton btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
 		if (btn.getBtnNumber() != -1) {  //se hizo click en un boton
 			if (validateSale(&btn)) { //veo si habilito venta
@@ -165,7 +165,6 @@ Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 		}
 		_currentMenu->hide();
 	}
-	//sp = _currentMenu->getCurrentSpot();
 	_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
 	setSpot(&sp, sp.getSpotNumber());
 	return sp;
