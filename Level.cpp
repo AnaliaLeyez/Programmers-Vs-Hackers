@@ -214,6 +214,7 @@ void Level::update(sf::Vector2i& mousePosition) {
 		for (auto& hacker : _enemies) {
 
 			hacker->update(getMapArray());
+			std::cout<< hacker->getPosition().x << " " << hacker->getPosition().y <<std::endl;
 			//agregar más lógica para las colisiones
 		}
 

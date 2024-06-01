@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>F:\UTN\02 - Segundo Cuatrimestre\Laboratorio 2\PRUEBAS Y EXPERIMENTOS SFML\PruebaSFML\SFML\include;C:\Program Files\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include;$(IncludePath)</IncludePath>
+    <IncludePath>F:\UTN\02 - Segundo Cuatrimestre\SFML\include;C:\Program Files\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include;$(IncludePath)</IncludePath>
     <LibraryPath>F:\UTN\02 - Segundo Cuatrimestre\SFML\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
