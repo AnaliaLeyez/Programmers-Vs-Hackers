@@ -49,13 +49,13 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 	//validar si el spot esta ocupado o no:
 	if (currentSp.getIsOccupied()) { //spot ocupado
 		std::cout << "aca va el menu2";
-
+		_currentMenu2->setPosition(currentSp.getPosition());
+		_currentMenu2->show();
 	}
 	else {  //spot libre
 		_currentMenu->setCurrentSpot(currentSp); //guardo el nro de spot en el tower Menu;
 		currentSp.setCurrentTower(_currentMenu->getCurrentSpot().getCurrentTower()); //me aseguro que el currentSpot esta asociado a la tower ahora
 		if (!_currentMenu->getIsVisible()) { //se clickeo en un spot libre y el menu no era visible
-			sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
 			_currentMenu->setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
 			_currentMenu->show();
 		}

@@ -6,6 +6,7 @@
 #include "UI.h"
 #include "Map.h"
 #include "TowerMenu.h"
+#include "TowerMenu2.h"
 #include "Tower.h"
 #include "Spot.h"
 
@@ -15,8 +16,6 @@ protected:
 	int _idLevel;
 	bool _finishedLevel;
 	UI _ui;
-	//sf::Texture _textureUTN;
-	//sf::Sprite _spriteUTN;
 	//NUEVO
 	sf::Texture _textureUTN;
 	sf::RectangleShape _UTN;
@@ -29,7 +28,7 @@ protected:
 	int _mapArray[20][30];
 	std::vector<Spot*> _spots;
 	TowerMenu *_currentMenu =new TowerMenu();  //el nivel tiene UN solo menu mostrandose
-
+	TowerMenu2* _currentMenu2 = new TowerMenu2();
 	int _golden;
 	int _energy;
 	sf::SoundBuffer _buffer;

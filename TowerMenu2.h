@@ -1,22 +1,21 @@
 #pragma once
-#include "Spot.h"
-#include "TowerMenuButton.h"
-class TowerMenu : public sf::Drawable, public sf::Transformable
+#include "Tower.h"
+class TowerMenu2 : public sf::Drawable, public sf::Transformable
 {
 protected:
 	sf::Sprite _sprite;
 	sf::Texture _texture;
 	bool _isVisible;
-	TowerMenuButton* _buttons[4];
+	TowerMenuButton* _buttons[2];
 	Spot _currentSpot;  //el spot por el cual se muestra el menu en ese momento
 public:
-	TowerMenu();
+	TowerMenu2();
 	bool getIsVisible();
 	const TowerMenuButton* getButtons() const;
 	TowerMenuButton* getButtonByIndex(int i) const;
 	Spot getCurrentSpot() const;
 	void setCurrentSpot(Spot);
-	void setButton(bool, int);
+	void setButton(bool states, int i);
 	void hide();
 	void show();
 	void mouseCheck(sf::Vector2i&);
@@ -26,3 +25,4 @@ public:
 
 	sf::FloatRect getGlobalBounds() const;
 };
+

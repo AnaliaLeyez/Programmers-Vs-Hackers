@@ -190,5 +190,7 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	}
 	if (_currentMenu->getIsVisible()) {
 		target.draw(*_currentMenu, states);
+	}else if (_currentMenu2->getIsVisible()) {
+		target.draw(*_currentMenu2, states);
 	}
 }

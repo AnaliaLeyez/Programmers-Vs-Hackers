@@ -27,36 +27,51 @@ void TowerMenuButton::setPrice()
 		throw std::runtime_error("Error al cargar img Oro");
 	}
 	_spriteBgPrice.setTexture(_textureBgPrice);
-	_spriteBgPrice.setPosition(-10, 40);
+	_spriteBgPrice.setTexture(_textureBgPrice);
+	_spriteBgPrice.setOrigin(_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().top + _sprite.getGlobalBounds().height / 2);
+	_spriteBgPrice.setPosition(0, -50);
 	
 	if (!_font.loadFromFile("fuentes/TowerPrice.ttf")) {
-		throw std::runtime_error("Error al cargar la fuente del Menu \n");
+		throw std::runtime_error("Error al cargar la fuente del Price Menu \n");
 	}
 	_price.setFont(_font);
 	_price.setCharacterSize(30);
-	_price.setPosition(-10, 40);
+	_price.setOrigin(_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().top + _sprite.getGlobalBounds().height / 2);
+	_price.setPosition(5, -54);
 	_price.setFillColor(sf::Color(255, 255, 255));
 	_price.setString("$" + std::to_string(getPrice()));
 }
 void TowerMenuButton::setInfo()
 {
 	if (!_textureBgInfo.loadFromFile("img/menuContextual/priceBg.png")) {
-		throw std::runtime_error("Error al cargar img Oro");
+		throw std::runtime_error("Error al cargar Background de Info/precio");
 	}
 	_spriteBgInfo.setTexture(_textureBgInfo);
-	_spriteBgInfo.setPosition(-10, 70);
+	_spriteBgInfo.setOrigin(_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().top + _sprite.getGlobalBounds().height / 2);
+	_spriteBgInfo.setPosition(-10, 80);
 	_spriteBgInfo.setScale(1.5, 1.5);
 
+	if (!_textureSword.loadFromFile("img/menuContextual/sword.png")) {
+		throw std::runtime_error("Error al cargar img Oro");
+	}
+	_spriteSword.setTexture(_textureSword);
+	_spriteSword.setOrigin(_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().top + _sprite.getGlobalBounds().height / 2);
+	_spriteSword.setPosition(-25, 75);
+	_spriteSword.setScale(0.4, 0.4);
+	
+
 	if (!_font.loadFromFile("fuentes/TowerPrice.ttf")) {
-		throw std::runtime_error("Error al cargar la fuente del Menu \n");
+		throw std::runtime_error("Error al cargar la fuente del Info Menu \n");
 	}
 
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 1; i++) {
 		_info[i].setFont(_font);
-		_info[i].setCharacterSize(25);
-		_info[i].setPosition(-10, 70);
+		_info[i].setCharacterSize(30);
+		_info[i].setOrigin(_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().top + _sprite.getGlobalBounds().height / 2);
+		_info[i].setPosition(15, 70);
 		_info[i].setFillColor(sf::Color(255, 255, 255));
-		_info[i].setString("Damage: \n" + std::to_string(getDamage()));
+		_info[i].setString(std::to_string(getDamage()));
+		
 	}
 
 }
@@ -80,7 +95,8 @@ void TowerMenuButton::draw(sf::RenderTarget& target, sf::RenderStates states) co
 	if (_mouseHover) {
 		target.draw(_spriteBgInfo, states);
 		target.draw(_spriteHover, states);
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 1; i++) {
+			target.draw(_spriteSword, states);
 			target.draw(_info[i], states);
 		}
 	}

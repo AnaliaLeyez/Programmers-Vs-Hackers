@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream> //una vez que todo funcione, esta libreria se va
-#include "Manager.h"
+#include "Manager.h" //revisar que includes son necesarios, solo los copie del towerMenu
 #include "Level.h"
 #include "Spot.h"
 #include "TowerMenuButton.h"
@@ -9,9 +9,9 @@
 #include "ButtonMaxiSar.h"
 #include "ButtonMaxiWenner.h"
 #include "TowerMenu.h"
+#include "TowerMenu2.h"
 
-
-TowerMenu::TowerMenu()
+TowerMenu2::TowerMenu2()
 {
 	_isVisible = false;
 	if (!_texture.loadFromFile("img/menuContextual/tower_menu_circle.png")) {
@@ -22,17 +22,13 @@ TowerMenu::TowerMenu()
 	_sprite.setScale(0.4f, 0.4f);
 
 	//Buttons initialization
-	_buttons[0] = new ButtonBrian();
-	_buttons[1] = new ButtonMaxiSar();
-	_buttons[2] = new ButtonMaxiWenner();
-	_buttons[3] = new ButtonKloster();
+	_buttons[0] = new ButtonBrian(); //aca va el boton de upgrade (que tiene img de espada)
+	_buttons[1] = new ButtonMaxiSar(); //aca va el boton de venta (que tiene img del cerdito)
 
 	_buttons[0]->setPosition(0, -100);
-	_buttons[1]->setPosition(85, 0);
-	_buttons[2]->setPosition(0, 85);
-	_buttons[3]->setPosition(-100, 0);
+	_buttons[1]->setPosition(0, 85);
 
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 2; i++) {
 		_buttons[i]->setBtnNumber(i);
 		_buttons[i]->setPrice();
 	}
@@ -41,18 +37,17 @@ TowerMenu::TowerMenu()
 	Spot sp;
 	setCurrentSpot(sp);
 }
+bool TowerMenu2::getIsVisible() { return _isVisible; }
+const TowerMenuButton* TowerMenu2::getButtons() const { return *_buttons; }
+TowerMenuButton* TowerMenu2::getButtonByIndex(int i) const { return _buttons[i]; }
+Spot TowerMenu2::getCurrentSpot() const { return _currentSpot; }
+void TowerMenu2::setCurrentSpot(Spot sp) { _currentSpot = sp; }
+void TowerMenu2::setButton(bool states, int i) { _buttons[i]->setMouseHover(states); }
 
-bool TowerMenu::getIsVisible(){	return _isVisible; }
-const TowerMenuButton* TowerMenu::getButtons() const { return *_buttons; }
-TowerMenuButton* TowerMenu::getButtonByIndex(int i) const { return _buttons[i]; }
-Spot TowerMenu::getCurrentSpot() const { return _currentSpot; }
-void TowerMenu::setCurrentSpot(Spot sp) { _currentSpot = sp; }
-void TowerMenu::setButton(bool states, int i) { _buttons[i]->setMouseHover(states); }
+void TowerMenu2::hide() { _isVisible = false; }
+void TowerMenu2::show() { _isVisible = true; }
 
-void TowerMenu::hide() { _isVisible = false; }
-void TowerMenu::show() { _isVisible = true; }
-
-void TowerMenu::mouseCheck(sf::Vector2i& mousePosition)
+void TowerMenu2::mouseCheck(sf::Vector2i& mousePosition)
 {
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
 	for (auto& button : _buttons)
@@ -68,7 +63,7 @@ void TowerMenu::mouseCheck(sf::Vector2i& mousePosition)
 	}
 }
 
-TowerMenuButton TowerMenu::validateClickOnButton(int mousex, int mousey, Spot& spot) {
+TowerMenuButton TowerMenu2::validateClickOnButton(int mousex, int mousey, Spot& spot) {
 	sf::Vector2f mousePos = sf::Vector2f(static_cast<float>(mousex), static_cast<float>(mousey));
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousePos);
 	for (int i = 0; i < 4; i++) {
@@ -81,22 +76,22 @@ TowerMenuButton TowerMenu::validateClickOnButton(int mousex, int mousey, Spot& s
 	return btn;
 }
 
-void TowerMenu::update(sf::Vector2i& mousePosition) {
+void TowerMenu2::update(sf::Vector2i& mousePosition) {
 	if (getIsVisible()) {
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 2; i++) {
 			_buttons[i]->update(mousePosition);
 		}
 	}
 }
-void TowerMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void TowerMenu2::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
 	target.draw(_sprite, states);
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 2; i++) {
 		target.draw(*_buttons[i], states);
 	}
 }
 
-sf::FloatRect TowerMenu::getGlobalBounds() const {
+sf::FloatRect TowerMenu2::getGlobalBounds() const {
 	return getTransform().transformRect(_sprite.getGlobalBounds());
 }

@@ -17,6 +17,8 @@ protected:
 	sf::Text _info[4];
 	sf::Texture _textureBgInfo;
 	sf::Sprite _spriteBgInfo;
+	sf::Texture _textureSword;
+	sf::Sprite _spriteSword;
 public:
 	Tower getTower();
 	int getPrice();
