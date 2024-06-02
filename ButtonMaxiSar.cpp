@@ -17,6 +17,6 @@ ButtonMaxiSar::ButtonMaxiSar()
 	setSpriteHover();
 	_tower = new TowerSarF();
 	setPrice();
-	_price.setString("$" + std::to_string(getPrice()));
+	setInfo();
 }
 

@@ -17,5 +17,5 @@ ButtonKloster::ButtonKloster()
 	setSpriteHover();
 	_tower = new TowerKloster();
 	setPrice();
-	_price.setString("$" + std::to_string(getPrice()));
+	setInfo();
 }

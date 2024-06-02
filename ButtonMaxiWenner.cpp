@@ -16,5 +16,5 @@ ButtonMaxiWenner::ButtonMaxiWenner()
 	setSpriteHover();
 	_tower = new TowerWenner();
 	setPrice();
-	_price.setString("$" + std::to_string(getPrice()));
+	setInfo();
 }

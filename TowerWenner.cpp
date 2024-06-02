@@ -21,7 +21,7 @@ TowerWenner::TowerWenner()
 	_price = 150;
 	_priceUpgrade = 9;
 	_salesValue = 5;
-	_damage = 10;
+	_damage = 8;
 	_range = 9;
 	_speedAttack = 3;
 	_upgradesAmount = 2;

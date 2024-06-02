@@ -21,7 +21,7 @@ TowerKloster::TowerKloster()
 	_price = 100;
 	_priceUpgrade = 9;
 	_salesValue = 5;
-	_damage = 10;
+	_damage = 7;
 	_range = 9;
 	_speedAttack = 3;
 	_upgradesAmount = 2;

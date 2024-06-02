@@ -14,13 +14,18 @@ protected:
 	sf::Text _price;
 	sf::Texture _textureBgPrice;
 	sf::Sprite _spriteBgPrice;
+	sf::Text _info[4];
+	sf::Texture _textureBgInfo;
+	sf::Sprite _spriteBgInfo;
 public:
 	Tower getTower();
 	int getPrice();
+	int getDamage();
 	int getBtnNumber();
 
 	void setBtnNumber(int);
 	void setPrice();
+	void setInfo();
 	void setMouseHover(bool);
 	void setSpriteHover();
 

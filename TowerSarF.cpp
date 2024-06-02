@@ -23,7 +23,7 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 	_price = 180;
 	_priceUpgrade = 9;
 	_salesValue = 5;
-	_damage = 10;
+	_damage = 3;
 	_range = 9;
 	_speedAttack = 3;
 	_upgradesAmount = 2;

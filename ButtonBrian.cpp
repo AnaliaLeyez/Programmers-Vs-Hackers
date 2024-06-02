@@ -17,5 +17,5 @@ ButtonBrian::ButtonBrian()
 	_tower = new TowerBrian();
 	setSpriteHover();
 	setPrice();
-	_price.setString("$" + std::to_string(getPrice()));
+	setInfo();
 }
