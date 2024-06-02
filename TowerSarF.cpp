@@ -20,7 +20,7 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 	_visualRange.setFillColor(sf::Color(0, 255, 0, 120));
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
-	_price = 10;
+	_price = 180;
 	_priceUpgrade = 9;
 	_salesValue = 5;
 	_damage = 10;

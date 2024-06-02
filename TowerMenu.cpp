@@ -34,7 +34,10 @@ TowerMenu::TowerMenu()
 
 	for (int i = 0; i < 4; i++) {
 		_buttons[i]->setBtnNumber(i);
+		_buttons[i]->setPrice();
 	}
+
+
 	Spot sp;
 	setCurrentSpot(sp);
 }

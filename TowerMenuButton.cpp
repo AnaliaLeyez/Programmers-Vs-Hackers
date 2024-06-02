@@ -5,12 +5,33 @@
 
 Tower TowerMenuButton::getTower() { return *_tower; }
 
+int TowerMenuButton::getPrice()
+{
+	return _tower->getPrice();
+}
+
 int TowerMenuButton::getBtnNumber() { return _btnNumber; }
 
 void TowerMenuButton::update(sf::Vector2i& mousePosition)
 {
 }
 void TowerMenuButton::setBtnNumber(int n) { _btnNumber = n; }
+void TowerMenuButton::setPrice()
+{
+	if (!_textureBgPrice.loadFromFile("img/menuContextual/priceBg.png")) {
+		throw std::runtime_error("Error al cargar img Oro");
+	}
+	_spriteBgPrice.setTexture(_textureBgPrice);
+	_spriteBgPrice.setPosition(-10, 40);
+	
+	if (!_font.loadFromFile("fuentes/TowerPrice.ttf")) {
+		throw std::runtime_error("Error al cargar la fuente del Menu \n");
+	}
+	_price.setFont(_font);
+	_price.setCharacterSize(30);
+	_price.setPosition(-10, 40);
+	_price.setFillColor(sf::Color(255, 255, 255));
+}
 void TowerMenuButton::setMouseHover(bool state) { _mouseHover = state; }
 void TowerMenuButton::setSpriteHover()
 {
@@ -25,10 +46,13 @@ void TowerMenuButton::setSpriteHover()
 void TowerMenuButton::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
+	target.draw(_spriteBgPrice, states);
 	target.draw(_sprite, states);
 	if (_mouseHover) {
 		target.draw(_spriteHover, states);
 	}
+	
+	target.draw(_price, states);
 }
 
 sf::FloatRect TowerMenuButton::getGlobalBounds() const {

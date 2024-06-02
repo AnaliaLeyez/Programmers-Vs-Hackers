@@ -39,12 +39,12 @@ UI::UI() {
 		case 0:
 			posX = 590;
 			posY = 20;
-			texto = "500";
+			texto = "500"; //no debe ir, cambia segun cada nivel
 			break;
 		case 1:
 			posX = 400;
 			posY = 20;
-			texto = "600";
+			texto = "600"; //no debe ir, cambia segun cada nivel
 			break;
 		case 2:
 			posX = 800;
@@ -55,7 +55,7 @@ UI::UI() {
 			break;
 		}
 		_text[i].setPosition(posX, posY);
-		_text[i].setString(texto);
+		_text[i].setString(texto);  //no debe ir, cambia segun cada nivel
 		//text[i].setOrigin(text[i].getGlobalBounds().getPosition().x / 2, text[i].getGlobalBounds().height / 2);
 		_text[i].setFillColor(sf::Color(255, 255, 255));
 	}

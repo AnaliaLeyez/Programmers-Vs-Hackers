@@ -33,18 +33,6 @@ for (int i = 0; i < 5; i++)
 	}
 }
 
-//void setWaves(std::list<std::list<Hacker>> &waves) {
-//	std::list<Hacker> hackers1;
-//	hackers1.push_back(HackerTrainee());
-//	hackers1.push_back(HackerTrainee());
-//	hackers1.push_back(HackerTrainee());
-//	waves.push_back(hackers1);
-//	std::list<Hacker> hackers2;
-//	hackers2.push_back(HackerTrainee());
-//	hackers2.push_back(HackerTrainee());
-//	waves.push_back(hackers2);
-//}
-
 void Level::spawnWave() {
 	static int enemyIndex = 0;
 
@@ -125,6 +113,7 @@ Level1::Level1()
 	setSpots(arr, _spots);
 	_golden = 500;
 	_energy = 500;
+	_ui.setText(0, std::to_string(getGolden()));
 	setMapArray(arr);
 	if (!_buffer.loadFromFile("music/nivel1.wav")) {
 		throw std::runtime_error("Error al cargar musica nivel 1");

@@ -16,4 +16,6 @@ ButtonBrian::ButtonBrian()
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 	_tower = new TowerBrian();
 	setSpriteHover();
+	setPrice();
+	_price.setString("$" + std::to_string(getPrice()));
 }
