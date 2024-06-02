@@ -141,9 +141,11 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletA.cpp" />
     <ClCompile Include="ButtonBrian.cpp" />
+    <ClCompile Include="ButtonCashSale.cpp" />
     <ClCompile Include="ButtonKloster.cpp" />
     <ClCompile Include="ButtonMaxiSar.cpp" />
     <ClCompile Include="ButtonMaxiWenner.cpp" />
+    <ClCompile Include="ButtonUpgrade.cpp" />
     <ClCompile Include="Collisionable.cpp" />
     <ClCompile Include="LevelClicks.cpp" />
     <ClCompile Include="Manager.cpp" />
@@ -171,9 +173,11 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletA.h" />
     <ClInclude Include="ButtonBrian.h" />
+    <ClInclude Include="ButtonCashSale.h" />
     <ClInclude Include="ButtonKloster.h" />
     <ClInclude Include="ButtonMaxiSar.h" />
     <ClInclude Include="ButtonMaxiWenner.h" />
+    <ClInclude Include="ButtonUpgrade.h" />
     <ClInclude Include="Collisionable.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Hacker.h" />

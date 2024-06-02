@@ -4,10 +4,8 @@
 #include "Level.h"
 #include "Spot.h"
 #include "TowerMenuButton.h"
-#include "ButtonBrian.h"
-#include "ButtonKloster.h"
-#include "ButtonMaxiSar.h"
-#include "ButtonMaxiWenner.h"
+#include "ButtonCashSale.h"
+#include "ButtonUpgrade.h"
 #include "TowerMenu.h"
 #include "TowerMenu2.h"
 
@@ -22,17 +20,12 @@ TowerMenu2::TowerMenu2()
 	_sprite.setScale(0.4f, 0.4f);
 
 	//Buttons initialization
-	_buttons[0] = new ButtonBrian(); //aca va el boton de upgrade (que tiene img de espada)
-	_buttons[1] = new ButtonMaxiSar(); //aca va el boton de venta (que tiene img del cerdito)
+	_buttons[0] = new ButtonUpgrade(); //aca va el boton de upgrade (que tiene img de espada)
+	_buttons[1] = new ButtonCashSale();  //con esta linea se rompe
 
 	_buttons[0]->setPosition(0, -100);
 	_buttons[1]->setPosition(0, 85);
-
-	for (int i = 0; i < 2; i++) {
-		_buttons[i]->setBtnNumber(i);
-		_buttons[i]->setPrice();
-	}
-
+	//_buttons[0]->setPrice();
 
 	Spot sp;
 	setCurrentSpot(sp);
