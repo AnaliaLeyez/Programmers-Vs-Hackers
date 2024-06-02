@@ -86,6 +86,7 @@ Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 			}
 		}
 		_currentMenu->hide();
+		_currentMenu2->hide();
 	}
 	_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
 	setSpot(&sp, sp.getSpotNumber());
