@@ -87,6 +87,9 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 	{
 		_currentMenu->mouseCheck(mousePosition);
 		_dying = true; //ESTO NO VA ACA, ES SOLO PARA VER QUE EL SWITCH DEL SPRITE DE UTN FUNCIONA, PERO ESO NO DEPENDERA DEL MOUSE
+	}else if (_currentMenu2->getIsVisible() && _currentMenu2->getGlobalBounds().contains(transformedMousePos))
+	{
+		_currentMenu2->mouseCheck(mousePosition);
 	}
 	else {
 		_dying = false; //ESTO NO VA ACA, ES SOLO PARA VER QUE EL SWITCH DEL SPRITE DE UTN FUNCIONA, PERO ESO NO DEPENDERA DEL MOUSE
