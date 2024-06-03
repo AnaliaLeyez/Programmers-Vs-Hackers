@@ -61,7 +61,22 @@ void Level::setSpot(Spot* sp, int n) {
 }
 void Level::setCurrentSpot(Spot sp) { _currentMenu->setCurrentSpot(sp); }
 void Level::setCurrentMenu(TowerMenu* menu) { _currentMenu = menu; }
+void Level::setNoCoinsText()
+{
+	if (!_font.loadFromFile("fuentes/TowerPrice.ttf")) {
+		throw std::runtime_error("Error al cargar la fuente del Price Menu \n");
+	}
+	_NoCoins.setFont(_font);
+	_NoCoins.setCharacterSize(70);
+	_NoCoins.setOrigin(_NoCoins.getGlobalBounds().getPosition().x / 2, _NoCoins.getGlobalBounds().height / 2);
+	_NoCoins.setPosition(300, 250);
+	_NoCoins.setFillColor(sf::Color(255, 0, 0));
+	_NoCoins.setString("SALDO INSUFICIENTE");
 
+	_noCoinsClock.restart();
+	_displayTimeNoCoins = sf::seconds(3);
+	_flagNoCoins = false;
+}
 //void Level::shoot(sf::Vector2f position)
 //{
 //	//_bullets.push_back(Bullet(position, _hacker.getPosition()));
@@ -101,8 +116,10 @@ bool Level::validateSale(TowerMenuButton* button) {
 	std::cout << "Oro anterior: " << getGolden() << std::endl;
 	if (price <= getGolden()) {
 		std::cout << "Venta Autorizada" << std::endl;
+		_flagNoCoins = false;
 		return true;
 	}
+	_flagNoCoins = true;
 	return false;
 }
 void Level::sell(Tower tower, Spot& currentSpot) {
@@ -196,4 +213,10 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	}else if (_currentMenu2->getIsVisible()) {
 		target.draw(*_currentMenu2, states);
 	}
+
+	//NUEVO
+	if (_noCoinsClock.getElapsedTime() < _displayTimeNoCoins && _flagNoCoins) {
+		target.draw(_NoCoins, states); // Dibujar el texto
+	}
+	//FIN NUEVO
 }

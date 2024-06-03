@@ -16,13 +16,11 @@ protected:
 	int _idLevel;
 	bool _finishedLevel;
 	UI _ui;
-	//NUEVO
 	sf::Texture _textureUTN;
 	sf::RectangleShape _UTN;
 	sf::Texture _textureUTNRed;
 	sf::RectangleShape _UTNRed;
 	bool _dying;
-	//NUEVO
 
 	Map *_map;
 	int _mapArray[20][30];
@@ -37,18 +35,23 @@ protected:
 
 	std::vector<Hacker*> _enemies;
 	int _currentWave;
-	//cantidad de oleadas
 	int _enemiesPerWave;
 	int _timeBetweenWaves;
 	int _timeBetweenEnemies;
 	sf::Clock _waveClock;
 	sf::Clock _enemyClock;
 
-
-	//std::list<std::list<Hacker>> _waves;
 	sf::Vector2f _hackerStartPosition;
 	std::list <Tower> _towersAvailable;
 	std::list <Tower> _activeTowers;
+
+	//NUEVO:
+	sf::Clock _noCoinsClock;
+	sf::Font _font;
+	sf::Text _NoCoins;
+	sf::Time _displayTimeNoCoins;
+	bool _flagNoCoins;
+	//FIN NUEVO
 public:
 	int getIdLevel() const;
 	bool getFinisheLevel()const;
@@ -84,6 +87,7 @@ public:
 	void setCurrentSpot(Spot); //para que el currentMenu tenga su Spot asociado
 	void setCurrentMenu(TowerMenu*);
 
+	void setNoCoinsText(); //NUEVO
 	void spawnWave();
 
 	void handlerEvent(const sf::Event&);

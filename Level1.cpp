@@ -122,10 +122,11 @@ Level1::Level1()
 	_sound.setVolume(5);
 	_sound.play();
 	_musicPlaying = true;
-	/*setWaves(_waves);*/
 	_hackerStartPosition = { 960 / 32 * 9, 640 / 32 * 1 };
 	_towersAvailable.push_back(TowerBrian());
 	_towersAvailable.push_back(TowerKloster());
 	_towersAvailable.push_back(TowerSarF());
 	_towersAvailable.push_back(TowerWenner());
+
+	setNoCoinsText(); //NUEVO
 }

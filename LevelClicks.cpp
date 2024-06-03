@@ -82,7 +82,10 @@ Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 				setSpot(&sp, sp.getSpotNumber());
 			}
 			else {
-				std::cout << "Sos pobre: ";
+				std::cout << "Saldo insuficiente" << std::endl; //deberia mostrarse por 2 segundos un cartel "saldo insuficiente"
+				//NUEVO
+				_noCoinsClock.restart(); // lo reseteo para que se muestre
+				//FIN NUEVO
 			}
 		}
 		_currentMenu->hide();
