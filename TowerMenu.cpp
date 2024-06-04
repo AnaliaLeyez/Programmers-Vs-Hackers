@@ -37,7 +37,6 @@ TowerMenu::TowerMenu()
 		_buttons[i]->setPrice();
 	}
 
-
 	Spot sp;
 	setCurrentSpot(sp);
 }
@@ -83,7 +82,7 @@ TowerMenuButton TowerMenu::validateClickOnButton(int mousex, int mousey, Spot& s
 
 void TowerMenu::update(sf::Vector2i& mousePosition) {
 	if (getIsVisible()) {
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 4; i++) { //si quiero reutilizar esta funcion el 4 lo debo reemplazar por una variable xq en menu2 son 2 botones
 			_buttons[i]->update(mousePosition);
 		}
 	}

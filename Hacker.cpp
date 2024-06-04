@@ -4,7 +4,12 @@
 #include "Collisionable.h"
 #include "Hacker.h"
 
-//sf::Sprite Hacker::getSprite() const { return _sprite; }
+sf::Sprite& Hacker::getSprite()
+{
+	return _sprite;
+}
+
+//sf::Sprite Hacker::getSprite() const {  }
 int Hacker::getLife() const { return _life; }
 int Hacker::getDamage() const { return _damage; }
 sf::Vector2f Hacker::getVelocity() const { return _velocity; }
@@ -34,8 +39,17 @@ void Hacker::update(int arr[][30])
 void Hacker::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
+	target.draw(_collisionRect, states);
 	target.draw(_sprite, states);
 }
+
+void Hacker::takeDamageFromTheBulletSentFromHeavenMadeInHeavenBabyOhNyes(int damageBullet)
+{
+	_life -= damageBullet;
+}
+
+
+
 
 
 //DESARROLLO
@@ -58,5 +72,7 @@ void Hacker::moveHacker(int arr[][30])
 	default:
 		break;
 	}
+	_collisionRect.move(_direction);
 	_sprite.move(_direction);
+
 }

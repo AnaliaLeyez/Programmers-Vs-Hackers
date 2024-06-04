@@ -1,19 +1,17 @@
-#pragma once
+ï»¿#pragma once
 #include "HackerTrainee.h"
 
 class Tower : public sf::Drawable, public sf::Transformable, public Collisionable
 {
 protected:
-	//Propiedades estéticas
+	//Propiedades estï¿½ticas
 	sf::Texture _texture;
-	sf::Sprite _sprite;
-	sf::CircleShape _visualRange;
 	std::string _name;
 	//Propiedades oro
 	int _price;
 	int _priceUpgrade;
 	int _salesValue;
-	//Propiedades bélicas:
+	//Propiedades bï¿½licas:
 	int _damage;
 	int _range;
 	int _speedAttack;
@@ -21,7 +19,13 @@ protected:
 	int _upgradesAmount;
 
 	int _spotNumber;
+
+	sf::Clock _clock;
+	float _fireRate;
+
 public:
+	sf::Sprite _sprite;
+	sf::CircleShape _visualRange;
 	//Getters
 	std::string getName() const;
 	//sf::Sprite getSprite() const;
@@ -43,11 +47,12 @@ public:
 	void setDamage(int);
 	void setCooldown(int);
 	void setSpotNumber(int);
-	
+
 	//Comportamiento
 	void verificarEnemigo(HackerTrainee&);
 	sf::FloatRect getBounds() const;
 	void update();
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
-};
 
+	bool canShoot();
+};

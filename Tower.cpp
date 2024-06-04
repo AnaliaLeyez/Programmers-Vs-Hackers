@@ -48,6 +48,17 @@ void Tower::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(_sprite, states);
 }
 
+bool Tower::canShoot()
+{
+    if (_clock.getElapsedTime().asSeconds() >= _fireRate)
+    {
+        _clock.restart();
+
+        return true;
+    }
+    return false;
+}
+
 void Tower::verificarEnemigo(HackerTrainee& enemy)
 {
     // Calcula la distancia entre los centros de la torre y el objetivo

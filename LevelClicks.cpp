@@ -77,13 +77,17 @@ Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 				Tower tower = btn.getTower();
 				sell(tower, sp);
 				tower.setSpotNumber(sp.getSpotNumber());
-				//tower.setPosition(currentSpot.getPosition());
 				//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
+				tower.setSpotNumber(sp.getSpotNumber());
+
+				tower._sprite.setPosition(sp.getPosition());  ///ESTO LO PUSO ADRI, VER SI PODEMOS CAMBIARLO, EL ATRIBUTO DEBE SER PRIVADO
+				tower._visualRange.setPosition(sp.getPosition()); ///ESTO LO PUSO ADRI, VER SI PODEMOS CAMBIARLO, EL ATRIBUTO DEBE SER PRIVADO
+				tower.setPosition(sp.getPosition());
 				setActiveTowers(tower);
 				setSpot(&sp, sp.getSpotNumber());
 			}
 			else {
-				_noCoinsClock.restart(); // NUEVO, reseteo el clock para que se muestre el cartel
+				_noCoinsClock.restart(); //NUEVO reseteo el clock para que se muestre el cartel
 			}
 		}
 		_currentMenu->hide();
@@ -91,10 +95,6 @@ Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 
 
 	}
-	
-	//else if(_currentMenu2->getIsVisible()){
-	// TowerMenuButton btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
-	// }
 	_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
 	setSpot(&sp, sp.getSpotNumber());
 	return sp;

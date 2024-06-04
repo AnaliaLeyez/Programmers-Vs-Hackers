@@ -20,12 +20,9 @@ Map Level::getMap() const { return *_map; }
 int(*Level::getMapArray())[30] { return _mapArray; }
 const std::vector<Spot*> Level::getSpots() const { return _spots; }
 Spot Level::getCurrentSpot() const { return _currentMenu->getCurrentSpot(); }
-Spot Level::getSpotByNumber(int n) const
-{
+Spot Level::getSpotByNumber(int n) const {
 	for (auto& spot : _spots) {
-		if (spot->getSpotNumber() == n) {
-			return *spot;
-		}
+		if (spot->getSpotNumber() == n) { return *spot; }
 	}
 }
 TowerMenu Level::getCurrentMenu() const { return *_currentMenu; }
@@ -54,7 +51,6 @@ void Level::setSpot(Spot* sp, int n) {
 		if (spot->getSpotNumber() == n) {
 			spot->setOccupied(sp->getIsOccupied());
 			spot->setCurrentTower(sp->getCurrentTower());
-			//spot=sp;
 			break;
 		}
 	}
@@ -77,10 +73,6 @@ void Level::setNoCoinsText()
 	_displayTimeNoCoins = sf::seconds(3);
 	_flagNoCoins = false;
 }
-//void Level::shoot(sf::Vector2f position)
-//{
-//	//_bullets.push_back(Bullet(position, _hacker.getPosition()));
-//}
 
 void Level::mouseCheck(sf::Vector2i& mousePosition)
 {
@@ -113,9 +105,7 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 
 bool Level::validateSale(TowerMenuButton* button) {
 	int price = button->getTower().getPrice();
-	std::cout << "Oro anterior: " << getGolden() << std::endl;
 	if (price <= getGolden()) {
-		std::cout << "Venta Autorizada" << std::endl;
 		_flagNoCoins = false;
 		return true;
 	}
@@ -123,7 +113,6 @@ bool Level::validateSale(TowerMenuButton* button) {
 	return false;
 }
 void Level::sell(Tower tower, Spot& currentSpot) {
-	std::cout << "Vamos a comprar la torre... " << std::endl;
 	int price = tower.getPrice();
 	setGolden(getGolden() - price);
 	std::cout << "se compro: " << tower.getName() << std::endl;
@@ -132,6 +121,12 @@ void Level::sell(Tower tower, Spot& currentSpot) {
 	currentSpot.setCurrentTower(tower);
 	currentSpot.setOccupied(true);
 }
+
+void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition)
+{
+	_bullets.push_back(Bullet(shootingPosition, targetPosition));
+}
+
 void Level::update(sf::Vector2i& mousePosition) {
 	if (!getFinisheLevel()) {
 
@@ -142,7 +137,71 @@ void Level::update(sf::Vector2i& mousePosition) {
 		for (auto& hacker : _enemies) {
 
 			hacker->update(getMapArray());
+			//std::cout<< hacker->getPosition().x << " " << hacker->getPosition().y <<std::endl;
 			//agregar más lógica para las colisiones
+		}
+
+
+		for (auto& tower : _activeTowers)
+		{
+			//std::cout << tower._visualRange.getPosition().x << " " << tower._visualRange.getPosition().y << std::endl;
+
+			for (auto& hacker : _enemies)
+			{
+				if (tower._visualRange.getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
+				{
+					if (tower.canShoot())
+						shoot(tower._visualRange.getPosition(), hacker->_collisionRect.getPosition());
+					//std::cout << hacker->_collisionRect.getPosition().x << " " << hacker->_collisionRect.getPosition().y<< std::endl;
+				}
+				auto it = _bullets.begin();
+				while (it != _bullets.end())
+				{
+					Bullet& bullet = *it;
+					bullet.update();
+
+					if (bullet._collisionCircle.getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
+					{
+						hacker->takeDamageFromTheBulletSentFromHeavenMadeInHeavenBabyOhNyes(bullet.getDamage());
+						std::cout << hacker->getLife() << std::endl;
+						it = _bullets.erase(it);
+					}
+					else
+					{
+						++it;
+					}
+
+
+				}
+			}
+		}
+		/*
+		for (auto& hacker : _enemies)
+		{
+
+			hacker->update(getMapArray());
+
+			if (hacker->getLife() <= 0)
+			{
+
+			}
+		}
+		*/
+		auto itH = _enemies.begin();
+		while (itH != _enemies.end())
+		{
+			Hacker* hacker = *itH;
+			hacker->update(getMapArray());
+
+			if (hacker->getLife() <= 0)
+			{
+
+				itH = _enemies.erase(itH);
+			}
+			else
+			{
+				++itH;
+			}
 		}
 
 		// Verificar si se ha completado el nivel
@@ -195,23 +254,33 @@ void Level::update(sf::Vector2i& mousePosition) {
 	}
 }
 
-void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
+void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
+{
 	states.transform *= getTransform();
 	target.draw(*_map, states);
 	_dying ? target.draw(_UTNRed, states) : target.draw(_UTN, states);
 	target.draw(_ui, states);
-	for (Spot* spot : _spots) {  //luego de "comprar" torre, el spot trae basura. ahora con solo clickear ya se rompe
+	for (Spot* spot : _spots)
+	{
 		target.draw(*spot, states);
 	}
-	for (const auto& hacker : _enemies) {
+	for (const auto& hacker : _enemies)
+	{
 		if (hacker->getLife() > 0) {
 			target.draw(*hacker, states);
 		}
 	}
-	if (_currentMenu->getIsVisible()) {
+	if (_currentMenu->getIsVisible())
+	{
 		target.draw(*_currentMenu, states);
-	}else if (_currentMenu2->getIsVisible()) {
+	} else if (_currentMenu2->getIsVisible())
+	{
 		target.draw(*_currentMenu2, states);
+	}
+
+	for (auto& bullet : _bullets)
+	{
+		target.draw(bullet, states);
 	}
 
 	//NUEVO

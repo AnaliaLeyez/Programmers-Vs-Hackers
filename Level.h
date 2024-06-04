@@ -9,6 +9,7 @@
 #include "TowerMenu2.h"
 #include "Tower.h"
 #include "Spot.h"
+#include "Bullet.h"
 
 class Level: public sf::Drawable, public sf::Transformable
 {
@@ -45,6 +46,8 @@ protected:
 	std::list <Tower> _towersAvailable;
 	std::list <Tower> _activeTowers;
 
+	std::list<Bullet> _bullets;
+
 	//NUEVO:
 	sf::Clock _noCoinsClock;
 	sf::Font _font;
@@ -61,7 +64,7 @@ public:
 	const std::vector<Spot*> getSpots() const;
 	Spot getCurrentSpot() const;
 	Spot getSpotByNumber(int) const;
-	TowerMenu getCurrentMenu() const;  //nuevo
+	TowerMenu getCurrentMenu() const;
 
 	int getGolden();
 	int getEnergy() const;
@@ -90,7 +93,7 @@ public:
 	void setNoCoinsText(); //NUEVO
 	void spawnWave();
 
-	void handlerEvent(const sf::Event&);
+	//void handlerEvent(const sf::Event&);  //esto no se esta usando ni se definio
 	void mouseCheck(sf::Vector2i&);
 	void validateClick(int, int);
 	int validateClickOnSpot(int, int);
@@ -102,5 +105,7 @@ public:
 
 	bool validateSale(TowerMenuButton*); //nuevo
 	void sell(Tower, Spot&);
+
+	void shoot(sf::Vector2f, sf::Vector2f);
 };
 
