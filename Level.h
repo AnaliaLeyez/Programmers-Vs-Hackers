@@ -91,6 +91,7 @@ public:
 	void setCurrentMenu(TowerMenu*);
 
 	void setNoCoinsText(); //NUEVO
+
 	void spawnWave();
 
 	//void handlerEvent(const sf::Event&);  //esto no se esta usando ni se definio
@@ -99,13 +100,16 @@ public:
 	int validateClickOnSpot(int, int);
 	void manageClickOnSpot(int, int, Spot&);
 	Spot manageOutOfSpotClick(int, int);
+	void clickWithMenu1Open(int, int, Spot&);
 	void validateClickOnSpeaker(int, int);
-	void draw(sf::RenderTarget&, sf::RenderStates) const;
-	void update(sf::Vector2i&);
 
 	bool validateSale(TowerMenuButton*); //nuevo
 	void sell(Tower, Spot&);
 
 	void shoot(sf::Vector2f, sf::Vector2f);
+
+	void draw(sf::RenderTarget&, sf::RenderStates) const;
+	void update(sf::Vector2i&);
+
 };
 

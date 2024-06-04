@@ -69,41 +69,43 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 	Spot sp = _currentMenu->getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
 	if (_currentMenu->getIsVisible()) { //click fuera de spot y towerMenu estaba visible
-
-		///TODO ESTO DEBERIA IR EN UNA FUNCION: clickWithMenu1Open(mousex, mousey, sp)  sp por REFERENCIA
-		TowerMenuButton btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
-		if (btn.getBtnNumber() != -1) {  //se hizo click en un boton
-			if (validateSale(&btn)) { //veo si habilito venta
-				Tower tower = btn.getTower();
-				sell(tower, sp);
-				tower.setSpotNumber(sp.getSpotNumber());
-				//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
-				tower.setSpotNumber(sp.getSpotNumber());
-
-				sf::Sprite sprite= tower.getSprite(); //posicion del sprite
-				sprite.setPosition(sp.getPosition());
-				tower.setSprite(sprite);
-
-				sf::CircleShape vsRange = tower.getVisualRange(); //posicion del rango
-				vsRange.setPosition(sp.getPosition());
-				tower.setVisualRange(vsRange);
-
-				tower.setPosition(sp.getPosition());
-				setActiveTowers(tower);
-				setSpot(&sp, sp.getSpotNumber());
-			}
-			else {
-				_noCoinsClock.restart(); //NUEVO reseteo el clock para que se muestre el cartel
-			}
-		}
-		_currentMenu->hide();
+		clickWithMenu1Open(mousex, mousey, sp);
+	}
+	else if (_currentMenu2->getIsVisible()) {
 		_currentMenu2->hide();
-
-
 	}
 	_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
 	setSpot(&sp, sp.getSpotNumber());
 	return sp;
+}
+void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
+{
+	TowerMenuButton btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
+	if (btn.getBtnNumber() != -1) {  //se hizo click en un boton
+		if (validateSale(&btn)) { //veo si habilito venta
+			Tower tower = btn.getTower();
+			sell(tower, sp);
+			tower.setSpotNumber(sp.getSpotNumber());
+			//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
+			tower.setSpotNumber(sp.getSpotNumber());
+
+			sf::Sprite sprite = tower.getSprite(); //posicion del sprite
+			sprite.setPosition(sp.getPosition());
+			tower.setSprite(sprite);
+
+			sf::CircleShape vsRange = tower.getVisualRange(); //posicion del rango
+			vsRange.setPosition(sp.getPosition());
+			tower.setVisualRange(vsRange);
+
+			tower.setPosition(sp.getPosition());
+			setActiveTowers(tower);
+			setSpot(&sp, sp.getSpotNumber());
+		}
+		else {
+			_noCoinsClock.restart(); //NUEVO reseteo el clock para que se muestre el cartel
+		}
+	}
+	_currentMenu->hide();
 }
 void Level::validateClickOnSpeaker(int mousex, int mousey) {
 	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {

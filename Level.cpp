@@ -163,7 +163,7 @@ void Level::update(sf::Vector2i& mousePosition) {
 					if (bullet._collisionCircle.getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
 					{
 						hacker->takeDamage(bullet.getDamage());
-						std::cout << hacker->getLife() << std::endl;
+						//std::cout << hacker->getLife() << std::endl;
 						itB = _bullets.erase(itB);
 					}
 					else
@@ -280,9 +280,8 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 		target.draw(bullet, states);
 	}
 
-	//NUEVO
+	//NUEVO:
 	if (_noCoinsClock.getElapsedTime() < _displayTimeNoCoins && _flagNoCoins) {
 		target.draw(_NoCoins, states); // Dibujar el texto
 	}
-	//FIN NUEVO
 }

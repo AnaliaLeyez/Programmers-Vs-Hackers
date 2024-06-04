@@ -20,7 +20,7 @@ Bullet::Bullet(sf::Vector2f initialPosition, sf::Vector2f target)
 	_sprite.setPosition(initialPosition);
 
 	_enemyPosition = target;
-	_speed = 3.0f; //lo puse en 1 para verlo mas lento y note algun bug
+	_speed = 3.0f;
 	_damage = 20;
 }
 
@@ -49,13 +49,13 @@ void Bullet::setDamage(int damage) { _damage = damage; }
 
 void Bullet::moveBullet(sf::Vector2f towerPosition, sf::Vector2f enemyPosition)
 {
-	// Calcular el vector de direcci�n entre la torre y el objetivo
+	// Calcular el vector de direccion entre la torre y el objetivo
 	sf::Vector2f _direction = enemyPosition - towerPosition;
 
 	// Lo del teorema del mago ese griego viejo
 	_direction /= sqrt((float)std::pow(_direction.x, 2) + (float)std::pow(_direction.y, 2));
 
-	// Mover el proyectil en la direcci�n calculada
+	// Mover el proyectil en la direccion calculada
 	move(_direction.x * _velocity.x, _direction.y * _velocity.y);
 
 }
@@ -70,6 +70,5 @@ void Bullet::update()
 void Bullet::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
-	//target.draw(_sprite, states);
 	target.draw(_sprite, states);
 }

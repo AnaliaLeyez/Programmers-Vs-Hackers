@@ -4,12 +4,7 @@
 #include "Collisionable.h"
 #include "Hacker.h"
 
-sf::Sprite& Hacker::getSprite()
-{
-	return _sprite;
-}
-
-//sf::Sprite Hacker::getSprite() const {  }
+sf::Sprite& Hacker::getSprite() { return _sprite; }
 int Hacker::getLife() const { return _life; }
 int Hacker::getDamage() const { return _damage; }
 sf::Vector2f Hacker::getVelocity() const { return _velocity; }
