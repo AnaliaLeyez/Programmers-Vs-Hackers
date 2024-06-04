@@ -69,6 +69,8 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 	Spot sp = _currentMenu->getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
 	if (_currentMenu->getIsVisible()) { //click fuera de spot y towerMenu estaba visible
+
+		///TODO ESTO DEBERIA IR EN UNA FUNCION: clickWithMenu1Open(mousex, mousey, sp)  sp por REFERENCIA
 		TowerMenuButton btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
 		if (btn.getBtnNumber() != -1) {  //se hizo click en un boton
 			if (validateSale(&btn)) { //veo si habilito venta
@@ -76,21 +78,23 @@ Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 				sell(tower, sp);
 				tower.setSpotNumber(sp.getSpotNumber());
 				//tower.setPosition(currentSpot.getPosition());
-				//tower.setPosition(currentSpot.getInverseTransform().transformRect((currentSpot.getGlobalBounds())).getPosition());
 				//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
 				setActiveTowers(tower);
 				setSpot(&sp, sp.getSpotNumber());
 			}
 			else {
-				std::cout << "Saldo insuficiente" << std::endl; //deberia mostrarse por 2 segundos un cartel "saldo insuficiente"
-				//NUEVO
-				_noCoinsClock.restart(); // lo reseteo para que se muestre
-				//FIN NUEVO
+				_noCoinsClock.restart(); // NUEVO, reseteo el clock para que se muestre el cartel
 			}
 		}
 		_currentMenu->hide();
 		_currentMenu2->hide();
+
+
 	}
+	
+	//else if(_currentMenu2->getIsVisible()){
+	// TowerMenuButton btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
+	// }
 	_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
 	setSpot(&sp, sp.getSpotNumber());
 	return sp;

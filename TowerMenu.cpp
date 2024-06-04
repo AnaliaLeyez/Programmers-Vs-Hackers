@@ -68,10 +68,10 @@ void TowerMenu::mouseCheck(sf::Vector2i& mousePosition)
 	}
 }
 
-TowerMenuButton TowerMenu::validateClickOnButton(int mousex, int mousey, Spot& spot) {
+TowerMenuButton TowerMenu::validateClickOnButton(int mousex, int mousey, Spot& spot) { //aca deberia recibir tambien int quantityButtons
 	sf::Vector2f mousePos = sf::Vector2f(static_cast<float>(mousex), static_cast<float>(mousey));
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousePos);
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 4; i++) { //si quiero reutilizar esta funcion el 4 lo debo reemplazar por una variable xq en menu2 son 2 botones
 		if (_buttons[i]->getGlobalBounds().contains(transformedMousePos)) {
 			return *_buttons[i];
 		}
