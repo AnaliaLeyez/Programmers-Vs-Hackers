@@ -8,8 +8,13 @@ HackerTrainee::HackerTrainee()
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
-	_sprite.setPosition(sf::Vector2f(960/32*9.5, 640 / 32 * 0.5));
+	_sprite.setPosition(sf::Vector2f(960 / 32 * 9.5, 640 / 32 * 0.5));
 	_name = "Trainee";
+
+	_collisionRect.setSize({ 30,30 });
+	_collisionRect.setOrigin(_collisionRect.getGlobalBounds().width / 2, _collisionRect.getGlobalBounds().height / 2);
+	_collisionRect.setFillColor(sf::Color::Red);
+	_collisionRect.setPosition(sf::Vector2f(960 / 32 * 9.5, 640 / 32 * 0.5));
 
 	_seniority = 0;
 	_life = 100;

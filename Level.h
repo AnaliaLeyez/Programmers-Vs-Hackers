@@ -9,6 +9,7 @@
 #include "TowerMenu2.h"
 #include "Tower.h"
 #include "Spot.h"
+#include "Bullet.h"
 
 class Level: public sf::Drawable, public sf::Transformable
 {
@@ -44,6 +45,8 @@ protected:
 	sf::Vector2f _hackerStartPosition;
 	std::list <Tower> _towersAvailable;
 	std::list <Tower> _activeTowers;
+
+	std::list<Bullet> _bullets;
 
 	//NUEVO:
 	sf::Clock _noCoinsClock;
@@ -102,5 +105,7 @@ public:
 
 	bool validateSale(TowerMenuButton*); //nuevo
 	void sell(Tower, Spot&);
+
+	void shoot(sf::Vector2f, sf::Vector2f);
 };
 

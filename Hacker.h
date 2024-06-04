@@ -4,9 +4,9 @@
 class Hacker :public sf::Drawable, public sf::Transformable, public Collisionable
 {
 protected:
-	
+
 	static sf::Texture _texture;
-	sf::Sprite _sprite;
+
 	std::string _name;
 	sf::Vector2f _velocity;
 	sf::Vector2f _direction;
@@ -18,6 +18,11 @@ protected:
 	sf::Vector2f _position;
 public:
 	//sf::Sprite getSprite() const;
+	sf::Sprite _sprite;
+	sf::Sprite& getSprite();
+
+	sf::RectangleShape _collisionRect;
+
 	int getLife() const;
 	int getDamage() const;
 	sf::Vector2f getVelocity() const;
@@ -31,7 +36,7 @@ public:
 	void setDirection(sf::Vector2f);
 	void setBoos(bool);
 	void setGoldenDrop(float);
-	
+
 	//Comportamiento
 	void moveHacker(int arr[][30]);
 	void attack(float*);
@@ -39,6 +44,5 @@ public:
 	void update(int arr[][30]);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 
-
+	void takeDamageFromTheBulletSentFromHeavenMadeInHeavenBabyOhNyes(int);
 };
-

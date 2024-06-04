@@ -27,6 +27,7 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 	_range = 9;
 	_speedAttack = 3;
 	_upgradesAmount = 2;
+	_fireRate = 1.0f; // Tiempo en segundos entre disparos
 }
 
 void TowerSarF::update1()
