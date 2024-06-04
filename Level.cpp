@@ -148,30 +148,28 @@ void Level::update(sf::Vector2i& mousePosition) {
 
 			for (auto& hacker : _enemies)
 			{
-				if (tower._visualRange.getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
+				if (tower.getVisualRange().getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
 				{
 					if (tower.canShoot())
-						shoot(tower._visualRange.getPosition(), hacker->_collisionRect.getPosition());
+						shoot(tower.getVisualRange().getPosition(), hacker->_collisionRect.getPosition());
 					//std::cout << hacker->_collisionRect.getPosition().x << " " << hacker->_collisionRect.getPosition().y<< std::endl;
 				}
-				auto it = _bullets.begin();
-				while (it != _bullets.end())
+				auto itB = _bullets.begin();
+				while (itB != _bullets.end())
 				{
-					Bullet& bullet = *it;
+					Bullet& bullet = *itB;
 					bullet.update();
 
 					if (bullet._collisionCircle.getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
 					{
-						hacker->takeDamageFromTheBulletSentFromHeavenMadeInHeavenBabyOhNyes(bullet.getDamage());
+						hacker->takeDamage(bullet.getDamage());
 						std::cout << hacker->getLife() << std::endl;
-						it = _bullets.erase(it);
+						itB = _bullets.erase(itB);
 					}
 					else
 					{
-						++it;
+						++itB;
 					}
-
-
 				}
 			}
 		}
@@ -208,7 +206,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 		if (_currentWave > 3 && _enemies.empty()) {
 			setFinishedLevel(true);
 		}
-		
 		if (_currentMenu->getIsVisible()) {
 			_currentMenu->update(mousePosition);
 		}

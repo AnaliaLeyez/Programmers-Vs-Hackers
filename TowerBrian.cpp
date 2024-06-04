@@ -23,7 +23,7 @@ TowerBrian::TowerBrian()
 	_salesValue = 5;
 	_damage = 3;
 	_range = 9;
-	_speedAttack = 3;
+	_speedAttack = 3; //este no se esta usando me parece, esta el fireRate en su lugar...
 	_upgradesAmount = 2;
 	_fireRate = 1.0f; // Tiempo en segundos entre disparos
 }

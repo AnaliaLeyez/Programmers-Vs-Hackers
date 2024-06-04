@@ -18,41 +18,21 @@ bool Hacker::getBoss() const { return _isABoss; }
 int Hacker::getGoldenDrop() const { return _goldenDrop; }
 
 void Hacker::setLife(int life) { _life = life; }
-void Hacker::setDamage(float damage) { _damage = damage; }
+void Hacker::setDamage(int damage) { _damage = damage; }
 void Hacker::setVelocity(sf::Vector2f velocity) { _velocity = velocity; }
 void Hacker::setDirection(sf::Vector2f direction) { _direction = direction; }
 void Hacker::setBoos(bool boss) { _isABoss = boss; }
-void Hacker::setGoldenDrop(float drop) { _goldenDrop = drop; }
+void Hacker::setGoldenDrop(int drop) { _goldenDrop = drop; }
 
 void Hacker::attack(float* hackerLife)
 {
 	*hackerLife -= getDamage();
 }
-
-sf::FloatRect Hacker::getBounds() const { return _sprite.getGlobalBounds(); }
-
-void Hacker::update(int arr[][30])
-{
-	moveHacker(arr);
-}
-
-void Hacker::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-	states.transform *= getTransform();
-	target.draw(_collisionRect, states);
-	target.draw(_sprite, states);
-}
-
-void Hacker::takeDamageFromTheBulletSentFromHeavenMadeInHeavenBabyOhNyes(int damageBullet)
+void Hacker::takeDamage(int damageBullet)
 {
 	_life -= damageBullet;
 }
 
-
-
-
-
-//DESARROLLO
 void Hacker::moveHacker(int arr[][30])
 {
 	switch (arr[(int)_sprite.getPosition().y / 32][(int)_sprite.getPosition().x / 32])
@@ -74,5 +54,18 @@ void Hacker::moveHacker(int arr[][30])
 	}
 	_collisionRect.move(_direction);
 	_sprite.move(_direction);
+}
 
+sf::FloatRect Hacker::getBounds() const { return _sprite.getGlobalBounds(); }
+
+void Hacker::update(int arr[][30])
+{
+	moveHacker(arr);
+}
+
+void Hacker::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+	states.transform *= getTransform();
+	//target.draw(_collisionRect, states); //el rectangulo rojo no lo quiero mostrar
+	target.draw(_sprite, states);
 }

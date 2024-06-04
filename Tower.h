@@ -6,6 +6,8 @@ class Tower : public sf::Drawable, public sf::Transformable, public Collisionabl
 protected:
 	//Propiedades est�ticas
 	sf::Texture _texture;
+	sf::Sprite _sprite;
+	sf::CircleShape _visualRange;
 	std::string _name;
 	//Propiedades oro
 	int _price;
@@ -24,11 +26,9 @@ protected:
 	float _fireRate;
 
 public:
-	sf::Sprite _sprite;
-	sf::CircleShape _visualRange;
 	//Getters
 	std::string getName() const;
-	//sf::Sprite getSprite() const;
+	sf::Sprite getSprite() const;
 	sf::CircleShape getVisualRange() const;
 	int getPrice() const;
 	int getPriceUpgrade() const;
@@ -39,6 +39,8 @@ public:
 	int getUpgradesAmount() const;
 	int getSpotNumber() const;
 
+	void setSprite(sf::Sprite);
+	void setVisualRange(sf::CircleShape);
 	void setRange(int);
 	void setName(std::string);
 	void setPrice(int);

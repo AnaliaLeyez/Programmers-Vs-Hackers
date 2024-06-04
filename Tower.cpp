@@ -11,13 +11,15 @@ int Tower::getPrice() const { return _price; }
 int Tower::getPriceUpgrade() const { return _priceUpgrade; }
 int Tower::getSalesValue() const { return _salesValue; }
 sf::CircleShape Tower::getVisualRange() const { return _visualRange; }
-//sf::Sprite Tower::getSprite() const { return _sprite; }
+sf::Sprite Tower::getSprite() const { return _sprite; }
 int Tower::getDamage() const { return _damage; }
 int Tower::getRange() const { return _range; }
 int Tower::getSpeedAtack() const { return _speedAttack; }
 int Tower::getUpgradesAmount() const { return _upgradesAmount; }
 int Tower::getSpotNumber() const { return _spotNumber; }
 
+void Tower::setSprite(sf::Sprite sp) { _sprite = sp; }
+void Tower::setVisualRange(sf::CircleShape vsRange) { _visualRange = vsRange; }
 void Tower::setRange(int range) { _range = range; }
 void Tower::setName(std::string name) { _name = name; }
 void Tower::setPrice(int price) { _price = price; }

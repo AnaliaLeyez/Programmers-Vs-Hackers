@@ -20,7 +20,7 @@ Bullet::Bullet(sf::Vector2f initialPosition, sf::Vector2f target)
 	_sprite.setPosition(initialPosition);
 
 	_enemyPosition = target;
-	_speed = 3.0f;
+	_speed = 3.0f; //lo puse en 1 para verlo mas lento y note algun bug
 	_damage = 20;
 }
 

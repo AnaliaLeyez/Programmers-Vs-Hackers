@@ -80,8 +80,14 @@ Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 				//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
 				tower.setSpotNumber(sp.getSpotNumber());
 
-				tower._sprite.setPosition(sp.getPosition());  ///ESTO LO PUSO ADRI, VER SI PODEMOS CAMBIARLO, EL ATRIBUTO DEBE SER PRIVADO
-				tower._visualRange.setPosition(sp.getPosition()); ///ESTO LO PUSO ADRI, VER SI PODEMOS CAMBIARLO, EL ATRIBUTO DEBE SER PRIVADO
+				sf::Sprite sprite= tower.getSprite(); //posicion del sprite
+				sprite.setPosition(sp.getPosition());
+				tower.setSprite(sprite);
+
+				sf::CircleShape vsRange = tower.getVisualRange(); //posicion del rango
+				vsRange.setPosition(sp.getPosition());
+				tower.setVisualRange(vsRange);
+
 				tower.setPosition(sp.getPosition());
 				setActiveTowers(tower);
 				setSpot(&sp, sp.getSpotNumber());

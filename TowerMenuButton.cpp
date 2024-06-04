@@ -57,7 +57,7 @@ void TowerMenuButton::setInfo()
 	_spriteSword.setTexture(_textureSword);
 	_spriteSword.setOrigin(_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().top + _sprite.getGlobalBounds().height / 2);
 	_spriteSword.setPosition(-25, 75);
-	_spriteSword.setScale(0.4, 0.4);
+	_spriteSword.setScale(0.4f, 0.4f);
 	
 
 	if (!_font.loadFromFile("fuentes/TowerPrice.ttf")) {

@@ -31,11 +31,11 @@ public:
 	int getGoldenDrop() const;
 
 	void setLife(int);
-	void setDamage(float);
+	void setDamage(int);
 	void setVelocity(sf::Vector2f);
 	void setDirection(sf::Vector2f);
 	void setBoos(bool);
-	void setGoldenDrop(float);
+	void setGoldenDrop(int);
 
 	//Comportamiento
 	void moveHacker(int arr[][30]);
@@ -44,5 +44,5 @@ public:
 	void update(int arr[][30]);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 
-	void takeDamageFromTheBulletSentFromHeavenMadeInHeavenBabyOhNyes(int);
+	void takeDamage(int);
 };
