@@ -20,12 +20,9 @@ Map Level::getMap() const { return *_map; }
 int(*Level::getMapArray())[30] { return _mapArray; }
 const std::vector<Spot*> Level::getSpots() const { return _spots; }
 Spot Level::getCurrentSpot() const { return _currentMenu->getCurrentSpot(); }
-Spot Level::getSpotByNumber(int n) const
-{
+Spot Level::getSpotByNumber(int n) const {
 	for (auto& spot : _spots) {
-		if (spot->getSpotNumber() == n) {
-			return *spot;
-		}
+		if (spot->getSpotNumber() == n) { return *spot; }
 	}
 }
 TowerMenu Level::getCurrentMenu() const { return *_currentMenu; }
@@ -54,7 +51,6 @@ void Level::setSpot(Spot* sp, int n) {
 		if (spot->getSpotNumber() == n) {
 			spot->setOccupied(sp->getIsOccupied());
 			spot->setCurrentTower(sp->getCurrentTower());
-			//spot=sp;
 			break;
 		}
 	}
@@ -77,10 +73,6 @@ void Level::setNoCoinsText()
 	_displayTimeNoCoins = sf::seconds(3);
 	_flagNoCoins = false;
 }
-//void Level::shoot(sf::Vector2f position)
-//{
-//	//_bullets.push_back(Bullet(position, _hacker.getPosition()));
-//}
 
 void Level::mouseCheck(sf::Vector2i& mousePosition)
 {
@@ -113,9 +105,7 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 
 bool Level::validateSale(TowerMenuButton* button) {
 	int price = button->getTower().getPrice();
-	std::cout << "Oro anterior: " << getGolden() << std::endl;
 	if (price <= getGolden()) {
-		std::cout << "Venta Autorizada" << std::endl;
 		_flagNoCoins = false;
 		return true;
 	}
@@ -123,7 +113,6 @@ bool Level::validateSale(TowerMenuButton* button) {
 	return false;
 }
 void Level::sell(Tower tower, Spot& currentSpot) {
-	std::cout << "Vamos a comprar la torre... " << std::endl;
 	int price = tower.getPrice();
 	setGolden(getGolden() - price);
 	std::cout << "se compro: " << tower.getName() << std::endl;
@@ -213,8 +202,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 			{
 				++itH;
 			}
-
-
 		}
 
 		// Verificar si se ha completado el nivel
@@ -274,7 +261,7 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 	_dying ? target.draw(_UTNRed, states) : target.draw(_UTN, states);
 	target.draw(_ui, states);
 	for (Spot* spot : _spots)
-	{  //luego de "comprar" torre, el spot trae basura. ahora con solo clickear ya se rompe
+	{
 		target.draw(*spot, states);
 	}
 	for (const auto& hacker : _enemies)
@@ -286,8 +273,7 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 	if (_currentMenu->getIsVisible())
 	{
 		target.draw(*_currentMenu, states);
-	}
-	else if (_currentMenu2->getIsVisible())
+	} else if (_currentMenu2->getIsVisible())
 	{
 		target.draw(*_currentMenu2, states);
 	}

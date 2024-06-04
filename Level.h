@@ -64,7 +64,7 @@ public:
 	const std::vector<Spot*> getSpots() const;
 	Spot getCurrentSpot() const;
 	Spot getSpotByNumber(int) const;
-	TowerMenu getCurrentMenu() const;  //nuevo
+	TowerMenu getCurrentMenu() const;
 
 	int getGolden();
 	int getEnergy() const;
@@ -93,7 +93,7 @@ public:
 	void setNoCoinsText(); //NUEVO
 	void spawnWave();
 
-	void handlerEvent(const sf::Event&);
+	//void handlerEvent(const sf::Event&);  //esto no se esta usando ni se definio
 	void mouseCheck(sf::Vector2i&);
 	void validateClick(int, int);
 	int validateClickOnSpot(int, int);
