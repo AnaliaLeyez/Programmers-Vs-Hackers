@@ -141,10 +141,13 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletA.cpp" />
     <ClCompile Include="ButtonBrian.cpp" />
+    <ClCompile Include="ButtonCashSale.cpp" />
     <ClCompile Include="ButtonKloster.cpp" />
     <ClCompile Include="ButtonMaxiSar.cpp" />
     <ClCompile Include="ButtonMaxiWenner.cpp" />
+    <ClCompile Include="ButtonUpgrade.cpp" />
     <ClCompile Include="Collisionable.cpp" />
+    <ClCompile Include="LevelClicks.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Hacker.cpp" />
     <ClCompile Include="HackerTrainee.cpp" />
@@ -159,6 +162,7 @@
     <ClCompile Include="Tower.cpp" />
     <ClCompile Include="TowerMenu.cpp" />
     <ClCompile Include="TowerBrian.cpp" />
+    <ClCompile Include="TowerMenu2.cpp" />
     <ClCompile Include="TowerMenuButton.cpp" />
     <ClCompile Include="TowerSarF.cpp" />
     <ClCompile Include="TowerKloster.cpp" />
@@ -169,9 +173,11 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletA.h" />
     <ClInclude Include="ButtonBrian.h" />
+    <ClInclude Include="ButtonCashSale.h" />
     <ClInclude Include="ButtonKloster.h" />
     <ClInclude Include="ButtonMaxiSar.h" />
     <ClInclude Include="ButtonMaxiWenner.h" />
+    <ClInclude Include="ButtonUpgrade.h" />
     <ClInclude Include="Collisionable.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Hacker.h" />
@@ -187,6 +193,7 @@
     <ClInclude Include="Tower.h" />
     <ClInclude Include="TowerMenu.h" />
     <ClInclude Include="TowerBrian.h" />
+    <ClInclude Include="TowerMenu2.h" />
     <ClInclude Include="TowerMenuButton.h" />
     <ClInclude Include="TowerSarF.h" />
     <ClInclude Include="TowerKloster.h" />

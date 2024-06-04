@@ -61,7 +61,22 @@ void Level::setSpot(Spot* sp, int n) {
 }
 void Level::setCurrentSpot(Spot sp) { _currentMenu->setCurrentSpot(sp); }
 void Level::setCurrentMenu(TowerMenu* menu) { _currentMenu = menu; }
+void Level::setNoCoinsText()
+{
+	if (!_font.loadFromFile("fuentes/TowerPrice.ttf")) {
+		throw std::runtime_error("Error al cargar la fuente del Price Menu \n");
+	}
+	_NoCoins.setFont(_font);
+	_NoCoins.setCharacterSize(70);
+	_NoCoins.setOrigin(_NoCoins.getGlobalBounds().getPosition().x / 2, _NoCoins.getGlobalBounds().height / 2);
+	_NoCoins.setPosition(300, 250);
+	_NoCoins.setFillColor(sf::Color(255, 0, 0));
+	_NoCoins.setString("SALDO INSUFICIENTE");
 
+	_noCoinsClock.restart();
+	_displayTimeNoCoins = sf::seconds(3);
+	_flagNoCoins = false;
+}
 //void Level::shoot(sf::Vector2f position)
 //{
 //	//_bullets.push_back(Bullet(position, _hacker.getPosition()));
@@ -87,101 +102,12 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 	{
 		_currentMenu->mouseCheck(mousePosition);
 		_dying = true; //ESTO NO VA ACA, ES SOLO PARA VER QUE EL SWITCH DEL SPRITE DE UTN FUNCIONA, PERO ESO NO DEPENDERA DEL MOUSE
+	}else if (_currentMenu2->getIsVisible() && _currentMenu2->getGlobalBounds().contains(transformedMousePos))
+	{
+		_currentMenu2->mouseCheck(mousePosition);
 	}
 	else {
 		_dying = false; //ESTO NO VA ACA, ES SOLO PARA VER QUE EL SWITCH DEL SPRITE DE UTN FUNCIONA, PERO ESO NO DEPENDERA DEL MOUSE
-	}
-}
-void Level::validateClick(int mousex, int mousey)
-{
-	Spot currentSpot = _currentMenu->getCurrentSpot(); //si es el primer click el spot estara en cero //currentSpot tiene el nro de spot ¿y el estado?
-	int clickSpot = validateClickOnSpot(mousex, mousey);
-	if (clickSpot != 0) { //si se clickeo spot, esto devuelve el nro de spot
-		currentSpot.setSpotNumber(clickSpot);
-		//currentSpot.setOccupied(level.getCurrentSpot().getIsOccupied());
-		currentSpot.setOccupied(getSpotByNumber(currentSpot.getSpotNumber()).getIsOccupied());
-		_currentMenu->setCurrentSpot(currentSpot);  //si se clickeo en spot e estoy diciendo a menu q se asocie a ese spot, sino nose
-		manageClickOnSpot(mousex, mousey, currentSpot); //currentSpot tiene el nro de spot y el estado
-	}
-	else { //si NO se clickeo spot
-		currentSpot = manageOutOfSpotClick(mousex, mousey);
-	}
-	setSpot(&currentSpot, currentSpot.getSpotNumber());
-	validateClickOnSpeaker(mousex, mousey);
-}
-int Level::validateClickOnSpot(int mousex, int mousey) {
-	if (!_currentMenu->getIsVisible()) {
-		for (auto& spot : _spots) {
-			if (spot->getGlobalBounds().contains(mousex, mousey)) {
-				return spot->getSpotNumber();
-			}
-		}
-	}
-	return 0;  //seria como decir "no se clickeo en ningun spot"
-}
-void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
-	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
-	currentSp.getSpotNumber();
-	_currentMenu->setCurrentSpot(currentSp);
-	_currentMenu->setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
-	//validar si el spot esta ocupado o no:
-	if (currentSp.getIsOccupied()) { //spot ocupado
-		std::cout << "aca va el menu2";
-	}
-	else {  //spot libre
-		_currentMenu->setCurrentSpot(currentSp); //guardo el nro de spot en el tower Menu;
-		currentSp.setCurrentTower(_currentMenu->getCurrentSpot().getCurrentTower()); //me aseguro que el currentSpot esta asociado a la tower ahora
-		if (!_currentMenu->getIsVisible()) { //se clickeo en un spot libre y el menu no era visible
-			sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
-			_currentMenu->setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
-			_currentMenu->show();
-		}
-		else { //se clickeo en un spot libre y el menu era visible
-			_currentMenu->hide();
-		}
-	}
-	setCurrentSpot(currentSp);
-	setSpot(&currentSp, currentSp.getSpotNumber());
-}
-Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
-	Spot sp = _currentMenu->getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
-	if (_currentMenu->getIsVisible()) { //click fuera de spot y towerMenu estaba visible
-		_currentMenu->validateClickOnButton(mousex, mousey, sp); //sp regresa con estado y torre de spot
-		TowerMenuButton btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
-		if (btn.getBtnNumber() != -1) {  //se hizo click en un boton
-			if (validateSale(&btn)) { //veo si habilito venta
-				Tower tower = btn.getTower();
-				sell(tower, sp);
-				tower.setSpotNumber(sp.getSpotNumber());
-				//tower.setPosition(currentSpot.getPosition());
-				//tower.setPosition(currentSpot.getInverseTransform().transformRect((currentSpot.getGlobalBounds())).getPosition());
-				//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
-				setActiveTowers(tower);
-				setSpot(&sp, sp.getSpotNumber());
-			}
-			else {
-				std::cout << "Sos pobre: ";
-			}
-		}
-		_currentMenu->hide();
-	}
-	//sp = _currentMenu->getCurrentSpot();
-	_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
-	setSpot(&sp, sp.getSpotNumber());
-	return sp;
-}
-void Level::validateClickOnSpeaker(int mousex, int mousey) {
-	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
-		if (getMusicPlaying()) {
-			setSound(false);
-			setMusicPlaying(false);
-			_ui.setTextureSpeaker("img/complementarias/mute.png");
-		}
-		else {
-			setSound(true);
-			setMusicPlaying(true);
-			_ui.setTextureSpeaker("img/complementarias/musicOn.png");
-		}
 	}
 }
 
@@ -190,8 +116,10 @@ bool Level::validateSale(TowerMenuButton* button) {
 	std::cout << "Oro anterior: " << getGolden() << std::endl;
 	if (price <= getGolden()) {
 		std::cout << "Venta Autorizada" << std::endl;
+		_flagNoCoins = false;
 		return true;
 	}
+	_flagNoCoins = true;
 	return false;
 }
 void Level::sell(Tower tower, Spot& currentSpot) {
@@ -199,7 +127,7 @@ void Level::sell(Tower tower, Spot& currentSpot) {
 	int price = tower.getPrice();
 	setGolden(getGolden() - price);
 	std::cout << "se compro: " << tower.getName() << std::endl;
-	std::cout << "Oro actual: " << getGolden() << std::endl;
+	_ui.setText(0, std::to_string(getGolden()));
 	currentSpot.setCurrentTower(tower);
 	currentSpot.setCurrentTower(tower);
 	currentSpot.setOccupied(true);
@@ -283,5 +211,13 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	}
 	if (_currentMenu->getIsVisible()) {
 		target.draw(*_currentMenu, states);
+	}else if (_currentMenu2->getIsVisible()) {
+		target.draw(*_currentMenu2, states);
 	}
+
+	//NUEVO
+	if (_noCoinsClock.getElapsedTime() < _displayTimeNoCoins && _flagNoCoins) {
+		target.draw(_NoCoins, states); // Dibujar el texto
+	}
+	//FIN NUEVO
 }

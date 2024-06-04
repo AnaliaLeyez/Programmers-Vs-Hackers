@@ -18,10 +18,10 @@ TowerBrian::TowerBrian()
 	_visualRange.setFillColor(sf::Color(0, 255, 0, 120));
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
-	_price = 10;
+	_price = 220;
 	_priceUpgrade = 9;
 	_salesValue = 5;
-	_damage = 10;
+	_damage = 3;
 	_range = 9;
 	_speedAttack = 3;
 	_upgradesAmount = 2;

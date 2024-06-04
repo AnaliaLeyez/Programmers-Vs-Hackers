@@ -67,3 +67,7 @@ void Manager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(*_currentLevel, states);
 }
+
+Manager::~Manager()
+{
+}

@@ -15,4 +15,6 @@ ButtonMaxiWenner::ButtonMaxiWenner()
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 	setSpriteHover();
 	_tower = new TowerWenner();
+	setPrice();
+	setInfo();
 }

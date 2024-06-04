@@ -14,6 +14,7 @@ private:
 public:
 	UI();
 	sf::RectangleShape getSpeaker() const;
+	void setText(int, std::string);
 	sf::Texture getTextureSpeaker() const;
 	void setTextureSpeaker(std::string);
 
