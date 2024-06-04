@@ -25,7 +25,8 @@ TowerMenu2::TowerMenu2()
 
 	_buttons[0]->setPosition(0, -100);
 	_buttons[1]->setPosition(0, 85);
-	//_buttons[0]->setPrice();
+	_buttons[0]->setBtnNumber(1);
+	_buttons[1]->setBtnNumber(2);
 
 	Spot sp;
 	setCurrentSpot(sp);

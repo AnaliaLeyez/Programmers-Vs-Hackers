@@ -65,7 +65,7 @@ void Level::setNoCoinsText()
 	_NoCoins.setFont(_font);
 	_NoCoins.setCharacterSize(70);
 	_NoCoins.setOrigin(_NoCoins.getGlobalBounds().getPosition().x / 2, _NoCoins.getGlobalBounds().height / 2);
-	_NoCoins.setPosition(300, 250);
+	_NoCoins.setPosition(250, 250);
 	_NoCoins.setFillColor(sf::Color(255, 0, 0));
 	_NoCoins.setString("SALDO INSUFICIENTE");
 

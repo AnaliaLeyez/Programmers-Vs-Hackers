@@ -48,12 +48,19 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 	_currentMenu->setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
 	//validar si el spot esta ocupado o no:
 	if (currentSp.getIsOccupied()) { //spot ocupado
-		std::cout << "aca va el menu2";
-		_currentMenu2->setPosition(currentSp.getPosition());
-		_currentMenu2->show();
+		if (!_currentMenu2->getIsVisible()) { //se clickeo en un spot ocupado y el menu2 no era visible
+			std::cout << "aca va el menu2" << std::endl;
+			_currentMenu2->setCurrentSpot(currentSp); //guardo el nro de spot en el tower Menu2;
+			_currentMenu2->setPosition(currentSp.getPosition());
+			_currentMenu2->show();
+		}
+		else { //se clickeo en un spot ocupado y el menu2 era visible
+			_currentMenu2->hide();
+		}
 	}
 	else {  //spot libre
-		_currentMenu->setCurrentSpot(currentSp); //guardo el nro de spot en el tower Menu;
+		_currentMenu2->hide(); //Necesario, en caso q se haya estado mostrando por otro spot
+		//_currentMenu->setCurrentSpot(currentSp); //guardo el nro de spot en el tower Menu; OBS: esta linea ya esta al inicio
 		currentSp.setCurrentTower(_currentMenu->getCurrentSpot().getCurrentTower()); //me aseguro que el currentSpot esta asociado a la tower ahora
 		if (!_currentMenu->getIsVisible()) { //se clickeo en un spot libre y el menu no era visible
 			_currentMenu->setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
@@ -70,11 +77,12 @@ Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 	Spot sp = _currentMenu->getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
 	if (_currentMenu->getIsVisible()) { //click fuera de spot y towerMenu estaba visible
 		clickWithMenu1Open(mousex, mousey, sp);
+		_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
 	}
 	else if (_currentMenu2->getIsVisible()) {
-		_currentMenu2->hide();
+		clickWithMenu2Open(mousex, mousey, sp);
+		_currentMenu2->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
 	}
-	_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
 	setSpot(&sp, sp.getSpotNumber());
 	return sp;
 }
@@ -106,6 +114,42 @@ void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 		}
 	}
 	_currentMenu->hide();
+}
+void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
+{
+	TowerMenuButton btn = _currentMenu2->validateClickOnButton(mousex, mousey, sp);
+	if (btn.getBtnNumber() == 1) {  //se hizo click en el boton 1 que es upgrade:
+		std::cout << "UPGRADE" << std::endl;
+		//esto esta todo copiado del menu1, revisar y ajustar al menu2:
+		//if (validateSale(&btn)) { //veo si habilito venta
+		//	Tower tower = btn.getTower();
+		//	sell(tower, sp);
+		//	tower.setSpotNumber(sp.getSpotNumber());
+		//	//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
+		//	tower.setSpotNumber(sp.getSpotNumber());
+
+		//	sf::Sprite sprite = tower.getSprite(); //posicion del sprite
+		//	sprite.setPosition(sp.getPosition());
+		//	tower.setSprite(sprite);
+
+		//	sf::CircleShape vsRange = tower.getVisualRange(); //posicion del rango
+		//	vsRange.setPosition(sp.getPosition());
+		//	tower.setVisualRange(vsRange);
+
+		//	tower.setPosition(sp.getPosition());
+		//	setActiveTowers(tower);
+		//	setSpot(&sp, sp.getSpotNumber());
+		//}
+		//else {
+		//	_noCoinsClock.restart(); //NUEVO reseteo el clock para que se muestre el cartel
+		//}
+	}
+	else if (btn.getBtnNumber() == 2) {
+		//boton de venta
+		std::cout << "REVENDER TORRE" << std::endl;
+	}
+
+	_currentMenu2->hide();
 }
 void Level::validateClickOnSpeaker(int mousex, int mousey) {
 	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {

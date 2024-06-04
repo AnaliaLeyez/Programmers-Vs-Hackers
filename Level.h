@@ -101,6 +101,7 @@ public:
 	void manageClickOnSpot(int, int, Spot&);
 	Spot manageOutOfSpotClick(int, int);
 	void clickWithMenu1Open(int, int, Spot&);
+	void clickWithMenu2Open(int, int, Spot&);
 	void validateClickOnSpeaker(int, int);
 
 	bool validateSale(TowerMenuButton*); //nuevo
