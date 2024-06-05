@@ -104,7 +104,7 @@ public:
 	void clickWithMenu2Open(int, int, Spot&);
 	void validateClickOnSpeaker(int, int);
 
-	bool validateSale(TowerMenuButton*); //nuevo
+	bool validateSale(Button*); //nuevo
 	void sell(Tower, Spot&);
 
 	void shoot(sf::Vector2f, sf::Vector2f);

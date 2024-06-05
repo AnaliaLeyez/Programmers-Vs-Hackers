@@ -1,7 +1,6 @@
 #pragma once
-#include "TowerMenuButton.h"
 
-class ButtonCashSale : public TowerMenuButton
+class ButtonCashSale : public Button
 {
 public:
 	ButtonCashSale();

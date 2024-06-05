@@ -78,7 +78,7 @@
     <ClCompile Include="TowerBrian.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="TowerMenuButton.cpp">
+    <ClCompile Include="Button.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="TowerSarF.cpp">
@@ -170,9 +170,6 @@
     <ClInclude Include="TowerBrian.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="TowerMenuButton.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="TowerSarF.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -192,6 +189,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="ButtonUpgrade.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

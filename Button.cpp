@@ -1,27 +1,15 @@
 #include <SFML/Graphics.hpp>
 #include "TowerMenu.h"
-#include "TowerMenuButton.h"
+#include "Button.h"
 
 
-Tower TowerMenuButton::getTower() { return *_tower; }
+Tower Button::getTower() { return *_tower; }
+int Button::getPrice() { return _tower->getPrice(); }
+int Button::getDamage() { return _tower->getDamage(); }
+int Button::getBtnNumber() { return _btnNumber; }
 
-int TowerMenuButton::getPrice()
-{
-	return _tower->getPrice();
-}
-
-int TowerMenuButton::getDamage()
-{
-	return _tower->getDamage();
-}
-
-int TowerMenuButton::getBtnNumber() { return _btnNumber; }
-
-void TowerMenuButton::update(sf::Vector2i& mousePosition)
-{
-}
-void TowerMenuButton::setBtnNumber(int n) { _btnNumber = n; }
-void TowerMenuButton::setPrice()
+void Button::setBtnNumber(int n) { _btnNumber = n; }
+void Button::setPrice()
 {
 	if (!_textureBgPrice.loadFromFile("img/menuContextual/priceBg.png")) {
 		throw std::runtime_error("Error al cargar img Oro");
@@ -41,7 +29,7 @@ void TowerMenuButton::setPrice()
 	_price.setFillColor(sf::Color(255, 255, 255));
 	_price.setString("$" + std::to_string(getPrice()));
 }
-void TowerMenuButton::setInfo()
+void Button::setInfo()
 {
 	if (!_textureBgInfo.loadFromFile("img/menuContextual/priceBg.png")) {
 		throw std::runtime_error("Error al cargar Background de Info/precio");
@@ -75,8 +63,8 @@ void TowerMenuButton::setInfo()
 	}
 
 }
-void TowerMenuButton::setMouseHover(bool state) { _mouseHover = state; }
-void TowerMenuButton::setSpriteHover()
+void Button::setMouseHover(bool state) { _mouseHover = state; }
+void Button::setSpriteHover()
 {
 	if (!_textureHover.loadFromFile("img/menuContextual/button_tower_menu_hover.png"))
 	{
@@ -86,7 +74,11 @@ void TowerMenuButton::setSpriteHover()
 	_spriteHover.setScale(0.7f, 0.7f);
 	_spriteHover.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 }
-void TowerMenuButton::draw(sf::RenderTarget& target, sf::RenderStates states) const
+
+void Button::update(sf::Vector2i& mousePosition)
+{
+}
+void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
 	target.draw(_sprite, states);
@@ -103,6 +95,6 @@ void TowerMenuButton::draw(sf::RenderTarget& target, sf::RenderStates states) co
 	
 }
 
-sf::FloatRect TowerMenuButton::getGlobalBounds() const {
+sf::FloatRect Button::getGlobalBounds() const {
 	return getTransform().transformRect(_sprite.getGlobalBounds()); 
 }

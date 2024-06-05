@@ -3,7 +3,7 @@
 #include "Manager.h" //revisar que includes son necesarios, solo los copie del towerMenu
 #include "Level.h"
 #include "Spot.h"
-#include "TowerMenuButton.h"
+#include "Button.h"
 #include "ButtonCashSale.h"
 #include "ButtonUpgrade.h"
 #include "TowerMenu.h"
@@ -32,8 +32,8 @@ TowerMenu2::TowerMenu2()
 	setCurrentSpot(sp);
 }
 bool TowerMenu2::getIsVisible() { return _isVisible; }
-const TowerMenuButton* TowerMenu2::getButtons() const { return *_buttons; }
-TowerMenuButton* TowerMenu2::getButtonByIndex(int i) const { return _buttons[i]; }
+const Button* TowerMenu2::getButtons() const { return *_buttons; }
+Button* TowerMenu2::getButtonByIndex(int i) const { return _buttons[i]; }
 Spot TowerMenu2::getCurrentSpot() const { return _currentSpot; }
 void TowerMenu2::setCurrentSpot(Spot sp) { _currentSpot = sp; }
 void TowerMenu2::setButton(bool states, int i) { _buttons[i]->setMouseHover(states); }
@@ -57,7 +57,7 @@ void TowerMenu2::mouseCheck(sf::Vector2i& mousePosition)
 	}
 }
 
-TowerMenuButton TowerMenu2::validateClickOnButton(int mousex, int mousey, Spot& spot) {
+Button TowerMenu2::validateClickOnButton(int mousex, int mousey, Spot& spot) {
 	sf::Vector2f mousePos = sf::Vector2f(static_cast<float>(mousex), static_cast<float>(mousey));
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousePos);
 	for (int i = 0; i < 4; i++) {
@@ -65,7 +65,7 @@ TowerMenuButton TowerMenu2::validateClickOnButton(int mousex, int mousey, Spot& 
 			return *_buttons[i];
 		}
 	}
-	TowerMenuButton btn;
+	Button btn;
 	btn.setBtnNumber(-1);
 	return btn;
 }

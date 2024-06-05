@@ -1,6 +1,6 @@
 #pragma once
 #include "Tower.h"
-class TowerMenuButton : public sf::Drawable, public sf::Transformable
+class Button : public sf::Drawable, public sf::Transformable
 {
 protected:
 	Tower* _tower;

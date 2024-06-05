@@ -163,7 +163,7 @@
     <ClCompile Include="TowerMenu.cpp" />
     <ClCompile Include="TowerBrian.cpp" />
     <ClCompile Include="TowerMenu2.cpp" />
-    <ClCompile Include="TowerMenuButton.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="TowerSarF.cpp" />
     <ClCompile Include="TowerKloster.cpp" />
     <ClCompile Include="TowerWenner.cpp" />
@@ -194,7 +194,7 @@
     <ClInclude Include="TowerMenu.h" />
     <ClInclude Include="TowerBrian.h" />
     <ClInclude Include="TowerMenu2.h" />
-    <ClInclude Include="TowerMenuButton.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="TowerSarF.h" />
     <ClInclude Include="TowerKloster.h" />
     <ClInclude Include="TowerWenner.h" />

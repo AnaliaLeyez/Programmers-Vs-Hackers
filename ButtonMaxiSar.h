@@ -1,6 +1,6 @@
 #pragma once
 
-class ButtonMaxiSar : public TowerMenuButton
+class ButtonMaxiSar : public Button
 {
 public:
 	ButtonMaxiSar();

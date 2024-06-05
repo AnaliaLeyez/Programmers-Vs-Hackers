@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "TowerMenuButton.h"
+#include "Button.h"
 #include "ButtonCashSale.h"
 
 ButtonCashSale::ButtonCashSale()

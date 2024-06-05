@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "TowerSarF.h"
-#include "TowerMenuButton.h"
+#include "Button.h"
 #include "ButtonMaxiSar.h"
 
 ButtonMaxiSar::ButtonMaxiSar()

@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "TowerKloster.h"
-#include "TowerMenuButton.h"
+#include "Button.h"
 #include "ButtonKloster.h"
 
 ButtonKloster::ButtonKloster()

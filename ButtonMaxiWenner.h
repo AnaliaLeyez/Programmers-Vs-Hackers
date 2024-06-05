@@ -1,5 +1,5 @@
 #pragma once
-class ButtonMaxiWenner : public TowerMenuButton
+class ButtonMaxiWenner : public Button
 {
 public:
 	ButtonMaxiWenner();

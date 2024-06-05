@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "TowerBrian.h"
-#include "TowerMenuButton.h"
+#include "Button.h"
 #include "ButtonBrian.h"
 
 ButtonBrian::ButtonBrian()

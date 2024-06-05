@@ -1,3 +1,4 @@
+#include "Button.h"
 #include "ButtonUpgrade.h"
 
 ButtonUpgrade::ButtonUpgrade()

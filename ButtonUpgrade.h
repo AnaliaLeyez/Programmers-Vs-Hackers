@@ -1,6 +1,6 @@
 #pragma once
-#include "TowerMenuButton.h"
-class ButtonUpgrade : public TowerMenuButton
+
+class ButtonUpgrade : public Button
 {
 public:
 	ButtonUpgrade();

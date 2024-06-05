@@ -88,7 +88,7 @@ Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 }
 void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 {
-	TowerMenuButton btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
+	Button btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
 	if (btn.getBtnNumber() != -1) {  //se hizo click en un boton
 		if (validateSale(&btn)) { //veo si habilito venta
 			Tower tower = btn.getTower();
@@ -117,7 +117,7 @@ void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 }
 void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 {
-	TowerMenuButton btn = _currentMenu2->validateClickOnButton(mousex, mousey, sp);
+	Button btn = _currentMenu2->validateClickOnButton(mousex, mousey, sp);
 	if (btn.getBtnNumber() == 1) {  //se hizo click en el boton 1 que es upgrade:
 		std::cout << "UPGRADE" << std::endl;
 		//esto esta todo copiado del menu1, revisar y ajustar al menu2:

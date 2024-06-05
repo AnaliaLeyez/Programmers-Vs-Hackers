@@ -1,5 +1,5 @@
 #pragma once
-class ButtonBrian : public TowerMenuButton
+class ButtonBrian : public Button
 {
 public:
 	ButtonBrian();

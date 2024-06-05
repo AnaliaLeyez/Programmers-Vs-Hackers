@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "TowerWenner.h"
-#include "TowerMenuButton.h"
+#include "Button.h"
 #include "ButtonMaxiWenner.h"
 
 ButtonMaxiWenner::ButtonMaxiWenner()

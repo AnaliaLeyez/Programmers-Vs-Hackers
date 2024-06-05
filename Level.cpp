@@ -103,7 +103,7 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 	}
 }
 
-bool Level::validateSale(TowerMenuButton* button) {
+bool Level::validateSale(Button* button) {
 	int price = button->getTower().getPrice();
 	if (price <= getGolden()) {
 		_flagNoCoins = false;
