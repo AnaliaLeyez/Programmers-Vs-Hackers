@@ -88,10 +88,10 @@ Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 }
 void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 {
-	Button btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
-	if (btn.getBtnNumber() != -1) {  //se hizo click en un boton
-		if (validateSale(&btn)) { //veo si habilito venta
-			Tower tower = btn.getTower();
+	Button* btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
+	if (btn->getBtnNumber() != -1) {  //se hizo click en un boton
+		if (validateSale(btn)) { //veo si habilito venta
+			Tower tower = btn->getTower();
 			sell(tower, sp);
 			tower.setSpotNumber(sp.getSpotNumber());
 			//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
