@@ -27,7 +27,7 @@ public:
 	void setVelocity(sf::Vector2f);
 	void setDamage(int);
 
-	void moveBullet(sf::Vector2f, sf::Vector2f);
+	//void moveBullet(sf::Vector2f, sf::Vector2f);
 
 	sf::FloatRect getBounds() const;
 	void update();

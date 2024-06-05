@@ -26,9 +26,9 @@ Bullet::Bullet(sf::Vector2f initialPosition, sf::Vector2f target)
 
 void Bullet::moveToward()
 {
-	// Calcular el vector de direcci�n entre la torre y el objetivo
+	//Calcular el vector de direccion entre la torre y el objetivo
 	sf::Vector2f _direction = _enemyPosition - _collisionCircle.getPosition();
-	// Normalizar el vector de direcci�n
+	//Normalizar el vector de direccion
 	float length = std::sqrt(_direction.x * _direction.x + _direction.y * _direction.y);
 	_direction /= length;
 
@@ -47,18 +47,18 @@ void Bullet::setDirection(sf::Vector2f d) { _direction = d; }
 void Bullet::setVelocity(sf::Vector2f velocity) { _velocity = velocity; }
 void Bullet::setDamage(int damage) { _damage = damage; }
 
-void Bullet::moveBullet(sf::Vector2f towerPosition, sf::Vector2f enemyPosition)
-{
-	// Calcular el vector de direccion entre la torre y el objetivo
-	sf::Vector2f _direction = enemyPosition - towerPosition;
-
-	// Lo del teorema del mago ese griego viejo
-	_direction /= sqrt((float)std::pow(_direction.x, 2) + (float)std::pow(_direction.y, 2));
-
-	// Mover el proyectil en la direccion calculada
-	move(_direction.x * _velocity.x, _direction.y * _velocity.y);
-
-}
+//void Bullet::moveBullet(sf::Vector2f towerPosition, sf::Vector2f enemyPosition)
+//{
+//	// Calcular el vector de direccion entre la torre y el objetivo
+//	sf::Vector2f _direction = enemyPosition - towerPosition;
+//
+//	// Lo del teorema del mago ese griego viejo
+//	_direction /= sqrt((float)std::pow(_direction.x, 2) + (float)std::pow(_direction.y, 2));
+//
+//	// Mover el proyectil en la direccion calculada
+//	move(_direction.x * _velocity.x, _direction.y * _velocity.y);
+//
+//}
 
 void Bullet::update()
 {

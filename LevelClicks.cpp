@@ -120,6 +120,7 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 	Button btn = _currentMenu2->validateClickOnButton(mousex, mousey, sp);
 	if (btn.getBtnNumber() == 1) {  //se hizo click en el boton 1 que es upgrade:
 		std::cout << "UPGRADE" << std::endl;
+		//tower.upgrade();
 		//esto esta todo copiado del menu1, revisar y ajustar al menu2:
 		//if (validateSale(&btn)) { //veo si habilito venta
 		//	Tower tower = btn.getTower();
