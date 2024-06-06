@@ -21,11 +21,6 @@ TowerMenu::TowerMenu()
 	_sprite.setOrigin(_sprite.getLocalBounds().width / 2, _sprite.getLocalBounds().height / 2);
 	_sprite.setScale(0.4f, 0.4f);
 
-	//Buttons initialization
-	//_buttons[0] = new ButtonBrian();
-	//_buttons[1] = new ButtonMaxiSar();
-	//_buttons[2] = new ButtonMaxiWenner();
-	//_buttons[3] = new ButtonKloster();
 	Button* btn = new ButtonBrian(); //saque este formato de los spots.. pero necesito q cada boton sea distinto
 	_buttons.push_back(btn);
 	btn = new ButtonMaxiSar();
@@ -40,10 +35,6 @@ TowerMenu::TowerMenu()
 	_buttons[2]->setPosition(0, 85);
 	_buttons[3]->setPosition(-100, 0);
 
-	//for (int i = 0; i < 4; i++) {
-	//	_buttons[i]->setBtnNumber(i);
-	//	_buttons[i]->setPrice();
-	//}
 	int i = 0;
 	for (Button* button : _buttons) {
 		button->setBtnNumber(i);
@@ -82,20 +73,14 @@ void TowerMenu::mouseCheck(sf::Vector2i& mousePosition)
 	}
 }
 
-//Button TowerMenu::validateClickOnButton(int mousex, int mousey, Spot& spot) {
 Button* TowerMenu::validateClickOnButton(int mousex, int mousey, Spot& spot) { //aca deberia recibir tambien int quantityButtons
 	sf::Vector2f mousePos = sf::Vector2f(static_cast<float>(mousex), static_cast<float>(mousey));
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousePos);
-	//for (int i = 0; i < 4; i++) { //si quiero reutilizar esta funcion el 4 lo debo reemplazar por una variable xq en menu2 son 2 botones
-	//	if (_buttons[i]->getGlobalBounds().contains(transformedMousePos)) {
 	for (Button* button : _buttons) { //si quiero reutilizar esta funcion el 4 lo debo reemplazar por una variable xq en menu2 son 2 botones
 		if (button->getGlobalBounds().contains(transformedMousePos)) {
-			//return *_buttons[i];
 			return button;
 		}
 	}
-	//Button btn;
-	//btn.setBtnNumber(-1);
 	Button* btn = new ButtonBrian();
 	btn->setBtnNumber(-1);
 	return btn;
@@ -103,9 +88,6 @@ Button* TowerMenu::validateClickOnButton(int mousex, int mousey, Spot& spot) { /
 
 void TowerMenu::update(sf::Vector2i& mousePosition) {
 	if (getIsVisible()) {
-		//for (int i = 0; i < 4; i++) { //si quiero reutilizar esta funcion el 4 lo debo reemplazar por una variable xq en menu2 son 2 botones
-		//	_buttons[i]->update(mousePosition);
-		//}
 		for (Button* button : _buttons)
 		{
 			button->update(mousePosition);;
@@ -116,9 +98,6 @@ void TowerMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
 	target.draw(_sprite, states);
-	//for (int i = 0; i < 4; i++) {
-	//	target.draw(*_buttons[i], states);
-	//}
 	for (Button* button : _buttons)
 	{
 		target.draw(*button, states);

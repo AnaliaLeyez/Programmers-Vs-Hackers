@@ -4,6 +4,6 @@ class TowerBrian : public Tower
 {
 public:
 	TowerBrian();
-	void update1();
+	void upgrade() override;
 };
 

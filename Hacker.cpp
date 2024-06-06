@@ -11,6 +11,7 @@ sf::Vector2f Hacker::getVelocity() const { return _velocity; }
 sf::Vector2f Hacker::getDirection() const { return _direction; }
 bool Hacker::getBoss() const { return _isABoss; }
 int Hacker::getGoldenDrop() const { return _goldenDrop; }
+bool Hacker::getEnd() const { return _reachedEnd; }
 
 void Hacker::setLife(int life) { _life = life; }
 void Hacker::setDamage(int damage) { _damage = damage; }
@@ -41,10 +42,16 @@ void Hacker::moveHacker(int arr[][30])
 	case 4:
 		_direction = { 0.0f,1.0f };
 		break;
-	case 5:
-		_direction = { -1.0f,0.0f };
+	case 5: //esto lo podemos sacar, cambiar numeracion
+		_direction = { 0.0f,-1.0f };
+		_reachedEnd = false;
+		break;
+	case 8:
+		_direction = { 0.0f,1.0f };
+		_reachedEnd = true;
 		break;
 	default:
+		//_reachedEnd = false;
 		break;
 	}
 	_collisionRect.move(_direction);

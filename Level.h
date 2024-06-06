@@ -54,6 +54,8 @@ protected:
 	sf::Text _NoCoins;
 	sf::Time _displayTimeNoCoins;
 	bool _flagNoCoins;
+	sf::Text _gameOver;
+	bool _flagGameOver;
 	//FIN NUEVO
 public:
 	int getIdLevel() const;
@@ -67,7 +69,7 @@ public:
 	TowerMenu getCurrentMenu() const;
 
 	int getGolden();
-	int getEnergy() const;
+	int getEnergy();
 	sf::SoundBuffer getBuffer() const;
 	bool getMusicPlaying() const;
 	sf::Sound getSound() const;
@@ -94,7 +96,6 @@ public:
 
 	void spawnWave();
 
-	//void handlerEvent(const sf::Event&);  //esto no se esta usando ni se definio
 	void mouseCheck(sf::Vector2i&);
 	void validateClick(int, int);
 	int validateClickOnSpot(int, int);
@@ -108,6 +109,9 @@ public:
 	void sell(Tower, Spot&);
 
 	void shoot(sf::Vector2f, sf::Vector2f);
+
+	//nuevo
+	void setGameOverText();
 
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update(sf::Vector2i&);

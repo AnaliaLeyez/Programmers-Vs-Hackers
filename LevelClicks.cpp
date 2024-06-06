@@ -74,12 +74,15 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 	setSpot(&currentSp, currentSp.getSpotNumber());
 }
 Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
-	Spot sp = _currentMenu->getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
+	//Spot sp = _currentMenu->getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
+	Spot sp;
 	if (_currentMenu->getIsVisible()) { //click fuera de spot y towerMenu estaba visible
+		Spot sp = _currentMenu->getCurrentSpot();
 		clickWithMenu1Open(mousex, mousey, sp);
 		_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
 	}
 	else if (_currentMenu2->getIsVisible()) {
+		Spot sp = _currentMenu2->getCurrentSpot();
 		clickWithMenu2Open(mousex, mousey, sp);
 		_currentMenu2->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
 	}
@@ -120,34 +123,14 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 	Button btn = _currentMenu2->validateClickOnButton(mousex, mousey, sp);
 	if (btn.getBtnNumber() == 1) {  //se hizo click en el boton 1 que es upgrade:
 		std::cout << "UPGRADE" << std::endl;
-		//tower.upgrade();
-		//esto esta todo copiado del menu1, revisar y ajustar al menu2:
-		//if (validateSale(&btn)) { //veo si habilito venta
-		//	Tower tower = btn.getTower();
-		//	sell(tower, sp);
-		//	tower.setSpotNumber(sp.getSpotNumber());
-		//	//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
-		//	tower.setSpotNumber(sp.getSpotNumber());
-
-		//	sf::Sprite sprite = tower.getSprite(); //posicion del sprite
-		//	sprite.setPosition(sp.getPosition());
-		//	tower.setSprite(sprite);
-
-		//	sf::CircleShape vsRange = tower.getVisualRange(); //posicion del rango
-		//	vsRange.setPosition(sp.getPosition());
-		//	tower.setVisualRange(vsRange);
-
-		//	tower.setPosition(sp.getPosition());
-		//	setActiveTowers(tower);
-		//	setSpot(&sp, sp.getSpotNumber());
-		//}
-		//else {
-		//	_noCoinsClock.restart(); //NUEVO reseteo el clock para que se muestre el cartel
-		//}
+		Tower tw = sp.getCurrentTower();
+		//tw.getID();
+		tw.upgrade();
+		std::cout << "nuevo danio" << tw.getDamage() << std::endl;		
 	}
 	else if (btn.getBtnNumber() == 2) {
 		//boton de venta
-		std::cout << "REVENDER TORRE" << std::endl;
+		Spot sp = _currentMenu->getCurrentSpot();
 	}
 
 	_currentMenu2->hide();

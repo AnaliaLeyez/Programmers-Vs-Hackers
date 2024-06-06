@@ -28,7 +28,7 @@ TowerWenner::TowerWenner()
 	_fireRate = 1.0f; // Tiempo en segundos entre disparos
 }
 
-void TowerWenner::update1()
+void TowerWenner::upgrade()
 {
 	_priceUpgrade = 9;
 	_salesValue = 7;

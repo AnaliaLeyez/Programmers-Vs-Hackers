@@ -4,5 +4,5 @@ class TowerKloster : public Tower
 {
 public:
 	TowerKloster();
-	void update1();
+	void upgrade();
 };

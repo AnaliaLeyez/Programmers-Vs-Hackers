@@ -4,6 +4,6 @@ class TowerSarF : public Tower
 {
 public:
 	TowerSarF();
-	void update1();
+	void upgrade();
 };
 

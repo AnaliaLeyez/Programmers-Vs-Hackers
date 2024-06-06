@@ -7,14 +7,14 @@ UI::UI() {
 		throw std::runtime_error("Error al cargar img Oro");
 	}
 	_coin.setTexture(_textureCoins);
-	_coin.setPosition(510, 20);
+	_coin.setPosition(550, 35);
 	_coin.setOrigin(_coin.getGlobalBounds().width / 2, _coin.getGlobalBounds().height / 2);
 
 	if (!_textureRay.loadFromFile("img/complementarias/energia.png")) {
 		throw std::runtime_error("Error al cargar img Rayo");
 	}
 	_ray.setTexture(_textureRay);
-	_ray.setPosition(340, 25);
+	_ray.setPosition(360, 40);
 	_ray.setOrigin( _ray.getGlobalBounds().width / 2, _ray.getGlobalBounds().height / 2);
 
 	//parlante

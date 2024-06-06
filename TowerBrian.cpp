@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-
 #include "Hacker.h"
 #include "Tower.h"
 #include "TowerBrian.h"
@@ -28,7 +27,7 @@ TowerBrian::TowerBrian()
 	_fireRate = 1.0f; // Tiempo en segundos entre disparos
 }
 
-void TowerBrian::update1()
+void TowerBrian::upgrade() 
 {
 	_name = "Laboratorio 2";
 	_priceUpgrade = 9;

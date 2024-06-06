@@ -7,13 +7,11 @@ protected:
 	sf::Sprite _sprite;
 	sf::Texture _texture;
 	bool _isVisible;
-	//Button* _buttons[4];
 	std::vector <Button*> _buttons;
 	Spot _currentSpot;
 public:
 	TowerMenu();
 	bool getIsVisible();
-	//const Button* getButtons() const;
 	const std::vector <Button*> getButtons() const;
 	Button* getButtonByIndex(int i) const;
 	Spot getCurrentSpot() const;
@@ -22,7 +20,6 @@ public:
 	void hide();
 	void show();
 	void mouseCheck(sf::Vector2i&);
-	//Button validateClickOnButton(int, int, Spot&);
 	Button* validateClickOnButton(int, int, Spot&);
 	void update(sf::Vector2i&);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;

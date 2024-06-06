@@ -26,6 +26,9 @@ protected:
 	float _fireRate;
 
 public:
+	virtual void upgrade() {}
+	//virtual void upgrade()=0;
+	
 	//Getters
 	std::string getName() const;
 	sf::Sprite getSprite() const;

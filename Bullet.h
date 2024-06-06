@@ -14,7 +14,6 @@ protected:
 	float _speed;
 
 public:
-
 	sf::CircleShape _collisionCircle;
 	Bullet(sf::Vector2f initialPosition = { 100,100 }, sf::Vector2f target = { 300,300 });
 	void moveToward();
@@ -26,8 +25,6 @@ public:
 	void setDirection(sf::Vector2f);
 	void setVelocity(sf::Vector2f);
 	void setDamage(int);
-
-	//void moveBullet(sf::Vector2f, sf::Vector2f);
 
 	sf::FloatRect getBounds() const;
 	void update();

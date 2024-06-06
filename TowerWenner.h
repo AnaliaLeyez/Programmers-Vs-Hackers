@@ -4,7 +4,7 @@ class TowerWenner : public Tower
 {
 public:
 	TowerWenner();
-	void update1();
+	void upgrade();
 };
 
 

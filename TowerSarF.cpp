@@ -30,7 +30,7 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 	_fireRate = 1.0f; // Tiempo en segundos entre disparos
 }
 
-void TowerSarF::update1()
+void TowerSarF::upgrade()
 {
 	_priceUpgrade = 9;
 	_salesValue = 7;

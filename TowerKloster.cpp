@@ -28,7 +28,7 @@ TowerKloster::TowerKloster()
 	_fireRate = 1.0f; // Tiempo en segundos entre disparos
 }
 
-void TowerKloster::update1()
+void TowerKloster::upgrade()
 {
 	_priceUpgrade = 9;
 	_salesValue = 7;

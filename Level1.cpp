@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib> // Necesario para std::rand() y std::srand()
+#include <ctime> 
 #include "UI.h"
 #include "Map.h"
 #include "Map1.h"
@@ -7,6 +9,8 @@
 #include "TowerKloster.h"
 #include "TowerSarF.h"
 #include "TowerWenner.h"
+#include "HackerTrainee.h"
+#include "HackerJunior.h"
 #include "Level.h"
 #include "Spot.h"
 #include "Level1.h"
@@ -34,29 +38,61 @@ for (int i = 0; i < 5; i++)
 }
 
 void Level::spawnWave() {
+	std::srand(std::time(nullptr));
 	static int enemyIndex = 0;
+	static int traineeCount = 0; // Contador para los HackerTrainee
+	static int juniorCount = 0; //Contador para los HackerJunior
 
-	// Verifico si todavía hay enemigos para agregar en esta oleada
 	if (enemyIndex < _enemiesPerWave) {
-		// Genero un nuevo enemigo
-		if (_enemyClock.getElapsedTime().asSeconds() >= _timeBetweenEnemies) {
-
-			HackerTrainee* hacker = new HackerTrainee();
-			_enemies.push_back(hacker);
-			//std::cout << "Wave " << _currentWave << ": Enemigo " << enemyIndex + 1 << " de " << _enemiesPerWave << std::endl;
-			_enemyClock.restart();
+		// Genera un nuevo enemigo
+		int randomTime = std::rand() % 8 + 1;
+		if (_enemyClock.getElapsedTime().asSeconds() >= randomTime) {
+			// Oleada 1: Todos los HackerTrainee
+			if (_currentWave == 1) {
+				HackerTrainee* trainee = new HackerTrainee();
+				_enemies.push_back(trainee);
+				++traineeCount;
+			}
+			// Oleada 2: Mitad HackerTrainee y mitad HackerJunior
+			else if (_currentWave == 2) {
+				if (enemyIndex % 2 == 0) {
+					HackerTrainee* trainee = new HackerTrainee();
+					_enemies.push_back(trainee);
+					++traineeCount;
+				}
+				else {
+					HackerJunior* junior = new HackerJunior();
+					_enemies.push_back(junior);
+					++juniorCount;
+				}
+			}
+			// Oleada 3: Más HackerJunior que HackerTrainee
+			else if (_currentWave == 3) {
+				if (juniorCount < traineeCount) {
+					HackerJunior* junior = new HackerJunior();
+					_enemies.push_back(junior);
+					++juniorCount;
+				}
+				else {
+					HackerTrainee* trainee = new HackerTrainee();
+					_enemies.push_back(trainee);
+					++traineeCount;
+				}
+			}
 			++enemyIndex;
+			_enemyClock.restart();
+			std::cout << randomTime << std::endl;
 		}
 	}
 	else {
-		// Si ya agregue todos los enemigos de esta oleada
-		enemyIndex = 0; // Reinicio el índice para la próxima oleada
-		_enemiesPerWave += 10; // Incremento la cantidad de enemigos para la próxima oleada
-		++_currentWave; // Incremento el número de oleada
-		/*std::cout << "Comenzando Wave " << _currentWave << std::endl;*/
-		_waveClock.restart(); // Reinicio el temporizador de la oleada
+		// Si ya se agregaron todos los enemigos de esta oleada
+		enemyIndex = 0; // Reinicia el índice para la próxima oleada
+		_enemiesPerWave += 10; // Incrementa la cantidad de enemigos para la próxima oleada
+		++_currentWave; // Incrementa el número de oleada
+		_waveClock.restart(); // Reinicia el temporizador de la oleada
 	}
 }
+
 
 Level1::Level1()
 {
@@ -64,6 +100,7 @@ Level1::Level1()
 	_enemiesPerWave = 5;
 	_timeBetweenWaves = 10;
 	_timeBetweenEnemies = 2;
+	_timeBetweenEnemies = std::rand() % 15 + 1; ///ver si esta queda o se va 
 	_waveClock.restart();
 	_enemyClock.restart();
 
