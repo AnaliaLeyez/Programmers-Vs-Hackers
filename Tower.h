@@ -13,7 +13,7 @@ protected:
 	int _price;
 	int _priceUpgrade;
 	int _salesValue;
-	//Propiedades b�licas:
+	//Propiedades belicas:
 	int _damage;
 	int _range;
 	int _speedAttack;

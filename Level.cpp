@@ -45,7 +45,7 @@ void Level::setEnergy(int energy) { _energy = energy; }
 void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
 void Level::setTowersAvailable(Tower towerAvailable) { _towersAvailable.push_back(towerAvailable); }
-void Level::setActiveTowers(Tower tower) { _activeTowers.push_back(tower); }
+void Level::setActiveTowers(Tower* tower) { _activeTowers.push_back(*tower); }
 void Level::setSpot(Spot* sp, int n) {
 	for (auto& spot : _spots) {
 		if (spot->getSpotNumber() == n) {
@@ -101,7 +101,7 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 }
 
 bool Level::validateSale(Button* button) {
-	int price = button->getTower().getPrice();
+	int price = button->getTower()->getPrice(); //antes: .getPrice()
 	if (price <= getGolden()) {
 		_flagNoCoins = false;
 		return true;
@@ -109,10 +109,10 @@ bool Level::validateSale(Button* button) {
 	_flagNoCoins = true;
 	return false;
 }
-void Level::sell(Tower tower, Spot& currentSpot) {
-	int price = tower.getPrice();
+void Level::sell(Tower* tower, Spot& currentSpot) {
+	int price = tower->getPrice();
 	setGolden(getGolden() - price);
-	std::cout << "se compro: " << tower.getName() << std::endl;
+	std::cout << "se compro: " << tower->getName() << std::endl;
 	_ui.setText(0, std::to_string(getGolden()));
 	currentSpot.setCurrentTower(tower);
 	currentSpot.setCurrentTower(tower);
@@ -154,7 +154,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 				while (itB != _bullets.end())
 				{
 					Bullet& bullet = *itB;
-					/*bullet.update();*/
 
 					if (bullet._collisionCircle.getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
 					{
@@ -181,7 +180,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 
 			if (hacker->getLife() <= 0)
 			{
-
 				itH = _enemies.erase(itH);
 			}
 			else
@@ -189,23 +187,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 				++itH;
 			}
 		}
-
-		//for (auto& hacker : _enemies) {
-		//	if (hacker->getEnd() == true) {
-		//		if (getEnergy()-50>= 0) { //hay que dar un margen de tiempo al ataque xq sino resta mucho de golpe
-		//			_dying = true;
-		//			setEnergy(getEnergy() - 2);
-		//			_ui.setText(1, std::to_string(getEnergy()));
-		//		}else {
-		//			_flagGameOver = true;
-		//			setGameOverText();
-		//		}
-		//		break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
-		//	}
-		//	else  {				
-		//		_dying = false;
-		//	}
-		//}
 		 
 		for (auto& hacker : _enemies) {
 			if (hacker->getEnd() == true) {

@@ -8,7 +8,7 @@ sf::Texture Spot::_textureB;
 Spot::Spot()
 {
 	_spotNumber = 0;
-	_currentTower.setPrice(0);
+	//_currentTower->setPrice(0);
     _mouseHover = false;
 	if (!_textureA.loadFromFile("img/maps/spot_martillo.png")) {
 		throw std::runtime_error("Error img Torre Brian");
@@ -29,7 +29,7 @@ int Spot::getSpotNumber() const { return _spotNumber; }
 
 bool Spot::getIsOccupied() const { return _occupied; }
 
-Tower Spot::getCurrentTower() const { return _currentTower; }
+Tower* Spot::getCurrentTower() const { return _currentTower; }
 
 bool Spot::getMouseHover() const { return _mouseHover; }
 
@@ -44,7 +44,7 @@ void Spot::setMouseHover(bool state) { _mouseHover = state; }
 
 void Spot::setOccupied(bool status){ _occupied = status; }
 
-void Spot::setCurrentTower(Tower tower){ _currentTower = tower; }
+void Spot::setCurrentTower(Tower* tower){ _currentTower = tower; }
 
 void Spot::validateMouseHover(bool &_mouseHover)
 {
@@ -58,7 +58,7 @@ void Spot::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
 	if (getIsOccupied()) {
-		target.draw(_currentTower, states);
+		target.draw(*_currentTower, states);
 	}
 	else {
 		_mouseHover ? target.draw(_spriteB, states) : target.draw(_spriteA, states);

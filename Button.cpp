@@ -3,7 +3,7 @@
 #include "Button.h"
 
 
-Tower Button::getTower() { return *_tower; }
+Tower* Button::getTower() { return _tower; }
 int Button::getPrice() { return _tower->getPrice(); }
 int Button::getDamage() { return _tower->getDamage(); }
 int Button::getBtnNumber() { return _btnNumber; }

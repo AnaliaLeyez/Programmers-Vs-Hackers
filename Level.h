@@ -87,7 +87,7 @@ public:
 	void setMusicPlaying(bool);
 	void setSound(bool);
 	void setTowersAvailable(Tower);
-	void setActiveTowers(Tower);
+	void setActiveTowers(Tower*);
 	void setSpot(Spot*, int); //setea la info de un spot en particular
 	void setCurrentSpot(Spot); //para que el currentMenu tenga su Spot asociado
 	void setCurrentMenu(TowerMenu*);
@@ -106,7 +106,7 @@ public:
 	void validateClickOnSpeaker(int, int);
 
 	bool validateSale(Button*); //nuevo
-	void sell(Tower, Spot&);
+	void sell(Tower*, Spot&);
 
 	void shoot(sf::Vector2f, sf::Vector2f);
 

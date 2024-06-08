@@ -94,23 +94,30 @@ void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 	Button* btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
 	if (btn->getBtnNumber() != -1) {  //se hizo click en un boton
 		if (validateSale(btn)) { //veo si habilito venta
-			Tower tower = btn->getTower();
+			Tower* tower = btn->getTower();  // cuando hago esto desaparece tower
+			if (tower != nullptr) {
+				//Tower& towerRef = *tower;
+				
 			sell(tower, sp);
-			tower.setSpotNumber(sp.getSpotNumber());
+			tower->setSpotNumber(sp.getSpotNumber());
 			//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
-			tower.setSpotNumber(sp.getSpotNumber());
+			tower->setSpotNumber(sp.getSpotNumber());
 
-			sf::Sprite sprite = tower.getSprite(); //posicion del sprite
+			sf::Sprite sprite = tower->getSprite(); //posicion del sprite
 			sprite.setPosition(sp.getPosition());
-			tower.setSprite(sprite);
+			tower->setSprite(sprite);
 
-			sf::CircleShape vsRange = tower.getVisualRange(); //posicion del rango
+			sf::CircleShape vsRange = tower->getVisualRange(); //posicion del rango
 			vsRange.setPosition(sp.getPosition());
-			tower.setVisualRange(vsRange);
+			tower->setVisualRange(vsRange);
 
-			tower.setPosition(sp.getPosition());
+			tower->setPosition(sp.getPosition());
 			setActiveTowers(tower);
 			setSpot(&sp, sp.getSpotNumber());
+			}
+			else {
+				// Maneja el caso donde '_tower' es nullptr
+			}
 		}
 		else {
 			_noCoinsClock.restart(); //NUEVO reseteo el clock para que se muestre el cartel
@@ -123,10 +130,9 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 	Button btn = _currentMenu2->validateClickOnButton(mousex, mousey, sp);
 	if (btn.getBtnNumber() == 1) {  //se hizo click en el boton 1 que es upgrade:
 		std::cout << "UPGRADE" << std::endl;
-		Tower tw = sp.getCurrentTower();
-		//tw.getID();
-		tw.upgrade();
-		std::cout << "nuevo danio" << tw.getDamage() << std::endl;		
+		/*Tower* tw = sp.getCurrentTower();
+		tw->upgrade();
+		std::cout << "nuevo danio" << tw->getDamage() << std::endl;	*/	
 	}
 	else if (btn.getBtnNumber() == 2) {
 		//boton de venta

@@ -29,20 +29,6 @@ void Tower::setPriceUpgrade(int price) { _priceUpgrade = price; }
 void Tower::setCooldown(int value) { (value == 0) ? _cooldown = 0 : _cooldown++; }
 void Tower::setSpotNumber(int n) { _spotNumber = n; }
 
-//Comportamiento
-/*
-void Tower::shoot(Hacker& objetivo)
-{
-    if (_cooldown > 10)
-    {
-        GamePlay& gp = GamePlay::getInstance();
-        gp.shoot(getPosition());
-        _cooldown = 0;
-    }
-    objetivo.getLife() -= getDamage();
-}
-*/
-
 void Tower::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     states.transform *= getTransform();

@@ -20,7 +20,8 @@ protected:
 	sf::Texture _textureSword;
 	sf::Sprite _spriteSword;
 public:
-	Tower getTower();
+	//Tower getTower();
+	Tower* getTower();
 	int getPrice();
 	int getDamage();
 	int getBtnNumber();
