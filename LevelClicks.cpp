@@ -133,9 +133,7 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 		Tower* tw = sp.getCurrentTower();
 		tw->upgrade();
 		std::cout << "nuevo danio" << tw->getDamage() << std::endl;
-		/*Tower* tw = sp.getCurrentTower();
-		tw->upgrade();
-		std::cout << "nuevo danio" << tw->getDamage() << std::endl;	*/	
+		std::cout << sp.getCurrentTower()->getDamage() << std::endl;
 	}
 	else if (btn.getBtnNumber() == 2) {
 		//boton de venta
