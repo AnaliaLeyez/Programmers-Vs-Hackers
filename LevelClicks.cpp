@@ -130,6 +130,8 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 	Button btn = _currentMenu2->validateClickOnButton(mousex, mousey, sp);
 	if (btn.getBtnNumber() == 1) {  //se hizo click en el boton 1 que es upgrade:
 		std::cout << "UPGRADE" << std::endl;
+		sp.getCurrentTower()->update();
+		std::cout << "nuevo danio" << sp.getCurrentTower()->getDamage() << std::endl;
 		/*Tower* tw = sp.getCurrentTower();
 		tw->upgrade();
 		std::cout << "nuevo danio" << tw->getDamage() << std::endl;	*/	
