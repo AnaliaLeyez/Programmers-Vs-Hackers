@@ -9,7 +9,7 @@ protected:
 	//sf::Texture _texture;
 	sf::Vector2f _direction;
 	sf::Vector2f _velocity;
-	sf::Vector2f _enemyPosition;  //dudo mucho que esto est� correcto tenerlo ac�
+	
 	int _damage;
 	float _speed;
 
@@ -31,4 +31,7 @@ public:
 	sf::FloatRect getBounds() const;
 	void update();
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
+
+
+	sf::Vector2f _enemyPosition;
 };

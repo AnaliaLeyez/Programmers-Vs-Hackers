@@ -32,7 +32,7 @@ void Bullet::moveToward()
 	float length = std::sqrt(_direction.x * _direction.x + _direction.y * _direction.y);
 	_direction /= length;
 
-	// Mover el proyectil en la direcci�n calculada
+	// Mover el proyectil en la direccion calculada
 	//_collisionCircle.move(_direction * _speed); //ADRI
 	move(_direction * _speed); //ANA
 	//_sprite.move(_direction * _speed); //ADRI

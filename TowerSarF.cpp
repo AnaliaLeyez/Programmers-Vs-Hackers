@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Hacker.h"
+#include "BulletBrian.h" //cambiar por Sar F
 #include "Tower.h"
 #include "TowerSarF.h"
 
@@ -28,6 +29,10 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 	_speedAttack = 3;
 	_upgradesAmount = 2;
 	_fireRate = 1.0f; // Tiempo en segundos entre disparos
+
+	//_clock.restart(); //NUEVO, ANA
+	_cooldown = 0;
+	_bullet = new BulletBrian(getPosition()); //NUEVO, ANA //esto seria bulletSarF
 }
 
 void TowerSarF::upgrade()

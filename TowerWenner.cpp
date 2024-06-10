@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Hacker.h"
+#include "BulletBrian.h" //cambiar por Wenner
 #include "Tower.h"
 #include "TowerWenner.h"
 
@@ -26,6 +27,10 @@ TowerWenner::TowerWenner()
 	_speedAttack = 3;
 	_upgradesAmount = 2;
 	_fireRate = 1.0f; // Tiempo en segundos entre disparos
+
+	//_clock.restart(); //NUEVO, ANA
+	_cooldown = 0;
+	_bullet = new BulletBrian(getPosition()); //NUEVO, ANA //esto seria bulletWenner
 }
 
 void TowerWenner::upgrade()

@@ -27,6 +27,8 @@ TowerBrian::TowerBrian()
 	_upgradesAmount = 2;
 	_fireRate = 1.0f; // Tiempo en segundos entre disparos
 
+	//_clock.restart(); //NUEVO, ANA
+	_cooldown = 0;
 	_bullet = new BulletBrian(getPosition()); //NUEVO, ANA
 }
 

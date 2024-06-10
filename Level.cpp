@@ -123,8 +123,9 @@ void Level::sell(Tower* tower, Spot& currentSpot) {
 void Level::shoot(Bullet* blt, Hacker* hacker) //ANA
 {
 	//_bullets.push_back(Bullet(shootingPosition, targetPosition)); //ADRI
+	blt->_enemyPosition = hacker->getPosition();
 	_bullets.push_back(blt); //ANA
-
+	
 	auto itB = _bullets.begin();
 	while (itB != _bullets.end())
 	{
@@ -162,17 +163,41 @@ void Level::update(sf::Vector2i& mousePosition) {
 
 			for (auto& hacker : _enemies)
 			{
-				if (tower->getVisualRange().getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
-				//if (tower->isCollision(*hacker)) 
+
+
+				// Pocision de la torre
+				sf::Vector2f posicionTorre = tower->getSprite().getPosition();
+				// Obtiene los límites globales del sprite del objetivo
+				sf::FloatRect limitesObjetivo = hacker->getSprite().getGlobalBounds();
+				// Calcula la posición del centro del sprite del objetivo, que analía me explique que pasa acá.
+				sf::Vector2f centroObjetivo(limitesObjetivo.left + limitesObjetivo.width / 2, limitesObjetivo.top + limitesObjetivo.height / 2);
+				// Calcula la distancia entre los centros de la torre y el objetivo
+				float distancia = std::sqrt(std::pow(centroObjetivo.x - posicionTorre.x, 2) + std::pow(centroObjetivo.y - posicionTorre.y, 2));
+				float radioTorre = tower->getVisualRange().getRadius();
+				if (tower->canShoot())
 				{
-					if (tower->canShoot()) {
-						//shoot(tower->getVisualRange().getPosition(), hacker->_collisionRect.getPosition()); //ADRI
+					if (distancia <= radioTorre) {
 						Bullet* bullet = tower->getBullet();
 						bullet->setDirection(hacker->_collisionRect.getPosition());
 						shoot(bullet, hacker);
-						//std::cout << hacker->_collisionRect.getPosition().x << " " << hacker->_collisionRect.getPosition().y<< std::endl;
 					}
 				}
+
+
+
+				//if (tower->getVisualRange().getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
+				////if (tower->isCollision(*hacker)) 
+				//{
+				//	if (tower->canShoot()) {
+				//		//shoot(tower->getVisualRange().getPosition(), hacker->_collisionRect.getPosition()); //ADRI
+				//		Bullet* bullet = tower->getBullet();
+				//		bullet->setDirection(hacker->_collisionRect.getPosition());
+				//		shoot(bullet, hacker);
+				//		//std::cout << hacker->_collisionRect.getPosition().x << " " << hacker->_collisionRect.getPosition().y<< std::endl;
+				//	}
+				//}
+
+
 			}
 		}
 		for (auto& bullet : _bullets) {

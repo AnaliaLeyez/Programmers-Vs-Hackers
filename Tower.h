@@ -18,12 +18,12 @@ protected:
 	int _damage;
 	int _range;
 	int _speedAttack;
-	unsigned int _cooldown;
 	int _upgradesAmount;
 
 	int _spotNumber;
 
-	sf::Clock _clock;
+	//sf::Clock _clock;
+	int _cooldown;
 	float _fireRate;
 	Bullet* _bullet; //NUEVO, ANA
 
@@ -46,13 +46,14 @@ public:
 
 	void setSprite(sf::Sprite);
 	void setVisualRange(sf::CircleShape);
+	void setRangeColor(sf::Color);
 	void setRange(int);
 	void setName(std::string);
 	void setPrice(int);
 	void setPriceUpgrade(int);
 	void setSalesValue(int);
 	void setDamage(int);
-	void setCooldown(int);
+	//void setCooldown(int);
 	void setSpotNumber(int);
 
 	//Comportamiento

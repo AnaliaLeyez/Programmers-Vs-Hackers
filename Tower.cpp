@@ -26,13 +26,17 @@ Bullet* Tower::getBullet() const
 
 void Tower::setSprite(sf::Sprite sp) { _sprite = sp; }
 void Tower::setVisualRange(sf::CircleShape vsRange) { _visualRange = vsRange; }
+void Tower::setRangeColor(sf::Color color)
+{
+    _visualRange.setFillColor(color);
+}
 void Tower::setRange(int range) { _range = range; }
 void Tower::setName(std::string name) { _name = name; }
 void Tower::setPrice(int price) { _price = price; }
 void Tower::setSalesValue(int value) { _salesValue = value; }
 void Tower::setDamage(int damage) { _damage = damage; }
 void Tower::setPriceUpgrade(int price) { _priceUpgrade = price; }
-void Tower::setCooldown(int value) { (value == 0) ? _cooldown = 0 : _cooldown++; }
+//void Tower::setCooldown(int value) { (value == 0) ? _cooldown = 0 : _cooldown++; }
 void Tower::setSpotNumber(int n) { _spotNumber = n; }
 
 void Tower::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -44,12 +48,16 @@ void Tower::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 bool Tower::canShoot()
 {
-    if (_clock.getElapsedTime().asSeconds() >= _fireRate)
+    //if (_clock.getElapsedTime().asSeconds() >= _fireRate)
+    if (_cooldown >= 70)
     {
-        _clock.restart();
-
+        setRangeColor(sf::Color(255, 0, 0, 120));
+        //_clock.restart();
+        _cooldown = 0;
         return true;
     }
+    setRangeColor(sf::Color(0, 255, 0, 120));
+    _cooldown++;
     return false;
 }
 
