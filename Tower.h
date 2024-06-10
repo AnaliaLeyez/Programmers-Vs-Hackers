@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Bullet.h"
 #include "HackerTrainee.h"
 
 class Tower : public sf::Drawable, public sf::Transformable, public Collisionable
@@ -24,9 +25,9 @@ protected:
 
 	sf::Clock _clock;
 	float _fireRate;
+	Bullet* _bullet; //NUEVO, ANA
 
 public:
-	//virtual void upgrade() {}
 	virtual void upgrade()=0;
 	
 	//Getters
@@ -41,6 +42,7 @@ public:
 	int getSpeedAtack() const;
 	int getUpgradesAmount() const;
 	int getSpotNumber() const;
+	Bullet* getBullet() const;
 
 	void setSprite(sf::Sprite);
 	void setVisualRange(sf::CircleShape);

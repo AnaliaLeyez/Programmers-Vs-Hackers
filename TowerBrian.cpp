@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Hacker.h"
+#include "BulletBrian.h"
 #include "Tower.h"
 #include "TowerBrian.h"
 
@@ -13,7 +14,7 @@ TowerBrian::TowerBrian()
 	_name = "Torre Laboratorio 1";
 
 	//Rango de ataque:
-	_visualRange.setRadius(120);
+	_visualRange.setRadius(150);
 	_visualRange.setFillColor(sf::Color(0, 255, 0, 120));
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
@@ -21,10 +22,12 @@ TowerBrian::TowerBrian()
 	_priceUpgrade = 9;
 	_salesValue = 5;
 	_damage = 3;
-	_range = 9;
+	_range = 8;
 	_speedAttack = 3; //este no se esta usando me parece, esta el fireRate en su lugar...
 	_upgradesAmount = 2;
 	_fireRate = 1.0f; // Tiempo en segundos entre disparos
+
+	_bullet = new BulletBrian(getPosition()); //NUEVO, ANA
 }
 
 void TowerBrian::upgrade() 

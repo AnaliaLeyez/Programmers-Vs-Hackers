@@ -4,6 +4,7 @@
 
 #include "Collisionable.h"
 #include "HackerTrainee.h"
+#include "Bullet.h"
 #include "Tower.h"
 
 std::string Tower::getName() const { return _name;}
@@ -17,6 +18,11 @@ int Tower::getRange() const { return _range; }
 int Tower::getSpeedAtack() const { return _speedAttack; }
 int Tower::getUpgradesAmount() const { return _upgradesAmount; }
 int Tower::getSpotNumber() const { return _spotNumber; }
+
+Bullet* Tower::getBullet() const
+{
+    return _bullet;
+}
 
 void Tower::setSprite(sf::Sprite sp) { _sprite = sp; }
 void Tower::setVisualRange(sf::CircleShape vsRange) { _visualRange = vsRange; }

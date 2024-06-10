@@ -14,7 +14,7 @@
 #include "Level.h"
 
 int Level::getIdLevel() const { return _idLevel; }
-bool Level::getFinisheLevel() const{ return _finishedLevel; }
+bool Level::getFinisheLevel() const { return _finishedLevel; }
 UI Level::getUI() const { return _ui; }
 Map Level::getMap() const { return *_map; }
 int(*Level::getMapArray())[30] { return _mapArray; }
@@ -32,14 +32,14 @@ sf::SoundBuffer Level::getBuffer() const { return _buffer; }
 sf::Sound Level::getSound() const { return _sound; }
 bool Level::getMusicPlaying() const { return _musicPlaying; }
 sf::Vector2f Level::getHackerStartPosition() const { return _hackerStartPosition; }
-const std::list<Tower*> Level::getTowersAvailable() const { return _towersAvailable;}
+const std::list<Tower*> Level::getTowersAvailable() const { return _towersAvailable; }
 std::list<Tower*> Level::getActiveTowers() const { return _activeTowers; }
 
 void Level::setIdLevel(int idLevel) { _idLevel = idLevel; }
 void Level::setFinishedLevel(bool finished) { _finishedLevel = finished; }
 void Level::setUI(const UI& ui) { _ui = ui; }
 void Level::setMap(const Map& map) { *_map = map; }
-void Level::setMapArray(const int(&mapArray)[20][30]) {	std::copy(&mapArray[0][0], &mapArray[0][0] + 20 * 30, &_mapArray[0][0]); }
+void Level::setMapArray(const int(&mapArray)[20][30]) { std::copy(&mapArray[0][0], &mapArray[0][0] + 20 * 30, &_mapArray[0][0]); }
 void Level::setGolden(int golden) { _golden = golden; }
 void Level::setEnergy(int energy) { _energy = energy; }
 void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
@@ -93,7 +93,8 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 	if (_currentMenu->getIsVisible() && _currentMenu->getGlobalBounds().contains(transformedMousePos))
 	{
 		_currentMenu->mouseCheck(mousePosition);
-	}else if (_currentMenu2->getIsVisible() && _currentMenu2->getGlobalBounds().contains(transformedMousePos))
+	}
+	else if (_currentMenu2->getIsVisible() && _currentMenu2->getGlobalBounds().contains(transformedMousePos))
 	{
 		_currentMenu2->mouseCheck(mousePosition);
 	}
@@ -118,9 +119,27 @@ void Level::sell(Tower* tower, Spot& currentSpot) {
 	currentSpot.setOccupied(true);
 }
 
-void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition)
+//void Level::shoot(Bullet* bullet, sf::Vector2f shootingPosition, sf::Vector2f targetPosition)
+void Level::shoot(Bullet* blt, Hacker* hacker) //ANA
 {
-	_bullets.push_back(Bullet(shootingPosition, targetPosition));
+	//_bullets.push_back(Bullet(shootingPosition, targetPosition)); //ADRI
+	_bullets.push_back(blt); //ANA
+
+	auto itB = _bullets.begin();
+	while (itB != _bullets.end())
+	{
+		Bullet* bullet = *itB;
+
+		if (bullet->getBounds().intersects(hacker->getBounds()))
+		{
+			hacker->takeDamage(bullet->getDamage());
+			itB = _bullets.erase(itB);
+		}
+		else
+		{
+			++itB;
+		}
+	}
 }
 
 void Level::update(sf::Vector2i& mousePosition) {
@@ -144,31 +163,20 @@ void Level::update(sf::Vector2i& mousePosition) {
 			for (auto& hacker : _enemies)
 			{
 				if (tower->getVisualRange().getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
+				//if (tower->isCollision(*hacker)) 
 				{
-					if (tower->canShoot())
-						shoot(tower->getVisualRange().getPosition(), hacker->_collisionRect.getPosition());
-					//std::cout << hacker->_collisionRect.getPosition().x << " " << hacker->_collisionRect.getPosition().y<< std::endl;
-				}
-				auto itB = _bullets.begin();
-				while (itB != _bullets.end())
-				{
-					Bullet& bullet = *itB;
-
-					if (bullet._collisionCircle.getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
-					{
-						hacker->takeDamage(bullet.getDamage());
-						//std::cout << hacker->getLife() << std::endl;
-						itB = _bullets.erase(itB);
-					}
-					else
-					{
-						++itB;
+					if (tower->canShoot()) {
+						//shoot(tower->getVisualRange().getPosition(), hacker->_collisionRect.getPosition()); //ADRI
+						Bullet* bullet = tower->getBullet();
+						bullet->setDirection(hacker->_collisionRect.getPosition());
+						shoot(bullet, hacker);
+						//std::cout << hacker->_collisionRect.getPosition().x << " " << hacker->_collisionRect.getPosition().y<< std::endl;
 					}
 				}
 			}
 		}
-		for (auto& bullet : _bullets ) {
-			bullet.update();
+		for (auto& bullet : _bullets) {
+			bullet->update();
 		}
 
 		auto itH = _enemies.begin();
@@ -185,39 +193,39 @@ void Level::update(sf::Vector2i& mousePosition) {
 			{
 				++itH;
 			}
-		}
-		 
-		for (auto& hacker : _enemies) {
-			if (hacker->getEnd() == true) {
-				if (getEnergy() - 50 >= 0) {
-					if (hacker->_cooldown > 20) { //configurar los get y set con _cooldown en private
-						//if (getEnergy() - 50 >= 0 ) { //hay que dar un margen de tiempo al ataque xq sino resta mucho de golpe
-						_dying = true;
-						setEnergy(getEnergy() - 20);
-						_ui.setText(1, std::to_string(getEnergy()));
-						hacker->_cooldown=0;
+
+			for (auto& hacker : _enemies) {
+				if (hacker->getEnd() == true) {
+					if (getEnergy() - 20 >= 0) {
+						if (hacker->_cooldown > 20) { //configurar los get y set con _cooldown en private
+							//if (getEnergy() - 20 >= 0 ) { //hay que dar un margen de tiempo al ataque xq sino resta mucho de golpe
+							_dying = true;
+							setEnergy(getEnergy() - 20);
+							_ui.setText(1, std::to_string(getEnergy()));
+							hacker->_cooldown = 0;
+						}
+						hacker->_cooldown++;
 					}
-					hacker->_cooldown++;
-				}
-				else {
-					_flagGameOver = true;
-					setGameOverText();
-				}
-				break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
+					else {
+						_flagGameOver = true;
+						setGameOverText();
+					}
+					break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
 				}
 				else {
 					_dying = false;
 				}
 			}
-		 
-		// Verificar si se ha completado el nivel
-		if (_currentWave > 3 && _enemies.empty()) {
-			setFinishedLevel(true);
+
+			// Verificar si se ha completado el nivel
+			if (_currentWave > 3 && _enemies.empty()) {
+				setFinishedLevel(true);
+			}
+			if (_currentMenu->getIsVisible()) {
+				_currentMenu->update(mousePosition);
+			}
+			mouseCheck(mousePosition);
 		}
-		if (_currentMenu->getIsVisible()) {
-			_currentMenu->update(mousePosition);
-		}
-		mouseCheck(mousePosition);
 	}
 	else {
 		if (getIdLevel() < 4) { //aca digo que solo puede llegar hasta el nivel 4
@@ -228,7 +236,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 		}
 	}
 }
-
 
 
 void Level::setGameOverText()
@@ -263,14 +270,15 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 	if (_currentMenu->getIsVisible())
 	{
 		target.draw(*_currentMenu, states);
-	} else if (_currentMenu2->getIsVisible())
+	}
+	else if (_currentMenu2->getIsVisible())
 	{
 		target.draw(*_currentMenu2, states);
 	}
 
 	for (auto& bullet : _bullets)
 	{
-		target.draw(bullet, states);
+		target.draw(*bullet, states);
 	}
 
 	//NUEVO:

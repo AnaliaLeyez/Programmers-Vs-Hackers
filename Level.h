@@ -46,7 +46,7 @@ protected:
 	std::list <Tower*> _towersAvailable;
 	std::list <Tower*> _activeTowers;
 
-	std::list<Bullet> _bullets;
+	std::list<Bullet*> _bullets;
 
 	//NUEVO:
 	sf::Clock _noCoinsClock;
@@ -108,7 +108,8 @@ public:
 	bool validateSale(Button*); //nuevo
 	void sell(Tower*, Spot&);
 
-	void shoot(sf::Vector2f, sf::Vector2f);
+	//void shoot(sf::Vector2f, sf::Vector2f); //ADRI
+	void shoot(Bullet*, Hacker*); //ANA
 
 	//nuevo
 	void setGameOverText();

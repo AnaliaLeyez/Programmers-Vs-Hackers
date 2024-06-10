@@ -6,35 +6,36 @@
 
 sf::Texture Bullet::_texture;
 
-Bullet::Bullet(sf::Vector2f initialPosition, sf::Vector2f target)
-{
-	_collisionCircle.setRadius(10.f);
-	_collisionCircle.setFillColor(sf::Color::White);
-	_collisionCircle.setPosition(initialPosition);
-
-	if (!_texture.loadFromFile("img/Bullets/fireball.png")) {
-		throw std::runtime_error("Error img FireBall");
-	}
-	_sprite.setTexture(_texture);
-	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
-	_sprite.setPosition(initialPosition);
-
-	_enemyPosition = target;
-	_speed = 3.0f;
-	_damage = 20;
-}
+//Bullet::Bullet(sf::Vector2f initialPosition, sf::Vector2f target)
+//{
+//	_collisionCircle.setRadius(10.f);
+//	_collisionCircle.setPosition(initialPosition);
+//
+//	if (!_texture.loadFromFile("img/Bullets/fireball.png")) {
+//		throw std::runtime_error("Error img FireBall");
+//	}
+//	_sprite.setTexture(_texture);
+//	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
+//	_sprite.setPosition(initialPosition);
+//
+//	_enemyPosition = target;
+//	_speed = 3.0f;
+//	_damage = 20;
+//}
 
 void Bullet::moveToward()
 {
 	//Calcular el vector de direccion entre la torre y el objetivo
-	sf::Vector2f _direction = _enemyPosition - _collisionCircle.getPosition();
+	//sf::Vector2f _direction = _enemyPosition - _collisionCircle.getPosition(); //ADRI
+	sf::Vector2f _direction = _enemyPosition - getPosition(); //ANA
 	//Normalizar el vector de direccion
 	float length = std::sqrt(_direction.x * _direction.x + _direction.y * _direction.y);
 	_direction /= length;
 
 	// Mover el proyectil en la direcci�n calculada
-	_collisionCircle.move(_direction * _speed);
-	_sprite.move(_direction * _speed);
+	//_collisionCircle.move(_direction * _speed); //ADRI
+	move(_direction * _speed); //ANA
+	//_sprite.move(_direction * _speed); //ADRI
 }
 
 sf::FloatRect Bullet::getBounds() const { return _sprite.getGlobalBounds(); }

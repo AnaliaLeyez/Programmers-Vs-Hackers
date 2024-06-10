@@ -16,7 +16,7 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 	_name = "Torre Programacion 1";
 
 	//Rango de ataque:
-	_visualRange.setRadius(120);
+	_visualRange.setRadius(130);
 	_visualRange.setFillColor(sf::Color(0, 255, 0, 120));
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
@@ -24,7 +24,7 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 	_priceUpgrade = 9;
 	_salesValue = 5;
 	_damage = 3;
-	_range = 9;
+	_range = 7;
 	_speedAttack = 3;
 	_upgradesAmount = 2;
 	_fireRate = 1.0f; // Tiempo en segundos entre disparos

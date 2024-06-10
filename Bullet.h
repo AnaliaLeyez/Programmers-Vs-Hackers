@@ -14,8 +14,10 @@ protected:
 	float _speed;
 
 public:
+	virtual void upgrade() = 0;
+
 	sf::CircleShape _collisionCircle;
-	Bullet(sf::Vector2f initialPosition = { 100,100 }, sf::Vector2f target = { 300,300 });
+	//Bullet(sf::Vector2f initialPosition = { 100,100 }, sf::Vector2f target = { 300,300 }); //ADRI
 	void moveToward();
 
 	sf::Vector2f getDirection() const;
