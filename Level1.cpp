@@ -164,5 +164,7 @@ Level1::Level1()
 	_towersAvailable.push_back(new TowerSarF());
 	_towersAvailable.push_back(new TowerWenner());
 
+	_currentMenu = _Menu1;
+
 	setNoCoinsText(); //NUEVO
 }

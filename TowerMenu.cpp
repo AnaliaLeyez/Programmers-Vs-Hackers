@@ -1,58 +1,20 @@
 #include <SFML/Graphics.hpp>
 #include <iostream> //una vez que todo funcione, esta libreria se va
-#include "Manager.h"
-#include "Level.h"
 #include "Spot.h"
 #include "Button.h"
 #include "ButtonBrian.h"
-#include "ButtonKloster.h"
-#include "ButtonMaxiSar.h"
-#include "ButtonMaxiWenner.h"
 #include "TowerMenu.h"
 
 
-TowerMenu::TowerMenu()
-{
-	_isVisible = false;
-	if (!_texture.loadFromFile("img/menuContextual/tower_menu_circle.png")) {
-		throw std::runtime_error("Error img Menu Circle");
-	}
-	_sprite.setTexture(_texture);
-	_sprite.setOrigin(_sprite.getLocalBounds().width / 2, _sprite.getLocalBounds().height / 2);
-	_sprite.setScale(0.4f, 0.4f);
-
-	Button* btn = new ButtonBrian(); //saque este formato de los spots.. pero necesito q cada boton sea distinto
-	_buttons.push_back(btn);
-	btn = new ButtonMaxiSar();
-	_buttons.push_back(btn);
-	btn = new ButtonMaxiWenner();
-	_buttons.push_back(btn);
-	btn = new ButtonKloster();
-	_buttons.push_back(btn);
-
-	_buttons[0]->setPosition(0, -100);
-	_buttons[1]->setPosition(85, 0);
-	_buttons[2]->setPosition(0, 85);
-	_buttons[3]->setPosition(-100, 0);
-
-	int i = 0;
-	for (Button* button : _buttons) {
-		button->setBtnNumber(i);
-		//button->setPriceText();
-		i++;
-	}
-
-	Spot sp;
-	setCurrentSpot(sp);
-}
-
-bool TowerMenu::getIsVisible(){	return _isVisible; }
+bool TowerMenu::getIsVisible() { return _isVisible; }
 //const Button* TowerMenu::getButtons() const { return *_buttons; }
 const std::vector <Button*> TowerMenu::getButtons() const { return _buttons; }
 Button* TowerMenu::getButtonByIndex(int i) const { return _buttons[i]; }
 Spot TowerMenu::getCurrentSpot() const { return _currentSpot; }
+int TowerMenu::getNumberMenu() const { return _NumberMenu; }
 void TowerMenu::setCurrentSpot(Spot sp) { _currentSpot = sp; }
 void TowerMenu::setButton(bool states, int i) { _buttons[i]->setMouseHover(states); }
+//void TowerMenu::setNumberMenu(int n) { _NumberMenu = n; }
 
 void TowerMenu::hide() { _isVisible = false; }
 void TowerMenu::show() { _isVisible = true; }

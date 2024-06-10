@@ -48,22 +48,23 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 	_currentMenu->setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
 	//validar si el spot esta ocupado o no:
 	if (currentSp.getIsOccupied()) { //spot ocupado
-		if (!_currentMenu2->getIsVisible()) { //se clickeo en un spot ocupado y el menu2 no era visible
+		_currentMenu = _Menu2;
+		if (!_currentMenu->getIsVisible()) { //se clickeo en un spot ocupado y el menu2 no era visible
 			std::cout << "aca va el menu2" << std::endl;
-			_currentMenu2->setCurrentSpot(currentSp); //guardo el nro de spot en el tower Menu2;
-			_currentMenu2->setPosition(currentSp.getPosition());
-			_currentMenu2->show();
+			_currentMenu->setCurrentSpot(currentSp); //guardo el nro de spot en el tower Menu2;
+			_currentMenu->setPosition(currentSp.getPosition());
+			_currentMenu->show();
 		}
 		else { //se clickeo en un spot ocupado y el menu2 era visible
-			_currentMenu2->hide();
+			_currentMenu->hide();
 		}
 	}
 	else {  //spot libre
-		_currentMenu2->hide(); //Necesario, en caso q se haya estado mostrando por otro spot
-		//_currentMenu->setCurrentSpot(currentSp); //guardo el nro de spot en el tower Menu; OBS: esta linea ya esta al inicio
+		//_currentMenu2->hide(); //Necesario, en caso q se haya estado mostrando por otro spot
+		_currentMenu = _Menu1;
 		currentSp.setCurrentTower(_currentMenu->getCurrentSpot().getCurrentTower()); //me aseguro que el currentSpot esta asociado a la tower ahora
 		if (!_currentMenu->getIsVisible()) { //se clickeo en un spot libre y el menu no era visible
-			_currentMenu->setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
+			_currentMenu->setPosition(currentSp.getPosition()); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
 			_currentMenu->show();
 		}
 		else { //se clickeo en un spot libre y el menu era visible
@@ -78,13 +79,13 @@ Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 	Spot sp;
 	if (_currentMenu->getIsVisible()) { //click fuera de spot y towerMenu estaba visible
 		Spot sp = _currentMenu->getCurrentSpot();
-		clickWithMenu1Open(mousex, mousey, sp);
+		if (_currentMenu->getNumberMenu() == 1) {
+			clickWithMenu1Open(mousex, mousey, sp);
+		}
+		else {
+			clickWithMenu2Open(mousex, mousey, sp);
+		}
 		_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
-	}
-	else if (_currentMenu2->getIsVisible()) {
-		Spot sp = _currentMenu2->getCurrentSpot();
-		clickWithMenu2Open(mousex, mousey, sp);
-		_currentMenu2->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
 	}
 	setSpot(&sp, sp.getSpotNumber());
 	return sp;
@@ -116,7 +117,7 @@ void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 }
 void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 {
-	Button* btn = _currentMenu2->validateClickOnButton(mousex, mousey, sp);
+	Button* btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
 	if (btn->getBtnNumber() == 1) {  //se hizo click en el boton 1 que es upgrade:
 		std::cout << "UPGRADE" << std::endl;
 		//validar si alcanza el dinero
@@ -148,7 +149,7 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 		Spot sp = _currentMenu->getCurrentSpot();
 	}
 
-	_currentMenu2->hide();
+	_currentMenu->hide();
 }
 void Level::validateClickOnSpeaker(int mousex, int mousey) {
 	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {

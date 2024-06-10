@@ -94,10 +94,10 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 	{
 		_currentMenu->mouseCheck(mousePosition);
 	}
-	else if (_currentMenu2->getIsVisible() && _currentMenu2->getGlobalBounds().contains(transformedMousePos))
+	/*else if (_currentMenu2->getIsVisible() && _currentMenu2->getGlobalBounds().contains(transformedMousePos))
 	{
 		_currentMenu2->mouseCheck(mousePosition);
-	}
+	}*/
 
 }
 
@@ -301,10 +301,10 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 	{
 		target.draw(*_currentMenu, states);
 	}
-	else if (_currentMenu2->getIsVisible())
+	/*else if (_currentMenu2->getIsVisible())
 	{
 		target.draw(*_currentMenu2, states);
-	}
+	}*/
 
 	for (auto& bullet : _bullets)
 	{

@@ -6,6 +6,7 @@
 #include "UI.h"
 #include "Map.h"
 #include "TowerMenu.h"
+#include "TowerMenu1.h"
 #include "TowerMenu2.h"
 #include "Tower.h"
 #include "Spot.h"
@@ -26,8 +27,9 @@ protected:
 	Map *_map;
 	int _mapArray[20][30];
 	std::vector<Spot*> _spots;
-	TowerMenu *_currentMenu =new TowerMenu();  //el nivel tiene UN solo menu mostrandose
-	TowerMenu2* _currentMenu2 = new TowerMenu2();
+	TowerMenu* _currentMenu;
+	TowerMenu1* _Menu1 =new TowerMenu1();
+	TowerMenu2* _Menu2 = new TowerMenu2();
 	int _golden;
 	int _energy;
 	sf::SoundBuffer _buffer;

@@ -9,14 +9,16 @@ protected:
 	bool _isVisible;
 	std::vector <Button*> _buttons;
 	Spot _currentSpot;
+	int _NumberMenu;
 public:
-	TowerMenu();
 	bool getIsVisible();
 	const std::vector <Button*> getButtons() const;
 	Button* getButtonByIndex(int) const;
 	Spot getCurrentSpot() const;
+	int getNumberMenu() const;
 	void setCurrentSpot(Spot);
 	void setButton(bool, int);
+	void setNumberMenu(int);
 	void hide();
 	void show();
 	void mouseCheck(sf::Vector2i&);
