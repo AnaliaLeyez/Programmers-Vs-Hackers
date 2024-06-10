@@ -38,7 +38,7 @@ TowerMenu::TowerMenu()
 	int i = 0;
 	for (Button* button : _buttons) {
 		button->setBtnNumber(i);
-		button->setPrice();
+		//button->setPriceText();
 		i++;
 	}
 

@@ -15,3 +15,5 @@ ButtonCashSale::ButtonCashSale()
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 	setSpriteHover();
 }
+
+

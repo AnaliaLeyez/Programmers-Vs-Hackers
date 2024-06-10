@@ -19,9 +19,9 @@ TowerWenner::TowerWenner()
 	_visualRange.setFillColor(sf::Color(0, 255, 0, 120));
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
-	_price = 120;
-	_priceUpgrade = 9;
-	_salesValue = 5;
+	_price = 150;
+	_priceUpgrade = 200;
+	_salesValue = 120;
 	_damage = 8;
 	_range = 6;
 	_speedAttack = 3;

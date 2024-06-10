@@ -16,7 +16,8 @@ ButtonMaxiSar::ButtonMaxiSar()
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 	setSpriteHover();
 	_tower = new TowerSarF();
-	setPrice();
+	_price = _tower->getPrice();
+	setPriceText();
 	setInfo();
 }
 

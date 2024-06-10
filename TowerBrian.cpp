@@ -19,8 +19,8 @@ TowerBrian::TowerBrian()
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
 	_price = 220;
-	_priceUpgrade = 9;
-	_salesValue = 5;
+	_priceUpgrade = 340;
+	_salesValue = 176;
 	_damage = 3;
 	_range = 8;
 	_speedAttack = 3; //este no se esta usando me parece, esta el fireRate en su lugar...

@@ -13,7 +13,7 @@ public:
 	TowerMenu();
 	bool getIsVisible();
 	const std::vector <Button*> getButtons() const;
-	Button* getButtonByIndex(int i) const;
+	Button* getButtonByIndex(int) const;
 	Spot getCurrentSpot() const;
 	void setCurrentSpot(Spot);
 	void setButton(bool, int);

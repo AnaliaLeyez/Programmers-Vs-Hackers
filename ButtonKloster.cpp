@@ -16,6 +16,7 @@ ButtonKloster::ButtonKloster()
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 	setSpriteHover();
 	_tower = new TowerKloster();
-	setPrice();
+	_price = _tower->getPrice();
+	setPriceText();
 	setInfo();
 }

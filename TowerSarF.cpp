@@ -22,8 +22,8 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
 	_price = 180;
-	_priceUpgrade = 9;
-	_salesValue = 5;
+	_priceUpgrade = 240;
+	_salesValue = 144;
 	_damage = 3;
 	_range = 7;
 	_speedAttack = 3;

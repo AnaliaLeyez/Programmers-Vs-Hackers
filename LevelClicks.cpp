@@ -93,7 +93,8 @@ void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 {
 	Button* btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
 	if (btn->getBtnNumber() != -1) {  //se hizo click en un boton
-		if (validateSale(btn)) { //veo si habilito venta
+
+		if (validateSale(btn->getTower(),true)) { //veo si habilito venta
 			Tower* tower = btn->getTower();  // cuando hago esto desaparece tower
 			if (tower != nullptr) {				
 			sell(tower, sp);
@@ -115,15 +116,34 @@ void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 }
 void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 {
-	Button btn = _currentMenu2->validateClickOnButton(mousex, mousey, sp);
-	if (btn.getBtnNumber() == 1) {  //se hizo click en el boton 1 que es upgrade:
+	Button* btn = _currentMenu2->validateClickOnButton(mousex, mousey, sp);
+	if (btn->getBtnNumber() == 1) {  //se hizo click en el boton 1 que es upgrade:
 		std::cout << "UPGRADE" << std::endl;
+		//validar si alcanza el dinero
+		Tower* tower = sp.getCurrentTower();
+		if (validateSale(tower,false)) { //veo si habilito venta
+		if (tower != nullptr) {
+			sell(tower, sp);
+			//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
+			tower->setSpotNumber(sp.getSpotNumber());
+			tower->setOrigin(sp.getOrigin()); //nuevo
+			setActiveTowers(tower);
+			setSpot(&sp, sp.getSpotNumber());
+		}
+		else {
+			// Maneja el caso donde '_tower' es nullptr
+		}
+	}
+	else {
+		_noCoinsClock.restart(); //NUEVO reseteo el clock para que se muestre el cartel
+	}
+		//si alcanza, comprar
 		Tower* tw = sp.getCurrentTower();
 		tw->upgrade();
 		std::cout << "nuevo danio" << tw->getDamage() << std::endl;
 		std::cout << sp.getCurrentTower()->getDamage() << std::endl;
 	}
-	else if (btn.getBtnNumber() == 2) {
+	else if (btn->getBtnNumber() == 2) {
 		//boton de venta
 		Spot sp = _currentMenu->getCurrentSpot();
 	}

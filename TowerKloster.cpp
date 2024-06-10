@@ -20,8 +20,8 @@ TowerKloster::TowerKloster()
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
 	_price = 100;
-	_priceUpgrade = 9;
-	_salesValue = 5;
+	_priceUpgrade = 110;
+	_salesValue = 80;
 	_damage = 7;
 	_range = 7;
 	_speedAttack = 3;

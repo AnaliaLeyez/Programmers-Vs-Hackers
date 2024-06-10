@@ -7,9 +7,10 @@ Tower* Button::getTower() { return _tower; }
 int Button::getPrice() { return _tower->getPrice(); }
 int Button::getDamage() { return _tower->getDamage(); }
 int Button::getBtnNumber() { return _btnNumber; }
+int Button::getPrice() const { return _price; }
 
 void Button::setBtnNumber(int n) { _btnNumber = n; }
-void Button::setPrice()
+void Button::setPriceText()
 {
 	if (!_textureBgPrice.loadFromFile("img/menuContextual/priceBg.png")) {
 		throw std::runtime_error("Error al cargar img Oro");
@@ -22,12 +23,12 @@ void Button::setPrice()
 	if (!_font.loadFromFile("fuentes/TowerPrice.ttf")) {
 		throw std::runtime_error("Error al cargar la fuente del Price Menu \n");
 	}
-	_price.setFont(_font);
-	_price.setCharacterSize(30);
-	_price.setOrigin(_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().top + _sprite.getGlobalBounds().height / 2);
-	_price.setPosition(5, -54);
-	_price.setFillColor(sf::Color(255, 255, 255));
-	_price.setString("$" + std::to_string(getPrice()));
+	_priceText.setFont(_font);
+	_priceText.setCharacterSize(30);
+	_priceText.setOrigin(_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().top + _sprite.getGlobalBounds().height / 2);
+	_priceText.setPosition(5, -54);
+	_priceText.setFillColor(sf::Color(255, 255, 255));
+	_priceText.setString("$" + std::to_string(getPrice()));
 }
 void Button::setInfo()
 {
@@ -74,6 +75,7 @@ void Button::setSpriteHover()
 	_spriteHover.setScale(0.7f, 0.7f);
 	_spriteHover.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 }
+void Button::setPrice(int price) { _price = price; }
 
 void Button::update(sf::Vector2i& mousePosition)
 {
@@ -83,7 +85,7 @@ void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	states.transform *= getTransform();
 	target.draw(_sprite, states);
 	target.draw(_spriteBgPrice, states);	
-	target.draw(_price, states);
+	target.draw(_priceText, states);
 	if (_mouseHover) {
 		target.draw(_spriteBgInfo, states);
 		target.draw(_spriteHover, states);

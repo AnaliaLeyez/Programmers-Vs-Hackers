@@ -5,6 +5,7 @@
 #include "Spot.h"
 #include "Button.h"
 #include "ButtonCashSale.h"
+#include"ButtonBrian.h"
 #include "ButtonUpgrade.h"
 #include "TowerMenu.h"
 #include "TowerMenu2.h"
@@ -20,8 +21,10 @@ TowerMenu2::TowerMenu2()
 	_sprite.setScale(0.4f, 0.4f);
 
 	//Buttons initialization
-	_buttons[0] = new ButtonUpgrade(); //aca va el boton de upgrade (que tiene img de espada)
-	_buttons[1] = new ButtonCashSale();  //con esta linea se rompe
+	Button* btn = new ButtonUpgrade(); //aca va el boton de upgrade (que tiene img de espada)
+	_buttons.push_back(btn);
+	btn = new ButtonCashSale();  //con esta linea se rompe
+	_buttons.push_back(btn);
 
 	_buttons[0]->setPosition(0, -100);
 	_buttons[1]->setPosition(0, 85);
@@ -32,7 +35,8 @@ TowerMenu2::TowerMenu2()
 	setCurrentSpot(sp);
 }
 bool TowerMenu2::getIsVisible() { return _isVisible; }
-const Button* TowerMenu2::getButtons() const { return *_buttons; }
+//const Button* TowerMenu2::getButtons() const { return *_buttons; }
+const std::vector <Button*> TowerMenu2::getButtons() const { return _buttons; }
 Button* TowerMenu2::getButtonByIndex(int i) const { return _buttons[i]; }
 Spot TowerMenu2::getCurrentSpot() const { return _currentSpot; }
 void TowerMenu2::setCurrentSpot(Spot sp) { _currentSpot = sp; }
@@ -57,23 +61,24 @@ void TowerMenu2::mouseCheck(sf::Vector2i& mousePosition)
 	}
 }
 
-Button TowerMenu2::validateClickOnButton(int mousex, int mousey, Spot& spot) {
+Button* TowerMenu2::validateClickOnButton(int mousex, int mousey, Spot& spot) {
 	sf::Vector2f mousePos = sf::Vector2f(static_cast<float>(mousex), static_cast<float>(mousey));
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousePos);
-	for (int i = 0; i < 4; i++) {
-		if (_buttons[i]->getGlobalBounds().contains(transformedMousePos)) {
-			return *_buttons[i];
+	for (Button* button : _buttons) { //si quiero reutilizar esta funcion el 4 lo debo reemplazar por una variable xq en menu2 son 2 botones
+		if (button->getGlobalBounds().contains(transformedMousePos)) {
+			return button;
 		}
 	}
-	Button btn;
-	btn.setBtnNumber(-1);
+	Button* btn = new ButtonBrian();
+	btn->setBtnNumber(-1);
 	return btn;
 }
 
 void TowerMenu2::update(sf::Vector2i& mousePosition) {
 	if (getIsVisible()) {
-		for (int i = 0; i < 2; i++) {
-			_buttons[i]->update(mousePosition);
+		for (Button* button : _buttons)
+		{
+			button->update(mousePosition);;
 		}
 	}
 }
@@ -81,8 +86,9 @@ void TowerMenu2::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
 	target.draw(_sprite, states);
-	for (int i = 0; i < 2; i++) {
-		target.draw(*_buttons[i], states);
+	for (Button* button : _buttons)
+	{
+		target.draw(*button, states);
 	}
 }
 
