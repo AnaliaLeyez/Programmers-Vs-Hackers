@@ -109,7 +109,7 @@ bool Level::validateSale(Tower* tower, bool firstSale) {
 void Level::sell(Tower* tower, Spot& currentSpot) {
 	int price = tower->getPrice();
 	setGolden(getGolden() - price);
-	std::cout << "se compro: " << tower->getName() << std::endl;
+	/*std::cout << "se compro: " << tower->getName() << std::endl;*/
 	_ui.setText(0, std::to_string(getGolden()));
 	currentSpot.setCurrentTower(tower);
 	currentSpot.setOccupied(true);

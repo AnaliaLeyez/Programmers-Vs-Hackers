@@ -95,19 +95,14 @@ void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 	Button* btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
 	if (btn->getBtnNumber() != -1) {  //se hizo click en un boton
 
-		if (validateSale(btn->getTower(),true)) { //veo si habilito venta
-			Tower* tower = btn->getTower();  // cuando hago esto desaparece tower
-			if (tower != nullptr) {				
-			sell(tower, sp);
-			//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
-			tower->setSpotNumber(sp.getSpotNumber());
-			tower->setOrigin(sp.getOrigin()); //nuevo
-			setActiveTowers(tower);
-			setSpot(&sp, sp.getSpotNumber());
-			}
-			else {
-				// Maneja el caso donde '_tower' es nullptr
-			}
+		if (validateSale(btn->getTower(), true)) { //veo si habilito venta
+			Tower* tower = btn->getTower();
+				sell(tower, sp);
+				//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
+				tower->setSpotNumber(sp.getSpotNumber());
+				tower->setOrigin(sp.getOrigin()); //nuevo
+				setActiveTowers(tower);
+				setSpot(&sp, sp.getSpotNumber()); //CUIDADO esta linea parece innecesaria pero la saco y se rompe el programa
 		}
 		else {
 			_noCoinsClock.restart(); //NUEVO reseteo el clock para que se muestre el cartel
@@ -122,27 +117,24 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 		std::cout << "UPGRADE" << std::endl;
 		//validar si alcanza el dinero
 		Tower* tower = sp.getCurrentTower();
-		if (validateSale(tower,false)) { //veo si habilito venta
-		if (tower != nullptr) {
-			sell(tower, sp);
-			//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
-			tower->setSpotNumber(sp.getSpotNumber());
-			tower->setOrigin(sp.getOrigin()); //nuevo
-			setActiveTowers(tower);
-			setSpot(&sp, sp.getSpotNumber());
+		if (validateSale(tower, false)) { //veo si habilito venta
+				sell(tower, sp);
+				//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
+				tower->setSpotNumber(sp.getSpotNumber());
+				tower->setOrigin(sp.getOrigin()); //nuevo
+				setActiveTowers(tower);
+				setSpot(&sp, sp.getSpotNumber()); //CUIDADO esta linea parece innecesaria pero la saco y se rompe el programa
+				
+				//si alcanza, comprar
+				Tower* tw = sp.getCurrentTower();
+				tw->upgrade();
+				std::cout << "se compro: " << tower->getName() << std::endl;
+				std::cout << "nuevo danio" << tw->getDamage() << std::endl;
 		}
 		else {
-			// Maneja el caso donde '_tower' es nullptr
+			_noCoinsClock.restart(); //NUEVO reseteo el clock para que se muestre el cartel
 		}
-	}
-	else {
-		_noCoinsClock.restart(); //NUEVO reseteo el clock para que se muestre el cartel
-	}
-		//si alcanza, comprar
-		Tower* tw = sp.getCurrentTower();
-		tw->upgrade();
-		std::cout << "nuevo danio" << tw->getDamage() << std::endl;
-		std::cout << sp.getCurrentTower()->getDamage() << std::endl;
+		
 	}
 	else if (btn->getBtnNumber() == 2) {
 		//boton de venta

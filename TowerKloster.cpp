@@ -35,16 +35,40 @@ TowerKloster::TowerKloster()
 
 void TowerKloster::upgrade()
 {
-	_name = "ARSO";
-	if (!_texture.loadFromFile("img/towers/torreC_2.png")) {
-		throw std::runtime_error("Error img tower ARSO");
+	
+	switch (_upgradesAmount)
+	{
+	case 2:
+	{
+		_name = "ARSO";
+		if (!_texture.loadFromFile("img/towers/torreC_3.png")) {
+			throw std::runtime_error("Error img tower ARSO");
+		}
+		_sprite.setTexture(_texture);
+		_priceUpgrade = 200;
+		_salesValue = 168;
+		_damage = 9;
+		//_speedAttack = 2;  //no terminamos de definir esto como es en el juego real
+		_upgradesAmount = 1;
 	}
-	_sprite.setTexture(_texture);
-	_priceUpgrade = 200;
-	_salesValue = 168;
-	_damage = 9;
-	//_speedAttack = 2;  //no terminamos de definir esto como es en el juego real
-	_upgradesAmount = 1;
+	break;
+	case 1:
+	{
+		_name = "Torre KLOSTER";
+		if (!_texture.loadFromFile("img/towers/torrec_4.png")) {
+			throw std::runtime_error("Error img tower Labo3 BRIAN");
+		}
+		_sprite.setTexture(_texture);
+
+		_priceUpgrade = 9990;
+		_salesValue = 328;
+		_damage = 13;
+		//_speedAttack = 3;   //no terminamos de definir esto como es en el juego real
+		_upgradesAmount = 0;
+	}
+	default:
+		break;
+	}
 }
 
 void TowerKloster::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos)

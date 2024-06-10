@@ -35,17 +35,41 @@ TowerWenner::TowerWenner()
 
 void TowerWenner::upgrade()
 {
-	_name = "estadistica";
-	if (!_texture.loadFromFile("img/towers/torreB_2.png")) {
-		throw std::runtime_error("Error img tower estadistica");
-	}
-	_sprite.setTexture(_texture);
+	
+	switch (_upgradesAmount)
+	{
+	case 2:
+	{
+		_name = "estadistica";
+		if (!_texture.loadFromFile("img/towers/torreB_3.png")) {
+			throw std::runtime_error("Error img tower estadistica");
+		}
+		_sprite.setTexture(_texture);
 
-	_priceUpgrade = 300;
-	_salesValue = 280;
-	_damage = 14;
-	//_speedAttack = 1; //no terminamos de definir esto como es en el juego real
-	_upgradesAmount = 1;
+		_priceUpgrade = 300;
+		_salesValue = 280;
+		_damage = 14;
+		//_speedAttack = 1; //no terminamos de definir esto como es en el juego real
+		_upgradesAmount = 1;
+	}
+	break;
+	case 1:
+	{
+		_name = "Torre BRIAN";
+		if (!_texture.loadFromFile("img/towers/torreb_4.png")) {
+			throw std::runtime_error("Error img tower MAXI WENNER");
+		}
+		_sprite.setTexture(_texture);
+
+		_priceUpgrade = 9990;
+		_salesValue = 816;
+		_damage = 8;
+		//_speedAttack = 3;   //no terminamos de definir esto como es en el juego real
+		_upgradesAmount = 0;
+	}
+	default:
+		break;
+	}
 }
 
 void TowerWenner::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos)

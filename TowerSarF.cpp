@@ -37,16 +37,40 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 
 void TowerSarF::upgrade()
 {
-	_name = "Programacion 2";
-	if (!_texture.loadFromFile("img/towers/torreD_2.png")) {
-		throw std::runtime_error("Error img tower Programacion2");
+	
+	switch (_upgradesAmount)
+	{
+	case 2:
+	{
+		_name = "Programacion 2";
+		if (!_texture.loadFromFile("img/towers/torreD_2.png")) {
+			throw std::runtime_error("Error img tower Programacion2");
+		}
+		_sprite.setTexture(_texture);
+		_priceUpgrade = 300;
+		_salesValue = 336;
+		_damage = 5;
+		//_speedAttack = 3;  //no terminamos de definir esto como es en el juego real
+		_upgradesAmount = 1;
 	}
-	_sprite.setTexture(_texture);
-	_priceUpgrade = 300;
-	_salesValue = 336;
-	_damage = 5;
-	//_speedAttack = 3;  //no terminamos de definir esto como es en el juego real
-	_upgradesAmount = 1;
+	break;
+	case 1:
+	{
+		_name = "Torre MAXI F";
+		if (!_texture.loadFromFile("img/towers/torreD_4.png")) {
+			throw std::runtime_error("Error img tower MAXI F");
+		}
+		_sprite.setTexture(_texture);
+
+		_priceUpgrade = 9990;
+		_salesValue = 576;
+		_damage = 7;
+		//_speedAttack = 3;   //no terminamos de definir esto como es en el juego real
+		_upgradesAmount = 0;
+	}
+	default:
+		break;
+	}
 }
 
 void TowerSarF::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos)

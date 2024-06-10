@@ -34,17 +34,40 @@ TowerBrian::TowerBrian()
 
 void TowerBrian::upgrade() 
 {
-	_name = "Torre Laboratorio 2";
-	if (!_texture.loadFromFile("img/towers/torreA_2.png")) {
-		throw std::runtime_error("Error img tower Labo2");
-	}
-	_sprite.setTexture(_texture);
+	switch (_upgradesAmount)
+	{
+	case 2:
+	{
+		_name = "Torre Laboratorio 2";
+		if (!_texture.loadFromFile("img/towers/torreA_2.png")) {
+			throw std::runtime_error("Error img tower Labo2");
+		}
+		_sprite.setTexture(_texture);
 
-	_priceUpgrade = 460;
-	_salesValue = 448;
-	_damage = 5;
-	//_speedAttack = 3;   //no terminamos de definir esto como es en el juego real
-	_upgradesAmount = 1;
+		_priceUpgrade = 460;
+		_salesValue = 448;
+		_damage = 5;
+		//_speedAttack = 3;   //no terminamos de definir esto como es en el juego real
+		_upgradesAmount = 1;
+	}
+	break;
+	case 1:
+	{
+		_name = "Torre BRIAN";
+		if (!_texture.loadFromFile("img/towers/torreA_5.png")) {
+			throw std::runtime_error("Error img tower Labo3 BRIAN");
+		}
+		_sprite.setTexture(_texture);
+
+		_priceUpgrade = 9990;
+		_salesValue = 816;
+		_damage = 8;
+		//_speedAttack = 3;   //no terminamos de definir esto como es en el juego real
+		_upgradesAmount = 0;
+	}
+	default:
+		break;
+	}
 }
 
 void TowerBrian::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos) {
