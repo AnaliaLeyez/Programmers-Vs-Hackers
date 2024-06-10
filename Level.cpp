@@ -82,22 +82,14 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 		//spot->mouseCheck(mousePosition);  //por que si lo hago con esta linea no funciona? 
 		// deberia ser un pasamanos igual que lo es con currentMenu e igual que validateClick
 		if (spot->getGlobalBounds().contains(transformedMousePos))
-		{
 			spot->setMouseHover(true);
-		}
 		else
-		{
 			spot->setMouseHover(false);
-		}
 	}
 	if (_currentMenu->getIsVisible() && _currentMenu->getGlobalBounds().contains(transformedMousePos))
 	{
 		_currentMenu->mouseCheck(mousePosition);
 	}
-	/*else if (_currentMenu2->getIsVisible() && _currentMenu2->getGlobalBounds().contains(transformedMousePos))
-	{
-		_currentMenu2->mouseCheck(mousePosition);
-	}*/
 
 }
 
@@ -149,6 +141,7 @@ void Level::shoot(Bullet* blt, Hacker* hacker) //ANA
 
 void Level::update(sf::Vector2i& mousePosition) {
 	if (!getFinisheLevel()) {
+		mouseCheck(mousePosition);
 
 		if (_waveClock.getElapsedTime().asSeconds() >= _timeBetweenWaves && _currentWave <= 3) {  /// cambiar el 3 por cantidad de oleadas
 			spawnWave(); // Generar una nueva oleada de enemigos
@@ -254,7 +247,7 @@ void Level::update(sf::Vector2i& mousePosition) {
 			if (_currentMenu->getIsVisible()) {
 				_currentMenu->update(mousePosition);
 			}
-			mouseCheck(mousePosition);
+			
 		}
 	}
 	else {
@@ -301,10 +294,6 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 	{
 		target.draw(*_currentMenu, states);
 	}
-	/*else if (_currentMenu2->getIsVisible())
-	{
-		target.draw(*_currentMenu2, states);
-	}*/
 
 	for (auto& bullet : _bullets)
 	{
