@@ -4,7 +4,7 @@ class BulletBrian : public Bullet
 {
 public:
 	//BulletBrian(sf::Vector2f, sf::Vector2f);
-	BulletBrian(sf::Vector2f);
-	void upgrade();
+	BulletBrian(sf::Vector2f, sf::Vector2f);
+	void upgrade() override;
 };
 

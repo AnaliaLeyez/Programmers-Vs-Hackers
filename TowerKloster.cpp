@@ -30,7 +30,7 @@ TowerKloster::TowerKloster()
 
 	//_clock.restart(); //NUEVO, ANA
 	_cooldown = 0;
-	_bullet = new BulletBrian(getPosition()); //NUEVO, ANA //esto seria bulletKloster
+	//_bullet = new BulletBrian(getPosition()); //NUEVO, ANA //esto seria bulletKloster
 }
 
 void TowerKloster::upgrade()
@@ -45,5 +45,10 @@ void TowerKloster::upgrade()
 	_damage = 9;
 	//_speedAttack = 2;  //no terminamos de definir esto como es en el juego real
 	_upgradesAmount = 1;
+}
+
+void TowerKloster::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos)
+{
+	_bullet = new BulletBrian(twPos, hkPos); //esto seria bulletKloster
 }
 

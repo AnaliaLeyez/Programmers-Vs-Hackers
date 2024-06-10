@@ -47,7 +47,7 @@ protected:
 	std::list <Tower*> _activeTowers;
 
 	std::list<Bullet*> _bullets;
-
+	
 	//NUEVO:
 	sf::Clock _noCoinsClock;
 	sf::Font _font;

@@ -26,10 +26,11 @@ protected:
 	int _cooldown;
 	float _fireRate;
 	Bullet* _bullet; //NUEVO, ANA
+	//std::list<Bullet*> _bullets; //NUEVO, ANA
 
 public:
 	virtual void upgrade()=0;
-	
+	virtual void setBullet(sf::Vector2f, sf::Vector2f) = 0;
 	//Getters
 	std::string getName() const;
 	sf::Sprite getSprite() const;
@@ -55,6 +56,7 @@ public:
 	void setDamage(int);
 	//void setCooldown(int);
 	void setSpotNumber(int);
+	
 
 	//Comportamiento
 	void verificarEnemigo(HackerTrainee&);

@@ -32,7 +32,7 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 
 	//_clock.restart(); //NUEVO, ANA
 	_cooldown = 0;
-	_bullet = new BulletBrian(getPosition()); //NUEVO, ANA //esto seria bulletSarF
+	//_bullet = new BulletBrian(getPosition()); //NUEVO, ANA //esto seria bulletSarF
 }
 
 void TowerSarF::upgrade()
@@ -47,4 +47,9 @@ void TowerSarF::upgrade()
 	_damage = 5;
 	//_speedAttack = 3;  //no terminamos de definir esto como es en el juego real
 	_upgradesAmount = 1;
+}
+
+void TowerSarF::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos)
+{
+	_bullet = new BulletBrian(twPos, hkPos); //esto seria bulletSarF
 }

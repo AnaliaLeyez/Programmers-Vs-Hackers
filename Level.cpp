@@ -123,7 +123,7 @@ void Level::sell(Tower* tower, Spot& currentSpot) {
 void Level::shoot(Bullet* blt, Hacker* hacker) //ANA
 {
 	//_bullets.push_back(Bullet(shootingPosition, targetPosition)); //ADRI
-	blt->_enemyPosition = hacker->getPosition();
+	blt->setEnemyPosition(hacker->getPosition());
 	_bullets.push_back(blt); //ANA
 	
 	auto itB = _bullets.begin();
@@ -165,20 +165,20 @@ void Level::update(sf::Vector2i& mousePosition) {
 			{
 
 
-				// Pocision de la torre
+				// CON ESTE CODIGO VIEJO ENTRA AL IF, CON EL NUEVO NO
 				sf::Vector2f posicionTorre = tower->getSprite().getPosition();
 				// Obtiene los límites globales del sprite del objetivo
 				sf::FloatRect limitesObjetivo = hacker->getSprite().getGlobalBounds();
 				// Calcula la posición del centro del sprite del objetivo, que analía me explique que pasa acá.
-				sf::Vector2f centroObjetivo(limitesObjetivo.left + limitesObjetivo.width / 2, limitesObjetivo.top + limitesObjetivo.height / 2);
+				sf::Vector2f centroObjetivo( limitesObjetivo.width / 2, limitesObjetivo.height / 2);
 				// Calcula la distancia entre los centros de la torre y el objetivo
 				float distancia = std::sqrt(std::pow(centroObjetivo.x - posicionTorre.x, 2) + std::pow(centroObjetivo.y - posicionTorre.y, 2));
 				float radioTorre = tower->getVisualRange().getRadius();
 				if (tower->canShoot())
 				{
 					if (distancia <= radioTorre) {
-						Bullet* bullet = tower->getBullet();
-						bullet->setDirection(hacker->_collisionRect.getPosition());
+						tower->setBullet(tower->getPosition(), hacker->getPosition()); //setBullet deberia usar polimorfismo para que segun la torre se setee la bala deseada
+						Bullet* bullet = tower->getBullet(); //problema: al iniciar la bala debo decir de que tipo es y tambien su posicion inicial y direccion
 						shoot(bullet, hacker);
 					}
 				}
@@ -186,16 +186,17 @@ void Level::update(sf::Vector2i& mousePosition) {
 
 
 				//if (tower->getVisualRange().getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
-				////if (tower->isCollision(*hacker)) 
-				//{
-				//	if (tower->canShoot()) {
-				//		//shoot(tower->getVisualRange().getPosition(), hacker->_collisionRect.getPosition()); //ADRI
-				//		Bullet* bullet = tower->getBullet();
-				//		bullet->setDirection(hacker->_collisionRect.getPosition());
-				//		shoot(bullet, hacker);
-				//		//std::cout << hacker->_collisionRect.getPosition().x << " " << hacker->_collisionRect.getPosition().y<< std::endl;
-				//	}
-				//}
+				if (tower->isCollision(*hacker)) 
+				{
+					if (tower->canShoot()) {
+						//shoot(tower->getVisualRange().getPosition(), hacker->_collisionRect.getPosition()); //ADRI
+						Bullet* bullet = tower->getBullet();
+						bullet->setDirection(hacker->_collisionRect.getPosition());
+						bullet->setEnemyPosition(hacker->_collisionRect.getPosition());
+						shoot(bullet, hacker);
+						//std::cout << hacker->_collisionRect.getPosition().x << " " << hacker->_collisionRect.getPosition().y<< std::endl;
+					}
+				}
 
 
 			}

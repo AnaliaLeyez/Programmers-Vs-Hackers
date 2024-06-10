@@ -30,7 +30,7 @@ TowerWenner::TowerWenner()
 
 	//_clock.restart(); //NUEVO, ANA
 	_cooldown = 0;
-	_bullet = new BulletBrian(getPosition()); //NUEVO, ANA //esto seria bulletWenner
+	//_bullet = new BulletBrian(getPosition()); //NUEVO, ANA //esto seria bulletWenner
 }
 
 void TowerWenner::upgrade()
@@ -46,4 +46,9 @@ void TowerWenner::upgrade()
 	_damage = 14;
 	//_speedAttack = 1; //no terminamos de definir esto como es en el juego real
 	_upgradesAmount = 1;
+}
+
+void TowerWenner::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos)
+{
+	_bullet = new BulletBrian(twPos, hkPos); //esto seria bulletWenner
 }

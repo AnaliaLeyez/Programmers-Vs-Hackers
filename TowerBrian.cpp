@@ -29,7 +29,7 @@ TowerBrian::TowerBrian()
 
 	//_clock.restart(); //NUEVO, ANA
 	_cooldown = 0;
-	_bullet = new BulletBrian(getPosition()); //NUEVO, ANA
+	//_bullet = new BulletBrian(getPosition()); //NUEVO, ANA
 }
 
 void TowerBrian::upgrade() 
@@ -47,3 +47,6 @@ void TowerBrian::upgrade()
 	_upgradesAmount = 1;
 }
 
+void TowerBrian::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos) {
+	_bullet = new BulletBrian(twPos, hkPos);
+}

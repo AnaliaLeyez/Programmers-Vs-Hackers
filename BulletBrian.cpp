@@ -4,7 +4,7 @@
 #include "Bullet.h"
 #include "BulletBrian.h"
 
-BulletBrian::BulletBrian(sf::Vector2f initialPosition)
+BulletBrian::BulletBrian(sf::Vector2f initialPosition, sf::Vector2f direction)
 {
 	//ADRI
 	_collisionCircle.setRadius(10.f);
@@ -14,10 +14,10 @@ BulletBrian::BulletBrian(sf::Vector2f initialPosition)
 	//	throw std::runtime_error("Error img FireBall");
 	//}
 	//_sprite.setTexture(_texture);
-	//_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
-	//_sprite.setPosition(initialPosition);
+	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
+	_sprite.setPosition(initialPosition);
 
-	//_enemyPosition = direction;
+	_enemyPosition = direction;
 	//_speed = 3.0f;
 	//_damage = 20;
 
@@ -25,8 +25,7 @@ BulletBrian::BulletBrian(sf::Vector2f initialPosition)
 
 
 	//ANA
-	setPosition(initialPosition);
-	setOrigin(initialPosition);
+	//setOrigin(initialPosition);
 	//_direction = direction;
 	_damage = 2; //esto ver que valores segun la torre q le corresponde
 	_speed = 3.0f;
