@@ -32,8 +32,8 @@ sf::SoundBuffer Level::getBuffer() const { return _buffer; }
 sf::Sound Level::getSound() const { return _sound; }
 bool Level::getMusicPlaying() const { return _musicPlaying; }
 sf::Vector2f Level::getHackerStartPosition() const { return _hackerStartPosition; }
-const std::list<Tower> Level::getTowersAvailable() const { return _towersAvailable;}
-std::list<Tower> Level::getActiveTowers() const { return _activeTowers; }
+const std::list<Tower*> Level::getTowersAvailable() const { return _towersAvailable;}
+std::list<Tower*> Level::getActiveTowers() const { return _activeTowers; }
 
 void Level::setIdLevel(int idLevel) { _idLevel = idLevel; }
 void Level::setFinishedLevel(bool finished) { _finishedLevel = finished; }
@@ -44,8 +44,8 @@ void Level::setGolden(int golden) { _golden = golden; }
 void Level::setEnergy(int energy) { _energy = energy; }
 void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
-void Level::setTowersAvailable(Tower towerAvailable) { _towersAvailable.push_back(towerAvailable); }
-void Level::setActiveTowers(Tower* tower) { _activeTowers.push_back(*tower); }
+void Level::setTowersAvailable(Tower* towerAvailable) { _towersAvailable.push_back(towerAvailable); }
+void Level::setActiveTowers(Tower* tower) { _activeTowers.push_back(tower); }
 void Level::setSpot(Spot* sp, int n) {
 	for (auto& spot : _spots) {
 		if (spot->getSpotNumber() == n) {
@@ -115,7 +115,6 @@ void Level::sell(Tower* tower, Spot& currentSpot) {
 	std::cout << "se compro: " << tower->getName() << std::endl;
 	_ui.setText(0, std::to_string(getGolden()));
 	currentSpot.setCurrentTower(tower);
-	currentSpot.setCurrentTower(tower);
 	currentSpot.setOccupied(true);
 }
 
@@ -144,10 +143,10 @@ void Level::update(sf::Vector2i& mousePosition) {
 
 			for (auto& hacker : _enemies)
 			{
-				if (tower.getVisualRange().getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
+				if (tower->getVisualRange().getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
 				{
-					if (tower.canShoot())
-						shoot(tower.getVisualRange().getPosition(), hacker->_collisionRect.getPosition());
+					if (tower->canShoot())
+						shoot(tower->getVisualRange().getPosition(), hacker->_collisionRect.getPosition());
 					//std::cout << hacker->_collisionRect.getPosition().x << " " << hacker->_collisionRect.getPosition().y<< std::endl;
 				}
 				auto itB = _bullets.begin();

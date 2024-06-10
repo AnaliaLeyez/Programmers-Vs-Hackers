@@ -2,9 +2,9 @@
 #include <SFML/Graphics.hpp>
 
 #include "Bullet.h"
-#include "BulletA.h"
+#include "BulletBrian.h"
 
-BulletA::BulletA(sf::Vector2f position, sf::Vector2f direction)
+BulletBrian::BulletBrian(sf::Vector2f position, sf::Vector2f direction)
 {
 	setPosition(position);
 	_direction = direction;
@@ -18,13 +18,7 @@ BulletA::BulletA(sf::Vector2f position, sf::Vector2f direction)
 	_sprite.setOrigin({ getBounds().left + getBounds().width / 2, getBounds().top + getBounds().height / 2 });
 }
 
-void BulletA::update1BulletA()
+void BulletBrian::upgrade()
 {
 	_damage = 3;
-}
-
-void BulletA::update2BulletA()
-{
-	_damage = 4;
-	_velocity = { 3.f,3.f };
 }

@@ -81,7 +81,6 @@ void Level::spawnWave() {
 			}
 			++enemyIndex;
 			_enemyClock.restart();
-			std::cout << randomTime << std::endl;
 		}
 	}
 	else {
@@ -160,10 +159,10 @@ Level1::Level1()
 	_sound.play();
 	_musicPlaying = true;
 	_hackerStartPosition = { 960 / 32 * 9, 640 / 32 * 1 };
-	_towersAvailable.push_back(TowerBrian());
-	_towersAvailable.push_back(TowerKloster());
-	_towersAvailable.push_back(TowerSarF());
-	_towersAvailable.push_back(TowerWenner());
+	_towersAvailable.push_back(new TowerBrian());
+	_towersAvailable.push_back(new TowerKloster());
+	_towersAvailable.push_back(new TowerSarF());
+	_towersAvailable.push_back(new TowerWenner());
 
 	setNoCoinsText(); //NUEVO
 }

@@ -95,23 +95,20 @@ void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 	if (btn->getBtnNumber() != -1) {  //se hizo click en un boton
 		if (validateSale(btn)) { //veo si habilito venta
 			Tower* tower = btn->getTower();  // cuando hago esto desaparece tower
-			if (tower != nullptr) {
-				//Tower& towerRef = *tower;
-				
+			if (tower != nullptr) {				
 			sell(tower, sp);
-			tower->setSpotNumber(sp.getSpotNumber());
 			//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
 			tower->setSpotNumber(sp.getSpotNumber());
 
-			sf::Sprite sprite = tower->getSprite(); //posicion del sprite
-			sprite.setPosition(sp.getPosition());
-			tower->setSprite(sprite);
+			//sf::Sprite sprite = tower->getSprite(); //posicion del sprite
+			//sprite.setPosition(sp.getPosition());
+			//tower->setSprite(sprite);
 
-			sf::CircleShape vsRange = tower->getVisualRange(); //posicion del rango
-			vsRange.setPosition(sp.getPosition());
-			tower->setVisualRange(vsRange);
+			//sf::CircleShape vsRange = tower->getVisualRange(); //posicion del rango
+			//vsRange.setPosition(sp.getPosition());
+			//tower->setVisualRange(vsRange);
 
-			tower->setPosition(sp.getPosition());
+			//tower->setPosition(sp.getPosition());
 			setActiveTowers(tower);
 			setSpot(&sp, sp.getSpotNumber());
 			}

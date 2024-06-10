@@ -59,13 +59,11 @@ void Spot::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
 	if (getIsOccupied()) {
-		std::cout << _currentTower->getDamage() << std::endl;
 		target.draw(*_currentTower, states);
 	}
 	else {
 		_mouseHover ? target.draw(_spriteB, states) : target.draw(_spriteA, states);
 	}
-	
 }
 
 

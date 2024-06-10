@@ -43,8 +43,8 @@ protected:
 	sf::Clock _enemyClock;
 
 	sf::Vector2f _hackerStartPosition;
-	std::list <Tower> _towersAvailable;
-	std::list <Tower> _activeTowers;
+	std::list <Tower*> _towersAvailable;
+	std::list <Tower*> _activeTowers;
 
 	std::list<Bullet> _bullets;
 
@@ -74,8 +74,8 @@ public:
 	bool getMusicPlaying() const;
 	sf::Sound getSound() const;
 	sf::Vector2f getHackerStartPosition() const;
-	const std::list<Tower> getTowersAvailable() const;
-	std::list <Tower> getActiveTowers() const;
+	const std::list<Tower*> getTowersAvailable() const;
+	std::list <Tower*> getActiveTowers() const;
 
 	void setIdLevel(int);
 	void setFinishedLevel(bool);
@@ -86,7 +86,7 @@ public:
 	void setEnergy(int);
 	void setMusicPlaying(bool);
 	void setSound(bool);
-	void setTowersAvailable(Tower);
+	void setTowersAvailable(Tower*);
 	void setActiveTowers(Tower*);
 	void setSpot(Spot*, int); //setea la info de un spot en particular
 	void setCurrentSpot(Spot); //para que el currentMenu tenga su Spot asociado
