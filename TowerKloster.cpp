@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-
+#include <iostream> //borrar
 #include "Hacker.h"
 #include "BulletBrian.h" //cambiar por Kloster
 #include "Tower.h"
@@ -69,6 +69,11 @@ void TowerKloster::upgrade()
 	default:
 		break;
 	}
+}
+
+void TowerKloster::resell()
+{
+	std::cout << "REVENTA KLOSTER" << std::endl;
 }
 
 void TowerKloster::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos)

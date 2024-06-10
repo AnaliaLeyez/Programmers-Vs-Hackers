@@ -113,10 +113,10 @@ void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 {
 	Button* btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
+	Tower* tower = sp.getCurrentTower();
 	if (btn->getBtnNumber() == 1) {  //se hizo click en el boton 1 que es upgrade:
 		std::cout << "UPGRADE" << std::endl;
 		//validar si alcanza el dinero
-		Tower* tower = sp.getCurrentTower();
 		if (validateSale(tower, false)) { //veo si habilito venta
 				sell(tower, sp);
 				//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
@@ -132,13 +132,13 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 				std::cout << "nuevo danio" << tw->getDamage() << std::endl;
 		}
 		else {
-			_noCoinsClock.restart(); //NUEVO reseteo el clock para que se muestre el cartel
+			_noCoinsClock.restart(); // reseteo el clock para que se muestre el cartel
 		}
 		
 	}
 	else if (btn->getBtnNumber() == 2) {
-		//boton de venta
-		Spot sp = _currentMenu->getCurrentSpot();
+		/*std::cout << "REVENTA" << std::endl;*/
+		tower->resell();
 	}
 
 	_currentMenu->hide();

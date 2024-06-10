@@ -30,6 +30,7 @@ protected:
 
 public:
 	virtual void upgrade()=0;
+	virtual void resell() = 0;
 	virtual void setBullet(sf::Vector2f, sf::Vector2f) = 0;
 	//Getters
 	std::string getName() const;

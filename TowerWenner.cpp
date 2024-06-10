@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-
+#include <iostream> //borrar
 #include "Hacker.h"
 #include "BulletBrian.h" //cambiar por Wenner
 #include "Tower.h"
@@ -55,7 +55,7 @@ void TowerWenner::upgrade()
 	break;
 	case 1:
 	{
-		_name = "Torre BRIAN";
+		_name = "Torre WENNER";
 		if (!_texture.loadFromFile("img/towers/torreb_4.png")) {
 			throw std::runtime_error("Error img tower MAXI WENNER");
 		}
@@ -63,13 +63,18 @@ void TowerWenner::upgrade()
 
 		_priceUpgrade = 9990;
 		_salesValue = 816;
-		_damage = 8;
+		_damage = 20;
 		//_speedAttack = 3;   //no terminamos de definir esto como es en el juego real
 		_upgradesAmount = 0;
 	}
 	default:
 		break;
 	}
+}
+
+void TowerWenner::resell()
+{
+	std::cout << "REVENTA WENNER" << std::endl;
 }
 
 void TowerWenner::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos)

@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-
+#include <iostream> //borrar
 #include "Hacker.h"
 #include "BulletBrian.h" //cambiar por Sar F
 #include "Tower.h"
@@ -71,6 +71,11 @@ void TowerSarF::upgrade()
 	default:
 		break;
 	}
+}
+
+void TowerSarF::resell()
+{
+	std::cout << "REVENTA MAXI F" << std::endl;
 }
 
 void TowerSarF::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos)

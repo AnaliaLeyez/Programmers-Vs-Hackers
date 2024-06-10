@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <iostream> //borrar
 #include "Hacker.h"
 #include "BulletBrian.h"
 #include "Tower.h"
@@ -68,6 +69,11 @@ void TowerBrian::upgrade()
 	default:
 		break;
 	}
+}
+
+void TowerBrian::resell()
+{
+	std::cout << "REVENTA BRIAN	" << std::endl;
 }
 
 void TowerBrian::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos) {
