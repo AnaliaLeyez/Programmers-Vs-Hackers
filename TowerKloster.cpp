@@ -30,10 +30,15 @@ TowerKloster::TowerKloster()
 
 void TowerKloster::upgrade()
 {
-	_priceUpgrade = 9;
-	_salesValue = 7;
-	_damage = 12;
-	_speedAttack = 2;
+	_name = "ARSO";
+	if (!_texture.loadFromFile("img/towers/torreC_2.png")) {
+		throw std::runtime_error("Error img tower ARSO");
+	}
+	_sprite.setTexture(_texture);
+	_priceUpgrade = 200;
+	_salesValue = 168;
+	_damage = 9;
+	//_speedAttack = 2;  //no terminamos de definir esto como es en el juego real
 	_upgradesAmount = 1;
 }
 

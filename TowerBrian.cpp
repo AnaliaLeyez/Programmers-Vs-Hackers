@@ -29,11 +29,16 @@ TowerBrian::TowerBrian()
 
 void TowerBrian::upgrade() 
 {
-	_name = "Laboratorio 2";
-	_priceUpgrade = 9;
-	_salesValue = 7;
-	_damage = 12;
-	_speedAttack = 2;
+	_name = "Torre Laboratorio 2";
+	if (!_texture.loadFromFile("img/towers/torreA_2.png")) {
+		throw std::runtime_error("Error img tower Labo2");
+	}
+	_sprite.setTexture(_texture);
+
+	_priceUpgrade = 460;
+	_salesValue = 448;
+	_damage = 5;
+	//_speedAttack = 3;   //no terminamos de definir esto como es en el juego real
 	_upgradesAmount = 1;
 }
 

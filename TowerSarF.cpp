@@ -32,9 +32,14 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 
 void TowerSarF::upgrade()
 {
-	_priceUpgrade = 9;
-	_salesValue = 7;
-	_damage = 12;
-	_speedAttack = 2;
+	_name = "Programacion 2";
+	if (!_texture.loadFromFile("img/towers/torreD_2.png")) {
+		throw std::runtime_error("Error img tower Programacion2");
+	}
+	_sprite.setTexture(_texture);
+	_priceUpgrade = 300;
+	_salesValue = 336;
+	_damage = 5;
+	//_speedAttack = 3;  //no terminamos de definir esto como es en el juego real
 	_upgradesAmount = 1;
 }

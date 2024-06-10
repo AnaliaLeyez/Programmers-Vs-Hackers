@@ -30,9 +30,15 @@ TowerWenner::TowerWenner()
 
 void TowerWenner::upgrade()
 {
-	_priceUpgrade = 9;
-	_salesValue = 7;
-	_damage = 12;
-	_speedAttack = 2;
+	_name = "estadistica";
+	if (!_texture.loadFromFile("img/towers/torreB_2.png")) {
+		throw std::runtime_error("Error img tower estadistica");
+	}
+	_sprite.setTexture(_texture);
+
+	_priceUpgrade = 300;
+	_salesValue = 280;
+	_damage = 14;
+	//_speedAttack = 1; //no terminamos de definir esto como es en el juego real
 	_upgradesAmount = 1;
 }
