@@ -8,17 +8,17 @@ protected:
 	sf::Texture _texture;
 	bool _isVisible;
 	std::vector <Button*> _buttons;
-	Spot _currentSpot;
+	Spot _currentSpot; //DEBERIA SER PUNTERO
 	int _NumberMenu;
 public:
 	bool getIsVisible();
-	const std::vector <Button*> getButtons() const;
+	//const std::vector <Button*> getButtons() const;
 	Button* getButtonByIndex(int) const;
-	Spot getCurrentSpot() const;
+	Spot getCurrentSpot() const; //DEBERIA SER PUNTERO
 	int getNumberMenu() const;
 	void setCurrentSpot(Spot);
 	void setButton(bool, int);
-	void setNumberMenu(int);
+	//void setNumberMenu(int);
 	void hide();
 	void show();
 	void mouseCheck(sf::Vector2i&);

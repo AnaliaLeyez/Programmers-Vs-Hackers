@@ -5,7 +5,7 @@
 class Tower : public sf::Drawable, public sf::Transformable, public Collisionable
 {
 protected:
-	//Propiedades est�ticas
+	//Propiedades esteticas
 	sf::Texture _texture;
 	sf::Sprite _sprite;
 	sf::CircleShape _visualRange;
@@ -55,9 +55,7 @@ public:
 	void setPriceUpgrade(int);
 	void setSalesValue(int);
 	void setDamage(int);
-	//void setCooldown(int);
 	void setSpotNumber(int);
-	
 
 	//Comportamiento
 	void verificarEnemigo(HackerTrainee&);

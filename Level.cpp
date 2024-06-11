@@ -46,9 +46,9 @@ void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
 void Level::setTowersAvailable(Tower* towerAvailable) { _towersAvailable.push_back(towerAvailable); }
 void Level::setActiveTowers(Tower* tower) { _activeTowers.push_back(tower); }
-void Level::setSpot(Spot* sp, int n) {
+void Level::setSpot(Spot* sp) {
 	for (auto& spot : _spots) {
-		if (spot->getSpotNumber() == n) {
+		if (spot->getSpotNumber() == sp->getSpotNumber()) {
 			spot->setOccupied(sp->getIsOccupied());
 			spot->setCurrentTower(sp->getCurrentTower());
 			break;
@@ -160,7 +160,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 
 			for (auto& hacker : _enemies)
 			{
-
 
 				// CON ESTE CODIGO VIEJO ENTRA AL IF, CON EL NUEVO NO
 				sf::Vector2f posicionTorre = tower->getSprite().getPosition();

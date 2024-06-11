@@ -28,7 +28,7 @@ void Level::validateClick(int mousex, int mousey)
 		currentSpot = _currentMenu->getCurrentSpot();
 		currentSpot = manageOutOfSpotClick(mousex, mousey);
 	}
-	setSpot(&currentSpot, currentSpot.getSpotNumber());
+	setSpot(&currentSpot);
 
 	validateClickOnSpeaker(mousex, mousey);
 }
@@ -72,13 +72,12 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 		}
 	}
 	setCurrentSpot(currentSp);
-	setSpot(&currentSp, currentSp.getSpotNumber());
+	setSpot(&currentSp);
 }
 Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
-	//Spot sp = _currentMenu->getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
-	Spot sp;
+	Spot sp;  //DEBERIA SER PUNTERO
 	if (_currentMenu->getIsVisible()) { //click fuera de spot y towerMenu estaba visible
-		Spot sp = _currentMenu->getCurrentSpot();
+		sp = _currentMenu->getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
 		if (_currentMenu->getNumberMenu() == 1) {
 			clickWithMenu1Open(mousex, mousey, sp);
 		}
@@ -87,7 +86,7 @@ Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 		}
 		_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
 	}
-	setSpot(&sp, sp.getSpotNumber());
+	setSpot(&sp);
 	return sp;
 }
 void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
@@ -102,7 +101,7 @@ void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 				tower->setSpotNumber(sp.getSpotNumber());
 				tower->setOrigin(sp.getOrigin()); //nuevo
 				setActiveTowers(tower);
-				setSpot(&sp, sp.getSpotNumber()); //CUIDADO esta linea parece innecesaria pero la saco y se rompe el programa
+				setSpot(&sp); //CUIDADO esta linea parece innecesaria pero la saco y se rompe el programa
 		}
 		else {
 			_noCoinsClock.restart(); //NUEVO reseteo el clock para que se muestre el cartel
@@ -123,13 +122,13 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 				tower->setSpotNumber(sp.getSpotNumber());
 				tower->setOrigin(sp.getOrigin()); //nuevo
 				setActiveTowers(tower);
-				setSpot(&sp, sp.getSpotNumber()); //CUIDADO esta linea parece innecesaria pero la saco y se rompe el programa
+				setSpot(&sp); //CUIDADO esta linea parece innecesaria pero la saco y se rompe el programa
 				
 				//si alcanza, comprar
-				Tower* tw = sp.getCurrentTower();
-				tw->upgrade();
+				//Tower* tw = sp.getCurrentTower();
+				tower->upgrade();
 				std::cout << "se compro: " << tower->getName() << std::endl;
-				std::cout << "nuevo danio" << tw->getDamage() << std::endl;
+				std::cout << "nuevo danio" << tower->getDamage() << std::endl;
 		}
 		else {
 			_noCoinsClock.restart(); // reseteo el clock para que se muestre el cartel

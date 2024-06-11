@@ -66,10 +66,9 @@ public:
 	Map getMap() const;
 	int(*getMapArray())[30];
 	const std::vector<Spot*> getSpots() const;
-	Spot getCurrentSpot() const;
-	Spot getSpotByNumber(int) const;
-	TowerMenu getCurrentMenu() const;
-
+	Spot getCurrentSpot() const; //DEBERIA SER PUNTERO
+	Spot getSpotByNumber(int) const; //DEBERIA SER PUNTERO
+	TowerMenu getCurrentMenu() const; //DEBERIA SER PUNTERO
 	int getGolden();
 	int getEnergy();
 	sf::SoundBuffer getBuffer() const;
@@ -90,7 +89,7 @@ public:
 	void setSound(bool);
 	void setTowersAvailable(Tower*);
 	void setActiveTowers(Tower*);
-	void setSpot(Spot*, int); //setea la info de un spot en particular
+	void setSpot(Spot*); //setea la info de un spot en particular
 	void setCurrentSpot(Spot); //para que el currentMenu tenga su Spot asociado
 	void setCurrentMenu(TowerMenu*);
 
@@ -102,7 +101,7 @@ public:
 	void validateClick(int, int);
 	int validateClickOnSpot(int, int);
 	void manageClickOnSpot(int, int, Spot&);
-	Spot manageOutOfSpotClick(int, int);
+	Spot manageOutOfSpotClick(int, int); //DEBERIA SER PUNTERO??????
 	void clickWithMenu1Open(int, int, Spot&);
 	void clickWithMenu2Open(int, int, Spot&);
 	void validateClickOnSpeaker(int, int);
