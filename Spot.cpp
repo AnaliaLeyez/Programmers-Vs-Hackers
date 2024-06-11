@@ -44,7 +44,12 @@ void Spot::setMouseHover(bool state) { _mouseHover = state; }
 
 void Spot::setOccupied(bool status){ _occupied = status; }
 
-void Spot::setCurrentTower(Tower* tower){ _currentTower = tower; }
+void Spot::setCurrentTower(Tower* tower){ 
+	if (_currentTower != nullptr) {
+		_currentTower=nullptr; // Libera la memoria de la torre actual
+	}
+	_currentTower = tower; 
+}
 
 void Spot::validateMouseHover(bool &_mouseHover)
 {

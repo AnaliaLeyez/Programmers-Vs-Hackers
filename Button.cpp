@@ -2,7 +2,7 @@
 #include "Button.h"
 
 
-Tower* Button::getTower() { return _tower; }
+Tower* Button::getTower() const { return _tower->clone(); }
 int Button::getPrice() { return _tower->getPrice(); }
 int Button::getDamage() { return _tower->getDamage(); }
 int Button::getBtnNumber() { return _btnNumber; }

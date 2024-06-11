@@ -71,11 +71,6 @@ void TowerBrian::upgrade()
 	}
 }
 
-void TowerBrian::resell()
-{
-	std::cout << "REVENTA BRIAN	" << std::endl;
-}
-
 void TowerBrian::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos) {
 	_bullet = new BulletBrian(twPos, hkPos);
 }

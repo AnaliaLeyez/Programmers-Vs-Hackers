@@ -114,6 +114,16 @@ void Level::sell(Tower* tower, Spot& currentSpot) {
 	currentSpot.setCurrentTower(tower);
 	currentSpot.setOccupied(true);
 }
+void Level::resellTower(Spot& sp) {
+	Tower* tower = sp.getCurrentTower();
+		int resaleValue = tower->getSalesValue();
+		setGolden(getGolden() + resaleValue); // Agregar el valor de reventa al oro del jugador
+		_ui.setText(0, std::to_string(getGolden()));
+		sp.clearCurrentTower(); // Limpiar la torre del spot
+		sp.setOccupied(false); // Marcar el spot como no ocupado
+		_activeTowers.remove(tower);
+		std::cout << "Torre vendida y eliminada del spot." << std::endl;
+}
 
 //void Level::shoot(Bullet* bullet, sf::Vector2f shootingPosition, sf::Vector2f targetPosition)
 void Level::shoot(Bullet* blt, Hacker* hacker) //ANA
@@ -157,30 +167,8 @@ void Level::update(sf::Vector2i& mousePosition) {
 		for (auto& tower : _activeTowers)
 		{
 			//std::cout << tower._visualRange.getPosition().x << " " << tower._visualRange.getPosition().y << std::endl;
-
 			for (auto& hacker : _enemies)
 			{
-
-				// CON ESTE CODIGO VIEJO ENTRA AL IF, CON EL NUEVO NO
-				sf::Vector2f posicionTorre = tower->getSprite().getPosition();
-				// Obtiene los límites globales del sprite del objetivo
-				sf::FloatRect limitesObjetivo = hacker->getSprite().getGlobalBounds();
-				// Calcula la posición del centro del sprite del objetivo, que analía me explique que pasa acá.
-				sf::Vector2f centroObjetivo( limitesObjetivo.width / 2, limitesObjetivo.height / 2);
-				// Calcula la distancia entre los centros de la torre y el objetivo
-				float distancia = std::sqrt(std::pow(centroObjetivo.x - posicionTorre.x, 2) + std::pow(centroObjetivo.y - posicionTorre.y, 2));
-				float radioTorre = tower->getVisualRange().getRadius();
-				if (tower->canShoot())
-				{
-					if (distancia <= radioTorre) {
-						tower->setBullet(tower->getPosition(), hacker->getPosition()); //setBullet deberia usar polimorfismo para que segun la torre se setee la bala deseada
-						Bullet* bullet = tower->getBullet(); //problema: al iniciar la bala debo decir de que tipo es y tambien su posicion inicial y direccion
-						shoot(bullet, hacker);
-					}
-				}
-
-
-
 				//if (tower->getVisualRange().getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
 				if (tower->isCollision(*hacker)) 
 				{

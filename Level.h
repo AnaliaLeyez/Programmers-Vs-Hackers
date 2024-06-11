@@ -108,6 +108,7 @@ public:
 
 	bool validateSale(Tower*, bool); //nuevo
 	void sell(Tower*, Spot&);
+	void resellTower(Spot&);
 
 	//void shoot(sf::Vector2f, sf::Vector2f); //ADRI
 	void shoot(Bullet*, Hacker*); //ANA
@@ -117,6 +118,10 @@ public:
 
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update(sf::Vector2i&);
-
+	~Level() { //revisar eliminar todo lo que haya sido asignado con memoria dinamica
+		for (Spot* spot : _spots) {
+			delete spot;
+		}
+	}
 };
 

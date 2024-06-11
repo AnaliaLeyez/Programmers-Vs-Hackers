@@ -29,8 +29,9 @@ protected:
 	//std::list<Bullet*> _bullets; //NUEVO, ANA
 
 public:
+	virtual Tower* clone() const = 0; // Método clone para crear nuevas instancias
 	virtual void upgrade()=0;
-	virtual void resell() = 0;
+
 	virtual void setBullet(sf::Vector2f, sf::Vector2f) = 0;
 	//Getters
 	std::string getName() const;

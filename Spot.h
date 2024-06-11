@@ -26,5 +26,14 @@ public:
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 
 	sf::FloatRect getGlobalBounds() const;
+	void clearCurrentTower() {
+		delete _currentTower; // Libera la memoria de la torre actual
+		_currentTower = nullptr;
+	}
+
+	~Spot() {
+		if(_currentTower!=nullptr)
+		_currentTower =nullptr;
+	}
 };
 

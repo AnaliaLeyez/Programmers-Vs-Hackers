@@ -72,11 +72,6 @@ void TowerWenner::upgrade()
 	}
 }
 
-void TowerWenner::resell()
-{
-	std::cout << "REVENTA WENNER" << std::endl;
-}
-
 void TowerWenner::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos)
 {
 	_bullet = new BulletBrian(twPos, hkPos); //esto seria bulletWenner

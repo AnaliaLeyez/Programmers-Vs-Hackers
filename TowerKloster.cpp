@@ -71,11 +71,6 @@ void TowerKloster::upgrade()
 	}
 }
 
-void TowerKloster::resell()
-{
-	std::cout << "REVENTA KLOSTER" << std::endl;
-}
-
 void TowerKloster::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos)
 {
 	_bullet = new BulletBrian(twPos, hkPos); //esto seria bulletKloster

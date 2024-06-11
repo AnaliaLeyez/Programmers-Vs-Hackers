@@ -73,11 +73,6 @@ void TowerSarF::upgrade()
 	}
 }
 
-void TowerSarF::resell()
-{
-	std::cout << "REVENTA MAXI F" << std::endl;
-}
-
 void TowerSarF::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos)
 {
 	_bullet = new BulletBrian(twPos, hkPos); //esto seria bulletSarF

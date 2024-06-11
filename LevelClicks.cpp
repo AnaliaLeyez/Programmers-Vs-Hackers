@@ -94,10 +94,9 @@ void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 	Button* btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
 	if (btn->getBtnNumber() != -1) {  //se hizo click en un boton
 
-		if (validateSale(btn->getTower(), true)) { //veo si habilito venta
-			Tower* tower = btn->getTower();
+		if (validateSale(btn->getTower(), true)) {
+			Tower* tower = btn->getTower()->clone(); // Crear una nueva instancia de la torre
 				sell(tower, sp);
-				//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
 				tower->setSpotNumber(sp.getSpotNumber());
 				tower->setOrigin(sp.getOrigin()); //nuevo
 				setActiveTowers(tower);
@@ -114,18 +113,16 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 	Button* btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
 	Tower* tower = sp.getCurrentTower();
 	if (btn->getBtnNumber() == 1) {  //se hizo click en el boton 1 que es upgrade:
+		
 		std::cout << "UPGRADE" << std::endl;
 		//validar si alcanza el dinero
-		if (validateSale(tower, false)) { //veo si habilito venta
+		if (validateSale(tower, false)) {
+			
 				sell(tower, sp);
-				//asi como se manda tower, hay que mandar la info del spot a level para q sepa q spot esta ocupado:
 				tower->setSpotNumber(sp.getSpotNumber());
 				tower->setOrigin(sp.getOrigin()); //nuevo
 				setActiveTowers(tower);
 				setSpot(&sp); //CUIDADO esta linea parece innecesaria pero la saco y se rompe el programa
-				
-				//si alcanza, comprar
-				//Tower* tw = sp.getCurrentTower();
 				tower->upgrade();
 				std::cout << "se compro: " << tower->getName() << std::endl;
 				std::cout << "nuevo danio" << tower->getDamage() << std::endl;
@@ -136,8 +133,8 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 		
 	}
 	else if (btn->getBtnNumber() == 2) {
-		/*std::cout << "REVENTA" << std::endl;*/
-		tower->resell();
+		resellTower(sp);
+		
 	}
 
 	_currentMenu->hide();
