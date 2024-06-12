@@ -6,22 +6,22 @@
 
 //sf::Texture Bullet::_texture;
 
-//Bullet::Bullet(sf::Vector2f initialPosition, sf::Vector2f target)
-//{
-//	_collisionCircle.setRadius(10.f);
-//	_collisionCircle.setPosition(initialPosition);
-//
-//	if (!_texture.loadFromFile("img/Bullets/fireball.png")) {
-//		throw std::runtime_error("Error img FireBall");
-//	}
-//	_sprite.setTexture(_texture);
-//	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
-//	_sprite.setPosition(initialPosition);
-//
-//	_enemyPosition = target;
-//	_speed = 3.0f;
-//	_damage = 20;
-//}
+Bullet::Bullet(sf::Vector2f initialPosition, sf::Vector2f target)
+{
+	_collisionCircle.setRadius(10.f);
+	_collisionCircle.setPosition(initialPosition);
+
+	if (!_texture.loadFromFile("img/Bullets/fireball.png")) {
+		throw std::runtime_error("Error img FireBall");
+	}
+	_sprite.setTexture(_texture);
+	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
+	_sprite.setPosition(initialPosition);
+
+	_enemyPosition = target;
+	_speed = 3.0f;
+	_damage = 20;
+}
 
 void Bullet::moveToward()
 {
