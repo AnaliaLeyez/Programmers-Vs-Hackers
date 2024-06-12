@@ -96,6 +96,7 @@ void Level::spawnWave() {
 Level1::Level1()
 {
 	_currentWave = 1;
+	_totalWaves = 3;
 	_enemiesPerWave = 5;
 	_timeBetweenWaves = 10;
 	_timeBetweenEnemies = 2;

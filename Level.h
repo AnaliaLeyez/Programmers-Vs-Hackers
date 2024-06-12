@@ -38,6 +38,7 @@ protected:
 
 	std::vector<Hacker*> _enemies;
 	int _currentWave;
+	int _totalWaves;
 	int _enemiesPerWave;
 	int _timeBetweenWaves;
 	int _timeBetweenEnemies;
@@ -112,8 +113,7 @@ public:
 
 	//void shoot(sf::Vector2f, sf::Vector2f); //ADRI
 	void shoot(Bullet*, Hacker*); //ANA
-
-	//nuevo
+	void checkLevelCompletion();
 	void setGameOverText();
 
 	void draw(sf::RenderTarget&, sf::RenderStates) const;

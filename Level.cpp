@@ -153,7 +153,13 @@ void Level::shoot(Bullet* blt, Hacker* hacker) //ANA
 	}
 }
 
+void Level::checkLevelCompletion() {
+	if (_currentWave > _totalWaves && _enemies.empty()) {
+		_finishedLevel = true;
+	}
+}
 void Level::update(sf::Vector2i& mousePosition) {
+	checkLevelCompletion();
 	if (!getFinisheLevel()) {
 		mouseCheck(mousePosition);
 
@@ -243,7 +249,9 @@ void Level::update(sf::Vector2i& mousePosition) {
 	}
 	else {
 		if (getIdLevel() < 4) { //aca digo que solo puede llegar hasta el nivel 4
+			std::cout << "NIVEL 2:" << std::endl;
 			Manager::getInstance().setNumberLevel(getIdLevel() + 1); //cambia al siguiente nivel
+
 		}
 		else {
 			//logica para cuando se termina el juego, cuando se pasaron todos los niveles
