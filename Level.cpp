@@ -154,7 +154,7 @@ void Level::shoot(Bullet* blt, Hacker* hacker) //ANA
 }
 
 void Level::checkLevelCompletion() {
-	if (_currentWave > _totalWaves && _enemies.empty()) {
+	if (_currentWave == _totalWaves && _enemies.empty()) {
 		_finishedLevel = true;
 	}
 }
