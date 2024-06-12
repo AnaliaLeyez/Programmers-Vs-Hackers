@@ -107,9 +107,12 @@ bool Level::validateSale(Tower* tower, bool firstSale) {
 	return false;
 }
 void Level::sell(Tower* tower, Spot& currentSpot) {
-	int price = tower->getPrice();
+	int price;
+	if (currentSpot.getIsOccupied()) { price= tower->getPriceUpgrade();}
+	else { price = tower->getPrice();}
+	
 	setGolden(getGolden() - price);
-	/*std::cout << "se compro: " << tower->getName() << std::endl;*/
+	
 	_ui.setText(0, std::to_string(getGolden()));
 	currentSpot.setCurrentTower(tower);
 	currentSpot.setOccupied(true);
@@ -117,12 +120,13 @@ void Level::sell(Tower* tower, Spot& currentSpot) {
 void Level::resellTower(Spot& sp) {
 	Tower* tower = sp.getCurrentTower();
 		int resaleValue = tower->getSalesValue();
+		std::cout << "Valor reventa:" << resaleValue << std::endl;
 		setGolden(getGolden() + resaleValue); // Agregar el valor de reventa al oro del jugador
 		_ui.setText(0, std::to_string(getGolden()));
 		sp.clearCurrentTower(); // Limpiar la torre del spot
 		sp.setOccupied(false); // Marcar el spot como no ocupado
 		_activeTowers.remove(tower);
-		std::cout << "Torre vendida y eliminada del spot." << std::endl;
+		
 }
 
 //void Level::shoot(Bullet* bullet, sf::Vector2f shootingPosition, sf::Vector2f targetPosition)
