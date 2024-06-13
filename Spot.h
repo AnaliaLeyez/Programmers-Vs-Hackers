@@ -4,12 +4,12 @@ class Spot : public sf::Drawable, public sf::Transformable
 {
 protected:
 	static sf::Texture _textureA, _textureB;
-	sf::Sprite _spriteA, _spriteB;
 	int _spotNumber;
 	bool _occupied;
 	Tower* _currentTower;
 	bool _mouseHover;
 public:
+	sf::Sprite _spriteA, _spriteB;
 	Spot();
 	void setSpot(int, bool);
 	int getSpotNumber() const;

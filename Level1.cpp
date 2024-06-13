@@ -29,6 +29,8 @@ for (int i = 0; i < 5; i++)
 		{
 			if (arr[y][x] == 6 && index<5)
 			{				
+				//spots[index]->_spriteA.setPosition(32 * x, 32 * y);
+				//spots[index]->_spriteB.setPosition(32 * x, 32 * y);
 				spots[index]->setPosition(32 * x, 32 * y);
 				spots[index]->setSpotNumber(index + 1);
 				index++;

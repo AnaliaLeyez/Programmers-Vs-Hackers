@@ -17,14 +17,16 @@ void Level::validateClick(int mousex, int mousey)
 {
 	Spot currentSpot; //nuevo
 	int clickSpot = validateClickOnSpot(mousex, mousey);
-	if (clickSpot != 0) { //si se clickeo spot, esto devuelve el nro de spot
+	if (clickSpot != 0)
+	{ //si se clickeo spot, esto devuelve el nro de spot
 		currentSpot = getSpotByNumber(clickSpot);
 		currentSpot.setSpotNumber(clickSpot);
 		currentSpot.setOccupied(getSpotByNumber(currentSpot.getSpotNumber()).getIsOccupied());
 		_currentMenu->setCurrentSpot(currentSpot);  //si se clickeo en spot e estoy diciendo a menu q se asocie a ese spot, sino nose
 		manageClickOnSpot(mousex, mousey, currentSpot); //currentSpot tiene el nro de spot y el estado
 	}
-	else { //si NO se clickeo spot
+	else 
+	{ //si NO se clickeo spot
 		currentSpot = _currentMenu->getCurrentSpot();
 		currentSpot = manageOutOfSpotClick(mousex, mousey);
 	}
@@ -32,7 +34,8 @@ void Level::validateClick(int mousex, int mousey)
 
 	validateClickOnSpeaker(mousex, mousey);
 }
-int Level::validateClickOnSpot(int mousex, int mousey) {
+int Level::validateClickOnSpot(int mousex, int mousey) 
+{
 	if (!_currentMenu->getIsVisible()) {
 		for (auto& spot : _spots) {
 			if (spot->getGlobalBounds().contains(mousex, mousey)) {
@@ -59,7 +62,8 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 			_currentMenu->hide();
 		}
 	}
-	else {  //spot libre
+	else 
+	{  //spot libre
 		//_currentMenu2->hide(); //Necesario, en caso q se haya estado mostrando por otro spot
 		_currentMenu = _menu1;
 		currentSp.setCurrentTower(_currentMenu->getCurrentSpot().getCurrentTower()); //me aseguro que el currentSpot esta asociado a la tower ahora
@@ -77,7 +81,9 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 	Spot sp;  //DEBERIA SER PUNTERO
 	if (_currentMenu->getIsVisible()) { //click fuera de spot y towerMenu estaba visible
+		std::cout << "manageOutOfSpot-SP: " << sp.getPosition().x << std::endl;
 		sp = _currentMenu->getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
+		
 		if (_currentMenu->getNumberMenu() == 1) {
 			clickWithMenu1Open(mousex, mousey, sp);
 		}
@@ -92,15 +98,40 @@ Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 {
 	Button* btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
+
+	std::cout << " clickWithMenu1Open sp: " << sp.getPosition().x << std::endl;
+
 	if (btn->getBtnNumber() != -1) {  //se hizo click en un boton
 
 		if (validateSale(btn->getTower(), true)) {
 			Tower* tower = btn->getTower()->clone(); // Crear una nueva instancia de la torre
 				sell(tower, sp);
+
 				tower->setSpotNumber(sp.getSpotNumber());
-				tower->setOrigin(sp.getOrigin()); //nuevo
+				//tower->setOrigin(sp.getOrigin()); //nuevo
+
+				std::cout<<"ANTES DE SETEAR: " << sp.getPosition().x << " " << sp.getPosition().y << std::endl;
+
+				//tower->_sprite.setPosition(sp.getInverseTransform().transformPoint(sp.getPosition()));
+				tower->_sprite.setPosition(sp.getPosition());
+				//tower->_visualRange.setPosition(sp.getInverseTransform().transformPoint(sp.getPosition()));
+				tower->_visualRange.setPosition(sp.getPosition());
+
+				sf::CircleShape debugCircle(10);
+				debugCircle.setFillColor(sf::Color::Red);
+				debugCircle.setPosition(sp.getPosition());
+				_debugShapes.push_back(debugCircle);
+
+				std::cout << "DESPUES DE SETEAR: " << std::endl;
+				//std::cout << tower->_sprite.getPosition().x << " " << tower->_sprite.getPosition().y << std::endl;
+				//std::cout << tower->_visualRange.getPosition().x << " " << tower->_visualRange.getPosition().y << std::endl;
+				//tower->setPosition(sp.getInverseTransform().transformPoint(sp.getPosition()));
+				std::cout << " - - - - " << std::endl;
+
+
 				setActiveTowers(tower);
 				setSpot(&sp); //CUIDADO esta linea parece innecesaria pero la saco y se rompe el programa
+				std::cout << "2# SPOT: " << sp.getPosition().x << " " << sp.getPosition().y << std::endl;
 		}
 		else {
 			_noCoinsClock.restart(); //NUEVO reseteo el clock para que se muestre el cartel
@@ -112,6 +143,7 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 {
 	Button* btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
 	Tower* tower = sp.getCurrentTower();
+
 	if (btn->getBtnNumber() == 1) {  //se hizo click en el boton 1 que es upgrade:
 		
 		std::cout << "UPGRADE" << std::endl;

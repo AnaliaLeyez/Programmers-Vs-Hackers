@@ -31,6 +31,8 @@ void Tower::setDamage(int damage) { _damage = damage; }
 void Tower::setPriceUpgrade(int price) { _priceUpgrade = price; }
 void Tower::setSpotNumber(int n) { _spotNumber = n; }
 
+int Tower::getType() const { return _type; }
+
 void Tower::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     states.transform *= getTransform();

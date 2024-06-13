@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream> //borrar
 #include "Hacker.h"
-#include "BulletBrian.h" //cambiar por Wenner
+//#include "BulletBrian.h" //cambiar por Wenner
 #include "Tower.h"
 #include "TowerWenner.h"
 
@@ -12,25 +12,22 @@ TowerWenner::TowerWenner()
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
-	_name = "Torre Matematica";
+	_name = "wenner";
 
 	//Rango de ataque:
 	_visualRange.setRadius(120);
 	_visualRange.setFillColor(sf::Color(0, 255, 0, 120));
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
-	_price = 150;
-	_priceUpgrade = 200;
-	_salesValue = 120;
-	_damage = 8;
-	_range = 6;
+	_type = 4;
+	_price = 10;
+	_priceUpgrade = 9;
+	_salesValue = 5;
+	_damage = 10;
+	_range = 9;
 	_speedAttack = 3;
 	_upgradesAmount = 2;
 	_fireRate = 1.0f; // Tiempo en segundos entre disparos
-
-	//_clock.restart(); //NUEVO, ANA
-	_cooldown = 0;
-	//_bullet = new BulletBrian(getPosition()); //NUEVO, ANA //esto seria bulletWenner
 }
 
 void TowerWenner::upgrade()
@@ -74,5 +71,5 @@ void TowerWenner::upgrade()
 
 void TowerWenner::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos)
 {
-	_bullet = new BulletBrian(twPos, hkPos); //esto seria bulletWenner
+	//_bullet = new BulletBrian(twPos, hkPos); //esto seria bulletWenner
 }

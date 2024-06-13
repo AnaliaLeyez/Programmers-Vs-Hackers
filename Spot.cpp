@@ -44,7 +44,8 @@ void Spot::setMouseHover(bool state) { _mouseHover = state; }
 
 void Spot::setOccupied(bool status){ _occupied = status; }
 
-void Spot::setCurrentTower(Tower* tower){ 
+void Spot::setCurrentTower(Tower* tower)
+{ 
 	if (_currentTower != nullptr) {
 		_currentTower=nullptr; // Libera la memoria de la torre actual
 	}
@@ -62,7 +63,8 @@ void Spot::validateClick(int mousex, int mousey)
 void Spot::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
-	if (getIsOccupied()) {
+	if (getIsOccupied())
+	{
 		target.draw(*_currentTower, states);
 	}
 	else {

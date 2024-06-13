@@ -11,6 +11,10 @@
 #include "Tower.h"
 #include "Spot.h"
 #include "Bullet.h"
+#include "BulletA.h"
+#include "BulletB.h"
+#include "BulletC.h"
+#include "BulletD.h"
 
 class Level: public sf::Drawable, public sf::Transformable
 {
@@ -60,6 +64,10 @@ protected:
 	sf::Text _gameOver;
 	bool _flagGameOver;
 	//FIN NUEVO
+
+	//A VER GASTON
+	std::vector<sf::CircleShape> _debugShapes;
+
 public:
 	int getIdLevel() const;
 	bool getFinisheLevel()const;
@@ -111,8 +119,9 @@ public:
 	void sell(Tower*, Spot&);
 	void resellTower(Spot&);
 
-	//void shoot(sf::Vector2f, sf::Vector2f); //ADRI
-	void shoot(Bullet*, Hacker*); //ANA
+	
+	//void shoot(Bullet*, Hacker*); //ANA
+	void shoot(sf::Vector2f, sf::Vector2f, int, int);
 	void checkLevelCompletion();
 	void setGameOverText();
 
