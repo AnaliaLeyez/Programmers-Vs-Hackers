@@ -12,10 +12,6 @@
 #include "Spot.h"
 #include "Tower.h"
 #include "Level.h"
-#include "Hacker.h"
-
-
-
 
 
 int Level::getIdLevel() const { return _idLevel; }
@@ -93,9 +89,9 @@ void Level::setGameOverText()
 }
 
 
-//void Level::decreaseEnergy(int amount) {
-//	_energy -= amount;
-//}
+void Level::decreaseEnergy(int amount) {
+	_energy -= amount;
+}
 
 void Level::mouseCheck(sf::Vector2i& mousePosition)
 {
@@ -203,9 +199,9 @@ void Level::update(sf::Vector2i& mousePosition) {
 			
 				if (hacker->getEnd() == true) {
 					_dying = true;
-					setEnergy(getEnergy() - 50);
+					//setEnergy(getEnergy() - 50);
 
-					//decreaseEnergy(hacker->attackUtn());
+					decreaseEnergy(hacker->attackUtn());
 
 					// hacker->attackUtn();
 

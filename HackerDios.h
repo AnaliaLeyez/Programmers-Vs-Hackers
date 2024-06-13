@@ -2,11 +2,10 @@
 #include "Hacker.h"
 
 
-class HackerSemiSr : public Hacker
+class HackerDios : public Hacker
 {
 public:
-	HackerSemiSr();
+	HackerDios();
 
 	int attackUtn() override;
 };
-

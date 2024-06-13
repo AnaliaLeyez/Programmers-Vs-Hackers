@@ -1,7 +1,7 @@
 #pragma once
 #include "Collisionable.h"
 #include <SFML/Graphics.hpp>
-#include "Level.h"
+
 class Hacker :public sf::Drawable, public sf::Transformable, public Collisionable
 {
 protected:
@@ -19,7 +19,7 @@ protected:
 public:
 	
 
-	//virtual int attackUtn() = 0;
+	virtual int attackUtn() = 0;
 
 	sf::Sprite _sprite;
 	sf::Sprite& getSprite();

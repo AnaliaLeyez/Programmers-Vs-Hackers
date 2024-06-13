@@ -1,8 +1,6 @@
 #include "HackerTrainee.h"
-//#include "Level.h"
-//#include "Hacker.h"
 
-//sf::Texture HackerTrainee::_texture;
+
 HackerTrainee::HackerTrainee()
 {
 	if (!_texture.loadFromFile("img/hackers/Trainee.png")) {
@@ -30,8 +28,8 @@ HackerTrainee::HackerTrainee()
 	_position = {  };
 }
 
-//int HackerTrainee::attackUtn() {
-//
-//	return 50;
-//}
+int HackerTrainee::attackUtn() {
+
+	return 50;
+}
 

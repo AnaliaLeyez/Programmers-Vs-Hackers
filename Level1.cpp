@@ -12,6 +12,7 @@
 #include "HackerTrainee.h"
 #include "HackerJunior.h"
 #include "HackerSemiSr.h"
+#include "HackerDios.h"
 #include "Level.h"
 #include "Spot.h"
 #include "Level1.h"
@@ -40,56 +41,70 @@ for (int i = 0; i < 5; i++)
 
 void Level::spawnWave() {
 	std::srand(std::time(nullptr));
-	 int enemyIndex = 0;
-	 int traineeCount = 0; // Contador para los HackerTrainee
-	 int juniorCount = 0; //Contador para los HackerJunior
-	 int semiSeniorCount = 0; // Contador para los HackerSemiSenior
+	//los contadores son de tipo static porque asi las variables mantienen su valor incluso
+	//despues de que la funcion haya terminado de ejecutarse
+	 static int enemyIndex = 0;
+	 static int traineeCount = 0; // Contador para los HackerTrainee
+	 static int juniorCount = 0; //Contador para los HackerJunior
+	 static int semiSeniorCount = 0; // Contador para los HackerSemiSenior
+	 static bool spawnedGodHacker = false;
 
-	if (enemyIndex < _enemiesPerWave) {
-		// Genera un nuevo enemigo
-		int randomTime = std::rand() % 8 + 1;
-		if (_enemyClock.getElapsedTime().asSeconds() >= randomTime) {
-			// Oleada 1: Todos los HackerTrainee
-			if (_currentWave == 1) {
-				HackerTrainee* trainee = new HackerTrainee();
-				_enemies.push_back(trainee);
-				++traineeCount;
-			}
-			// Oleada 2: Mitad HackerTrainee y mitad HackerJunior
-			else if (_currentWave == 2) {
-				if (enemyIndex % 2 == 0) {
-					HackerTrainee* trainee = new HackerTrainee();
-					_enemies.push_back(trainee);
-					++traineeCount;
-				}
-				else {
-					HackerJunior* junior = new HackerJunior();
-					_enemies.push_back(junior);
-					++juniorCount;
-				}
-			}
-			// Oleada 3: SemiSr y junior
-			else if (_currentWave == 3) {
-				if (semiSeniorCount < juniorCount) {
-					HackerSemiSr* semiSenior = new HackerSemiSr();
-					_enemies.push_back(semiSenior);
-					++semiSeniorCount;
-				}
-				else {
-					HackerJunior* junior = new HackerJunior();
-					_enemies.push_back(junior);
-					++juniorCount;
-				}
-			}
-			++enemyIndex;
-			_enemyClock.restart();
-		}
-	}
+	 if (enemyIndex < _enemiesPerWave) {
+		 // Genera un nuevo enemigo
+		 int randomTime = std::rand() % 8 + 1;
+		 if (_enemyClock.getElapsedTime().asSeconds() >= randomTime) {
+			 // Oleada 1: Todos los HackerTrainee
+			 if (_currentWave == 1) {
+				 HackerTrainee* trainee = new HackerTrainee();
+				 _enemies.push_back(trainee);
+				 ++traineeCount;
+			 }
+			 // Oleada 2: Mitad HackerTrainee y mitad HackerJunior
+			 else if (_currentWave == 2) {
+				 if (enemyIndex % 2 == 0) {
+					 HackerTrainee* trainee = new HackerTrainee();
+					 _enemies.push_back(trainee);
+					 ++traineeCount;
+				 }
+				 else {
+					 HackerJunior* junior = new HackerJunior();
+					 _enemies.push_back(junior);
+					 ++juniorCount;
+				 }
+			 }
+			 // Oleada 3: mitad SemiSr y mitad junior
+			 //lanza un dios cuando esta a la mitad de la oleada
+			 else if (_currentWave == 3) {
+
+				 if (!spawnedGodHacker && enemyIndex == _enemiesPerWave / 2) {
+					 HackerDios* dios = new HackerDios();
+					 _enemies.push_back(dios);
+					 spawnedGodHacker = true;
+				 }
+				 else {
+					 if (enemyIndex % 2 == 0) {
+						 HackerSemiSr* semiSenior = new HackerSemiSr();
+						 _enemies.push_back(semiSenior);
+						 ++semiSeniorCount;
+					 }
+					 else {
+						 HackerJunior* junior = new HackerJunior();
+						 _enemies.push_back(junior);
+						 ++juniorCount;
+					 }
+				 }
+			 }
+				 ++enemyIndex;
+				 _enemyClock.restart();
+			 }
+		 }
+	 
 	else {
 		// Si ya se agregaron todos los enemigos de esta oleada
 		enemyIndex = 0; // Reinicia el índice para la próxima oleada
 		_enemiesPerWave += 10; // Incrementa la cantidad de enemigos para la próxima oleada
 		++_currentWave; // Incrementa el número de oleada
+		spawnedGodHacker = false;
 		_waveClock.restart(); // Reinicia el temporizador de la oleada
 	}
 }

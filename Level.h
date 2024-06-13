@@ -125,7 +125,7 @@ public:
 	void update(sf::Vector2i&);
 
 
-	//void decreaseEnergy(int amount);
+	void decreaseEnergy(int amount);
 
 	~Level() { //revisar eliminar todo lo que haya sido asignado con memoria dinamica
 		for (Spot* spot : _spots) {

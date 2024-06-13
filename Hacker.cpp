@@ -3,7 +3,7 @@
 
 #include "Collisionable.h"
 #include "Hacker.h"
-#include "Level.h"
+
 
 //sf::Sprite& Hacker::getSprite() { return _sprite; }
 int Hacker::getLife() const { return _life; }
