@@ -21,7 +21,7 @@ Manager& Manager::getInstance() {
 //	*_currentInstance = mg;
 //}
 
-Manager::Manager(int level) {
+Manager::Manager(int level): _currentLevel(nullptr) {
 	setNumberLevel(level);
 }
 
@@ -39,7 +39,7 @@ void Manager::setNumberLevel(int IdLevel) {
 	switch (IdLevel)
 	{
 	case 1:
-		_currentLevel = new Level1();
+		 _currentLevel = new Level1();
 		_currentLevel->getHackerStartPosition(); //ver como el manager informa a la oleada desde donde empezar
 		break;
 	case 2:
@@ -70,4 +70,5 @@ void Manager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 Manager::~Manager()
 {
+	delete _currentLevel;
 }

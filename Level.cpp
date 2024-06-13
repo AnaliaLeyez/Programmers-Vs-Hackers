@@ -12,6 +12,11 @@
 #include "Spot.h"
 #include "Tower.h"
 #include "Level.h"
+#include "Hacker.h"
+
+
+
+
 
 int Level::getIdLevel() const { return _idLevel; }
 bool Level::getFinisheLevel() const { return _finishedLevel; }
@@ -73,6 +78,24 @@ void Level::setNoCoinsText()
 	_displayTimeNoCoins = sf::seconds(3);
 	_flagNoCoins = false;
 }
+
+void Level::setGameOverText()
+{
+	if (!_font.loadFromFile("fuentes/TowerPrice.ttf")) {
+		throw std::runtime_error("Error al cargar la fuente del Price Menu");
+	}
+	_gameOver.setFont(_font);
+	_gameOver.setCharacterSize(70);
+	_gameOver.setOrigin(_gameOver.getGlobalBounds().getPosition().x / 2, _gameOver.getGlobalBounds().height / 2);
+	_gameOver.setPosition(300, 250);
+	_gameOver.setFillColor(sf::Color(255, 0, 0));
+	_gameOver.setString("GAME OVER");
+}
+
+
+//void Level::decreaseEnergy(int amount) {
+//	_energy -= amount;
+//}
 
 void Level::mouseCheck(sf::Vector2i& mousePosition)
 {
@@ -158,6 +181,7 @@ void Level::checkLevelCompletion() {
 		_finishedLevel = true;
 	}
 }
+
 void Level::update(sf::Vector2i& mousePosition) {
 	checkLevelCompletion();
 	if (!getFinisheLevel()) {
@@ -172,7 +196,33 @@ void Level::update(sf::Vector2i& mousePosition) {
 			hacker->update(getMapArray());
 			//std::cout<< hacker->getPosition().x << " " << hacker->getPosition().y <<std::endl;
 			//agregar más lógica para las colisiones
-		}
+			
+
+			//Esta funcion la movi mas arriba estaba iterando 2 veces
+			//los enemigos
+			
+				if (hacker->getEnd() == true) {
+					_dying = true;
+					setEnergy(getEnergy() - 50);
+
+					//decreaseEnergy(hacker->attackUtn());
+
+					// hacker->attackUtn();
+
+					_ui.setText(1, std::to_string(getEnergy()));
+					if (getEnergy() <= 0) {
+						_flagGameOver = true;
+						setGameOverText();
+
+					}
+
+					break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
+				}
+				else {
+					_dying = false;
+				}
+			}
+		
 
 		for (auto& tower : _activeTowers)
 		{
@@ -214,28 +264,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 				++itH;
 			}
 
-			for (auto& hacker : _enemies) {
-				if (hacker->getEnd() == true) {
-					if (getEnergy() - 20 >= 0) {
-						if (hacker->_cooldown > 20) { //configurar los get y set con _cooldown en private
-							//if (getEnergy() - 20 >= 0 ) { //hay que dar un margen de tiempo al ataque xq sino resta mucho de golpe
-							_dying = true;
-							setEnergy(getEnergy() - 20);
-							_ui.setText(1, std::to_string(getEnergy()));
-							hacker->_cooldown = 0;
-						}
-						hacker->_cooldown++;
-					}
-					else {
-						_flagGameOver = true;
-						setGameOverText();
-					}
-					break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
-				}
-				else {
-					_dying = false;
-				}
-			}
 
 			// Verificar si se ha completado el nivel
 			if (_currentWave > 3 && _enemies.empty()) {
@@ -260,18 +288,8 @@ void Level::update(sf::Vector2i& mousePosition) {
 }
 
 
-void Level::setGameOverText()
-{
-	if (!_font.loadFromFile("fuentes/TowerPrice.ttf")) {
-		throw std::runtime_error("Error al cargar la fuente del Price Menu");
-	}
-	_gameOver.setFont(_font);
-	_gameOver.setCharacterSize(70);
-	_gameOver.setOrigin(_gameOver.getGlobalBounds().getPosition().x / 2, _gameOver.getGlobalBounds().height / 2);
-	_gameOver.setPosition(300, 250);
-	_gameOver.setFillColor(sf::Color(255, 0, 0));
-	_gameOver.setString("GAME OVER");
-}
+
+
 
 void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 {

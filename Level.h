@@ -59,8 +59,11 @@ protected:
 	bool _flagNoCoins;
 	sf::Text _gameOver;
 	bool _flagGameOver;
+
 	//FIN NUEVO
 public:
+
+	
 	int getIdLevel() const;
 	bool getFinisheLevel()const;
 	UI getUI() const;
@@ -96,6 +99,8 @@ public:
 
 	void setNoCoinsText(); //NUEVO
 
+	
+
 	void spawnWave();
 
 	void mouseCheck(sf::Vector2i&);
@@ -118,6 +123,10 @@ public:
 
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update(sf::Vector2i&);
+
+
+	//void decreaseEnergy(int amount);
+
 	~Level() { //revisar eliminar todo lo que haya sido asignado con memoria dinamica
 		for (Spot* spot : _spots) {
 			delete spot;

@@ -1,10 +1,11 @@
 #pragma once
 #include "Collisionable.h"
 #include <SFML/Graphics.hpp>
+#include "Level.h"
 class Hacker :public sf::Drawable, public sf::Transformable, public Collisionable
 {
 protected:
-	static sf::Texture _texture;
+	sf::Texture _texture;
 	std::string _name;
 	sf::Vector2f _velocity;
 	sf::Vector2f _direction;
@@ -16,8 +17,10 @@ protected:
 	sf::Vector2f _position;
 	bool _reachedEnd; // llego al final del camino ?
 public:
-	//virtual void takeLife(Level& level) = 0;
-	/*virtual int getType() const = 0;*/
+	
+
+	//virtual int attackUtn() = 0;
+
 	sf::Sprite _sprite;
 	sf::Sprite& getSprite();
 
@@ -31,6 +34,8 @@ public:
 	int getGoldenDrop() const;
 	bool getEnd() const;
 
+
+	void setEnd(bool end);
 	void setLife(int);
 	void setDamage(int);
 	void setVelocity(sf::Vector2f);
@@ -46,5 +51,5 @@ public:
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 
 	void takeDamage(int);
-	int _cooldown = 0;
+	//int _cooldown = 0;
 };

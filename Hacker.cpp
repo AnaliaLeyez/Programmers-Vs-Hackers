@@ -3,8 +3,9 @@
 
 #include "Collisionable.h"
 #include "Hacker.h"
+#include "Level.h"
 
-sf::Sprite& Hacker::getSprite() { return _sprite; }
+//sf::Sprite& Hacker::getSprite() { return _sprite; }
 int Hacker::getLife() const { return _life; }
 int Hacker::getDamage() const { return _damage; }
 sf::Vector2f Hacker::getVelocity() const { return _velocity; }
@@ -13,6 +14,7 @@ bool Hacker::getBoss() const { return _isABoss; }
 int Hacker::getGoldenDrop() const { return _goldenDrop; }
 bool Hacker::getEnd() const { return _reachedEnd; }
 
+void Hacker::setEnd(bool end) { _reachedEnd = end; }
 void Hacker::setLife(int life) { _life = life; }
 void Hacker::setDamage(int damage) { _damage = damage; }
 void Hacker::setVelocity(sf::Vector2f velocity) { _velocity = velocity; }
@@ -44,18 +46,18 @@ void Hacker::moveHacker(int arr[][30])
 		break;
 	case 5: //esto lo podemos sacar, cambiar numeracion
 		_direction = { 0.0f,-1.0f };
-		_reachedEnd = false;
+		
 		break;
 	case 8:
 		_direction = { 0.0f,1.0f };
 		_reachedEnd = true;
 		break;
 	default:
-		//_reachedEnd = false;
+		_reachedEnd = false;
 		break;
 	}
-	_collisionRect.move(_direction);
 	_sprite.move(_direction);
+	_collisionRect.move(_direction);
 }
 
 sf::FloatRect Hacker::getBounds() const { return _sprite.getGlobalBounds(); }

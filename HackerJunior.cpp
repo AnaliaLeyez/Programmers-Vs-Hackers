@@ -1,4 +1,6 @@
 #include "HackerJunior.h"
+//#include "Hacker.h"
+//#include "Level.h"
 
 HackerJunior::HackerJunior()
 {
@@ -20,6 +22,12 @@ HackerJunior::HackerJunior()
 	//DESARROLLO
 	_position = { };
 }
+
+
+//int HackerJunior::attackUtn() {
+//	
+//	return 100;
+//}
 
 //void HackerJunior::takeLife(Level& level) {
 //	// Reducir la vida del jugador según el tipo de hacker Trainee

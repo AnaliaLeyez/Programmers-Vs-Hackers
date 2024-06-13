@@ -11,6 +11,7 @@
 #include "TowerWenner.h"
 #include "HackerTrainee.h"
 #include "HackerJunior.h"
+#include "HackerSemiSr.h"
 #include "Level.h"
 #include "Spot.h"
 #include "Level1.h"
@@ -39,9 +40,10 @@ for (int i = 0; i < 5; i++)
 
 void Level::spawnWave() {
 	std::srand(std::time(nullptr));
-	static int enemyIndex = 0;
-	static int traineeCount = 0; // Contador para los HackerTrainee
-	static int juniorCount = 0; //Contador para los HackerJunior
+	 int enemyIndex = 0;
+	 int traineeCount = 0; // Contador para los HackerTrainee
+	 int juniorCount = 0; //Contador para los HackerJunior
+	 int semiSeniorCount = 0; // Contador para los HackerSemiSenior
 
 	if (enemyIndex < _enemiesPerWave) {
 		// Genera un nuevo enemigo
@@ -66,17 +68,17 @@ void Level::spawnWave() {
 					++juniorCount;
 				}
 			}
-			// Oleada 3: Más HackerJunior que HackerTrainee
+			// Oleada 3: SemiSr y junior
 			else if (_currentWave == 3) {
-				if (juniorCount < traineeCount) {
+				if (semiSeniorCount < juniorCount) {
+					HackerSemiSr* semiSenior = new HackerSemiSr();
+					_enemies.push_back(semiSenior);
+					++semiSeniorCount;
+				}
+				else {
 					HackerJunior* junior = new HackerJunior();
 					_enemies.push_back(junior);
 					++juniorCount;
-				}
-				else {
-					HackerTrainee* trainee = new HackerTrainee();
-					_enemies.push_back(trainee);
-					++traineeCount;
 				}
 			}
 			++enemyIndex;
@@ -151,6 +153,9 @@ Level1::Level1()
 	_golden = 2000;
 	_energy = 500;
 	_ui.setText(0, std::to_string(getGolden()));
+	_ui.setText(1, std::to_string(getEnergy()));
+
+
 	setMapArray(arr);
 	if (!_buffer.loadFromFile("music/nivel1.wav")) {
 		throw std::runtime_error("Error al cargar musica nivel 1");
