@@ -14,7 +14,7 @@ public:
 	void setSpot(int, bool);
 	int getSpotNumber() const;
 	bool getIsOccupied() const;
-	Tower* getCurrentTower() const;
+	Tower& getCurrentTower() const;
 	bool getMouseHover() const;
 
 	void setSpotNumber(int);

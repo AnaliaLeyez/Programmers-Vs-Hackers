@@ -7,11 +7,11 @@
 BulletA::BulletA(sf::Vector2f position, sf::Vector2f target, int damage)
 	: Bullet(position, target)
 {
-	_sprite.setPosition(position);
+	setPosition(position);
 	_enemyPosition = target;
 
 	_damage = damage; //esto ver que valores segun la torre q le corresponde
-	_speed = 5.0f;
+	_speed = 9.0f;
 	loadTexture();
 }
 

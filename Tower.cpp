@@ -43,7 +43,7 @@ void Tower::draw(sf::RenderTarget& target, sf::RenderStates states) const
 bool Tower::canShoot()
 {
     //if (_clock.getElapsedTime().asSeconds() >= _fireRate)
-    if (_cooldown >= 70)
+    if (_cooldown >= 20)
     {
         setRangeColor(sf::Color(255, 0, 0, 120));
         //_clock.restart();

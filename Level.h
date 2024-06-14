@@ -32,7 +32,7 @@ protected:
 	int _mapArray[20][30];
 	std::vector<Spot*> _spots;
 	TowerMenu* _currentMenu;
-	TowerMenu1* _menu1 =new TowerMenu1();
+	TowerMenu1* _menu1 = new TowerMenu1();
 	TowerMenu2* _menu2 = new TowerMenu2();
 	int _golden;
 	int _energy;

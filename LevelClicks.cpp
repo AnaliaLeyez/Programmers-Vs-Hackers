@@ -66,7 +66,7 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 	{  //spot libre
 		//_currentMenu2->hide(); //Necesario, en caso q se haya estado mostrando por otro spot
 		_currentMenu = _menu1;
-		currentSp.setCurrentTower(_currentMenu->getCurrentSpot().getCurrentTower()); //me aseguro que el currentSpot esta asociado a la tower ahora
+		currentSp.setCurrentTower(&_currentMenu->getCurrentSpot().getCurrentTower()); //me aseguro que el currentSpot esta asociado a la tower ahora
 		if (!_currentMenu->getIsVisible()) { //se clickeo en un spot libre y el menu no era visible
 			_currentMenu->setPosition(currentSp.getPosition()); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
 			_currentMenu->show();
@@ -142,7 +142,7 @@ void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 {
 	Button* btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
-	Tower* tower = sp.getCurrentTower();
+	Tower* tower = &sp.getCurrentTower();
 
 	if (btn->getBtnNumber() == 1) {  //se hizo click en el boton 1 que es upgrade:
 		

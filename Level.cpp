@@ -53,7 +53,7 @@ void Level::setSpot(Spot* sp)
 		if (spot->getSpotNumber() == sp->getSpotNumber())
 		{
 			spot->setOccupied(sp->getIsOccupied());
-			spot->setCurrentTower(sp->getCurrentTower());
+			spot->setCurrentTower(&sp->getCurrentTower());
 			break;
 		}
 	}
@@ -122,7 +122,7 @@ void Level::sell(Tower* tower, Spot& currentSpot) {
 	currentSpot.setOccupied(true);
 }
 void Level::resellTower(Spot& sp) {
-	Tower* tower = sp.getCurrentTower();
+	Tower* tower = &sp.getCurrentTower();
 	int resaleValue = tower->getSalesValue();
 	std::cout << "Valor reventa:" << resaleValue << std::endl;
 	setGolden(getGolden() + resaleValue); // Agregar el valor de reventa al oro del jugador
@@ -136,19 +136,25 @@ void Level::resellTower(Spot& sp) {
 //void Level::shoot(Bullet* bullet, sf::Vector2f shootingPosition, sf::Vector2f targetPosition)
 void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, int damage, int type)
 {
+	std::cout << "DENTRO DEL SHOOT; Donde SWITECHEAMOS: " << shootingPosition.x << " " << shootingPosition.y << std::endl;
 	switch (type)
 	{
 	case 1:
 		_bullets.push_back(new BulletA(shootingPosition, targetPosition, damage));
+		std::cout << "DENTRO DE CASE 1: " << shootingPosition.x << " " << shootingPosition.y << std::endl;
+		std::cout << "DENTRO DE CASE 1: " << targetPosition.x << " " << targetPosition.y << std::endl;
 		break;
 	case 2:
 		_bullets.push_back(new BulletB(shootingPosition, targetPosition, damage));
+		std::cout << " CASE 2" << std::endl;
 		break;
 	case 3:
 		_bullets.push_back(new BulletC(shootingPosition, targetPosition, damage));
+		std::cout << " CASE 3" << std::endl;
 		break;
 	case 4:
 		_bullets.push_back(new BulletD(shootingPosition, targetPosition, damage));
+		std::cout << " CASE 4" << std::endl;
 		break;
 
 	}
@@ -175,27 +181,42 @@ void Level::update(sf::Vector2i& mousePosition) {
 
 		}
 
-		for (auto& tower : _activeTowers)
+		//for (auto& tower : _activeTowers)
+		for(auto& spot : _spots)
 		{
 			for (auto& hacker : _enemies)
 			{	
 				//std::cout << " TowerPOs " << _spots[0]->getTransform().transformRect((tower->getBounds())).left << std::endl;
 				//std::cout << " HackerPos " << hacker->getBounds().left << std::endl;
 
-				if (_spots[0]->getTransform().transformRect((tower->getBounds())).intersects(hacker->getBounds()))
+				if (spot->getIsOccupied() &&
+					spot->getTransform().transformRect((spot->getCurrentTower().getBounds())).intersects(hacker->getBounds()))
 				{
 					
-					std::cout << "COliSIONO" << std::endl;
-					if (tower->canShoot())
+					//std::cout << "COliSIONO" << std::endl;
+					if (spot->getCurrentTower().canShoot())
 					{
-						shoot(tower->getVisualRange().getPosition(), hacker->_collisionRect.getPosition(), tower->getDamage(), tower->getType());
+						//std::cout << "Posiciones dentro del canShoot." << std::endl;
+						//std::cout << "Spot: " << spot->getPosition().x << " " << spot->getPosition().y << std::endl;
+						//std::cout << "Hacker: " << hacker->getPosition().x << " " << hacker->getPosition().y << std::endl;
+
+						shoot(spot->getPosition(), hacker->getPosition(), spot->getCurrentTower().getDamage(), spot->getCurrentTower().getType());
+
 					}
+
 					auto it = _bullets.begin();
 					while (it != _bullets.end())
 					{
 						Bullet* bullet = *it;
-						if (bullet->_collisionCircle.getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
+
+						//std::cout << "Dentro del While de bullet: " << std::endl;
+						//std::cout << "Bullet " << bullet->getTransform().transformRect(bullet->getBounds()).left<< " " << bullet->getBounds().top << std::endl;
+						//std::cout << "Hacker " << hacker->getBounds().left << " " << hacker->getBounds().top << std::endl;
+
+						if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
 						{
+							std::cout << "Colisionaron bala con hacker" << std::endl;
+
 							hacker->takeDamage(bullet->getDamage());
 							std::cout << hacker->getLife() << std::endl;
 							delete bullet;
