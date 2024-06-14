@@ -66,7 +66,10 @@ void Tower::verificarEnemigo(HackerTrainee& enemy)
     }    
 }
 
-sf::FloatRect Tower::getBounds() const { return _sprite.getLocalBounds(); }
+sf::FloatRect Tower::getBounds() const {
+        
+    return getTransform().transformRect(_visualRange.getGlobalBounds());
+}
 
 void Tower::update()
 {

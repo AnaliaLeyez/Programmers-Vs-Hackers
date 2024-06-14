@@ -7,7 +7,7 @@ HackerJunior::HackerJunior()
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
-	_sprite.setPosition(960 / 32 * 9.5, 640 / 32 * 0.5);
+	setPosition(960 / 32 * 9.5, 640 / 32 * 0.5);
 	//_sprite.setScale(0.1, 0.1);
 	_name = "Junior";
 

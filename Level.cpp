@@ -172,24 +172,20 @@ void Level::update(sf::Vector2i& mousePosition) {
 		// Actualizar los enemigos en el nivel
 		for (auto& hacker : _enemies) {
 			hacker->update(getMapArray());
-			// std::cout << hacker->getPosition().x << " " << hacker->getPosition().y << std::endl;
-			// agregar más lógica para las colisiones
+
 		}
 
 		for (auto& tower : _activeTowers)
 		{
 			for (auto& hacker : _enemies)
 			{	
-				//std::cout << tower->_visualRange.getPosition().x << std::endl;
-				//std::cout << hacker->_collisionRect.getPosition().x << std::endl;
-				//std::cout << tower->_sprite.getPosition().x << " " << tower->_sprite.getPosition().y << std::endl;
-				//std::cout << tower->_visualRange.getPosition().x << " " << tower->_visualRange.getPosition().y << std::endl;
-				//std::cout << mousePosition.x << " " << mousePosition.y <<std::endl;
-				//if (tower->getVisualRange().getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
-				std::cout << "Tower position: " << tower->_sprite.getPosition().x << " " << tower->_sprite.getPosition().y << std::endl;
-				if (tower->_visualRange.getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
-				{
+				//std::cout << " TowerPOs " << _spots[0]->getTransform().transformRect((tower->getBounds())).left << std::endl;
+				//std::cout << " HackerPos " << hacker->getBounds().left << std::endl;
 
+				if (_spots[0]->getTransform().transformRect((tower->getBounds())).intersects(hacker->getBounds()))
+				{
+					
+					std::cout << "COliSIONO" << std::endl;
 					if (tower->canShoot())
 					{
 						shoot(tower->getVisualRange().getPosition(), hacker->_collisionRect.getPosition(), tower->getDamage(), tower->getType());

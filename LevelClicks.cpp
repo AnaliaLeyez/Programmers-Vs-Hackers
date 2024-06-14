@@ -113,9 +113,9 @@ void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 				std::cout<<"ANTES DE SETEAR: " << sp.getPosition().x << " " << sp.getPosition().y << std::endl;
 
 				//tower->_sprite.setPosition(sp.getInverseTransform().transformPoint(sp.getPosition()));
-				tower->_sprite.setPosition(sp.getPosition());
+				tower->setPosition(0,0);
 				//tower->_visualRange.setPosition(sp.getInverseTransform().transformPoint(sp.getPosition()));
-				tower->_visualRange.setPosition(sp.getPosition());
+				//tower->setPosition(sp.getPosition());
 
 				sf::CircleShape debugCircle(10);
 				debugCircle.setFillColor(sf::Color::Red);

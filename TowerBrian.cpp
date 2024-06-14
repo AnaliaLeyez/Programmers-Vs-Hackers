@@ -12,8 +12,9 @@ TowerBrian::TowerBrian()
 		throw std::runtime_error("Error img Torre Brian");
 	}
 	_sprite.setTexture(_texture);
-	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
+	_sprite.setOrigin(64, 64);
 	_name = "brian";
+	_sprite.setPosition(0, 0);
 
 	//Rango de ataque:
 	_visualRange.setRadius(120);
@@ -33,6 +34,13 @@ TowerBrian::TowerBrian()
 
 void TowerBrian::upgrade() 
 {
+	std::cout << " - - - - - - - - " << std::endl;
+	std::cout << "Pos" << getPosition().x << " " << getPosition().y << std::endl;
+	std::cout << "ORIGIN " << getOrigin().x << " " << getOrigin().y << std::endl;
+	std::cout << "Sprite: " << _sprite.getPosition().x << " " << _sprite.getPosition().y << std::endl;
+	std::cout << "Origin: " << _sprite.getOrigin().x << " " << _sprite.getOrigin().y << std::endl;
+	
+
 	switch (_upgradesAmount)
 	{
 	case 2:

@@ -8,14 +8,14 @@ HackerTrainee::HackerTrainee()
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
-	_sprite.setPosition(sf::Vector2f(960 / 32 * 9.5, 640 / 32 * 0.5));
+	setPosition(sf::Vector2f(960 / 32 * 9.5, 640 / 32 * 0.5));
 	_name = "Trainee";
 
 	//SI ESTO LO TIENEN TODOS DEBERIA IR EN HACKER.CPP Y ACA LLAMAMOS AL METODO QUE SE ENCARGA DE ESO
 	_collisionRect.setSize({ 30,30 });
 	_collisionRect.setOrigin(_collisionRect.getGlobalBounds().width / 2, _collisionRect.getGlobalBounds().height / 2);
 	//_collisionRect.setFillColor(sf::Color::Red); //no lo quiero mostrar, por lo que el color no lo necesita
-	_collisionRect.setPosition(sf::Vector2f(960 / 32 * 9.5, 640 / 32 * 0.5));
+	//setPosition(sf::Vector2f(960 / 32 * 9.5, 640 / 32 * 0.5));
 	//SI ESTO LO TIENEN TODOS DEBERIA IR EN HACKER.CPP Y ACA LLAMAMOS AL METODO QUE SE ENCARGA DE ESO
 
 	_seniority = 0;
@@ -25,5 +25,5 @@ HackerTrainee::HackerTrainee()
 	_goldenDrop = 10;
 
 	//DESARROLLO
-	_position = {  };
+	//_position = {  };
 }
