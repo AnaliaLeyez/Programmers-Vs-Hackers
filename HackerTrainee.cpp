@@ -27,3 +27,9 @@ HackerTrainee::HackerTrainee()
 	//DESARROLLO
 	//_position = {  };
 }
+
+
+int HackerTrainee::attackUtn() {
+
+	return 50;
+}

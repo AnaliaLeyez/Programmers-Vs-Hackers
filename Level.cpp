@@ -159,19 +159,19 @@ void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, in
 	{
 	case 1:
 		_bullets.push_back(new BulletA(shootingPosition, targetPosition, damage));
-		
+
 		break;
 	case 2:
 		_bullets.push_back(new BulletB(shootingPosition, targetPosition, damage));
-		
+
 		break;
 	case 3:
 		_bullets.push_back(new BulletC(shootingPosition, targetPosition, damage));
-		
+
 		break;
 	case 4:
 		_bullets.push_back(new BulletD(shootingPosition, targetPosition, damage));
-		
+
 		break;
 
 	}
@@ -200,38 +200,38 @@ void Level::update(sf::Vector2i& mousePosition) {
 			hacker->update(getMapArray());
 			//std::cout<< hacker->getPosition().x << " " << hacker->getPosition().y <<std::endl;
 			//agregar más lógica para las colisiones
-			
+
 
 			//Esta funcion la movi mas arriba estaba iterando 2 veces
 			//los enemigos
-			
-				if (hacker->getEnd() == true) {
-					_dying = true;
-					//setEnergy(getEnergy() - 50);
 
-					decreaseEnergy(hacker->attackUtn());
+			if (hacker->getEnd() == true) {
+				_dying = true;
+				//setEnergy(getEnergy() - 50);
 
-					// hacker->attackUtn();
+				decreaseEnergy(hacker->attackUtn());
 
-					_ui.setText(1, std::to_string(getEnergy()));
-					if (getEnergy() <= 0) {
-						_flagGameOver = true;
-						setGameOverText();
+				// hacker->attackUtn();
 
-					}
+				_ui.setText(1, std::to_string(getEnergy()));
+				if (getEnergy() <= 0) {
+					_flagGameOver = true;
+					setGameOverText();
 
-					break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
 				}
-				else {
-					_dying = false;
-				}
+
+				break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
 			}
-		
+			else {
+				_dying = false;
+			}
+		}
 
-		for (auto& tower : _activeTowers)
+
+		for (auto& spot : _spots)
 		{
 			for (auto& hacker : _enemies)
-			{	
+			{
 				//std::cout << " TowerPOs " << _spots[0]->getTransform().transformRect((tower->getBounds())).left << std::endl;
 				//std::cout << " HackerPos " << hacker->getBounds().left << std::endl;
 
@@ -264,7 +264,7 @@ void Level::update(sf::Vector2i& mousePosition) {
 						else
 						{
 							++it;
-							
+
 						}
 					}
 				}
@@ -289,14 +289,9 @@ void Level::update(sf::Vector2i& mousePosition) {
 			for (auto& hacker : _enemies) {
 				if (hacker->getEnd() == true) {
 					if (getEnergy() - 20 >= 0) {
-						if (hacker->_cooldown > 20) { //configurar los get y set con _cooldown en private
-							//if (getEnergy() - 20 >= 0 ) { //hay que dar un margen de tiempo al ataque xq sino resta mucho de golpe
-							_dying = true;
-							setEnergy(getEnergy() - 20);
-							_ui.setText(1, std::to_string(getEnergy()));
-							hacker->_cooldown = 0;
-						}
-						hacker->_cooldown++;
+						_dying = true;
+						setEnergy(getEnergy() - 20);
+						_ui.setText(1, std::to_string(getEnergy()));
 					}
 					else {
 						_flagGameOver = true;
@@ -309,13 +304,15 @@ void Level::update(sf::Vector2i& mousePosition) {
 				}
 			}
 
-		// Verificar si se ha completado el nivel
-		if (_currentWave > 3 && _enemies.empty()) {
-			setFinishedLevel(true);
+			// Verificar si se ha completado el nivel
+			if (_currentWave > 3 && _enemies.empty()) {
+				setFinishedLevel(true);
+			}
+			if (_currentMenu->getIsVisible()) {
+				_currentMenu->update(mousePosition);
+			}
 		}
-		if (_currentMenu->getIsVisible()) {
-			_currentMenu->update(mousePosition);
-		}
+
 	}
 	else {
 		if (getIdLevel() < 4) { // aca digo que solo puede llegar hasta el nivel 4
@@ -331,45 +328,44 @@ void Level::update(sf::Vector2i& mousePosition) {
 
 
 
-
-void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
-{
-	states.transform *= getTransform();
-	target.draw(*_map, states);
-	_dying ? target.draw(_UTNRed, states) : target.draw(_UTN, states);
-	target.draw(_ui, states);
-	for (Spot* spot : _spots)
+	void Level::draw(sf::RenderTarget & target, sf::RenderStates states)const
 	{
-		target.draw(*spot, states);
-	}
-	for (const auto& hacker : _enemies)
-	{
-		if (hacker->getLife() > 0) {
-			target.draw(*hacker, states);
+		states.transform *= getTransform();
+		target.draw(*_map, states);
+		_dying ? target.draw(_UTNRed, states) : target.draw(_UTN, states);
+		target.draw(_ui, states);
+		for (Spot* spot : _spots)
+		{
+			target.draw(*spot, states);
 		}
-	}
-	if (_currentMenu->getIsVisible())
-	{
-		target.draw(*_currentMenu, states);
-	}
+		for (const auto& hacker : _enemies)
+		{
+			if (hacker->getLife() > 0) {
+				target.draw(*hacker, states);
+			}
+		}
+		if (_currentMenu->getIsVisible())
+		{
+			target.draw(*_currentMenu, states);
+		}
 
-	for (auto& bullet : _bullets)
-	{
-		target.draw(*bullet, states);
-	}
+		for (auto& bullet : _bullets)
+		{
+			target.draw(*bullet, states);
+		}
 
-	//NUEVO:
-	if (_noCoinsClock.getElapsedTime() < _displayTimeNoCoins && _flagNoCoins) {
-		target.draw(_NoCoins, states); // Dibujar el texto
-	}
+		//NUEVO:
+		if (_noCoinsClock.getElapsedTime() < _displayTimeNoCoins && _flagNoCoins) {
+			target.draw(_NoCoins, states); // Dibujar el texto
+		}
 
-	if (_flagGameOver) {
-		target.draw(_gameOver, states);
-	}
+		if (_flagGameOver) {
+			target.draw(_gameOver, states);
+		}
 
-	// AVERRRRGASTONNNNNNNNNNNNNNNNNNNNNN
-	for (const auto& shape : _debugShapes) {
-		target.draw(shape, states);
-	}
+		// AVERRRRGASTONNNNNNNNNNNNNNNNNNNNNN
+		for (const auto& shape : _debugShapes) {
+			target.draw(shape, states);
+		}
 
-}
+	}
