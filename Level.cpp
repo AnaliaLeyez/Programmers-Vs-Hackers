@@ -136,25 +136,23 @@ void Level::resellTower(Spot& sp) {
 //void Level::shoot(Bullet* bullet, sf::Vector2f shootingPosition, sf::Vector2f targetPosition)
 void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, int damage, int type)
 {
-	std::cout << "DENTRO DEL SHOOT; Donde SWITECHEAMOS: " << shootingPosition.x << " " << shootingPosition.y << std::endl;
 	switch (type)
 	{
 	case 1:
 		_bullets.push_back(new BulletA(shootingPosition, targetPosition, damage));
-		std::cout << "DENTRO DE CASE 1: " << shootingPosition.x << " " << shootingPosition.y << std::endl;
-		std::cout << "DENTRO DE CASE 1: " << targetPosition.x << " " << targetPosition.y << std::endl;
+		
 		break;
 	case 2:
 		_bullets.push_back(new BulletB(shootingPosition, targetPosition, damage));
-		std::cout << " CASE 2" << std::endl;
+		
 		break;
 	case 3:
 		_bullets.push_back(new BulletC(shootingPosition, targetPosition, damage));
-		std::cout << " CASE 3" << std::endl;
+		
 		break;
 	case 4:
 		_bullets.push_back(new BulletD(shootingPosition, targetPosition, damage));
-		std::cout << " CASE 4" << std::endl;
+		
 		break;
 
 	}
@@ -190,18 +188,17 @@ void Level::update(sf::Vector2i& mousePosition) {
 				//std::cout << " HackerPos " << hacker->getBounds().left << std::endl;
 
 				if (spot->getIsOccupied() &&
-					spot->getTransform().transformRect((spot->getCurrentTower().getBounds())).intersects(hacker->getBounds()))
+					spot->getTransform().transformRect((
+						spot->getCurrentTower().getBounds())).intersects(hacker->getBounds()
+						))
 				{
-					
 					//std::cout << "COliSIONO" << std::endl;
 					if (spot->getCurrentTower().canShoot())
 					{
-						//std::cout << "Posiciones dentro del canShoot." << std::endl;
-						//std::cout << "Spot: " << spot->getPosition().x << " " << spot->getPosition().y << std::endl;
-						//std::cout << "Hacker: " << hacker->getPosition().x << " " << hacker->getPosition().y << std::endl;
-
-						shoot(spot->getPosition(), hacker->getPosition(), spot->getCurrentTower().getDamage(), spot->getCurrentTower().getType());
-
+						shoot(spot->getPosition(),
+							hacker->getPosition(),
+							spot->getCurrentTower().getDamage(),
+							spot->getCurrentTower().getType());
 					}
 
 					auto it = _bullets.begin();
@@ -209,14 +206,8 @@ void Level::update(sf::Vector2i& mousePosition) {
 					{
 						Bullet* bullet = *it;
 
-						//std::cout << "Dentro del While de bullet: " << std::endl;
-						//std::cout << "Bullet " << bullet->getTransform().transformRect(bullet->getBounds()).left<< " " << bullet->getBounds().top << std::endl;
-						//std::cout << "Hacker " << hacker->getBounds().left << " " << hacker->getBounds().top << std::endl;
-
 						if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
 						{
-							std::cout << "Colisionaron bala con hacker" << std::endl;
-
 							hacker->takeDamage(bullet->getDamage());
 							std::cout << hacker->getLife() << std::endl;
 							delete bullet;
@@ -227,8 +218,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 							++it;
 							
 						}
-
-						
 					}
 				}
 			}

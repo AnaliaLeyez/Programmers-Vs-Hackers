@@ -8,16 +8,9 @@
 
 Bullet::Bullet(sf::Vector2f initialPosition, sf::Vector2f target)
 {
-
-	std::cout << "CONSTRUCTOR DE BULLET" << std::endl;
-	std::cout << "INITIAL POSITION: " << initialPosition.x << " " << initialPosition.y << std::endl;
-	std::cout << "TARGET POSITION: " << target.x << " " << target.y << std::endl;
-
 	_collisionCircle.setRadius(40.f);
 	_collisionCircle.setOrigin(_collisionCircle.getGlobalBounds().width / 2, _collisionCircle.getGlobalBounds().height / 2);
 	_collisionCircle.setFillColor(sf::Color::White);
-	
-
 	
 	_enemyPosition = target;
 

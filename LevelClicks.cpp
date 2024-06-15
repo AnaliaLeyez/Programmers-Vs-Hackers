@@ -80,14 +80,17 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 }
 Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 	Spot sp;  //DEBERIA SER PUNTERO
-	if (_currentMenu->getIsVisible()) { //click fuera de spot y towerMenu estaba visible
-		std::cout << "manageOutOfSpot-SP: " << sp.getPosition().x << std::endl;
+	if (_currentMenu->getIsVisible())
+	{
+		//click fuera de spot y towerMenu estaba visible
 		sp = _currentMenu->getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
 		
-		if (_currentMenu->getNumberMenu() == 1) {
+		if (_currentMenu->getNumberMenu() == 1) 
+		{
 			clickWithMenu1Open(mousex, mousey, sp);
 		}
-		else {
+		else 
+		{
 			clickWithMenu2Open(mousex, mousey, sp);
 		}
 		_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
@@ -98,9 +101,7 @@ Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 {
 	Button* btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
-
-	std::cout << " clickWithMenu1Open sp: " << sp.getPosition().x << std::endl;
-
+	
 	if (btn->getBtnNumber() != -1) {  //se hizo click en un boton
 
 		if (validateSale(btn->getTower(), true)) {
@@ -110,28 +111,13 @@ void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 				tower->setSpotNumber(sp.getSpotNumber());
 				//tower->setOrigin(sp.getOrigin()); //nuevo
 
-				std::cout<<"ANTES DE SETEAR: " << sp.getPosition().x << " " << sp.getPosition().y << std::endl;
-
 				//tower->_sprite.setPosition(sp.getInverseTransform().transformPoint(sp.getPosition()));
 				tower->setPosition(0,0);
 				//tower->_visualRange.setPosition(sp.getInverseTransform().transformPoint(sp.getPosition()));
 				//tower->setPosition(sp.getPosition());
 
-				sf::CircleShape debugCircle(10);
-				debugCircle.setFillColor(sf::Color::Red);
-				debugCircle.setPosition(sp.getPosition());
-				_debugShapes.push_back(debugCircle);
-
-				std::cout << "DESPUES DE SETEAR: " << std::endl;
-				//std::cout << tower->_sprite.getPosition().x << " " << tower->_sprite.getPosition().y << std::endl;
-				//std::cout << tower->_visualRange.getPosition().x << " " << tower->_visualRange.getPosition().y << std::endl;
-				//tower->setPosition(sp.getInverseTransform().transformPoint(sp.getPosition()));
-				std::cout << " - - - - " << std::endl;
-
-
 				setActiveTowers(tower);
 				setSpot(&sp); //CUIDADO esta linea parece innecesaria pero la saco y se rompe el programa
-				std::cout << "2# SPOT: " << sp.getPosition().x << " " << sp.getPosition().y << std::endl;
 		}
 		else {
 			_noCoinsClock.restart(); //NUEVO reseteo el clock para que se muestre el cartel
