@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
+
 #include <string>
 
 #include "Collisionable.h"
@@ -33,7 +35,7 @@ void Hacker::takeDamage(int damageBullet)
 
 void Hacker::moveHacker(int arr[][30])
 {
-	switch (arr[(int)_sprite.getPosition().y / 32][(int)_sprite.getPosition().x / 32])
+	switch (arr[(int)getPosition().y / 32][(int)getPosition().x / 32])
 	{
 	case 2:
 		_direction = { 1.0f,0.0f };
@@ -56,11 +58,11 @@ void Hacker::moveHacker(int arr[][30])
 		_reachedEnd = false;
 		break;
 	}
-	_sprite.move(_direction);
-	_collisionRect.move(_direction);
+
+	move(_direction);
 }
 
-sf::FloatRect Hacker::getBounds() const { return _sprite.getGlobalBounds(); }
+sf::FloatRect Hacker::getBounds() const { return getTransform().transformRect(_collisionRect.getGlobalBounds()); }
 
 void Hacker::update(int arr[][30])
 {
@@ -70,6 +72,6 @@ void Hacker::update(int arr[][30])
 void Hacker::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
-	//target.draw(_collisionRect, states); //el rectangulo rojo no lo quiero mostrar
+	target.draw(_collisionRect, states); //el rectangulo rojo no lo quiero mostrar
 	target.draw(_sprite, states);
 }

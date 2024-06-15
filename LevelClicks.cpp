@@ -17,14 +17,16 @@ void Level::validateClick(int mousex, int mousey)
 {
 	Spot currentSpot; //nuevo
 	int clickSpot = validateClickOnSpot(mousex, mousey);
-	if (clickSpot != 0) { //si se clickeo spot, esto devuelve el nro de spot
+	if (clickSpot != 0)
+	{ //si se clickeo spot, esto devuelve el nro de spot
 		currentSpot = getSpotByNumber(clickSpot);
 		currentSpot.setSpotNumber(clickSpot);
 		currentSpot.setOccupied(getSpotByNumber(currentSpot.getSpotNumber()).getIsOccupied());
 		_currentMenu->setCurrentSpot(currentSpot);  //si se clickeo en spot e estoy diciendo a menu q se asocie a ese spot, sino nose
 		manageClickOnSpot(mousex, mousey, currentSpot); //currentSpot tiene el nro de spot y el estado
 	}
-	else { //si NO se clickeo spot
+	else 
+	{ //si NO se clickeo spot
 		currentSpot = _currentMenu->getCurrentSpot();
 		currentSpot = manageOutOfSpotClick(mousex, mousey);
 	}
@@ -32,7 +34,8 @@ void Level::validateClick(int mousex, int mousey)
 
 	validateClickOnSpeaker(mousex, mousey);
 }
-int Level::validateClickOnSpot(int mousex, int mousey) {
+int Level::validateClickOnSpot(int mousex, int mousey) 
+{
 	if (!_currentMenu->getIsVisible()) {
 		for (auto& spot : _spots) {
 			if (spot->getGlobalBounds().contains(mousex, mousey)) {
@@ -59,10 +62,11 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 			_currentMenu->hide();
 		}
 	}
-	else {  //spot libre
+	else 
+	{  //spot libre
 		//_currentMenu2->hide(); //Necesario, en caso q se haya estado mostrando por otro spot
 		_currentMenu = _menu1;
-		currentSp.setCurrentTower(_currentMenu->getCurrentSpot().getCurrentTower()); //me aseguro que el currentSpot esta asociado a la tower ahora
+		currentSp.setCurrentTower(&_currentMenu->getCurrentSpot().getCurrentTower()); //me aseguro que el currentSpot esta asociado a la tower ahora
 		if (!_currentMenu->getIsVisible()) { //se clickeo en un spot libre y el menu no era visible
 			_currentMenu->setPosition(currentSp.getPosition()); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
 			_currentMenu->show();
@@ -76,12 +80,17 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 }
 Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 	Spot sp;  //DEBERIA SER PUNTERO
-	if (_currentMenu->getIsVisible()) { //click fuera de spot y towerMenu estaba visible
+	if (_currentMenu->getIsVisible())
+	{
+		//click fuera de spot y towerMenu estaba visible
 		sp = _currentMenu->getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
-		if (_currentMenu->getNumberMenu() == 1) {
+		
+		if (_currentMenu->getNumberMenu() == 1) 
+		{
 			clickWithMenu1Open(mousex, mousey, sp);
 		}
-		else {
+		else 
+		{
 			clickWithMenu2Open(mousex, mousey, sp);
 		}
 		_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
@@ -92,13 +101,21 @@ Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
 void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 {
 	Button* btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
+	
 	if (btn->getBtnNumber() != -1) {  //se hizo click en un boton
 
 		if (validateSale(btn->getTower(), true)) {
 			Tower* tower = btn->getTower()->clone(); // Crear una nueva instancia de la torre
 				sell(tower, sp);
+
 				tower->setSpotNumber(sp.getSpotNumber());
-				tower->setOrigin(sp.getOrigin()); //nuevo
+				//tower->setOrigin(sp.getOrigin()); //nuevo
+
+				//tower->_sprite.setPosition(sp.getInverseTransform().transformPoint(sp.getPosition()));
+				tower->setPosition(0,0);
+				//tower->_visualRange.setPosition(sp.getInverseTransform().transformPoint(sp.getPosition()));
+				//tower->setPosition(sp.getPosition());
+
 				setActiveTowers(tower);
 				setSpot(&sp); //CUIDADO esta linea parece innecesaria pero la saco y se rompe el programa
 		}
@@ -111,7 +128,8 @@ void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 {
 	Button* btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
-	Tower* tower = sp.getCurrentTower();
+	Tower* tower = &sp.getCurrentTower();
+
 	if (btn->getBtnNumber() == 1) {  //se hizo click en el boton 1 que es upgrade:
 		
 		std::cout << "UPGRADE" << std::endl;

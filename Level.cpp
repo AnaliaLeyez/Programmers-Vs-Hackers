@@ -47,11 +47,14 @@ void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
 void Level::setTowersAvailable(Tower* towerAvailable) { _towersAvailable.push_back(towerAvailable); }
 void Level::setActiveTowers(Tower* tower) { _activeTowers.push_back(tower); }
-void Level::setSpot(Spot* sp) {
-	for (auto& spot : _spots) {
-		if (spot->getSpotNumber() == sp->getSpotNumber()) {
+void Level::setSpot(Spot* sp)
+{
+	for (auto& spot : _spots)
+	{
+		if (spot->getSpotNumber() == sp->getSpotNumber())
+		{
 			spot->setOccupied(sp->getIsOccupied());
-			spot->setCurrentTower(sp->getCurrentTower());
+			spot->setCurrentTower(&sp->getCurrentTower());
 			break;
 		}
 	}
@@ -60,7 +63,8 @@ void Level::setCurrentSpot(Spot sp) { _currentMenu->setCurrentSpot(sp); }
 void Level::setCurrentMenu(TowerMenu* menu) { _currentMenu = menu; }
 void Level::setNoCoinsText()
 {
-	if (!_font.loadFromFile("fuentes/TowerPrice.ttf")) {
+	if (!_font.loadFromFile("fuentes/TowerPrice.ttf"))
+	{
 		throw std::runtime_error("Error al cargar la fuente del Price Menu \n");
 	}
 	_NoCoins.setFont(_font);
@@ -127,49 +131,51 @@ bool Level::validateSale(Tower* tower, bool firstSale) {
 }
 void Level::sell(Tower* tower, Spot& currentSpot) {
 	int price;
-	if (currentSpot.getIsOccupied()) { price= tower->getPriceUpgrade();}
-	else { price = tower->getPrice();}
-	
+	if (currentSpot.getIsOccupied()) { price = tower->getPriceUpgrade(); }
+	else { price = tower->getPrice(); }
+
 	setGolden(getGolden() - price);
-	
+
 	_ui.setText(0, std::to_string(getGolden()));
 	currentSpot.setCurrentTower(tower);
 	currentSpot.setOccupied(true);
 }
 void Level::resellTower(Spot& sp) {
-	Tower* tower = sp.getCurrentTower();
-		int resaleValue = tower->getSalesValue();
-		std::cout << "Valor reventa:" << resaleValue << std::endl;
-		setGolden(getGolden() + resaleValue); // Agregar el valor de reventa al oro del jugador
-		_ui.setText(0, std::to_string(getGolden()));
-		sp.clearCurrentTower(); // Limpiar la torre del spot
-		sp.setOccupied(false); // Marcar el spot como no ocupado
-		_activeTowers.remove(tower);
-		
+	Tower* tower = &sp.getCurrentTower();
+	int resaleValue = tower->getSalesValue();
+	std::cout << "Valor reventa:" << resaleValue << std::endl;
+	setGolden(getGolden() + resaleValue); // Agregar el valor de reventa al oro del jugador
+	_ui.setText(0, std::to_string(getGolden()));
+	sp.clearCurrentTower(); // Limpiar la torre del spot
+	sp.setOccupied(false); // Marcar el spot como no ocupado
+	_activeTowers.remove(tower);
+
 }
 
 //void Level::shoot(Bullet* bullet, sf::Vector2f shootingPosition, sf::Vector2f targetPosition)
-void Level::shoot(Bullet* blt, Hacker* hacker) //ANA
+void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, int damage, int type)
 {
-	//_bullets.push_back(Bullet(shootingPosition, targetPosition)); //ADRI
-	blt->setEnemyPosition(hacker->getPosition());
-	_bullets.push_back(blt); //ANA
-	
-	auto itB = _bullets.begin();
-	while (itB != _bullets.end())
+	switch (type)
 	{
-		Bullet* bullet = *itB;
+	case 1:
+		_bullets.push_back(new BulletA(shootingPosition, targetPosition, damage));
+		
+		break;
+	case 2:
+		_bullets.push_back(new BulletB(shootingPosition, targetPosition, damage));
+		
+		break;
+	case 3:
+		_bullets.push_back(new BulletC(shootingPosition, targetPosition, damage));
+		
+		break;
+	case 4:
+		_bullets.push_back(new BulletD(shootingPosition, targetPosition, damage));
+		
+		break;
 
-		if (bullet->getBounds().intersects(hacker->getBounds()))
-		{
-			hacker->takeDamage(bullet->getDamage());
-			itB = _bullets.erase(itB);
-		}
-		else
-		{
-			++itB;
-		}
 	}
+
 }
 
 void Level::checkLevelCompletion() {
@@ -183,11 +189,13 @@ void Level::update(sf::Vector2i& mousePosition) {
 	if (!getFinisheLevel()) {
 		mouseCheck(mousePosition);
 
-		if (_waveClock.getElapsedTime().asSeconds() >= _timeBetweenWaves && _currentWave <= 3) {  /// cambiar el 3 por cantidad de oleadas
+		if (_waveClock.getElapsedTime().asSeconds() >= _timeBetweenWaves && _currentWave <= 3) {
 			spawnWave(); // Generar una nueva oleada de enemigos
 		}
+
 		// Actualizar los enemigos en el nivel
 		for (auto& hacker : _enemies) {
+			hacker->update(getMapArray());
 
 			hacker->update(getMapArray());
 			//std::cout<< hacker->getPosition().x << " " << hacker->getPosition().y <<std::endl;
@@ -222,63 +230,100 @@ void Level::update(sf::Vector2i& mousePosition) {
 
 		for (auto& tower : _activeTowers)
 		{
-			//std::cout << tower._visualRange.getPosition().x << " " << tower._visualRange.getPosition().y << std::endl;
 			for (auto& hacker : _enemies)
-			{
-				//if (tower->getVisualRange().getGlobalBounds().intersects(hacker->_collisionRect.getGlobalBounds()))
-				if (tower->isCollision(*hacker)) 
+			{	
+				//std::cout << " TowerPOs " << _spots[0]->getTransform().transformRect((tower->getBounds())).left << std::endl;
+				//std::cout << " HackerPos " << hacker->getBounds().left << std::endl;
+
+				if (spot->getIsOccupied() &&
+					spot->getTransform().transformRect((
+						spot->getCurrentTower().getBounds())).intersects(hacker->getBounds()
+						))
 				{
-					if (tower->canShoot()) {
-						//shoot(tower->getVisualRange().getPosition(), hacker->_collisionRect.getPosition()); //ADRI
-						Bullet* bullet = tower->getBullet();
-						bullet->setDirection(hacker->_collisionRect.getPosition());
-						bullet->setEnemyPosition(hacker->_collisionRect.getPosition());
-						shoot(bullet, hacker);
-						//std::cout << hacker->_collisionRect.getPosition().x << " " << hacker->_collisionRect.getPosition().y<< std::endl;
+					//std::cout << "COliSIONO" << std::endl;
+					if (spot->getCurrentTower().canShoot())
+					{
+						shoot(spot->getPosition(),
+							hacker->getPosition(),
+							spot->getCurrentTower().getDamage(),
+							spot->getCurrentTower().getType());
+					}
+
+					auto it = _bullets.begin();
+					while (it != _bullets.end())
+					{
+						Bullet* bullet = *it;
+
+						if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
+						{
+							hacker->takeDamage(bullet->getDamage());
+							std::cout << hacker->getLife() << std::endl;
+							delete bullet;
+							it = _bullets.erase(it);
+						}
+						else
+						{
+							++it;
+							
+						}
 					}
 				}
-
-
 			}
 		}
+
 		for (auto& bullet : _bullets) {
 			bullet->update();
 		}
 
 		auto itH = _enemies.begin();
-		while (itH != _enemies.end())
-		{
+		while (itH != _enemies.end()) {
 			Hacker* hacker = *itH;
 			hacker->update(getMapArray());
-
-			if (hacker->getLife() <= 0)
-			{
+			if (hacker->getLife() <= 0) {
 				itH = _enemies.erase(itH);
 			}
-			else
-			{
+			else {
 				++itH;
 			}
 
+			for (auto& hacker : _enemies) {
+				if (hacker->getEnd() == true) {
+					if (getEnergy() - 20 >= 0) {
+						if (hacker->_cooldown > 20) { //configurar los get y set con _cooldown en private
+							//if (getEnergy() - 20 >= 0 ) { //hay que dar un margen de tiempo al ataque xq sino resta mucho de golpe
+							_dying = true;
+							setEnergy(getEnergy() - 20);
+							_ui.setText(1, std::to_string(getEnergy()));
+							hacker->_cooldown = 0;
+						}
+						hacker->_cooldown++;
+					}
+					else {
+						_flagGameOver = true;
+						setGameOverText();
+					}
+					break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
+				}
+				else {
+					_dying = false;
+				}
+			}
 
-			// Verificar si se ha completado el nivel
-			if (_currentWave > 3 && _enemies.empty()) {
-				setFinishedLevel(true);
-			}
-			if (_currentMenu->getIsVisible()) {
-				_currentMenu->update(mousePosition);
-			}
-			
+		// Verificar si se ha completado el nivel
+		if (_currentWave > 3 && _enemies.empty()) {
+			setFinishedLevel(true);
+		}
+		if (_currentMenu->getIsVisible()) {
+			_currentMenu->update(mousePosition);
 		}
 	}
 	else {
-		if (getIdLevel() < 4) { //aca digo que solo puede llegar hasta el nivel 4
+		if (getIdLevel() < 4) { // aca digo que solo puede llegar hasta el nivel 4
 			std::cout << "NIVEL 2:" << std::endl;
-			Manager::getInstance().setNumberLevel(getIdLevel() + 1); //cambia al siguiente nivel
-
+			Manager::getInstance().setNumberLevel(getIdLevel() + 1); // cambia al siguiente nivel
 		}
 		else {
-			//logica para cuando se termina el juego, cuando se pasaron todos los niveles
+			// lógica para cuando se termina el juego, cuando se pasaron todos los niveles
 		}
 	}
 }
@@ -321,4 +366,10 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 	if (_flagGameOver) {
 		target.draw(_gameOver, states);
 	}
+
+	// AVERRRRGASTONNNNNNNNNNNNNNNNNNNNNN
+	for (const auto& shape : _debugShapes) {
+		target.draw(shape, states);
+	}
+
 }

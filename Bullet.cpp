@@ -1,27 +1,20 @@
 ﻿#include "SFML/Graphics.hpp"
-
+#include <iostream>
 #include "Collisionable.h"
 #include "Hacker.h"
 #include "Bullet.h"
 
 //sf::Texture Bullet::_texture;
 
-//Bullet::Bullet(sf::Vector2f initialPosition, sf::Vector2f target)
-//{
-//	_collisionCircle.setRadius(10.f);
-//	_collisionCircle.setPosition(initialPosition);
-//
-//	if (!_texture.loadFromFile("img/Bullets/fireball.png")) {
-//		throw std::runtime_error("Error img FireBall");
-//	}
-//	_sprite.setTexture(_texture);
-//	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
-//	_sprite.setPosition(initialPosition);
-//
-//	_enemyPosition = target;
-//	_speed = 3.0f;
-//	_damage = 20;
-//}
+Bullet::Bullet(sf::Vector2f initialPosition, sf::Vector2f target)
+{
+	_collisionCircle.setRadius(40.f);
+	_collisionCircle.setOrigin(_collisionCircle.getGlobalBounds().width / 2, _collisionCircle.getGlobalBounds().height / 2);
+	_collisionCircle.setFillColor(sf::Color::White);
+	
+	_enemyPosition = target;
+
+}
 
 void Bullet::moveToward()
 {
@@ -38,7 +31,10 @@ void Bullet::moveToward()
 	//_sprite.move(_direction * _speed); //ADRI
 }
 
-sf::FloatRect Bullet::getBounds() const { return _sprite.getGlobalBounds(); }
+sf::FloatRect Bullet::getBounds() const
+{ 
+	return _sprite.getTransform().transformRect(_collisionCircle.getGlobalBounds());
+}
 sf::Vector2f Bullet::getDirection() const { return _direction; }
 sf::Vector2f Bullet::getVelocity() const { return _velocity; }
 sf::Vector2f Bullet::getEnemyPosition() const {	return _enemyPosition; }
@@ -57,5 +53,6 @@ void Bullet::update()
 void Bullet::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
+	//target.draw(_collisionCircle, states);
 	target.draw(_sprite, states);
 }

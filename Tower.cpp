@@ -31,6 +31,8 @@ void Tower::setDamage(int damage) { _damage = damage; }
 void Tower::setPriceUpgrade(int price) { _priceUpgrade = price; }
 void Tower::setSpotNumber(int n) { _spotNumber = n; }
 
+int Tower::getType() const { return _type; }
+
 void Tower::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     states.transform *= getTransform();
@@ -41,7 +43,7 @@ void Tower::draw(sf::RenderTarget& target, sf::RenderStates states) const
 bool Tower::canShoot()
 {
     //if (_clock.getElapsedTime().asSeconds() >= _fireRate)
-    if (_cooldown >= 70)
+    if (_cooldown >= 20)
     {
         setRangeColor(sf::Color(255, 0, 0, 120));
         //_clock.restart();
@@ -64,7 +66,10 @@ void Tower::verificarEnemigo(HackerTrainee& enemy)
     }    
 }
 
-sf::FloatRect Tower::getBounds() const { return _sprite.getLocalBounds(); }
+sf::FloatRect Tower::getBounds() const {
+        
+    return getTransform().transformRect(_visualRange.getGlobalBounds());
+}
 
 void Tower::update()
 {

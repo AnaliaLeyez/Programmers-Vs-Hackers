@@ -7,8 +7,8 @@ class Tower : public sf::Drawable, public sf::Transformable, public Collisionabl
 protected:
 	//Propiedades esteticas
 	sf::Texture _texture;
-	sf::Sprite _sprite;
-	sf::CircleShape _visualRange;
+	
+	
 	std::string _name;
 	//Propiedades oro
 	int _price;
@@ -21,6 +21,7 @@ protected:
 	int _upgradesAmount;
 
 	int _spotNumber;
+	int _type; //new
 
 	//sf::Clock _clock;
 	int _cooldown;
@@ -29,6 +30,8 @@ protected:
 	//std::list<Bullet*> _bullets; //NUEVO, ANA
 
 public:
+	sf::CircleShape _visualRange;
+	sf::Sprite _sprite;
 	virtual Tower* clone() const = 0; // Método clone para crear nuevas instancias
 	virtual void upgrade()=0;
 
@@ -46,6 +49,7 @@ public:
 	int getUpgradesAmount() const;
 	int getSpotNumber() const;
 	Bullet* getBullet() const;
+	int getType() const;
 
 	void setSprite(sf::Sprite);
 	void setVisualRange(sf::CircleShape);
@@ -63,6 +67,5 @@ public:
 	sf::FloatRect getBounds() const;
 	void update();
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
-
 	bool canShoot();
 };

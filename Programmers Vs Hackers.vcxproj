@@ -139,7 +139,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="BulletBrian.cpp" />
+    <ClCompile Include="BulletA.cpp" />
+    <ClCompile Include="BulletB.cpp" />
+    <ClCompile Include="BulletC.cpp" />
+    <ClCompile Include="BulletD.cpp" />
     <ClCompile Include="ButtonBrian.cpp" />
     <ClCompile Include="ButtonCashSale.cpp" />
     <ClCompile Include="ButtonKloster.cpp" />
@@ -175,7 +178,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="BulletBrian.h" />
+    <ClInclude Include="BulletA.h" />
+    <ClInclude Include="BulletB.h" />
+    <ClInclude Include="BulletC.h" />
+    <ClInclude Include="BulletD.h" />
     <ClInclude Include="ButtonBrian.h" />
     <ClInclude Include="ButtonCashSale.h" />
     <ClInclude Include="ButtonKloster.h" />

@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream> //borrar
 #include "Hacker.h"
-#include "BulletBrian.h" //cambiar por Sar F
+//#include "BulletBrian.h" //cambiar por Sar F
 #include "Tower.h"
 #include "TowerSarF.h"
 
@@ -14,25 +14,22 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 	//setPosition(position);
 
-	_name = "Torre Programacion 1";
+	_name = "sar";
 
 	//Rango de ataque:
-	_visualRange.setRadius(130);
+	_visualRange.setRadius(140);
 	_visualRange.setFillColor(sf::Color(0, 255, 0, 120));
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
-	_price = 180;
-	_priceUpgrade = 240;
-	_salesValue = 144;
-	_damage = 3;
-	_range = 7;
+	_type = 3;
+	_price = 10;
+	_priceUpgrade = 9;
+	_salesValue = 5;
+	_damage = 10;
+	_range = 9;
 	_speedAttack = 3;
 	_upgradesAmount = 2;
 	_fireRate = 1.0f; // Tiempo en segundos entre disparos
-
-	//_clock.restart(); //NUEVO, ANA
-	_cooldown = 0;
-	//_bullet = new BulletBrian(getPosition()); //NUEVO, ANA //esto seria bulletSarF
 }
 
 void TowerSarF::upgrade()
@@ -75,5 +72,5 @@ void TowerSarF::upgrade()
 
 void TowerSarF::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos)
 {
-	_bullet = new BulletBrian(twPos, hkPos); //esto seria bulletSarF
+	//_bullet = new BulletBrian(twPos, hkPos); //esto seria bulletSarF
 }
