@@ -15,7 +15,7 @@ TowerKloster::TowerKloster()
 	_name = "Torre SPD";
 
 	//Rango de ataque:
-	_visualRange.setRadius(130);
+	_visualRange.setRadius(125);
 	_visualRange.setFillColor(sf::Color(0, 255, 0, 120));
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
@@ -25,9 +25,8 @@ TowerKloster::TowerKloster()
 	_salesValue = 80;
 	_damage = 7;
 	_range = 7;
-	_speedAttack = 3;
 	_upgradesAmount = 2;
-	_fireRate = 1.0f; // Tiempo en segundos entre disparos
+	_fireRate = 1.5f; // Tiempo en segundos entre disparos
 }
 
 void TowerKloster::upgrade()

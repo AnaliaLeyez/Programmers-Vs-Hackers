@@ -25,9 +25,8 @@ TowerWenner::TowerWenner()
 	_salesValue = 120;
 	_damage = 8;
 	_range = 6;
-	_speedAttack = 3;
 	_upgradesAmount = 2;
-	_fireRate = 0.8f; // Tiempo en segundos entre disparos
+	_fireRate = 1.2f; // Tiempo en segundos entre disparos
 }
 
 void TowerWenner::upgrade()

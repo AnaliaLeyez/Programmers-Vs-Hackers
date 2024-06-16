@@ -17,7 +17,6 @@ protected:
 	//Propiedades belicas:
 	int _damage;
 	int _range;
-	int _speedAttack;
 	int _upgradesAmount;
 
 	int _spotNumber;
@@ -39,7 +38,6 @@ public:
 	int getSalesValue() const;
 	int getDamage() const;
 	int getRange() const;
-	int getSpeedAtack() const;
 	int getSpotNumber() const;
 	Bullet* getBullet() const;
 	int getType() const;

@@ -14,7 +14,6 @@ int Tower::getSalesValue() const { return _salesValue; }
 sf::Sprite Tower::getSprite() const { return _sprite; }
 int Tower::getDamage() const { return _damage; }
 int Tower::getRange() const { return _range; }
-int Tower::getSpeedAtack() const { return _speedAttack; }
 int Tower::getSpotNumber() const { return _spotNumber; }
 Bullet* Tower::getBullet() const { return _bullet; }
 
