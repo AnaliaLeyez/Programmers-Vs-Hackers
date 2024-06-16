@@ -1,21 +1,39 @@
 #include <SFML/Graphics.hpp>
 
 #include "UI.h"
-
 UI::UI() {
+	if (!_textureBgPlyInfo.loadFromFile("img/complementarias/player_info_background.png")) {
+		throw std::runtime_error("Error al cargar Background Points");
+	}
+	_bgPlyInfo.setTexture(_textureBgPlyInfo);
+	_bgPlyInfo.setPosition(420, 25);
+	_bgPlyInfo.setScale(0.5, 0.5);
+	_bgPlyInfo.setOrigin(_bgPlyInfo.getGlobalBounds().width / 2, _bgPlyInfo.getGlobalBounds().height / 2);
+
 	if (!_textureCoins.loadFromFile("img/complementarias/oro.png")) {
 		throw std::runtime_error("Error al cargar img Oro");
 	}
 	_coin.setTexture(_textureCoins);
-	_coin.setPosition(510, 20);
+	_coin.setPosition(460, 30);
+	_coin.setScale(0.8f, 0.8f);
 	_coin.setOrigin(_coin.getGlobalBounds().width / 2, _coin.getGlobalBounds().height / 2);
 
 	if (!_textureRay.loadFromFile("img/complementarias/energia.png")) {
 		throw std::runtime_error("Error al cargar img Rayo");
 	}
 	_ray.setTexture(_textureRay);
-	_ray.setPosition(340, 25);
-	_ray.setOrigin( _ray.getGlobalBounds().width / 2, _ray.getGlobalBounds().height / 2);
+	_ray.setPosition(350, 30);
+	_ray.setScale(0.7f, 0.7f);
+	_ray.setOrigin(_ray.getGlobalBounds().width / 2, _ray.getGlobalBounds().height / 2);
+
+	if (!_textureSkull.loadFromFile("img/complementarias/skull.png")) {
+		throw std::runtime_error("Error al cargar Calavera");
+	}
+	_skull.setTexture(_textureSkull);
+	_skull.setPosition(580, 30);
+	_skull.setScale(0.5, 0.5);
+	_skull.setOrigin(_skull.getGlobalBounds().width / 2, _skull.getGlobalBounds().height / 2);
+
 
 	//parlante
 	if (!_textureSpeaker.loadFromFile("img/complementarias/musicOn.png")) {
@@ -29,38 +47,47 @@ UI::UI() {
 	if (!_font.loadFromFile("fuentes/fuenteMenu.ttf")) {
 		throw std::runtime_error("Error al cargar la fuente del Menu \n");
 	}
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 4; i++) {
 		_text[i].setFont(_font);
-		_text[i].setCharacterSize(30);
+		_text[i].setCharacterSize(23);
 		int posX, posY;
 		std::string texto;
 		switch (i)
 		{
 		case 0:
-			posX = 590;
+			posX = 480;
 			posY = 20;
-			texto = "500";
 			break;
 		case 1:
-			posX = 400;
+			posX = 370;
 			posY = 20;
-			texto = "600";
 			break;
 		case 2:
+			posX = 615;
+			posY = 20;
+			texto = "1/1";
+			break;
+		case 3:
 			posX = 800;
-			posY = 700;
+			posY = 600;
 			texto = "Menu";
 			break;
 		default:
 			break;
 		}
 		_text[i].setPosition(posX, posY);
-		_text[i].setString(texto);
+		_text[i].setString(texto);  //no debe ir, cambia segun cada nivel
 		//text[i].setOrigin(text[i].getGlobalBounds().getPosition().x / 2, text[i].getGlobalBounds().height / 2);
 		_text[i].setFillColor(sf::Color(255, 255, 255));
 	}
 }
 sf::RectangleShape UI::getSpeaker() const { return _speaker; }
+
+void UI::setText(int i, std::string text)
+{
+	_text[i].setString(text);
+}
+
 sf::Texture UI::getTextureSpeaker() const { return _textureSpeaker; }
 void UI::setTextureSpeaker(std::string path) {
 	if (!_textureSpeaker.loadFromFile(path)) {
@@ -69,10 +96,12 @@ void UI::setTextureSpeaker(std::string path) {
 	_speaker.setTexture(&_textureSpeaker);
 }
 void UI::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+	target.draw(_bgPlyInfo, states);
 	target.draw(_ray, states);
 	target.draw(_coin, states);
+	target.draw(_skull, states);
 	target.draw(_speaker, states);
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 4; i++) {
 		target.draw(_text[i], states);
 	}
 }

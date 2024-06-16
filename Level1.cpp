@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib> // Necesario para std::rand() y std::srand()
+#include <ctime> 
 #include "UI.h"
 #include "Map.h"
 #include "Map1.h"
@@ -7,89 +9,103 @@
 #include "TowerKloster.h"
 #include "TowerSarF.h"
 #include "TowerWenner.h"
+#include "HackerTrainee.h"
+#include "HackerJunior.h"
+#include "HackerSemiSr.h"
+#include "HackerDios.h"
 #include "Level.h"
 #include "Spot.h"
 #include "Level1.h"
 
-void setSpots(int arr[][30], std::vector<Spot*> &spots) {
-for (int i = 0; i < 5; i++)
-{
-	Spot* sp = new Spot();
-	spots.push_back(sp);
-}
-//Ubicar spots
-	int index = 0;
-	for (int x = 0; x < 30; x++)
-	{
-		for (int y = 0; y < 20; y++)
-		{
-			if (arr[y][x] == 6 && index<5)
-			{				
-				spots[index]->setPosition(32 * x, 32 * y);
-				spots[index]->setSpotNumber(index + 1);
-				index++;
-			}
-		}
-	}
-}
-
-//void setWaves(std::list<std::list<Hacker>> &waves) {
-//	std::list<Hacker> hackers1;
-//	hackers1.push_back(HackerTrainee());
-//	hackers1.push_back(HackerTrainee());
-//	hackers1.push_back(HackerTrainee());
-//	waves.push_back(hackers1);
-//	std::list<Hacker> hackers2;
-//	hackers2.push_back(HackerTrainee());
-//	hackers2.push_back(HackerTrainee());
-//	waves.push_back(hackers2);
-//}
-
-void Level::spawnWave() {
+void Level1::spawnWave() {
+	std::srand(std::time(nullptr));
+	//los contadores son de tipo static porque asi las variables mantienen su valor incluso
+	//despues de que la funcion haya terminado de ejecutarse
 	static int enemyIndex = 0;
+	static bool spawnedGodHacker = false;
 
-	// Verifico si todavía hay enemigos para agregar en esta oleada
 	if (enemyIndex < _enemiesPerWave) {
-		// Genero un nuevo enemigo
-		if (_enemyClock.getElapsedTime().asSeconds() >= _timeBetweenEnemies) {
-
-			HackerTrainee* hacker = new HackerTrainee();
-			_enemies.push_back(hacker);
-			//std::cout << "Wave " << _currentWave << ": Enemigo " << enemyIndex + 1 << " de " << _enemiesPerWave << std::endl;
-			_enemyClock.restart();
+		// Genera un nuevo enemigo
+		int randomTime = std::rand() % 8 + 1;
+		if (_enemyClock.getElapsedTime().asSeconds() >= randomTime) {
+			switch (_currentWave)
+			{
+			case 1:
+			{
+				HackerTrainee* hk = new HackerTrainee();
+				hk->setPosition(_hackerStartPosition);
+				_enemies.push_back(hk);
+			}
+			break;
+			case 2:
+			{
+				if (enemyIndex % 2 == 0) {
+					HackerTrainee* hk = new HackerTrainee();
+					hk->setPosition(_hackerStartPosition);
+					_enemies.push_back(hk);
+				}
+				else {
+					HackerJunior* hk = new HackerJunior();
+					hk->setPosition(_hackerStartPosition);
+					_enemies.push_back(hk);
+				}
+			}
+			break;
+			case 3:
+			{
+				if (enemyIndex % 3 != 0) {
+					HackerSemiSr* hk = new HackerSemiSr();
+					hk->setPosition(_hackerStartPosition);
+					_enemies.push_back(hk);
+				}
+				else {
+					HackerDios* hk = new HackerDios();
+					hk->setPosition(_hackerStartPosition);
+					_enemies.push_back(hk);
+				}
+			}
+			break;
+			default:
+				break;
+			}
 			++enemyIndex;
+			_enemyClock.restart();
 		}
 	}
 	else {
-		// Si ya agregue todos los enemigos de esta oleada
-		enemyIndex = 0; // Reinicio el índice para la próxima oleada
-		_enemiesPerWave += 10; // Incremento la cantidad de enemigos para la próxima oleada
-		++_currentWave; // Incremento el número de oleada
-		/*std::cout << "Comenzando Wave " << _currentWave << std::endl;*/
-		_waveClock.restart(); // Reinicio el temporizador de la oleada
+		// Si ya se agregaron todos los enemigos de esta oleada
+		enemyIndex = 0; // Reinicia el índice para la próxima oleada
+		_enemiesPerWave += 2; // Incrementa la cantidad de enemigos para la próxima oleada
+		++_currentWave; // Incrementa el número de oleada
+		spawnedGodHacker = false;
+		_waveClock.restart(); // Reinicia el temporizador de la oleada
 	}
 }
+
 
 Level1::Level1()
 {
 	_currentWave = 1;
-	_enemiesPerWave = 5;
-	_timeBetweenWaves = 10;
+	_totalWaves = 3;
+	_enemiesPerWave = 1;
+	_timeBetweenWaves = 2;
 	_timeBetweenEnemies = 2;
+	_timeBetweenEnemies = std::rand() % 15 + 1; ///ver si esta queda o se va 
 	_waveClock.restart();
 	_enemyClock.restart();
+	_hackerStartPosition = { 960 / 32 * 9.5, 640 / 32 * 0.5 };
 
-	_idLevel=1;
+	_idLevel = 1;
 	_finishedLevel = false;
 	_map = new Map1();
-	int arr[20][30] = {
+	int arr[22][30] = {
 {0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,2,1,1,1,5},
+{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0},
+{0,0,0,0,0,0,0,0,1,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0},
+{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0},
+{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,2,1,3,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -102,8 +118,11 @@ Level1::Level1()
 {0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 	};
+	setMapArray(arr);
 
 	_dying = false;
 	if (!_textureUTN.loadFromFile("img/towers/facu.png")) {
@@ -122,10 +141,12 @@ Level1::Level1()
 	_UTNRed.setPosition(sf::Vector2f(850, 130));
 	_UTNRed.setOrigin(_UTNRed.getGlobalBounds().width / 2, _UTNRed.getGlobalBounds().height / 2);
 
-	setSpots(arr, _spots);
-	_golden = 500;
-	_energy = 500;
-	setMapArray(arr);
+	setSpots(arr, _spots, 5);
+	_golden = 2000;
+	_energy = 99999;
+	_ui.setText(0, std::to_string(getGolden()));
+	_ui.setText(1, std::to_string(getEnergy()));
+
 	if (!_buffer.loadFromFile("music/nivel1.wav")) {
 		throw std::runtime_error("Error al cargar musica nivel 1");
 	};
@@ -133,10 +154,13 @@ Level1::Level1()
 	_sound.setVolume(5);
 	_sound.play();
 	_musicPlaying = true;
-	/*setWaves(_waves);*/
-	_hackerStartPosition = { 960 / 32 * 9, 640 / 32 * 1 };
-	_towersAvailable.push_back(TowerBrian());
-	_towersAvailable.push_back(TowerKloster());
-	_towersAvailable.push_back(TowerSarF());
-	_towersAvailable.push_back(TowerWenner());
+
+	_towersAvailable.push_back(new TowerBrian());
+	_towersAvailable.push_back(new TowerKloster());
+	_towersAvailable.push_back(new TowerSarF());
+	_towersAvailable.push_back(new TowerWenner());
+
+	_currentMenu = _menu1;
+
+	setNoCoinsText(); //NUEVO
 }

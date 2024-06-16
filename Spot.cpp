@@ -1,14 +1,11 @@
+#include <iostream> //borrar
 #include <SFML/Graphics.hpp>
 
 #include "Spot.h"
 
-sf::Texture Spot::_textureA;
-sf::Texture Spot::_textureB;
-
 Spot::Spot()
 {
 	_spotNumber = 0;
-	_currentTower.setPrice(0);
     _mouseHover = false;
 	if (!_textureA.loadFromFile("img/maps/spot_martillo.png")) {
 		throw std::runtime_error("Error img Torre Brian");
@@ -26,25 +23,18 @@ Spot::Spot()
 }
 
 int Spot::getSpotNumber() const { return _spotNumber; }
-
 bool Spot::getIsOccupied() const { return _occupied; }
-
-Tower Spot::getCurrentTower() const { return _currentTower; }
-
+Tower& Spot::getCurrentTower() const { return *_currentTower; }
 bool Spot::getMouseHover() const { return _mouseHover; }
 
 void Spot::setSpot(int spotNumber, bool status) {
 	setSpotNumber(spotNumber);
 	setOccupied(status);
 }
-
 void Spot::setSpotNumber(int n) { _spotNumber = n; }
-
 void Spot::setMouseHover(bool state) { _mouseHover = state; }
-
 void Spot::setOccupied(bool status){ _occupied = status; }
-
-void Spot::setCurrentTower(Tower tower){ _currentTower = tower; }
+void Spot::setCurrentTower(Tower* tower) { _currentTower = tower; }
 
 void Spot::validateMouseHover(bool &_mouseHover)
 {
@@ -57,12 +47,13 @@ void Spot::validateClick(int mousex, int mousey)
 void Spot::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
-	if (getIsOccupied()) {
-		target.draw(_currentTower, states);
+	if (getIsOccupied())
+	{
+		target.draw(*_currentTower, states);
 	}
 	else {
 		_mouseHover ? target.draw(_spriteB, states) : target.draw(_spriteA, states);
-	}	
+	}
 }
 
 
@@ -70,11 +61,7 @@ sf::FloatRect Spot::getGlobalBounds() const {
 	return getTransform().transformRect(_spriteA.getGlobalBounds());
 }
 
-//sf::FloatRect Spot::getGlobalBounds() const {
-//	if (_mouseHover) {
-//		return getTransform().transformRect(_spriteA.getGlobalBounds());
-//	}
-//	else {
-//		return getTransform().transformRect(_spriteB.getGlobalBounds());
-//	}
-//}
+void Spot::clearCurrentTower()
+{
+	_currentTower = nullptr;
+}

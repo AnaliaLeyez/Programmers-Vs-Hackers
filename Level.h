@@ -6,8 +6,15 @@
 #include "UI.h"
 #include "Map.h"
 #include "TowerMenu.h"
+#include "TowerMenu1.h"
+#include "TowerMenu2.h"
 #include "Tower.h"
 #include "Spot.h"
+#include "Bullet.h"
+#include "BulletA.h"
+#include "BulletB.h"
+#include "BulletC.h"
+#include "BulletD.h"
 
 class Level: public sf::Drawable, public sf::Transformable
 {
@@ -15,19 +22,21 @@ protected:
 	int _idLevel;
 	bool _finishedLevel;
 	UI _ui;
+	//sf::Texture _textureUTN;
+	//sf::Sprite _spriteUTN;
 	//NUEVO
 	sf::Texture _textureUTN;
 	sf::RectangleShape _UTN;
 	sf::Texture _textureUTNRed;
 	sf::RectangleShape _UTNRed;
 	bool _dying;
-	//NUEVO
 
-	Map *_map;
-	int _mapArray[20][30];
+	Map* _map;
+	int _mapArray[22][30];
 	std::vector<Spot*> _spots;
-	TowerMenu *_currentMenu =new TowerMenu();  //el nivel tiene UN solo menu mostrandose
-
+	TowerMenu* _currentMenu;
+	TowerMenu1* _menu1 = new TowerMenu1();
+	TowerMenu2* _menu2 = new TowerMenu2();
 	int _golden;
 	int _energy;
 	sf::SoundBuffer _buffer;
@@ -36,7 +45,7 @@ protected:
 
 	std::vector<Hacker*> _enemies;
 	int _currentWave;
-	//cantidad de oleadas
+	int _totalWaves;
 	int _enemiesPerWave;
 	int _timeBetweenWaves;
 	int _timeBetweenEnemies;
@@ -44,56 +53,85 @@ protected:
 	sf::Clock _enemyClock;
 
 	sf::Vector2f _hackerStartPosition;
-	std::list <Tower> _towersAvailable;
-	std::list <Tower> _activeTowers;
+	std::list <Tower*> _towersAvailable;
+	std::list <Tower*> _activeTowers;
+
+	std::list<Bullet*> _bullets;
+
+	//NUEVO:
+	sf::Clock _noCoinsClock;
+	sf::Font _font;
+	sf::Text _NoCoins;
+	sf::Time _displayTimeNoCoins;
+	bool _flagNoCoins;
+	sf::Text _gameOver;
+	sf::Texture _textureGameOverSkull;
+	sf::Sprite _gameOverSkull;
+	bool _flagGameOver;
+
 public:
+	void virtual spawnWave() = 0;
 	int getIdLevel() const;
 	bool getFinisheLevel()const;
 	UI getUI() const;
 	Map getMap() const;
 	int(*getMapArray())[30];
 	const std::vector<Spot*> getSpots() const;
-	Spot getCurrentSpot() const;
-	Spot getSpotByNumber(int) const;
-	TowerMenu getCurrentMenu() const;  //nuevo
-
+	Spot getCurrentSpot() const; //DEBERIA SER PUNTERO
+	Spot getSpotByNumber(int) const; //DEBERIA SER PUNTERO
+	TowerMenu getCurrentMenu() const; //DEBERIA SER PUNTERO
 	int getGolden();
-	int getEnergy() const;
+	int getEnergy();
 	sf::SoundBuffer getBuffer() const;
 	bool getMusicPlaying() const;
 	sf::Sound getSound() const;
 	sf::Vector2f getHackerStartPosition() const;
-	const std::list<Tower> getTowersAvailable() const;
-	std::list <Tower> getActiveTowers() const;
+	const std::list<Tower*> getTowersAvailable() const;
+	std::list <Tower*> getActiveTowers() const;
 
 	void setIdLevel(int);
 	void setFinishedLevel(bool);
 	void setUI(const UI&);
 	void setMap(const Map&);
-	void setMapArray(const int(&)[20][30]);
+	void setMapArray(const int(&)[22][30]);
 	void setGolden(int);
 	void setEnergy(int);
 	void setMusicPlaying(bool);
 	void setSound(bool);
-	void setTowersAvailable(Tower);
-	void setActiveTowers(Tower);
-	void setSpot(Spot*, int); //setea la info de un spot en particular
+	void setTowersAvailable(Tower*);
+	void setActiveTowers(Tower*);
+	void setSpot(Spot*); //setea la info de un spot en particular
+	void setSpots(int arr[][30], std::vector<Spot*>&, int);
 	void setCurrentSpot(Spot); //para que el currentMenu tenga su Spot asociado
 	void setCurrentMenu(TowerMenu*);
+	void setNoCoinsText();
 
-	void spawnWave();
-
-	void handlerEvent(const sf::Event&);
 	void mouseCheck(sf::Vector2i&);
 	void validateClick(int, int);
 	int validateClickOnSpot(int, int);
 	void manageClickOnSpot(int, int, Spot&);
-	Spot manageOutOfSpotClick(int, int);
+	Spot manageOutOfSpotClick(int, int); //DEBERIA SER PUNTERO??????
+	void clickWithMenu1Open(int, int, Spot&);
+	void clickWithMenu2Open(int, int, Spot&);
 	void validateClickOnSpeaker(int, int);
+
+	bool validateSale(Tower*, bool);
+	void sell(Tower*, Spot&);
+	void resellTower(Spot&);
+	void decreaseEnergy(int);
+
+	void shoot(sf::Vector2f, sf::Vector2f, int, int, Hacker*);
+	void checkLevelCompletion();
+	void setGameOverText();
+
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update(sf::Vector2i&);
 
-	bool validateSale(TowerMenuButton*); //nuevo
-	void sell(Tower, Spot&);
+
+	~Level() { //revisar eliminar todo lo que haya sido asignado con memoria dinamica
+		for (Spot* spot : _spots) {
+			delete spot;
+		}
+	}
 };
 

@@ -10,7 +10,13 @@ int main()
 {
 	sf::RenderWindow window(sf::VideoMode(960, 640), "Programmers Vs Hackers");
 	window.setFramerateLimit(60);
-	int view = 1;
+	sf::Image icon;
+	if (!icon.loadFromFile("img/complementarias/logo.png")) {
+		throw std::runtime_error("Error al cargar logo miniatura");
+	}
+	// Establecer el icono de la ventana
+	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+	int view = 2;
 	sf::Vector2i mousePosition; //xq no es 2f? si despues lo terminamos pasando a 2f siempre...
 	while (window.isOpen())
 	{

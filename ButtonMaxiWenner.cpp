@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "TowerWenner.h"
-#include "TowerMenuButton.h"
+#include "Button.h"
 #include "ButtonMaxiWenner.h"
 
 ButtonMaxiWenner::ButtonMaxiWenner()
@@ -15,4 +15,7 @@ ButtonMaxiWenner::ButtonMaxiWenner()
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 	setSpriteHover();
 	_tower = new TowerWenner();
+	_price = _tower->getPrice();
+	setPriceText();
+	setInfo();
 }

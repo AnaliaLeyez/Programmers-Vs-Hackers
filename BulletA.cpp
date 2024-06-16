@@ -4,18 +4,23 @@
 #include "Bullet.h"
 #include "BulletA.h"
 
-BulletA::BulletA(sf::Vector2f position, sf::Vector2f direction)
+BulletA::BulletA(sf::Vector2f position, sf::Vector2f target, int damage)
 {
 	setPosition(position);
-	_direction = direction;
-	_damage = 2; //esto ver que valores segun la torre q le corresponde
-	_velocity = { 2.f,2.f }; //esto ver que valores segun la torre q le corresponde
+	_enemyPosition = target;
 
-	if (!_texture.loadFromFile("img/bullets/bola-canion.png")) {
-		throw std::runtime_error("Error img bala canion");
+	_damage = damage; //esto ver que valores segun la torre q le corresponde
+	_speed = 9.0f;
+	loadTexture();
+}
+
+void BulletA::loadTexture()
+{
+	if (!_texture.loadFromFile("img/bullets/iceball.png")) {
+		throw std::runtime_error("Error loading BulletA texture");
 	}
 	_sprite.setTexture(_texture);
-	_sprite.setOrigin({ getBounds().left + getBounds().width / 2, getBounds().top + getBounds().height / 2 });
+	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 }
 
 void BulletA::update1BulletA()

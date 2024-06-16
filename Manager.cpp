@@ -2,6 +2,7 @@
 
 #include "Level.h"
 #include "Level1.h"
+#include "Level2.h"
 #include "Manager.h"
 
 Manager* Manager::_currentInstance = nullptr;
@@ -21,11 +22,11 @@ Manager& Manager::getInstance() {
 //	*_currentInstance = mg;
 //}
 
-Manager::Manager(int level) {
+Manager::Manager(int level): _currentLevel(nullptr) {
 	setNumberLevel(level);
 }
 
-Level Manager::getLevel() const { return *_currentLevel; }
+Level* Manager::getLevel() const { return _currentLevel; }
 
 void Manager::setLevel(Level& level)
 {
@@ -33,17 +34,16 @@ void Manager::setLevel(Level& level)
 }
 
 void Manager::setNumberLevel(int IdLevel) {
-	if (_currentLevel != nullptr) {
+	/*if (_currentLevel != nullptr) {
 		delete _currentInstance;
-	}
+	}*/
 	switch (IdLevel)
 	{
 	case 1:
-		_currentLevel = new Level1();
-		_currentLevel->getHackerStartPosition(); //ver como el manager informa a la oleada desde donde empezar
+		 _currentLevel = new Level1();
 		break;
 	case 2:
-		//_currentLevel = new Level2();
+		_currentLevel = new Level2();
 		break;
 	default:
 		break;
@@ -66,4 +66,9 @@ void Manager::update(sf::Vector2i& mousePosition)
 void Manager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(*_currentLevel, states);
+}
+
+Manager::~Manager()
+{
+	//delete _currentLevel;
 }

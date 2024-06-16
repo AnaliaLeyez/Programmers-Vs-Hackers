@@ -1,28 +1,39 @@
-#pragma once
+ï»¿#pragma once
 #include "Collisionable.h"
 #include <SFML/Graphics.hpp>
-class Bullet: public Collisionable, public sf::Drawable, public sf::Transformable
+
+class Bullet : public Collisionable, public sf::Drawable, public sf::Transformable
 {
 protected:
 	sf::Sprite _sprite;
-	//static sf::Texture _texture;
 	sf::Texture _texture;
 	sf::Vector2f _direction;
-	int _damage;
 	sf::Vector2f _velocity;
-	sf::Vector2f _enemyPosition;  //dudo mucho que esto esté correcto tenerlo acá
+	
+	int _damage;
+	float _speed;
+	sf::Vector2f _enemyPosition;
+
 public:
-	sf::Vector2f getDirection() const;
-	sf::Vector2f getVelocity() const;
-	int getDamage() const;
-	void setDirection(sf::Vector2f);
-	void setVelocity(sf::Vector2f);
-	void setDamage(int);
+	//virtual void upgrade() = 0;
 
-	void moveBullet(sf::Vector2f, sf::Vector2f);
+	virtual ~Bullet() {};
 
-	sf::FloatRect getBounds() const;
-	void update();
-	void draw(sf::RenderTarget&, sf::RenderStates) const;
+	virtual void moveToward();
+	virtual void loadTexture() = 0;
+
+	virtual sf::Vector2f getDirection() const;
+	virtual sf::Vector2f getVelocity() const;
+	sf::Vector2f getEnemyPosition() const;
+
+	virtual int getDamage() const;
+	virtual void setDirection(sf::Vector2f);
+	virtual void setVelocity(sf::Vector2f);
+	virtual void setDamage(int);
+
+	void setEnemyPosition(sf::Vector2f);
+
+	virtual sf::FloatRect getBounds() const;
+	virtual void update();
+	virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
 };
-

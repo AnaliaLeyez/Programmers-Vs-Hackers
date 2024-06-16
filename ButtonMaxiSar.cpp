@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "TowerSarF.h"
-#include "TowerMenuButton.h"
+#include "Button.h"
 #include "ButtonMaxiSar.h"
 
 ButtonMaxiSar::ButtonMaxiSar()
@@ -16,5 +16,8 @@ ButtonMaxiSar::ButtonMaxiSar()
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 	setSpriteHover();
 	_tower = new TowerSarF();
+	_price = _tower->getPrice();
+	setPriceText();
+	setInfo();
 }
 

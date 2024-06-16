@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>F:\UTN\02 - Segundo Cuatrimestre\Laboratorio 2\PRUEBAS Y EXPERIMENTOS SFML\PruebaSFML\SFML\include;C:\Program Files\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include;$(IncludePath)</IncludePath>
-    <LibraryPath>F:\UTN\02 - Segundo Cuatrimestre\SFML\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>.\SFML\include;C:\Program Files\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>.\SFML\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>C:\Program Files\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include;$(IncludePath)</IncludePath>
@@ -140,11 +140,21 @@
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletA.cpp" />
+    <ClCompile Include="BulletB.cpp" />
+    <ClCompile Include="BulletC.cpp" />
+    <ClCompile Include="BulletD.cpp" />
     <ClCompile Include="ButtonBrian.cpp" />
+    <ClCompile Include="ButtonCashSale.cpp" />
     <ClCompile Include="ButtonKloster.cpp" />
     <ClCompile Include="ButtonMaxiSar.cpp" />
     <ClCompile Include="ButtonMaxiWenner.cpp" />
+    <ClCompile Include="ButtonUpgrade.cpp" />
     <ClCompile Include="Collisionable.cpp" />
+    <ClCompile Include="HackerDios.cpp" />
+    <ClCompile Include="HackerJunior.cpp" />
+    <ClCompile Include="HackerSemiSr.cpp" />
+    <ClCompile Include="Level2.cpp" />
+    <ClCompile Include="LevelClicks.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Hacker.cpp" />
     <ClCompile Include="HackerTrainee.cpp" />
@@ -153,13 +163,16 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Map1.cpp" />
+    <ClCompile Include="Map2.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MenuAbstract.cpp" />
     <ClCompile Include="Spot.cpp" />
     <ClCompile Include="Tower.cpp" />
     <ClCompile Include="TowerMenu.cpp" />
+    <ClCompile Include="TowerMenu1.cpp" />
     <ClCompile Include="TowerBrian.cpp" />
-    <ClCompile Include="TowerMenuButton.cpp" />
+    <ClCompile Include="TowerMenu2.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="TowerSarF.cpp" />
     <ClCompile Include="TowerKloster.cpp" />
     <ClCompile Include="TowerWenner.cpp" />
@@ -168,11 +181,20 @@
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletA.h" />
+    <ClInclude Include="BulletB.h" />
+    <ClInclude Include="BulletC.h" />
+    <ClInclude Include="BulletD.h" />
     <ClInclude Include="ButtonBrian.h" />
+    <ClInclude Include="ButtonCashSale.h" />
     <ClInclude Include="ButtonKloster.h" />
     <ClInclude Include="ButtonMaxiSar.h" />
     <ClInclude Include="ButtonMaxiWenner.h" />
+    <ClInclude Include="ButtonUpgrade.h" />
     <ClInclude Include="Collisionable.h" />
+    <ClInclude Include="HackerDios.h" />
+    <ClInclude Include="HackerJunior.h" />
+    <ClInclude Include="HackerSemiSr.h" />
+    <ClInclude Include="Level2.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Hacker.h" />
     <ClInclude Include="HackerTrainee.h" />
@@ -180,14 +202,17 @@
     <ClInclude Include="Level1.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Map1.h" />
+    <ClInclude Include="Map2.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuAbstract.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Spot.h" />
     <ClInclude Include="Tower.h" />
     <ClInclude Include="TowerMenu.h" />
+    <ClInclude Include="TowerMenu1.h" />
     <ClInclude Include="TowerBrian.h" />
-    <ClInclude Include="TowerMenuButton.h" />
+    <ClInclude Include="TowerMenu2.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="TowerSarF.h" />
     <ClInclude Include="TowerKloster.h" />
     <ClInclude Include="TowerWenner.h" />
