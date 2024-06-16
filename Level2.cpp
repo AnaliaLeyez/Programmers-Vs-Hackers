@@ -30,7 +30,7 @@ void Level2::spawnWave() {
 			case 1:
 			{
 				HackerTrainee* hk = new HackerTrainee();
-				hk->setSpritePosition(_hackerStartPosition);
+				hk->setPosition(_hackerStartPosition);
 				_enemies.push_back(hk);
 				++traineeCount;
 			}
@@ -39,13 +39,13 @@ void Level2::spawnWave() {
 			{
 				if (enemyIndex % 2 == 0) {
 					HackerTrainee* hk = new HackerTrainee();
-					hk->setSpritePosition(_hackerStartPosition);
+					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
 					++traineeCount;
 				}
 				else {
 					HackerJunior* hk = new HackerJunior();
-					hk->setSpritePosition(_hackerStartPosition);
+					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
 					++juniorCount;
 				}
@@ -55,13 +55,13 @@ void Level2::spawnWave() {
 			{
 				if (juniorCount < traineeCount) {
 					HackerJunior* hk = new HackerJunior();
-					hk->setSpritePosition(_hackerStartPosition);
+					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
 					++juniorCount;
 				}
 				else {
 					HackerTrainee* hk = new HackerTrainee();
-					hk->setSpritePosition(_hackerStartPosition);
+					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
 					++traineeCount;
 				}

@@ -329,7 +329,8 @@ void Level::update(sf::Vector2i& mousePosition) {
 	else {
 		if (getIdLevel() < 4) { // aca digo que solo puede llegar hasta el nivel 4
 			std::cout << "NIVEL 2:" << std::endl;
-			//Manager::getInstance().setNumberLevel(getIdLevel() + 1); // cambia al siguiente nivel
+			Manager::getInstance().setNumberLevel(2);
+			/*Manager::getInstance().setNumberLevel(getIdLevel() + 1);*/ // cambia al siguiente nivel
 		}
 		else {
 			// lógica para cuando se termina el juego, cuando se pasaron todos los niveles
