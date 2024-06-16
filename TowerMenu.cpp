@@ -7,8 +7,6 @@
 
 
 bool TowerMenu::getIsVisible() { return _isVisible; }
-//const Button* TowerMenu::getButtons() const { return *_buttons; }
-//const std::vector <Button*> TowerMenu::getButtons() const { return _buttons; }
 Button* TowerMenu::getButtonByIndex(int i) const { return _buttons[i]; }
 Spot TowerMenu::getCurrentSpot() const { return _currentSpot; }
 int TowerMenu::getNumberMenu() const { return _NumberMenu; }

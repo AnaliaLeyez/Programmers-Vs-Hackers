@@ -3,9 +3,6 @@
 
 #include "Spot.h"
 
-sf::Texture Spot::_textureA;
-sf::Texture Spot::_textureB;
-
 Spot::Spot()
 {
 	_spotNumber = 0;
@@ -26,31 +23,18 @@ Spot::Spot()
 }
 
 int Spot::getSpotNumber() const { return _spotNumber; }
-
 bool Spot::getIsOccupied() const { return _occupied; }
-
 Tower& Spot::getCurrentTower() const { return *_currentTower; }
-
 bool Spot::getMouseHover() const { return _mouseHover; }
 
 void Spot::setSpot(int spotNumber, bool status) {
 	setSpotNumber(spotNumber);
 	setOccupied(status);
 }
-
 void Spot::setSpotNumber(int n) { _spotNumber = n; }
-
 void Spot::setMouseHover(bool state) { _mouseHover = state; }
-
 void Spot::setOccupied(bool status){ _occupied = status; }
-
-void Spot::setCurrentTower(Tower* tower)
-{ 
-	if (_currentTower != nullptr) {
-		_currentTower=nullptr; // Libera la memoria de la torre actual
-	}
-	_currentTower = tower; 
-}
+void Spot::setCurrentTower(Tower* tower) { _currentTower = tower; }
 
 void Spot::validateMouseHover(bool &_mouseHover)
 {
@@ -77,11 +61,7 @@ sf::FloatRect Spot::getGlobalBounds() const {
 	return getTransform().transformRect(_spriteA.getGlobalBounds());
 }
 
-//sf::FloatRect Spot::getGlobalBounds() const {
-//	if (_mouseHover) {
-//		return getTransform().transformRect(_spriteA.getGlobalBounds());
-//	}
-//	else {
-//		return getTransform().transformRect(_spriteB.getGlobalBounds());
-//	}
-//}
+void Spot::clearCurrentTower()
+{
+	_currentTower = nullptr;
+}

@@ -12,15 +12,15 @@ protected:
 	int _NumberMenu;
 public:
 	bool getIsVisible();
-	//const std::vector <Button*> getButtons() const;
 	Button* getButtonByIndex(int) const;
 	Spot getCurrentSpot() const; //DEBERIA SER PUNTERO
 	int getNumberMenu() const;
 	void setCurrentSpot(Spot);
 	void setButton(bool, int);
-	//void setNumberMenu(int);
+
 	void hide();
 	void show();
+
 	void mouseCheck(sf::Vector2i&);
 	Button* validateClickOnButton(int, int, Spot&);
 	void update(sf::Vector2i&);

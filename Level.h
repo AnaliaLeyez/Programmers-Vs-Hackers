@@ -101,10 +101,7 @@ public:
 	void setSpots(int arr[][30], std::vector<Spot*>&, int);
 	void setCurrentSpot(Spot); //para que el currentMenu tenga su Spot asociado
 	void setCurrentMenu(TowerMenu*);
-
-	void setNoCoinsText(); //NUEVO
-
-	//void spawnWave();
+	void setNoCoinsText();
 
 	void mouseCheck(sf::Vector2i&);
 	void validateClick(int, int);
@@ -115,12 +112,11 @@ public:
 	void clickWithMenu2Open(int, int, Spot&);
 	void validateClickOnSpeaker(int, int);
 
-	bool validateSale(Tower*, bool); //nuevo
+	bool validateSale(Tower*, bool);
 	void sell(Tower*, Spot&);
 	void resellTower(Spot&);
+	void decreaseEnergy(int);
 
-
-	//void shoot(Bullet*, Hacker*); //ANA
 	void shoot(sf::Vector2f, sf::Vector2f, int, int);
 	void checkLevelCompletion();
 	void setGameOverText();
@@ -128,8 +124,6 @@ public:
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update(sf::Vector2i&);
 
-
-	void decreaseEnergy(int amount);
 
 	~Level() { //revisar eliminar todo lo que haya sido asignado con memoria dinamica
 		for (Spot* spot : _spots) {

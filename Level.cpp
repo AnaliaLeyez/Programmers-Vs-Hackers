@@ -169,23 +169,17 @@ void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, in
 	{
 	case 1:
 		_bullets.push_back(new BulletA(shootingPosition, targetPosition, damage));
-
 		break;
 	case 2:
 		_bullets.push_back(new BulletB(shootingPosition, targetPosition, damage));
-
 		break;
 	case 3:
 		_bullets.push_back(new BulletC(shootingPosition, targetPosition, damage));
-
 		break;
 	case 4:
 		_bullets.push_back(new BulletD(shootingPosition, targetPosition, damage));
-
 		break;
-
 	}
-
 }
 
 void Level::checkLevelCompletion() {
@@ -237,20 +231,16 @@ void Level::update(sf::Vector2i& mousePosition) {
 			//los enemigos
 
 			if (hacker->getEnd() == true) {
-				_dying = true;
-				//setEnergy(getEnergy() - 50);
-
-				decreaseEnergy(hacker->attackUtn());
-
-				// hacker->attackUtn();
-
-				_ui.setText(1, std::to_string(getEnergy()));
-				if (getEnergy() <= 0) {
+				if (getEnergy()- hacker->attackUtn()>=0) {
+					_dying = true;
+					decreaseEnergy(hacker->attackUtn());
+				}
+				else {
+					setEnergy(0);
 					_flagGameOver = true;
 					setGameOverText();
-
 				}
-
+				_ui.setText(1, std::to_string(getEnergy()));
 				break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
 			}
 			else {
@@ -359,16 +349,17 @@ void Level::update(sf::Vector2i& mousePosition) {
 
 
 
-	void Level::draw(sf::RenderTarget & target, sf::RenderStates states)const
+void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
+{
+	states.transform *= getTransform();
+	target.draw(*_map, states);
+	_dying ? target.draw(_UTNRed, states) : target.draw(_UTN, states);
+	target.draw(_ui, states);
+	for (Spot* spot : _spots)
 	{
-		states.transform *= getTransform();
-		target.draw(*_map, states);
-		_dying ? target.draw(_UTNRed, states) : target.draw(_UTN, states);
-		target.draw(_ui, states);
-		for (Spot* spot : _spots)
-		{
-			target.draw(*spot, states);
-		}
+		target.draw(*spot, states);
+	}
+	if (!_flagGameOver) {
 		for (const auto& hacker : _enemies)
 		{
 			if (hacker->getLife() > 0) {
@@ -379,19 +370,16 @@ void Level::update(sf::Vector2i& mousePosition) {
 		{
 			target.draw(*_currentMenu, states);
 		}
-
 		for (auto& bullet : _bullets)
 		{
 			target.draw(*bullet, states);
 		}
-
-		//NUEVO:
 		if (_noCoinsClock.getElapsedTime() < _displayTimeNoCoins && _flagNoCoins) {
 			target.draw(_NoCoins, states); // Dibujar el texto
 		}
-
-		if (_flagGameOver) {
-			target.draw(_gameOver, states);
-		}
-
 	}
+	else {
+		target.draw(_gameOver, states);
+	}
+
+}
