@@ -54,7 +54,7 @@ void TowerBrian::upgrade()
 	case 1:
 	{
 		_name = "Torre BRIAN";
-		if (!_texture.loadFromFile("img/towers/torreA_5.png")) {
+		if (!_texture.loadFromFile("img/towers/torreA_3.png")) {
 			throw std::runtime_error("Error img tower Labo3 BRIAN");
 		}
 		_sprite.setTexture(_texture);

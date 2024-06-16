@@ -51,7 +51,7 @@ void TowerWenner::upgrade()
 	case 1:
 	{
 		_name = "Torre WENNER";
-		if (!_texture.loadFromFile("img/towers/torreb_4.png")) {
+		if (!_texture.loadFromFile("img/towers/torreb_5.png")) {
 			throw std::runtime_error("Error img tower MAXI WENNER");
 		}
 		_sprite.setTexture(_texture);

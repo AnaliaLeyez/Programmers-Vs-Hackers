@@ -143,7 +143,7 @@ Level1::Level1()
 
 	setSpots(arr, _spots, 5);
 	_golden = 2000;
-	_energy = 99999;
+	_energy = 500;
 	_ui.setText(0, std::to_string(getGolden()));
 	_ui.setText(1, std::to_string(getEnergy()));
 

@@ -16,7 +16,7 @@ int main()
 	}
 	// Establecer el icono de la ventana
 	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-	int view = 2;
+	int view = 1;
 	sf::Vector2i mousePosition; //xq no es 2f? si despues lo terminamos pasando a 2f siempre...
 	while (window.isOpen())
 	{
