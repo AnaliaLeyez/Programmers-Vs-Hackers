@@ -72,6 +72,5 @@ void Hacker::update(int arr[][30])
 void Hacker::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
-	target.draw(_collisionRect, states); //el rectangulo rojo no lo quiero mostrar
 	target.draw(_sprite, states);
 }

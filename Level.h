@@ -28,8 +28,8 @@ protected:
 	sf::RectangleShape _UTNRed;
 	bool _dying;
 
-	Map *_map;
-	int _mapArray[20][30];
+	Map* _map;
+	int _mapArray[22][30];
 	std::vector<Spot*> _spots;
 	TowerMenu* _currentMenu;
 	TowerMenu1* _menu1 = new TowerMenu1();
@@ -54,7 +54,7 @@ protected:
 	std::list <Tower*> _activeTowers;
 
 	std::list<Bullet*> _bullets;
-	
+
 	//NUEVO:
 	sf::Clock _noCoinsClock;
 	sf::Font _font;
@@ -62,16 +62,12 @@ protected:
 	sf::Time _displayTimeNoCoins;
 	bool _flagNoCoins;
 	sf::Text _gameOver;
+	sf::Texture _textureGameOverSkull;
+	sf::Sprite _gameOverSkull;
 	bool _flagGameOver;
 
-	//FIN NUEVO
-
-	//A VER GASTON
-	std::vector<sf::CircleShape> _debugShapes;
-
 public:
-
-	
+	void virtual spawnWave() = 0;
 	int getIdLevel() const;
 	bool getFinisheLevel()const;
 	UI getUI() const;
@@ -94,7 +90,7 @@ public:
 	void setFinishedLevel(bool);
 	void setUI(const UI&);
 	void setMap(const Map&);
-	void setMapArray(const int(&)[20][30]);
+	void setMapArray(const int(&)[22][30]);
 	void setGolden(int);
 	void setEnergy(int);
 	void setMusicPlaying(bool);
@@ -102,14 +98,13 @@ public:
 	void setTowersAvailable(Tower*);
 	void setActiveTowers(Tower*);
 	void setSpot(Spot*); //setea la info de un spot en particular
+	void setSpots(int arr[][30], std::vector<Spot*>&, int);
 	void setCurrentSpot(Spot); //para que el currentMenu tenga su Spot asociado
 	void setCurrentMenu(TowerMenu*);
 
 	void setNoCoinsText(); //NUEVO
 
-	
-
-	void spawnWave();
+	//void spawnWave();
 
 	void mouseCheck(sf::Vector2i&);
 	void validateClick(int, int);
@@ -124,7 +119,7 @@ public:
 	void sell(Tower*, Spot&);
 	void resellTower(Spot&);
 
-	
+
 	//void shoot(Bullet*, Hacker*); //ANA
 	void shoot(sf::Vector2f, sf::Vector2f, int, int);
 	void checkLevelCompletion();

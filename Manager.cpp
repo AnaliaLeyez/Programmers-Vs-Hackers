@@ -25,7 +25,7 @@ Manager::Manager(int level): _currentLevel(nullptr) {
 	setNumberLevel(level);
 }
 
-Level Manager::getLevel() const { return *_currentLevel; }
+Level* Manager::getLevel() const { return _currentLevel; }
 
 void Manager::setLevel(Level& level)
 {

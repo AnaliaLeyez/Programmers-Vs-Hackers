@@ -10,7 +10,7 @@ private:
 	Level *_currentLevel;
 public:
 	static Manager& getInstance(); //Singleton
-	Level getLevel() const;
+	Level* getLevel() const;
 	void setLevel(Level&);
 	void setNumberLevel(int);
 	void validateClick(int, int, sf::RenderWindow&);

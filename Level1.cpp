@@ -17,90 +17,69 @@
 #include "Spot.h"
 #include "Level1.h"
 
-void setSpots(int arr[][30], std::vector<Spot*> &spots) {
-for (int i = 0; i < 5; i++)
-{
-	Spot* sp = new Spot();
-	spots.push_back(sp);
-}
-//Ubicar spots
-	int index = 0;
-	for (int x = 0; x < 30; x++)
-	{
-		for (int y = 0; y < 20; y++)
-		{
-			if (arr[y][x] == 6 && index<5)
-			{				
-				//spots[index]->_spriteA.setPosition(32 * x, 32 * y);
-				//spots[index]->_spriteB.setPosition(32 * x, 32 * y);
-				spots[index]->setPosition(32 * x, 32 * y);
-				spots[index]->setSpotNumber(index + 1);
-				index++;
-			}
-		}
-	}
-}
-
-void Level::spawnWave() {
+void Level1::spawnWave() {
 	std::srand(std::time(nullptr));
 	//los contadores son de tipo static porque asi las variables mantienen su valor incluso
 	//despues de que la funcion haya terminado de ejecutarse
-	 static int enemyIndex = 0;
-	 static int traineeCount = 0; // Contador para los HackerTrainee
-	 static int juniorCount = 0; //Contador para los HackerJunior
-	 static int semiSeniorCount = 0; // Contador para los HackerSemiSenior
-	 static bool spawnedGodHacker = false;
+	static int enemyIndex = 0;
+	static int traineeCount = 0; // Contador para los HackerTrainee
+	static int juniorCount = 0; //Contador para los HackerJunior
+	static int semiSeniorCount = 0; // Contador para los HackerSemiSenior
+	static bool spawnedGodHacker = false;
 
-	 if (enemyIndex < _enemiesPerWave) {
-		 // Genera un nuevo enemigo
-		 int randomTime = std::rand() % 8 + 1;
-		 if (_enemyClock.getElapsedTime().asSeconds() >= randomTime) {
-			 // Oleada 1: Todos los HackerTrainee
-			 if (_currentWave == 1) {
-				 HackerTrainee* trainee = new HackerTrainee();
-				 _enemies.push_back(trainee);
-				 ++traineeCount;
-			 }
-			 // Oleada 2: Mitad HackerTrainee y mitad HackerJunior
-			 else if (_currentWave == 2) {
-				 if (enemyIndex % 2 == 0) {
-					 HackerTrainee* trainee = new HackerTrainee();
-					 _enemies.push_back(trainee);
-					 ++traineeCount;
-				 }
-				 else {
-					 HackerJunior* junior = new HackerJunior();
-					 _enemies.push_back(junior);
-					 ++juniorCount;
-				 }
-			 }
-			 // Oleada 3: mitad SemiSr y mitad junior
-			 //lanza un dios cuando esta a la mitad de la oleada
-			 else if (_currentWave == 3) {
-
-				 if (!spawnedGodHacker && enemyIndex == _enemiesPerWave / 2) {
-					 HackerDios* dios = new HackerDios();
-					 _enemies.push_back(dios);
-					 spawnedGodHacker = true;
-				 }
-				 else {
-					 if (enemyIndex % 2 == 0) {
-						 HackerSemiSr* semiSenior = new HackerSemiSr();
-						 _enemies.push_back(semiSenior);
-						 ++semiSeniorCount;
-					 }
-					 else {
-						 HackerJunior* junior = new HackerJunior();
-						 _enemies.push_back(junior);
-						 ++juniorCount;
-					 }
-				 }
-			 }
-				 ++enemyIndex;
-				 _enemyClock.restart();
-			 }
-		 }
-	 
+	if (enemyIndex < _enemiesPerWave) {
+		// Genera un nuevo enemigo
+		int randomTime = std::rand() % 8 + 1;
+		if (_enemyClock.getElapsedTime().asSeconds() >= randomTime) {
+			switch (_currentWave)
+			{
+			case 1:
+			{
+				HackerTrainee* hk = new HackerTrainee();
+				hk->setPosition(_hackerStartPosition);
+				_enemies.push_back(hk);
+				++traineeCount;
+			}
+			break;
+			case 2:
+			{
+				if (enemyIndex % 2 == 0) {
+					HackerTrainee* hk = new HackerTrainee();
+					hk->setPosition(_hackerStartPosition);
+					_enemies.push_back(hk);
+					++traineeCount;
+				}
+				else {
+					HackerJunior* hk = new HackerJunior();
+					hk->setPosition(_hackerStartPosition);
+					_enemies.push_back(hk);
+					++juniorCount;
+				}
+			}
+			break;
+			case 3:
+			{
+				if (juniorCount < traineeCount) {
+					HackerJunior* hk = new HackerJunior();
+					hk->setPosition(_hackerStartPosition);
+					_enemies.push_back(hk);
+					++juniorCount;
+				}
+				else {
+					HackerTrainee* hk = new HackerTrainee();
+					hk->setPosition(_hackerStartPosition);
+					_enemies.push_back(hk);
+					++traineeCount;
+				}
+			}
+			break;
+			default:
+				break;
+			}
+			++enemyIndex;
+			_enemyClock.restart();
+		}
+	}
 	else {
 		// Si ya se agregaron todos los enemigos de esta oleada
 		enemyIndex = 0; // Reinicia el índice para la próxima oleada
@@ -116,24 +95,25 @@ Level1::Level1()
 {
 	_currentWave = 1;
 	_totalWaves = 3;
-	_enemiesPerWave = 5;
-	_timeBetweenWaves = 10;
+	_enemiesPerWave = 1;
+	_timeBetweenWaves = 2;
 	_timeBetweenEnemies = 2;
 	_timeBetweenEnemies = std::rand() % 15 + 1; ///ver si esta queda o se va 
 	_waveClock.restart();
 	_enemyClock.restart();
+	_hackerStartPosition = { 960 / 32 * 9.5, 640 / 32 * 0.5 };
 
-	_idLevel=1;
+	_idLevel = 1;
 	_finishedLevel = false;
 	_map = new Map1();
-	int arr[20][30] = {
+	int arr[22][30] = {
 {0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,2,1,5,0,0},
+{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,2,1,3,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -146,8 +126,11 @@ Level1::Level1()
 {0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 	};
+	setMapArray(arr);
 
 	_dying = false;
 	if (!_textureUTN.loadFromFile("img/towers/facu.png")) {
@@ -166,14 +149,12 @@ Level1::Level1()
 	_UTNRed.setPosition(sf::Vector2f(850, 130));
 	_UTNRed.setOrigin(_UTNRed.getGlobalBounds().width / 2, _UTNRed.getGlobalBounds().height / 2);
 
-	setSpots(arr, _spots);
+	setSpots(arr, _spots, 5);
 	_golden = 2000;
-	_energy = 500;
+	_energy = 9990;
 	_ui.setText(0, std::to_string(getGolden()));
 	_ui.setText(1, std::to_string(getEnergy()));
 
-
-	setMapArray(arr);
 	if (!_buffer.loadFromFile("music/nivel1.wav")) {
 		throw std::runtime_error("Error al cargar musica nivel 1");
 	};
@@ -181,7 +162,7 @@ Level1::Level1()
 	_sound.setVolume(5);
 	_sound.play();
 	_musicPlaying = true;
-	_hackerStartPosition = { 960 / 32 * 9, 640 / 32 * 1 };
+
 	_towersAvailable.push_back(new TowerBrian());
 	_towersAvailable.push_back(new TowerKloster());
 	_towersAvailable.push_back(new TowerSarF());

@@ -40,7 +40,9 @@ void Level::setIdLevel(int idLevel) { _idLevel = idLevel; }
 void Level::setFinishedLevel(bool finished) { _finishedLevel = finished; }
 void Level::setUI(const UI& ui) { _ui = ui; }
 void Level::setMap(const Map& map) { *_map = map; }
-void Level::setMapArray(const int(&mapArray)[20][30]) { std::copy(&mapArray[0][0], &mapArray[0][0] + 20 * 30, &_mapArray[0][0]); }
+void Level::setMapArray(const int(&mapArray)[22][30]) {
+	std::copy(&mapArray[0][0], &mapArray[0][0] + 22 * 30, &_mapArray[0][0]);
+}
 void Level::setGolden(int golden) { _golden = golden; }
 void Level::setEnergy(int energy) { _energy = energy; }
 void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
@@ -56,6 +58,27 @@ void Level::setSpot(Spot* sp)
 			spot->setOccupied(sp->getIsOccupied());
 			spot->setCurrentTower(&sp->getCurrentTower());
 			break;
+		}
+	}
+}
+void Level::setSpots(int arr[][30], std::vector<Spot*>& spots, int cant) {
+	for (int i = 0; i < cant; i++)
+	{
+		Spot* sp = new Spot();
+		spots.push_back(sp);
+	}
+	//Ubicar spots
+	int index = 0;
+	for (int x = 0; x < 30; x++)
+	{
+		for (int y = 0; y < 20; y++)
+		{
+			if (arr[y][x] == 6 && index < cant)
+			{
+				spots[index]->setPosition(32 * x, 32 * y);
+				spots[index]->setSpotNumber(index + 1);
+				index++;
+			}
 		}
 	}
 }
@@ -77,19 +100,6 @@ void Level::setNoCoinsText()
 	_noCoinsClock.restart();
 	_displayTimeNoCoins = sf::seconds(3);
 	_flagNoCoins = false;
-}
-
-void Level::setGameOverText()
-{
-	if (!_font.loadFromFile("fuentes/TowerPrice.ttf")) {
-		throw std::runtime_error("Error al cargar la fuente del Price Menu");
-	}
-	_gameOver.setFont(_font);
-	_gameOver.setCharacterSize(70);
-	_gameOver.setOrigin(_gameOver.getGlobalBounds().getPosition().x / 2, _gameOver.getGlobalBounds().height / 2);
-	_gameOver.setPosition(300, 250);
-	_gameOver.setFillColor(sf::Color(255, 0, 0));
-	_gameOver.setString("GAME OVER");
 }
 
 
@@ -182,6 +192,27 @@ void Level::checkLevelCompletion() {
 	if (_currentWave == _totalWaves && _enemies.empty()) {
 		_finishedLevel = true;
 	}
+}
+
+void Level::setGameOverText()
+{
+	if (!_font.loadFromFile("fuentes/TowerPrice.ttf")) {
+		throw std::runtime_error("Error al cargar la fuente del Price Menu");
+	}
+	_gameOver.setFont(_font);
+	_gameOver.setCharacterSize(70);
+	_gameOver.setOrigin(_gameOver.getGlobalBounds().getPosition().x / 2, _gameOver.getGlobalBounds().height / 2);
+	_gameOver.setPosition(300, 250);
+	_gameOver.setFillColor(sf::Color(255, 0, 0));
+	_gameOver.setString("GAME OVER");
+
+	if (!_textureGameOverSkull.loadFromFile("img/complementarias/Rip.png")) {
+		throw std::runtime_error("Error al cargar la calavera de GameOver");
+	}
+	_gameOverSkull.setTexture(_textureGameOverSkull);
+	_gameOverSkull.setPosition(400, 150);
+	_gameOverSkull.setScale(0.5, 0.5);
+	_gameOverSkull.setOrigin(_gameOverSkull.getGlobalBounds().width / 2, _gameOverSkull.getGlobalBounds().height / 2);
 }
 
 void Level::update(sf::Vector2i& mousePosition) {
@@ -361,11 +392,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 
 		if (_flagGameOver) {
 			target.draw(_gameOver, states);
-		}
-
-		// AVERRRRGASTONNNNNNNNNNNNNNNNNNNNNN
-		for (const auto& shape : _debugShapes) {
-			target.draw(shape, states);
 		}
 
 	}
