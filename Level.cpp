@@ -195,7 +195,7 @@ void Level::setGameOverText()
 	}
 	_gameOver.setFont(_font);
 	_gameOver.setCharacterSize(70);
-	_gameOver.setOrigin(_gameOver.getGlobalBounds().getPosition().x / 2, _gameOver.getGlobalBounds().height / 2);
+	//_gameOver.setOrigin(_gameOver.getGlobalBounds().width/ 2, _gameOver.getGlobalBounds().height / 2);
 	_gameOver.setPosition(300, 250);
 	_gameOver.setFillColor(sf::Color(255, 0, 0));
 	_gameOver.setString("GAME OVER");
@@ -379,6 +379,7 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 		}
 	}
 	else {
+		target.draw(_gameOverSkull, states);
 		target.draw(_gameOver, states);
 	}
 

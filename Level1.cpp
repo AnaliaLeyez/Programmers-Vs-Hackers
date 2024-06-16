@@ -22,9 +22,9 @@ void Level1::spawnWave() {
 	//los contadores son de tipo static porque asi las variables mantienen su valor incluso
 	//despues de que la funcion haya terminado de ejecutarse
 	static int enemyIndex = 0;
-	static int traineeCount = 0; // Contador para los HackerTrainee
-	static int juniorCount = 0; //Contador para los HackerJunior
-	static int semiSeniorCount = 0; // Contador para los HackerSemiSenior
+	//static int traineeCount = 0; // Contador para los HackerTrainee
+	//static int juniorCount = 0; //Contador para los HackerJunior
+	//static int semiSeniorCount = 0; // Contador para los HackerSemiSenior
 	static bool spawnedGodHacker = false;
 
 	if (enemyIndex < _enemiesPerWave) {
@@ -38,7 +38,7 @@ void Level1::spawnWave() {
 				HackerTrainee* hk = new HackerTrainee();
 				hk->setPosition(_hackerStartPosition);
 				_enemies.push_back(hk);
-				++traineeCount;
+				//++traineeCount;
 			}
 			break;
 			case 2:
@@ -47,29 +47,29 @@ void Level1::spawnWave() {
 					HackerTrainee* hk = new HackerTrainee();
 					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
-					++traineeCount;
+					//++traineeCount;
 				}
 				else {
 					HackerJunior* hk = new HackerJunior();
 					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
-					++juniorCount;
+					//++juniorCount;
 				}
 			}
 			break;
 			case 3:
 			{
-				if (juniorCount < traineeCount) {
-					HackerJunior* hk = new HackerJunior();
+				if (enemyIndex % 3 != 0) {
+					HackerSemiSr* hk = new HackerSemiSr();
 					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
-					++juniorCount;
+					//++semiSeniorCount;
 				}
 				else {
-					HackerTrainee* hk = new HackerTrainee();
+					HackerDios* hk = new HackerDios();
 					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
-					++traineeCount;
+					//++traineeCount;
 				}
 			}
 			break;
