@@ -142,8 +142,6 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 				setActiveTowers(tower);
 				setSpot(&sp); //CUIDADO esta linea parece innecesaria pero la saco y se rompe el programa
 				tower->upgrade();
-				std::cout << "se compro: " << tower->getName() << std::endl;
-				std::cout << "nuevo danio" << tower->getDamage() << std::endl;
 		}
 		else {
 			_noCoinsClock.restart(); // reseteo el clock para que se muestre el cartel
