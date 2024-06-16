@@ -18,8 +18,7 @@
 void Level2::spawnWave() {
 	std::srand(std::time(nullptr));
 	static int enemyIndex = 0;
-	static int traineeCount = 0; // Contador para los HackerTrainee
-	static int juniorCount = 0; //Contador para los HackerJunior
+	static bool spawnedGodHacker = false;
 
 	if (enemyIndex < _enemiesPerWave) {
 		// Genera un nuevo enemigo
@@ -32,7 +31,6 @@ void Level2::spawnWave() {
 				HackerTrainee* hk = new HackerTrainee();
 				hk->setPosition(_hackerStartPosition);
 				_enemies.push_back(hk);
-				++traineeCount;
 			}
 			break;
 			case 2:
@@ -41,29 +39,25 @@ void Level2::spawnWave() {
 					HackerTrainee* hk = new HackerTrainee();
 					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
-					++traineeCount;
 				}
 				else {
 					HackerJunior* hk = new HackerJunior();
 					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
-					++juniorCount;
 				}
 			}
 			break;
 			case 3:
 			{
-				if (juniorCount < traineeCount) {
+				if (enemyIndex % 3 != 0) {
 					HackerJunior* hk = new HackerJunior();
 					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
-					++juniorCount;
 				}
 				else {
 					HackerTrainee* hk = new HackerTrainee();
 					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
-					++traineeCount;
 				}
 			}
 			break;
@@ -74,23 +68,26 @@ void Level2::spawnWave() {
 			_enemyClock.restart();
 		}
 	}
-	else {
-		// Si ya se agregaron todos los enemigos de esta oleada
-		enemyIndex = 0; // Reinicia el índice para la próxima oleada
-		_enemiesPerWave += 10; // Incrementa la cantidad de enemigos para la próxima oleada
+	else if (_waveClock.getElapsedTime().asSeconds() > _timeBetweenWaves && _enemies.empty() && enemyIndex == _enemiesPerWave) {
 		++_currentWave; // Incrementa el número de oleada
-		_waveClock.restart(); // Reinicia el temporizador de la oleada
+		if (_currentWave <= _totalWaves) {
+			enemyIndex = 0; // Reinicia el índice para la próxima oleada
+			_enemiesPerWave += 1; // Incrementa la cantidad de enemigos para la próxima oleada
+
+			_ui.setText(2, std::to_string(getCurrentWave()));
+			spawnedGodHacker = false;
+			_waveClock.restart(); // Reinicia el temporizador de la oleada
+		}
 	}
 }
 
 Level2::Level2()
 {
 	_currentWave = 1;
-	_totalWaves = 3;
+	_totalWaves = 4;
 	_enemiesPerWave = 5;
-	_timeBetweenWaves = 1;
-	_timeBetweenEnemies = 2;
-	_timeBetweenEnemies = std::rand() % 15 + 1; ///ver si esta queda o se va 
+	_timeBetweenWaves = 10;
+	//_timeBetweenEnemies = std::rand() % 15 + 1; ///ver si esta queda o se va 
 	_waveClock.restart();
 	_enemyClock.restart();
 	_hackerStartPosition = { 960 / 32 * 0.5, 640 / 32 * 28 };
@@ -146,6 +143,8 @@ Level2::Level2()
 	_energy = 300;
 	_ui.setText(0, std::to_string(getGolden()));
 	_ui.setText(1, std::to_string(getEnergy()));
+	_ui.setText(2, std::to_string(getCurrentWave()));
+	_ui.setText(3, "/" + std::to_string(getTotalWaves()));
 
 	if (!_buffer.loadFromFile("music/nivel1.wav")) {
 		throw std::runtime_error("Error al cargar musica nivel 1");

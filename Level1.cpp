@@ -92,8 +92,7 @@ Level1::Level1()
 	_totalWaves = 3;
 	_enemiesPerWave = 1;
 	_timeBetweenWaves = 15;
-	//_timeBetweenEnemies = 2;
-	_timeBetweenEnemies = std::rand() % 15 + 1; ///ver si esta queda o se va 
+	//_timeBetweenEnemies = std::rand() % 15 + 1; ///ver si esta queda o se va 
 	_waveClock.restart();
 	_enemyClock.restart();
 	_hackerStartPosition = { 960 / 32 * 9.5, 640 / 32 * 0.5 };
