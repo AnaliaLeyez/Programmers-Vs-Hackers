@@ -15,24 +15,23 @@ TowerWenner::TowerWenner()
 	_name = "wenner";
 
 	//Rango de ataque:
-	_visualRange.setRadius(135);
+	_visualRange.setRadius(120);
 	_visualRange.setFillColor(sf::Color(0, 255, 0, 120));
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
 	_type = 4;
-	_price = 10;
-	_priceUpgrade = 9;
-	_salesValue = 5;
-	_damage = 10;
-	_range = 9;
+	_price = 150;
+	_priceUpgrade = 200;
+	_salesValue = 120;
+	_damage = 8;
+	_range = 6;
 	_speedAttack = 3;
 	_upgradesAmount = 2;
-	_fireRate = 1.0f; // Tiempo en segundos entre disparos
+	_fireRate = 0.8f; // Tiempo en segundos entre disparos
 }
 
 void TowerWenner::upgrade()
 {
-	
 	switch (_upgradesAmount)
 	{
 	case 2:
@@ -67,9 +66,4 @@ void TowerWenner::upgrade()
 	default:
 		break;
 	}
-}
-
-void TowerWenner::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos)
-{
-	//_bullet = new BulletBrian(twPos, hkPos); //esto seria bulletWenner
 }

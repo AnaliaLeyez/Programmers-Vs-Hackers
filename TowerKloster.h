@@ -6,5 +6,5 @@ public:
 	TowerKloster();
 	Tower* clone() const override { return new TowerKloster(*this); }
 	void upgrade() override;
-	void setBullet(sf::Vector2f, sf::Vector2f) override;
+	//void setBullet(sf::Vector2f, sf::Vector2f) override;
 };

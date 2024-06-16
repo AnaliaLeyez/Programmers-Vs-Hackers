@@ -5,10 +5,10 @@
 class Tower : public sf::Drawable, public sf::Transformable, public Collisionable
 {
 protected:
+	sf::CircleShape _visualRange;
+	sf::Sprite _sprite;
 	//Propiedades esteticas
 	sf::Texture _texture;
-	
-	
 	std::string _name;
 	//Propiedades oro
 	int _price;
@@ -30,12 +30,10 @@ protected:
 	//std::list<Bullet*> _bullets; //NUEVO, ANA
 
 public:
-	sf::CircleShape _visualRange;
-	sf::Sprite _sprite;
 	virtual Tower* clone() const = 0; // Método clone para crear nuevas instancias
 	virtual void upgrade()=0;
 
-	virtual void setBullet(sf::Vector2f, sf::Vector2f) = 0;
+	//virtual void setBullet(sf::Vector2f, sf::Vector2f) = 0;
 	//Getters
 	std::string getName() const;
 	sf::Sprite getSprite() const;

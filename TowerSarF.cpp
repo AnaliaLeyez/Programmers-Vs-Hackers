@@ -12,21 +12,20 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
-	//setPosition(position);
 
-	_name = "sar";
+	_name = "Torre Programacion 1";
 
 	//Rango de ataque:
-	_visualRange.setRadius(140);
+	_visualRange.setRadius(130);
 	_visualRange.setFillColor(sf::Color(0, 255, 0, 120));
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
 	_type = 3;
-	_price = 10;
-	_priceUpgrade = 9;
-	_salesValue = 5;
-	_damage = 10;
-	_range = 9;
+	_price = 180;
+	_priceUpgrade = 240;
+	_salesValue = 144;
+	_damage = 3;
+	_range = 7;
 	_speedAttack = 3;
 	_upgradesAmount = 2;
 	_fireRate = 1.0f; // Tiempo en segundos entre disparos
@@ -34,7 +33,6 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 
 void TowerSarF::upgrade()
 {
-	
 	switch (_upgradesAmount)
 	{
 	case 2:
@@ -70,7 +68,3 @@ void TowerSarF::upgrade()
 	}
 }
 
-void TowerSarF::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos)
-{
-	//_bullet = new BulletBrian(twPos, hkPos); //esto seria bulletSarF
-}

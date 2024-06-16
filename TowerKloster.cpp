@@ -12,19 +12,19 @@ TowerKloster::TowerKloster()
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
-	_name = "kloster";
+	_name = "Torre SPD";
 
 	//Rango de ataque:
-	_visualRange.setRadius(140);
+	_visualRange.setRadius(130);
 	_visualRange.setFillColor(sf::Color(0, 255, 0, 120));
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
 	_type = 2;
-	_price = 10;
-	_priceUpgrade = 9;
-	_salesValue = 5;
-	_damage = 10;
-	_range = 9;
+	_price = 100;
+	_priceUpgrade = 110;
+	_salesValue = 80;
+	_damage = 7;
+	_range = 7;
 	_speedAttack = 3;
 	_upgradesAmount = 2;
 	_fireRate = 1.0f; // Tiempo en segundos entre disparos
@@ -32,7 +32,6 @@ TowerKloster::TowerKloster()
 
 void TowerKloster::upgrade()
 {
-	
 	switch (_upgradesAmount)
 	{
 	case 2:
@@ -67,9 +66,3 @@ void TowerKloster::upgrade()
 		break;
 	}
 }
-
-void TowerKloster::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos)
-{
-	//_bullet = new BulletBrian(twPos, hkPos); //esto seria bulletKloster
-}
-

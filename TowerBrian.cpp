@@ -12,9 +12,10 @@ TowerBrian::TowerBrian()
 		throw std::runtime_error("Error img Torre Brian");
 	}
 	_sprite.setTexture(_texture);
-	_sprite.setOrigin(64, 64);
-	_name = "brian";
+	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 	_sprite.setPosition(0, 0);
+
+	_name = "Torre Laboratorio 1";
 
 	//Rango de ataque:
 	_visualRange.setRadius(150);
@@ -22,25 +23,18 @@ TowerBrian::TowerBrian()
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
 	_type = 1;
-	_price = 10;
-	_priceUpgrade = 9;
-	_salesValue = 5;
-	_damage = 10;
-	_range = 9;
-	_speedAttack = 3;
+	_price = 220;
+	_priceUpgrade = 340;
+	_salesValue = 176;
+	_damage = 3;
+	_range = 8;
+	_speedAttack = 3; //este no se esta usando me parece, esta el fireRate en su lugar...
 	_upgradesAmount = 2;
 	_fireRate = 1.0f; // Tiempo en segundos entre disparos
 }
 
 void TowerBrian::upgrade() 
 {
-	std::cout << " - - - - - - - - " << std::endl;
-	std::cout << "Pos" << getPosition().x << " " << getPosition().y << std::endl;
-	std::cout << "ORIGIN " << getOrigin().x << " " << getOrigin().y << std::endl;
-	std::cout << "Sprite: " << _sprite.getPosition().x << " " << _sprite.getPosition().y << std::endl;
-	std::cout << "Origin: " << _sprite.getOrigin().x << " " << _sprite.getOrigin().y << std::endl;
-	
-
 	switch (_upgradesAmount)
 	{
 	case 2:
@@ -75,9 +69,4 @@ void TowerBrian::upgrade()
 	default:
 		break;
 	}
-}
-
-void TowerBrian::setBullet(sf::Vector2f twPos, sf::Vector2f hkPos)
-{
-	//_bullet = new BulletA(twPos, hkPos);
 }
