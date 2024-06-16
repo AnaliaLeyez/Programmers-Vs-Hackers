@@ -47,7 +47,7 @@ UI::UI() {
 	if (!_font.loadFromFile("fuentes/fuenteMenu.ttf")) {
 		throw std::runtime_error("Error al cargar la fuente del Menu \n");
 	}
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 5; i++) {
 		_text[i].setFont(_font);
 		_text[i].setCharacterSize(23);
 		int posX, posY;
@@ -65,9 +65,12 @@ UI::UI() {
 		case 2:
 			posX = 615;
 			posY = 20;
-			texto = "1/1";
 			break;
 		case 3:
+			posX = 630;
+			posY = 20;
+			break;
+		case 4:
 			posX = 800;
 			posY = 600;
 			texto = "Menu";
@@ -101,7 +104,7 @@ void UI::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(_coin, states);
 	target.draw(_skull, states);
 	target.draw(_speaker, states);
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 5; i++) {
 		target.draw(_text[i], states);
 	}
 }

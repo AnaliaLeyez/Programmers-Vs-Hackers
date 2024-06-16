@@ -12,7 +12,7 @@ private:
 	sf::Texture _textureSkull;
 	sf::Sprite _skull;
 	sf::Font _font;
-	sf::Text _text[4];
+	sf::Text _text[5];
 	sf::Texture _textureSpeaker;
 	sf::RectangleShape _speaker;
 public:

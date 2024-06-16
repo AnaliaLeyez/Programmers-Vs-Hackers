@@ -29,6 +29,8 @@ Spot Level::getSpotByNumber(int n) const {
 TowerMenu Level::getCurrentMenu() const { return *_currentMenu; }
 int Level::getGolden() { return _golden; }
 int Level::getEnergy() { return _energy; }
+int Level::getCurrentWave() { return _currentWave; }
+int Level::getTotalWaves() { return _totalWaves; }
 sf::SoundBuffer Level::getBuffer() const { return _buffer; }
 sf::Sound Level::getSound() const { return _sound; }
 bool Level::getMusicPlaying() const { return _musicPlaying; }
@@ -45,6 +47,8 @@ void Level::setMapArray(const int(&mapArray)[22][30]) {
 }
 void Level::setGolden(int golden) { _golden = golden; }
 void Level::setEnergy(int energy) { _energy = energy; }
+//void Level::setCurrentWave(int wave) { _currentWave = wave; }
+//void Level::setTotalWaves(int total) { _totalWaves = total; }
 void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
 void Level::setTowersAvailable(Tower* towerAvailable) { _towersAvailable.push_back(towerAvailable); }
@@ -204,7 +208,7 @@ void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, in
 }
 
 void Level::checkLevelCompletion() {
-	if (_currentWave == _totalWaves && _enemies.empty()) {
+	if (_currentWave > _totalWaves && _enemies.empty()) {
 		_finishedLevel = true;
 	}
 }
@@ -235,7 +239,7 @@ void Level::update(sf::Vector2i& mousePosition) {
 	if (!getFinisheLevel()) {
 		mouseCheck(mousePosition);
 
-		if (_waveClock.getElapsedTime().asSeconds() >= _timeBetweenWaves && _currentWave <= 3) {
+		if (_currentWave <= _totalWaves) {
 			spawnWave(); // Generar una nueva oleada de enemigos
 		}
 
@@ -317,9 +321,9 @@ void Level::update(sf::Vector2i& mousePosition) {
 			}
 
 			// Verificar si se ha completado el nivel
-			if (_currentWave > 3 && _enemies.empty()) {
+			/*if (_currentWave > _totalWaves && _enemies.empty()) {
 				setFinishedLevel(true);
-			}
+			}*/
 			if (_currentMenu->getIsVisible()) {
 				_currentMenu->update(mousePosition);
 			}
@@ -337,8 +341,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 		}
 	}
 }
-
-
 
 
 void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const

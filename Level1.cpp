@@ -72,13 +72,16 @@ void Level1::spawnWave() {
 			_enemyClock.restart();
 		}
 	}
-	else {
-		// Si ya se agregaron todos los enemigos de esta oleada
-		enemyIndex = 0; // Reinicia el índice para la próxima oleada
-		_enemiesPerWave += 2; // Incrementa la cantidad de enemigos para la próxima oleada
+	else if(_waveClock.getElapsedTime().asSeconds()>_timeBetweenWaves && _enemies.empty() && enemyIndex==_enemiesPerWave) {
 		++_currentWave; // Incrementa el número de oleada
-		spawnedGodHacker = false;
-		_waveClock.restart(); // Reinicia el temporizador de la oleada
+		if (_currentWave <= _totalWaves) {
+			enemyIndex = 0; // Reinicia el índice para la próxima oleada
+			_enemiesPerWave += 1; // Incrementa la cantidad de enemigos para la próxima oleada
+
+			_ui.setText(2, std::to_string(getCurrentWave()));
+			spawnedGodHacker = false;
+			_waveClock.restart(); // Reinicia el temporizador de la oleada
+		}
 	}
 }
 
@@ -88,8 +91,8 @@ Level1::Level1()
 	_currentWave = 1;
 	_totalWaves = 3;
 	_enemiesPerWave = 1;
-	_timeBetweenWaves = 2;
-	_timeBetweenEnemies = 2;
+	_timeBetweenWaves = 15;
+	//_timeBetweenEnemies = 2;
 	_timeBetweenEnemies = std::rand() % 15 + 1; ///ver si esta queda o se va 
 	_waveClock.restart();
 	_enemyClock.restart();
@@ -146,6 +149,8 @@ Level1::Level1()
 	_energy = 500;
 	_ui.setText(0, std::to_string(getGolden()));
 	_ui.setText(1, std::to_string(getEnergy()));
+	_ui.setText(2, std::to_string(getCurrentWave()));
+	_ui.setText(3, "/" + std::to_string(getTotalWaves()));
 
 	if (!_buffer.loadFromFile("music/nivel1.wav")) {
 		throw std::runtime_error("Error al cargar musica nivel 1");

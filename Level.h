@@ -79,6 +79,8 @@ public:
 	TowerMenu getCurrentMenu() const; //DEBERIA SER PUNTERO
 	int getGolden();
 	int getEnergy();
+	int getCurrentWave();
+	int getTotalWaves();
 	sf::SoundBuffer getBuffer() const;
 	bool getMusicPlaying() const;
 	sf::Sound getSound() const;
@@ -93,6 +95,8 @@ public:
 	void setMapArray(const int(&)[22][30]);
 	void setGolden(int);
 	void setEnergy(int);
+	//void setCurrentWave(int);
+	//void setTotalWaves(int);
 	void setMusicPlaying(bool);
 	void setSound(bool);
 	void setTowersAvailable(Tower*);
