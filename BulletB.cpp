@@ -5,7 +5,6 @@
 #include "BulletB.h"
 
 BulletB::BulletB(sf::Vector2f position, sf::Vector2f target, int damage)
-	: Bullet(position, target)
 {
 	setPosition(position);
 	_enemyPosition = target;

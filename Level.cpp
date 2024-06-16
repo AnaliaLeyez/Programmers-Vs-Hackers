@@ -163,7 +163,7 @@ void Level::resellTower(Spot& sp) {
 }
 
 //void Level::shoot(Bullet* bullet, sf::Vector2f shootingPosition, sf::Vector2f targetPosition)
-void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, int damage, int type)
+void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, int damage, int type, Hacker* hacker)
 {
 	switch (type)
 	{
@@ -180,6 +180,27 @@ void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, in
 		_bullets.push_back(new BulletD(shootingPosition, targetPosition, damage));
 		break;
 	}
+
+	auto it = _bullets.begin();
+	while (it != _bullets.end())
+	{
+		Bullet* bullet = *it;
+
+		if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
+		{
+			hacker->takeDamage(bullet->getDamage());
+			std::cout << "Vida Hacker" << hacker->getLife() << std::endl;
+			delete bullet;
+			it = _bullets.erase(it);
+		}
+		else
+		{
+			++it;
+
+		}
+	}
+
+	//ACA SE PODRIA PONER LA LOGICA PARA QUE SE BORRE LA BALA
 }
 
 void Level::checkLevelCompletion() {
@@ -222,14 +243,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 		for (auto& hacker : _enemies) {
 			hacker->update(getMapArray());
 
-			hacker->update(getMapArray());
-			//std::cout<< hacker->getPosition().x << " " << hacker->getPosition().y <<std::endl;
-			//agregar más lógica para las colisiones
-
-
-			//Esta funcion la movi mas arriba estaba iterando 2 veces
-			//los enemigos
-
 			if (hacker->getEnd() == true) {
 				if (getEnergy()- hacker->attackUtn()>=0) {
 					_dying = true;
@@ -253,9 +266,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 		{
 			for (auto& hacker : _enemies)
 			{
-				//std::cout << " TowerPOs " << _spots[0]->getTransform().transformRect((tower->getBounds())).left << std::endl;
-				//std::cout << " HackerPos " << hacker->getBounds().left << std::endl;
-
 				if (spot->getIsOccupied() &&
 					spot->getTransform().transformRect((
 						spot->getCurrentTower().getBounds())).intersects(hacker->getBounds()
@@ -267,26 +277,7 @@ void Level::update(sf::Vector2i& mousePosition) {
 						shoot(spot->getPosition(),
 							hacker->getPosition(),
 							spot->getCurrentTower().getDamage(),
-							spot->getCurrentTower().getType());
-					}
-
-					auto it = _bullets.begin();
-					while (it != _bullets.end())
-					{
-						Bullet* bullet = *it;
-
-						if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
-						{
-							hacker->takeDamage(bullet->getDamage());
-							std::cout << hacker->getLife() << std::endl;
-							delete bullet;
-							it = _bullets.erase(it);
-						}
-						else
-						{
-							++it;
-
-						}
+							spot->getCurrentTower().getType(), hacker);
 					}
 				}
 			}
@@ -338,7 +329,7 @@ void Level::update(sf::Vector2i& mousePosition) {
 	else {
 		if (getIdLevel() < 4) { // aca digo que solo puede llegar hasta el nivel 4
 			std::cout << "NIVEL 2:" << std::endl;
-			Manager::getInstance().setNumberLevel(getIdLevel() + 1); // cambia al siguiente nivel
+			//Manager::getInstance().setNumberLevel(getIdLevel() + 1); // cambia al siguiente nivel
 		}
 		else {
 			// lógica para cuando se termina el juego, cuando se pasaron todos los niveles

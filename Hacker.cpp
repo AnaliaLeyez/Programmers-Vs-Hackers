@@ -62,7 +62,7 @@ void Hacker::moveHacker(int arr[][30])
 	move(_direction);
 }
 
-sf::FloatRect Hacker::getBounds() const { return getTransform().transformRect(_collisionRect.getGlobalBounds()); }
+sf::FloatRect Hacker::getBounds() const { return getTransform().transformRect(_sprite.getGlobalBounds()); }
 
 void Hacker::update(int arr[][30])
 {

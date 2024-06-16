@@ -22,9 +22,6 @@ void Level1::spawnWave() {
 	//los contadores son de tipo static porque asi las variables mantienen su valor incluso
 	//despues de que la funcion haya terminado de ejecutarse
 	static int enemyIndex = 0;
-	//static int traineeCount = 0; // Contador para los HackerTrainee
-	//static int juniorCount = 0; //Contador para los HackerJunior
-	//static int semiSeniorCount = 0; // Contador para los HackerSemiSenior
 	static bool spawnedGodHacker = false;
 
 	if (enemyIndex < _enemiesPerWave) {
@@ -38,7 +35,6 @@ void Level1::spawnWave() {
 				HackerTrainee* hk = new HackerTrainee();
 				hk->setPosition(_hackerStartPosition);
 				_enemies.push_back(hk);
-				//++traineeCount;
 			}
 			break;
 			case 2:
@@ -47,13 +43,11 @@ void Level1::spawnWave() {
 					HackerTrainee* hk = new HackerTrainee();
 					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
-					//++traineeCount;
 				}
 				else {
 					HackerJunior* hk = new HackerJunior();
 					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
-					//++juniorCount;
 				}
 			}
 			break;
@@ -63,13 +57,11 @@ void Level1::spawnWave() {
 					HackerSemiSr* hk = new HackerSemiSr();
 					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
-					//++semiSeniorCount;
 				}
 				else {
 					HackerDios* hk = new HackerDios();
 					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
-					//++traineeCount;
 				}
 			}
 			break;
@@ -83,7 +75,7 @@ void Level1::spawnWave() {
 	else {
 		// Si ya se agregaron todos los enemigos de esta oleada
 		enemyIndex = 0; // Reinicia el índice para la próxima oleada
-		_enemiesPerWave += 10; // Incrementa la cantidad de enemigos para la próxima oleada
+		_enemiesPerWave += 2; // Incrementa la cantidad de enemigos para la próxima oleada
 		++_currentWave; // Incrementa el número de oleada
 		spawnedGodHacker = false;
 		_waveClock.restart(); // Reinicia el temporizador de la oleada
@@ -151,7 +143,7 @@ Level1::Level1()
 
 	setSpots(arr, _spots, 5);
 	_golden = 2000;
-	_energy = 90;
+	_energy = 99999;
 	_ui.setText(0, std::to_string(getGolden()));
 	_ui.setText(1, std::to_string(getEnergy()));
 

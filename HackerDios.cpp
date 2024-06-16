@@ -7,22 +7,17 @@ HackerDios::HackerDios()
 	}
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
-	_sprite.setPosition(960 / 32 * 9.5, 640 / 32 * 0.5);
-	//_sprite.setScale(0.1, 0.1);
+	_sprite.setScale(2.2, 2.2);
 	_name = "Junior";
 
-	_seniority = 0;
-	_life = 500;
+	//_seniority = 0;
+	_life = 50;
 	_damage = 1;
-	_velocity = { 3,3 };
+	_velocity = { 1,1 };
 	_goldenDrop = 10;
-
-	//DESARROLLO
-	_position = { };
 }
-
 
 int HackerDios::attackUtn() {
 
-	return 10000000;
+	return 200;
 }

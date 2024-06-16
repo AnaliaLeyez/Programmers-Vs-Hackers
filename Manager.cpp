@@ -40,7 +40,7 @@ void Manager::setNumberLevel(int IdLevel) {
 	{
 	case 1:
 		 _currentLevel = new Level1();
-		_currentLevel->getHackerStartPosition(); //ver como el manager informa a la oleada desde donde empezar
+		//_currentLevel->getHackerStartPosition(); //ver como el manager informa a la oleada desde donde empezar
 		break;
 	case 2:
 		//_currentLevel = new Level2();

@@ -6,10 +6,11 @@ class Hacker :public sf::Drawable, public sf::Transformable, public Collisionabl
 {
 protected:
 	sf::Texture _texture;
+	sf::Sprite _sprite;
 	std::string _name;
 	sf::Vector2f _velocity;
 	sf::Vector2f _direction;
-	int _seniority;
+	//int _seniority;
 	int _life;
 	int _damage;
 	bool _isABoss;
@@ -17,14 +18,7 @@ protected:
 	sf::Vector2f _position;
 	bool _reachedEnd; // llego al final del camino ?
 public:
-	
-
 	virtual int attackUtn() = 0;
-
-	sf::Sprite _sprite;
-	sf::Sprite& getSprite();
-
-	sf::RectangleShape _collisionRect;
 
 	int getLife() const;
 	int getDamage() const;
@@ -33,7 +27,6 @@ public:
 	bool getBoss() const;
 	int getGoldenDrop() const;
 	bool getEnd() const;
-
 
 	void setEnd(bool end);
 	void setLife(int);
@@ -51,5 +44,4 @@ public:
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 
 	void takeDamage(int);
-	//int _cooldown = 0;
 };
