@@ -153,6 +153,7 @@
     <ClCompile Include="HackerDios.cpp" />
     <ClCompile Include="HackerJunior.cpp" />
     <ClCompile Include="HackerSemiSr.cpp" />
+    <ClCompile Include="Level2.cpp" />
     <ClCompile Include="LevelClicks.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Hacker.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="HackerDios.h" />
     <ClInclude Include="HackerJunior.h" />
     <ClInclude Include="HackerSemiSr.h" />
+    <ClInclude Include="Level2.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Hacker.h" />
     <ClInclude Include="HackerTrainee.h" />
