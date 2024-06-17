@@ -95,8 +95,6 @@ public:
 	void setMapArray(const int(&)[22][30]);
 	void setGolden(int);
 	void setEnergy(int);
-	//void setCurrentWave(int);
-	//void setTotalWaves(int);
 	void setMusicPlaying(bool);
 	void setSound(bool);
 	void setTowersAvailable(Tower*);

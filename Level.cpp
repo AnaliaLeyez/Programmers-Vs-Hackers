@@ -47,8 +47,6 @@ void Level::setMapArray(const int(&mapArray)[22][30]) {
 }
 void Level::setGolden(int golden) { _golden = golden; }
 void Level::setEnergy(int energy) { _energy = energy; }
-//void Level::setCurrentWave(int wave) { _currentWave = wave; }
-//void Level::setTotalWaves(int total) { _totalWaves = total; }
 void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
 void Level::setTowersAvailable(Tower* towerAvailable) { _towersAvailable.push_back(towerAvailable); }
@@ -166,7 +164,7 @@ void Level::resellTower(Spot& sp) {
 
 }
 
-//void Level::shoot(Bullet* bullet, sf::Vector2f shootingPosition, sf::Vector2f targetPosition)
+
 void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, int damage, int type, Hacker* hacker)
 {
 	switch (type)
@@ -320,10 +318,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 				}
 			}
 
-			// Verificar si se ha completado el nivel
-			/*if (_currentWave > _totalWaves && _enemies.empty()) {
-				setFinishedLevel(true);
-			}*/
 			if (_currentMenu->getIsVisible()) {
 				_currentMenu->update(mousePosition);
 			}
@@ -333,8 +327,7 @@ void Level::update(sf::Vector2i& mousePosition) {
 	else {
 		if (getIdLevel() < 4) { // aca digo que solo puede llegar hasta el nivel 4
 			std::cout << "NIVEL 2:" << std::endl;
-			Manager::getInstance().setNumberLevel(2);
-			/*Manager::getInstance().setNumberLevel(getIdLevel() + 1);*/ // cambia al siguiente nivel
+			Manager::getInstance().setNumberLevel(getIdLevel() + 1); // cambia al siguiente nivel
 		}
 		else {
 			// lógica para cuando se termina el juego, cuando se pasaron todos los niveles
