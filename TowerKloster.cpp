@@ -28,6 +28,7 @@ TowerKloster::TowerKloster()
 	_range = 7;
 	_upgradesAmount = 2;
 	_fireRate = 1.5f; // Tiempo en segundos entre disparos
+	_clock.restart();
 }
 
 void TowerKloster::upgrade()

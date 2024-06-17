@@ -20,10 +20,10 @@ UI Level::getUI() const { return _ui; }
 Map Level::getMap() const { return *_map; }
 int(*Level::getMapArray())[30] { return _mapArray; }
 const std::vector<Spot*> Level::getSpots() const { return _spots; }
-Spot Level::getCurrentSpot() const { return _currentMenu->getCurrentSpot(); }
-Spot Level::getSpotByNumber(int n) const {
+Spot* Level::getCurrentSpot() const { return _currentMenu->getCurrentSpot(); }
+Spot* Level::getSpotByNumber(int n) const {
 	for (auto& spot : _spots) {
-		if (spot->getSpotNumber() == n) { return *spot; }
+		if (spot->getSpotNumber() == n) { return spot; }
 	}
 }
 TowerMenu* Level::getCurrentMenu() const { return _currentMenu; }
@@ -84,11 +84,11 @@ void Level::setSpots(int arr[][30], std::vector<Spot*>& spots, int cant) {
 		}
 	}
 }
-void Level::setCurrentSpot(Spot sp) { _currentMenu->setCurrentSpot(sp); }
+void Level::setCurrentSpot(Spot* sp) { _currentMenu->setCurrentSpot(sp); }
 void Level::setCurrentMenu(TowerMenu* menu) { _currentMenu = menu; }
 void Level::setCurrentMenu(Spot* currentSp)
 {
-	_currentMenu->setCurrentSpot(*currentSp); //guardo el nro de spot en el tower Menu2;
+	_currentMenu->setCurrentSpot(currentSp); //guardo el nro de spot en el tower Menu2;
 	_currentMenu->setCurrentTower(currentSp->getCurrentTower());
 
 	setInfoBtn(_currentMenu, currentSp, 0); //debe recibir Tw*, *_currentMenu e Index

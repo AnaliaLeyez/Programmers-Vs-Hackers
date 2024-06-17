@@ -8,9 +8,9 @@
 
 bool TowerMenu::getIsVisible() { return _isVisible; }
 Button* TowerMenu::getButtonByIndex(int i) const { return _buttons[i]; }
-Spot TowerMenu::getCurrentSpot() const { return _currentSpot; }
+Spot* TowerMenu::getCurrentSpot() const { return _currentSpot; }
 int TowerMenu::getNumberMenu() const { return _NumberMenu; }
-void TowerMenu::setCurrentSpot(Spot sp) { _currentSpot = sp; }
+void TowerMenu::setCurrentSpot(Spot* sp) { _currentSpot = sp; }
 void TowerMenu::setButton(bool states, int i) { _buttons[i]->setMouseHover(states); }
 
 void TowerMenu::hide() { _isVisible = false; }

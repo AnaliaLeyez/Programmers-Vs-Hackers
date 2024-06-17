@@ -28,8 +28,8 @@ TowerMenu2::TowerMenu2()
 	_buttons[1]->setBtnNumber(1);
 	_buttons[0]->setBtnNumber(2);
 
-	Spot sp;
-	setCurrentSpot(sp);
+	/*Spot sp;
+	setCurrentSpot(sp);*/
 }
 
 void TowerMenu2::setCurrentTower(Tower* tw)

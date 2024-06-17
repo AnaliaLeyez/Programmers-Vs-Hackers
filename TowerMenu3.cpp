@@ -23,8 +23,8 @@ TowerMenu3::TowerMenu3()
 	_buttons[0]->setPosition(0, 85);
 	_buttons[0]->setBtnNumber(2);
 
-	Spot sp;
-	setCurrentSpot(sp);
+	//Spot sp;
+	//setCurrentSpot(sp);
 }
 
 void TowerMenu3::setCurrentTower(Tower* tw)

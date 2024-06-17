@@ -76,8 +76,8 @@ public:
 	Map getMap() const;
 	int(*getMapArray())[30];
 	const std::vector<Spot*> getSpots() const;
-	Spot getCurrentSpot() const; //DEBERIA SER PUNTERO
-	Spot getSpotByNumber(int) const; //DEBERIA SER PUNTERO
+	Spot* getCurrentSpot() const;
+	Spot* getSpotByNumber(int) const;
 	TowerMenu* getCurrentMenu() const;
 	int getGolden();
 	int getEnergy();
@@ -103,7 +103,7 @@ public:
 	void setActiveTowers(Tower*);
 	void setSpot(Spot*);
 	void setSpots(int arr[][30], std::vector<Spot*>&, int);
-	void setCurrentSpot(Spot); //para que el currentMenu tenga su Spot asociado
+	void setCurrentSpot(Spot*); //para que el currentMenu tenga su Spot asociado
 	void setCurrentMenu(TowerMenu*);
 	void setCurrentMenu(Spot*);  //SOBRECARGA DE FUNCION
 	void setInfoBtn(TowerMenu*, Spot*, int);
@@ -112,7 +112,7 @@ public:
 	void mouseCheck(sf::Vector2i&);
 	void validateClick(int, int);
 	int validateClickOnSpot(int, int);
-	void manageClickOnSpot(int, int, Spot&);
+	void manageClickOnSpot(int, int, Spot*);
 	Spot manageOutOfSpotClick(int, int); //DEBERIA SER PUNTERO??????
 	void clickWithMenu1Open(int, int, Spot&);
 	void clickWithMenu2Open(int, int, Spot&);

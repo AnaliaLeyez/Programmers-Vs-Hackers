@@ -23,7 +23,7 @@ protected:
 	int _spotNumber;
 	int _type; //new
 
-	//sf::Clock _clock;
+	sf::Clock _clock;
 	int _cooldown;
 	float _fireRate;
 	Bullet* _bullet;
