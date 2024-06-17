@@ -47,7 +47,7 @@ void TowerSarF::upgrade()
 		_salesValue = 336;
 		_damage = 5;
 		_damageUpgrade = 7;
-		//_speedAttack = 3;  //no terminamos de definir esto como es en el juego real
+		_fireRate = 0.7f; //dispara mas rapido
 		_upgradesAmount = 1;
 	}
 	break;
@@ -62,7 +62,7 @@ void TowerSarF::upgrade()
 		_priceUpgrade = 9990;
 		_salesValue = 576;
 		_damage = 7;
-		//_speedAttack = 3;   //no terminamos de definir esto como es en el juego real
+		//_fireRate  se mantiene
 		_upgradesAmount = 0;
 	}
 	default:

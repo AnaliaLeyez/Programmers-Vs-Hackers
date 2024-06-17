@@ -46,7 +46,7 @@ void TowerKloster::upgrade()
 		_salesValue = 168;
 		_damage = 9;
 		_damageUpgrade = 13;
-		//_speedAttack = 2;  //no terminamos de definir esto como es en el juego real
+		_fireRate = 1.5f; //dispara mas rapido
 		_upgradesAmount = 1;
 	}
 	break;
@@ -61,7 +61,7 @@ void TowerKloster::upgrade()
 		_priceUpgrade = 9990;
 		_salesValue = 328;
 		_damage = 13;
-		//_speedAttack = 3;   //no terminamos de definir esto como es en el juego real
+		//fireRate se mantiene
 		_upgradesAmount = 0;
 	}
 	default:

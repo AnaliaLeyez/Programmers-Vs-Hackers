@@ -47,7 +47,7 @@ void TowerWenner::upgrade()
 		_salesValue = 280;
 		_damage = 14;
 		_damageUpgrade = 20;
-		//_speedAttack = 1; //no terminamos de definir esto como es en el juego real
+		//fireRate se mantiene
 		_upgradesAmount = 1;
 	}
 	break;
@@ -62,7 +62,7 @@ void TowerWenner::upgrade()
 		_priceUpgrade = 9990;
 		_salesValue = 816;
 		_damage = 20;
-		//_speedAttack = 3;   //no terminamos de definir esto como es en el juego real
+		_fireRate = 2.f; //se hace mas lento
 		_upgradesAmount = 0;
 	}
 	default:
