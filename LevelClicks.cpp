@@ -59,12 +59,12 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 				_currentMenu->setCurrentTower(currentSp.getCurrentTower());
 
 				Tower* tower = currentSp.getCurrentTower(); // CREAR UNA FUNCION PARA ESTAS LINEAS
-				Button* btnUp = _currentMenu->getButtonByIndex(0);
+				Button* btnUp = _currentMenu->getButtonByIndex(1);
 				btnUp->setPrice(tower->getPriceUpgrade());
 				btnUp->setDamage(tower->getDamageUpgrade());
-				btnUp->setPriceText();;
+				btnUp->setPriceText();
 				btnUp->setInfo();
-				Button* btnCashSale = _currentMenu->getButtonByIndex(1);
+				Button* btnCashSale = _currentMenu->getButtonByIndex(0);
 				btnCashSale->setPrice(tower->getSalesValue());
 				btnCashSale->setPriceText();
 				_currentMenu->setPosition(currentSp.getPosition());

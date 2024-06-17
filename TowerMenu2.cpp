@@ -18,15 +18,15 @@ TowerMenu2::TowerMenu2()
 	_sprite.setScale(0.4f, 0.4f);
 
 	//Buttons initialization
-	Button* btn = new ButtonUpgrade(); //aca va el boton de upgrade (que tiene img de espada)
+	Button* btn = new ButtonCashSale();
 	_buttons.push_back(btn);
-	btn = new ButtonCashSale();
+	 btn = new ButtonUpgrade(); //aca va el boton de upgrade (que tiene img de espada)
 	_buttons.push_back(btn);
 
-	_buttons[0]->setPosition(0, -100);
-	_buttons[1]->setPosition(0, 85);
-	_buttons[0]->setBtnNumber(1);
-	_buttons[1]->setBtnNumber(2);
+	_buttons[1]->setPosition(0, -100);
+	_buttons[0]->setPosition(0, 85);
+	_buttons[1]->setBtnNumber(1);
+	_buttons[0]->setBtnNumber(2);
 
 	Spot sp;
 	setCurrentSpot(sp);
