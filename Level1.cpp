@@ -26,7 +26,7 @@ void Level1::spawnWave() {
 
 	if (enemyIndex < _enemiesPerWave) {
 		// Genera un nuevo enemigo
-		int randomTime = std::rand() % 8 + 1;
+		int randomTime = std::rand() % 4 + 1;
 		if (_enemyClock.getElapsedTime().asSeconds() >= randomTime) {
 			switch (_currentWave)
 			{
@@ -76,7 +76,7 @@ void Level1::spawnWave() {
 		++_currentWave; // Incrementa el número de oleada
 		if (_currentWave <= _totalWaves) {
 			enemyIndex = 0; // Reinicia el índice para la próxima oleada
-			_enemiesPerWave += 1; // Incrementa la cantidad de enemigos para la próxima oleada
+			_enemiesPerWave += 3; // Incrementa la cantidad de enemigos para la próxima oleada
 
 			_ui.setText(2, std::to_string(getCurrentWave()));
 			spawnedGodHacker = false;
@@ -90,7 +90,7 @@ Level1::Level1()
 {
 	_currentWave = 1;
 	_totalWaves = 3;
-	_enemiesPerWave = 1;
+	_enemiesPerWave = 2;
 	_timeBetweenWaves = 15;
 	//_timeBetweenEnemies = std::rand() % 15 + 1; ///ver si esta queda o se va 
 	_waveClock.restart();
@@ -107,7 +107,7 @@ Level1::Level1()
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,2,1,3,0,0},
+{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,2,1,1,9},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},

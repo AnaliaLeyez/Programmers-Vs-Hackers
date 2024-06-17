@@ -54,6 +54,10 @@ void Hacker::moveHacker(int arr[][30])
 		_direction = { 0.0f,1.0f };
 		_reachedEnd = true;
 		break;
+	case 9:
+		_direction = { -1.0f,0.0f };
+		_reachedEnd = true;
+		break;
 	default:
 		_reachedEnd = false;
 		break;
