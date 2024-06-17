@@ -24,13 +24,14 @@ void Level::validateClick(int mousex, int mousey)
 		currentSpot->setOccupied(getSpotByNumber(currentSpot->getSpotNumber())->getIsOccupied());
 		_currentMenu->setCurrentSpot(currentSpot);  //si se clickeo en spot e estoy diciendo a menu q se asocie a ese spot, sino nose
 		manageClickOnSpot(mousex, mousey, currentSpot); //currentSpot tiene el nro de spot y el estado
+		setSpot(currentSpot);
 	}
-	else 
+	else if(_currentMenu->getCurrentSpot()!=nullptr) //quiza es mi primer click y no tengo spot
 	{ //si NO se clickeo spot
 		currentSpot = _currentMenu->getCurrentSpot();
 		*currentSpot = manageOutOfSpotClick(mousex, mousey);
-	}
-	setSpot(currentSpot);
+		setSpot(currentSpot);
+	}	
 
 	validateClickOnSpeaker(mousex, mousey);
 }
