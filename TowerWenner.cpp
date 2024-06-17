@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream> //borrar
 #include "Hacker.h"
-//#include "BulletBrian.h" //cambiar por Wenner
 #include "Tower.h"
 #include "TowerWenner.h"
 
