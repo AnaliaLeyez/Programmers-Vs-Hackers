@@ -34,9 +34,9 @@ void Manager::setLevel(Level& level)
 }
 
 void Manager::setNumberLevel(int IdLevel) {
-	/*if (_currentLevel != nullptr) {
-		delete _currentInstance;
-	}*/
+	if (_currentLevel != nullptr) {
+		delete _currentLevel;
+	}
 	switch (IdLevel)
 	{
 	case 1:

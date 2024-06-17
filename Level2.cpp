@@ -146,8 +146,8 @@ Level2::Level2()
 	_ui.setText(2, std::to_string(getCurrentWave()));
 	_ui.setText(3, "/" + std::to_string(getTotalWaves()));
 
-	if (!_buffer.loadFromFile("music/nivel1.wav")) {
-		throw std::runtime_error("Error al cargar musica nivel 1");
+	if (!_buffer.loadFromFile("music/level2.wav")) {
+		throw std::runtime_error("Error al cargar musica nivel 2");
 	};
 	_sound.setBuffer(_buffer);
 	_sound.setVolume(5);
