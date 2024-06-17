@@ -5,6 +5,7 @@
 
 ButtonMaxiWenner::ButtonMaxiWenner()
 {
+	_type = 1;
 	_mouseHover = false;
 	if (!_texture.loadFromFile("img/menuContextual/button_tower_menu_maxiWen.png"))
 	{

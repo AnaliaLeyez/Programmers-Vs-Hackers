@@ -11,6 +11,8 @@ protected:
 	Spot _currentSpot; //DEBERIA SER PUNTERO
 	int _NumberMenu;
 public:
+	virtual void setCurrentTower(Tower*)=0;
+
 	bool getIsVisible();
 	Button* getButtonByIndex(int) const;
 	Spot getCurrentSpot() const; //DEBERIA SER PUNTERO

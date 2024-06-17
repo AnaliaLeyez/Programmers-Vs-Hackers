@@ -24,7 +24,7 @@ Spot::Spot()
 
 int Spot::getSpotNumber() const { return _spotNumber; }
 bool Spot::getIsOccupied() const { return _occupied; }
-Tower& Spot::getCurrentTower() const { return *_currentTower; }
+Tower* Spot::getCurrentTower() const { return _currentTower; }
 bool Spot::getMouseHover() const { return _mouseHover; }
 
 void Spot::setSpot(int spotNumber, bool status) {

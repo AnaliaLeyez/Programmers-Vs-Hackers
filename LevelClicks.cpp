@@ -51,22 +51,52 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 	_currentMenu->setPosition(transformedMousePos); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
 	//validar si el spot esta ocupado o no:
 	if (currentSp.getIsOccupied()) { //spot ocupado
-		_currentMenu = _menu2;
-		if (!_currentMenu->getIsVisible()) { //se clickeo en un spot ocupado y el menu2 no era visible
-			std::cout << "aca va el menu2" << std::endl;
-			_currentMenu->setCurrentSpot(currentSp); //guardo el nro de spot en el tower Menu2;
-			_currentMenu->setPosition(currentSp.getPosition());
-			_currentMenu->show();
+		if (currentSp.getCurrentTower()->getUpgradesAmount() != 0) {
+			_currentMenu = _menu2;
+			if (!_currentMenu->getIsVisible()) { //se clickeo en un spot ocupado y el menu2 no era visible
+				std::cout << "--- ACA VA EL MENU 2 ---" << std::endl;
+				_currentMenu->setCurrentSpot(currentSp); //guardo el nro de spot en el tower Menu2;
+				_currentMenu->setCurrentTower(currentSp.getCurrentTower());
+
+				Tower* tower = currentSp.getCurrentTower(); // CREAR UNA FUNCION PARA ESTAS LINEAS
+				Button* btnUp = _currentMenu->getButtonByIndex(0);
+				btnUp->setPrice(tower->getPriceUpgrade());
+				btnUp->setDamage(tower->getDamageUpgrade());
+				btnUp->setPriceText();;
+				btnUp->setInfo();
+				Button* btnCashSale = _currentMenu->getButtonByIndex(1);
+				btnCashSale->setPrice(tower->getSalesValue());
+				btnCashSale->setPriceText();
+				_currentMenu->setPosition(currentSp.getPosition());
+				_currentMenu->show();
+			}
+			else { //se clickeo en un spot ocupado y el menu2 era visible
+				_currentMenu->hide();
+			}
 		}
-		else { //se clickeo en un spot ocupado y el menu2 era visible
-			_currentMenu->hide();
+		else {
+			_currentMenu = _menu3;
+			if (!_currentMenu->getIsVisible()) { //se clickeo en un spot ocupado y el menu2 no era visible
+				std::cout << "--- ACA VA EL MENU 3 ---" << std::endl;
+				_currentMenu->setCurrentSpot(currentSp); //guardo el nro de spot en el tower Menu2;
+				_currentMenu->setCurrentTower(currentSp.getCurrentTower());
+
+				Tower* tower = currentSp.getCurrentTower(); // Crear una nueva instancia de la torre
+				Button* btn = _currentMenu->getButtonByIndex(0);
+				btn->setPrice(tower->getPriceUpgrade());
+				btn->setDamage(tower->getDamageUpgrade());
+				btn->setPriceText();;
+				btn->setInfo();
+				_currentMenu->setPosition(currentSp.getPosition());
+				_currentMenu->show();
+			}
 		}
 	}
 	else 
 	{  //spot libre
 		//_currentMenu2->hide(); //Necesario, en caso q se haya estado mostrando por otro spot
 		_currentMenu = _menu1;
-		currentSp.setCurrentTower(&_currentMenu->getCurrentSpot().getCurrentTower()); //me aseguro que el currentSpot esta asociado a la tower ahora
+		currentSp.setCurrentTower(_currentMenu->getCurrentSpot().getCurrentTower()); //me aseguro que el currentSpot esta asociado a la tower ahora
 		if (!_currentMenu->getIsVisible()) { //se clickeo en un spot libre y el menu no era visible
 			_currentMenu->setPosition(currentSp.getPosition()); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
 			_currentMenu->show();
@@ -128,7 +158,7 @@ void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 {
 	Button* btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
-	Tower* tower = &sp.getCurrentTower();
+	Tower* tower = sp.getCurrentTower();
 
 	if (btn->getBtnNumber() == 1) {  //se hizo click en el boton 1 que es upgrade:
 		

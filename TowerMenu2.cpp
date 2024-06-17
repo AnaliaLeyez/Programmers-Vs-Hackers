@@ -31,3 +31,8 @@ TowerMenu2::TowerMenu2()
 	Spot sp;
 	setCurrentSpot(sp);
 }
+
+void TowerMenu2::setCurrentTower(Tower* tw)
+{
+	_currentTower = tw;
+}

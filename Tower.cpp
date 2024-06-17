@@ -13,7 +13,9 @@ int Tower::getPriceUpgrade() const { return _priceUpgrade; }
 int Tower::getSalesValue() const { return _salesValue; }
 sf::Sprite Tower::getSprite() const { return _sprite; }
 int Tower::getDamage() const { return _damage; }
+int Tower::getDamageUpgrade() const { return _damageUpgrade; }
 int Tower::getRange() const { return _range; }
+int Tower::getUpgradesAmount() const { return _upgradesAmount;}
 int Tower::getSpotNumber() const { return _spotNumber; }
 Bullet* Tower::getBullet() const { return _bullet; }
 

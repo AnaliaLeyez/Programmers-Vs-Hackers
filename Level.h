@@ -34,6 +34,7 @@ protected:
 	TowerMenu* _currentMenu;
 	TowerMenu1* _menu1 = new TowerMenu1();
 	TowerMenu2* _menu2 = new TowerMenu2();
+	TowerMenu2* _menu3 = new TowerMenu2();
 	int _golden;
 	int _energy;
 	sf::SoundBuffer _buffer;
@@ -76,7 +77,7 @@ public:
 	const std::vector<Spot*> getSpots() const;
 	Spot getCurrentSpot() const; //DEBERIA SER PUNTERO
 	Spot getSpotByNumber(int) const; //DEBERIA SER PUNTERO
-	TowerMenu getCurrentMenu() const; //DEBERIA SER PUNTERO
+	TowerMenu* getCurrentMenu() const;
 	int getGolden();
 	int getEnergy();
 	int getCurrentWave();

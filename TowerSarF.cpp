@@ -25,6 +25,7 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 	_priceUpgrade = 240;
 	_salesValue = 144;
 	_damage = 3;
+	_damageUpgrade = 5;
 	_range = 8;
 	_upgradesAmount = 2;
 	_fireRate = 1.0f; // Tiempo en segundos entre disparos
@@ -44,6 +45,7 @@ void TowerSarF::upgrade()
 		_priceUpgrade = 300;
 		_salesValue = 336;
 		_damage = 5;
+		_damageUpgrade = 7;
 		//_speedAttack = 3;  //no terminamos de definir esto como es en el juego real
 		_upgradesAmount = 1;
 	}

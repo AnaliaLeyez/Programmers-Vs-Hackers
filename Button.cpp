@@ -3,11 +3,11 @@
 
 
 Tower* Button::getTower() const { return _tower; }
-int Button::getPrice() { return _tower->getPrice(); }
-int Button::getDamage() { return _tower->getDamage(); }
-int Button::getBtnNumber() { return _btnNumber; }
-int Button::getPrice() const { return _price; }
-
+int Button::getPrice() const { return _tower->getPrice(); }
+int Button::getPriceOfButton() const { return _price; }
+int Button::getDamage() const { return _tower->getDamage(); }
+int Button::getBtnNumber() const { return _btnNumber; }
+int Button::getDamageOfButton() const { return _damage; }
 void Button::setBtnNumber(int n) { _btnNumber = n; }
 void Button::setPriceText()
 {
@@ -27,7 +27,13 @@ void Button::setPriceText()
 	_priceText.setOrigin(_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().top + _sprite.getGlobalBounds().height / 2);
 	_priceText.setPosition(5, -54);
 	_priceText.setFillColor(sf::Color(255, 255, 255));
-	_priceText.setString("$" + std::to_string(getPrice()));
+	if (_type == 1) {
+		_priceText.setString("$" + std::to_string(getPrice()));
+	}
+	else {
+		_priceText.setString("$" + std::to_string(getPriceOfButton()));
+	}
+	
 }
 void Button::setInfo()
 {
@@ -58,7 +64,13 @@ void Button::setInfo()
 		_info[i].setOrigin(_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().top + _sprite.getGlobalBounds().height / 2);
 		_info[i].setPosition(15, 70);
 		_info[i].setFillColor(sf::Color(255, 255, 255));
-		_info[i].setString(std::to_string(getDamage()));
+		if (_type == 1) {
+			_info[i].setString(std::to_string(getDamage()));
+		}
+		else {
+			_info[i].setString(std::to_string(getDamageOfButton()));
+		}
+		
 		
 	}
 
@@ -75,6 +87,7 @@ void Button::setSpriteHover()
 	_spriteHover.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 }
 void Button::setPrice(int price) { _price = price; }
+void Button::setDamage(int damage) { _damage = damage; }
 
 void Button::update(sf::Vector2i& mousePosition)
 {

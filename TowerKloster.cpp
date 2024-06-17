@@ -24,6 +24,7 @@ TowerKloster::TowerKloster()
 	_priceUpgrade = 110;
 	_salesValue = 80;
 	_damage = 7;
+	_damageUpgrade = 9;
 	_range = 7;
 	_upgradesAmount = 2;
 	_fireRate = 1.5f; // Tiempo en segundos entre disparos
@@ -43,6 +44,7 @@ void TowerKloster::upgrade()
 		_priceUpgrade = 200;
 		_salesValue = 168;
 		_damage = 9;
+		_damageUpgrade = 13;
 		//_speedAttack = 2;  //no terminamos de definir esto como es en el juego real
 		_upgradesAmount = 1;
 	}

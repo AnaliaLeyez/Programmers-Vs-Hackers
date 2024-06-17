@@ -3,8 +3,10 @@
 class Button : public sf::Drawable, public sf::Transformable
 {
 protected:
+	int _type;
 	Tower* _tower;
 	int _price;
+	int _damage;
 	sf::Texture _texture;
 	sf::Sprite _sprite;
 	sf::Texture _textureHover;
@@ -22,10 +24,12 @@ protected:
 	sf::Sprite _spriteSword;
 public:
 	Tower* getTower() const; // Devuelve una nueva instancia
-	int getPrice();
-	int getDamage();
-	int getBtnNumber();
 	int getPrice() const;
+	int getPriceOfButton() const;
+	int getDamage() const;
+	int getDamageOfButton() const;
+	int getBtnNumber() const;
+	
 	
 	void setBtnNumber(int);
 	void setPriceText();
@@ -33,6 +37,7 @@ public:
 	void setMouseHover(bool);
 	void setSpriteHover();
 	void setPrice(int);
+	void setDamage(int);
 
 	void update(sf::Vector2i&);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;

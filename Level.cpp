@@ -26,7 +26,7 @@ Spot Level::getSpotByNumber(int n) const {
 		if (spot->getSpotNumber() == n) { return *spot; }
 	}
 }
-TowerMenu Level::getCurrentMenu() const { return *_currentMenu; }
+TowerMenu* Level::getCurrentMenu() const { return _currentMenu; }
 int Level::getGolden() { return _golden; }
 int Level::getEnergy() { return _energy; }
 int Level::getCurrentWave() { return _currentWave; }
@@ -58,7 +58,7 @@ void Level::setSpot(Spot* sp)
 		if (spot->getSpotNumber() == sp->getSpotNumber())
 		{
 			spot->setOccupied(sp->getIsOccupied());
-			spot->setCurrentTower(&sp->getCurrentTower());
+			spot->setCurrentTower(sp->getCurrentTower());
 			break;
 		}
 	}
@@ -153,7 +153,7 @@ void Level::sell(Tower* tower, Spot& currentSpot) {
 	currentSpot.setOccupied(true);
 }
 void Level::resellTower(Spot& sp) {
-	Tower* tower = &sp.getCurrentTower();
+	Tower* tower = sp.getCurrentTower();
 	int resaleValue = tower->getSalesValue();
 	std::cout << "Valor reventa:" << resaleValue << std::endl;
 	setGolden(getGolden() + resaleValue); // Agregar el valor de reventa al oro del jugador
@@ -270,16 +270,16 @@ void Level::update(sf::Vector2i& mousePosition) {
 			{
 				if (spot->getIsOccupied() &&
 					spot->getTransform().transformRect((
-						spot->getCurrentTower().getBounds())).intersects(hacker->getBounds()
+						spot->getCurrentTower()->getBounds())).intersects(hacker->getBounds()
 						))
 				{
 					//std::cout << "COliSIONO" << std::endl;
-					if (spot->getCurrentTower().canShoot())
+					if (spot->getCurrentTower()->canShoot())
 					{
 						shoot(spot->getPosition(),
 							hacker->getPosition(),
-							spot->getCurrentTower().getDamage(),
-							spot->getCurrentTower().getType(), hacker);
+							spot->getCurrentTower()->getDamage(),
+							spot->getCurrentTower()->getType(), hacker);
 					}
 				}
 			}
