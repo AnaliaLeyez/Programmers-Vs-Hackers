@@ -114,11 +114,11 @@ void Level::setInfoBtn(TowerMenu* menu, Spot* currentSp, int index)
 }
 void Level::setNoCoinsText()
 {
-	if (!_font.loadFromFile("fuentes/TowerPrice.ttf"))
+	if (!_fontNoCoins.loadFromFile("fuentes/TowerPrice.ttf"))
 	{
 		throw std::runtime_error("Error al cargar la fuente del Price Menu \n");
 	}
-	_NoCoins.setFont(_font);
+	_NoCoins.setFont(_fontNoCoins);
 	_NoCoins.setCharacterSize(70);
 	_NoCoins.setOrigin(_NoCoins.getGlobalBounds().getPosition().x / 2, _NoCoins.getGlobalBounds().height / 2);
 	_NoCoins.setPosition(250, 250);
@@ -129,7 +129,19 @@ void Level::setNoCoinsText()
 	_displayTimeNoCoins = sf::seconds(3);
 	_flagNoCoins = false;
 }
-
+void Level::setLevelUpText()
+{
+	if (!_fontLevelUp.loadFromFile("fuentes/TowerPrice.ttf"))
+	{
+		throw std::runtime_error("Error al cargar la fuente del Level Up");
+	}
+	_levelUp.setFont(_fontLevelUp);
+	_levelUp.setCharacterSize(70);
+	_levelUp.setOrigin(_levelUp.getGlobalBounds().getPosition().x / 2, _levelUp.getGlobalBounds().height / 2);
+	_levelUp.setPosition(250, 250);
+	_levelUp.setFillColor(sf::Color(0, 0, 255));
+	_levelUp.setString("CONGRATS! \n LEVEL UP");
+}
 
 void Level::decreaseEnergy(int amount) {
 	_energy -= amount;
@@ -220,29 +232,31 @@ void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, in
 			std::cout << "Vida Hacker" << hacker->getLife() << std::endl;
 			delete bullet;
 			it = _bullets.erase(it);
-		}
+		}/*else if (.....)  //ACA SE BORRARIAN LAS BALAS
+		{
+			delete bullet;
+			it = _bullets.erase(it);
+		}*/
 		else
 		{
 			++it;
-
 		}
 	}
-
-	//ACA SE PODRIA PONER LA LOGICA PARA QUE SE BORRE LA BALA
 }
 
 void Level::checkLevelCompletion() {
 	if (_currentWave > _totalWaves && _enemies.empty()) {
 		_finishedLevel = true;
+		_levelUpClock.restart();
 	}
 }
 
 void Level::setGameOverText()
 {
-	if (!_font.loadFromFile("fuentes/TowerPrice.ttf")) {
+	if (!_fontGameOver.loadFromFile("fuentes/TowerPrice.ttf")) {
 		throw std::runtime_error("Error al cargar la fuente del Price Menu");
 	}
-	_gameOver.setFont(_font);
+	_gameOver.setFont(_fontGameOver);
 	_gameOver.setCharacterSize(70);
 	//_gameOver.setOrigin(_gameOver.getGlobalBounds().width/ 2, _gameOver.getGlobalBounds().height / 2);
 	_gameOver.setPosition(300, 250);
@@ -259,84 +273,30 @@ void Level::setGameOverText()
 }
 
 void Level::update(sf::Vector2i& mousePosition) {
-	checkLevelCompletion();
-	if (!getFinisheLevel()) {
-		mouseCheck(mousePosition);
+	if (!_finishedLevel) {
+		checkLevelCompletion(); //xq quiero que una sola vez pase por el check level si se gana el nivel, ya que ahi reseteo un clock
+		if (!_finishedLevel) {
+			mouseCheck(mousePosition);
 
-		if (_currentWave <= _totalWaves) {
-			spawnWave(); // Generar una nueva oleada de enemigos
-		}
-
-		// Actualizar los enemigos en el nivel
-		for (auto& hacker : _enemies) {
-			hacker->update(getMapArray());
-
-			if (hacker->getEnd() == true) {
-				if (getEnergy()- hacker->attackUtn()>=0) {
-					_dying = true;
-					decreaseEnergy(hacker->attackUtn());
-				}
-				else {
-					setEnergy(0);
-					_flagGameOver = true;
-					setGameOverText();
-				}
-				_ui.setText(1, std::to_string(getEnergy()));
-				break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
-			}
-			else {
-				_dying = false;
-			}
-		}
-
-
-		for (auto& spot : _spots)
-		{
-			for (auto& hacker : _enemies)
-			{
-				if (spot->getIsOccupied() &&
-					spot->getTransform().transformRect((
-						spot->getCurrentTower()->getBounds())).intersects(hacker->getBounds()
-						))
-				{
-					//std::cout << "COliSIONO" << std::endl;
-					if (spot->getCurrentTower()->canShoot())
-					{
-						shoot(spot->getPosition(),
-							hacker->getPosition(),
-							spot->getCurrentTower()->getDamage(),
-							spot->getCurrentTower()->getType(), hacker);
-					}
-				}
-			}
-		}
-
-		for (auto& bullet : _bullets) {
-			bullet->update();
-		}
-
-		auto itH = _enemies.begin();
-		while (itH != _enemies.end()) {
-			Hacker* hacker = *itH;
-			hacker->update(getMapArray());
-			if (hacker->getLife() <= 0) {
-				itH = _enemies.erase(itH);
-			}
-			else {
-				++itH;
+			if (_currentWave <= _totalWaves) {
+				spawnWave(); // Generar una nueva oleada de enemigos
 			}
 
+			// Actualizar los enemigos en el nivel
 			for (auto& hacker : _enemies) {
+				hacker->update(getMapArray());
+
 				if (hacker->getEnd() == true) {
-					if (getEnergy() - 20 >= 0) {
+					if (getEnergy() - hacker->attackUtn() >= 0) {
 						_dying = true;
-						setEnergy(getEnergy() - 20);
-						_ui.setText(1, std::to_string(getEnergy()));
+						decreaseEnergy(hacker->attackUtn());
 					}
 					else {
+						setEnergy(0);
 						_flagGameOver = true;
 						setGameOverText();
 					}
+					_ui.setText(1, std::to_string(getEnergy()));
 					break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
 				}
 				else {
@@ -344,13 +304,69 @@ void Level::update(sf::Vector2i& mousePosition) {
 				}
 			}
 
-			if (_currentMenu->getIsVisible()) {
-				_currentMenu->update(mousePosition);
+
+			for (auto& spot : _spots)
+			{
+				for (auto& hacker : _enemies)
+				{
+					if (spot->getIsOccupied() &&
+						spot->getTransform().transformRect((
+							spot->getCurrentTower()->getBounds())).intersects(hacker->getBounds()
+							))
+					{
+						//std::cout << "COliSIONO" << std::endl;
+						if (spot->getCurrentTower()->canShoot())
+						{
+							shoot(spot->getPosition(),
+								hacker->getPosition(),
+								spot->getCurrentTower()->getDamage(),
+								spot->getCurrentTower()->getType(), hacker);
+						}
+					}
+				}
+			}
+
+			for (auto& bullet : _bullets) {
+				bullet->update();
+			}
+
+			auto itH = _enemies.begin();
+			while (itH != _enemies.end()) {
+				Hacker* hacker = *itH;
+				hacker->update(getMapArray());
+				if (hacker->getLife() <= 0) {
+					itH = _enemies.erase(itH);
+				}
+				else {
+					++itH;
+				}
+
+				for (auto& hacker : _enemies) {
+					if (hacker->getEnd() == true) {
+						if (getEnergy() - 20 >= 0) {
+							_dying = true;
+							setEnergy(getEnergy() - 20);
+							_ui.setText(1, std::to_string(getEnergy()));
+						}
+						else {
+							_flagGameOver = true;
+							setGameOverText();
+						}
+						break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
+					}
+					else {
+						_dying = false;
+					}
+				}
+
+				if (_currentMenu->getIsVisible()) {
+					_currentMenu->update(mousePosition);
+				}
 			}
 		}
-
 	}
-	else {
+	else if(_levelUpClock.getElapsedTime().asSeconds()>4) {
+
 		if (getIdLevel() < 4) { // aca digo que solo puede llegar hasta el nivel 4
 			std::cout << "NIVEL 2:" << std::endl;
 			Manager::getInstance().setNumberLevel(getIdLevel() + 1); // cambia al siguiente nivel
@@ -360,7 +376,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 		}
 	}
 }
-
 
 void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 {
@@ -372,28 +387,33 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 	{
 		target.draw(*spot, states);
 	}
-	if (!_flagGameOver) {
-		for (const auto& hacker : _enemies)
-		{
-			if (hacker->getLife() > 0) {
-				target.draw(*hacker, states);
+	if (!_finishedLevel) {
+		if (!_flagGameOver) {
+			for (const auto& hacker : _enemies)
+			{
+				if (hacker->getLife() > 0) {
+					target.draw(*hacker, states);
+				}
+			}
+			if (_currentMenu->getIsVisible())
+			{
+				target.draw(*_currentMenu, states);
+			}
+			for (auto& bullet : _bullets)
+			{
+				target.draw(*bullet, states);
+			}
+			if (_noCoinsClock.getElapsedTime() < _displayTimeNoCoins && _flagNoCoins) {
+				target.draw(_NoCoins, states); // Dibujar el texto
 			}
 		}
-		if (_currentMenu->getIsVisible())
-		{
-			target.draw(*_currentMenu, states);
-		}
-		for (auto& bullet : _bullets)
-		{
-			target.draw(*bullet, states);
-		}
-		if (_noCoinsClock.getElapsedTime() < _displayTimeNoCoins && _flagNoCoins) {
-			target.draw(_NoCoins, states); // Dibujar el texto
+		else {
+			target.draw(_gameOverSkull, states);
+			target.draw(_gameOver, states);
 		}
 	}
 	else {
-		target.draw(_gameOverSkull, states);
-		target.draw(_gameOver, states);
+		target.draw(_levelUp, states);
 	}
 
 }

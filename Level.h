@@ -58,15 +58,19 @@ protected:
 	std::list<Bullet*> _bullets;
 
 	//NUEVO:
+	sf::Font _fontNoCoins;
 	sf::Clock _noCoinsClock;
-	sf::Font _font;
 	sf::Text _NoCoins;
 	sf::Time _displayTimeNoCoins;
 	bool _flagNoCoins;
+	sf::Font _fontGameOver;
 	sf::Text _gameOver;
 	sf::Texture _textureGameOverSkull;
 	sf::Sprite _gameOverSkull;
 	bool _flagGameOver;
+	sf::Font _fontLevelUp;
+	sf::Clock _levelUpClock;
+	sf::Text _levelUp;
 
 public:
 	void virtual spawnWave() = 0;
@@ -108,6 +112,7 @@ public:
 	void setCurrentMenu(Spot*);  //SOBRECARGA DE FUNCION
 	void setInfoBtn(TowerMenu*, Spot*, int);
 	void setNoCoinsText();
+	void setLevelUpText();
 
 	void mouseCheck(sf::Vector2i&);
 	void validateClick(int, int);

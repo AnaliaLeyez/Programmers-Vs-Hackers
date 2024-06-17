@@ -76,7 +76,7 @@ void Level1::spawnWave() {
 		++_currentWave; // Incrementa el número de oleada
 		if (_currentWave <= _totalWaves) {
 			enemyIndex = 0; // Reinicia el índice para la próxima oleada
-			_enemiesPerWave += 3; // Incrementa la cantidad de enemigos para la próxima oleada
+			_enemiesPerWave += 1; // Incrementa la cantidad de enemigos para la próxima oleada
 
 			_ui.setText(2, std::to_string(getCurrentWave()));
 			spawnedGodHacker = false;
@@ -89,8 +89,8 @@ void Level1::spawnWave() {
 Level1::Level1()
 {
 	_currentWave = 1;
-	_totalWaves = 3;
-	_enemiesPerWave = 2;
+	_totalWaves = 1;
+	_enemiesPerWave = 1;
 	_timeBetweenWaves = 15;
 	//_timeBetweenEnemies = std::rand() % 15 + 1; ///ver si esta queda o se va 
 	_waveClock.restart();
@@ -167,4 +167,5 @@ Level1::Level1()
 	_currentMenu = _menu1;
 
 	setNoCoinsText(); //NUEVO
+	setLevelUpText();
 }
