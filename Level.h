@@ -8,6 +8,7 @@
 #include "TowerMenu.h"
 #include "TowerMenu1.h"
 #include "TowerMenu2.h"
+#include "TowerMenu3.h"
 #include "Tower.h"
 #include "Spot.h"
 #include "Bullet.h"
@@ -34,7 +35,7 @@ protected:
 	TowerMenu* _currentMenu;
 	TowerMenu1* _menu1 = new TowerMenu1();
 	TowerMenu2* _menu2 = new TowerMenu2();
-	TowerMenu2* _menu3 = new TowerMenu2();
+	TowerMenu3* _menu3 = new TowerMenu3();
 	int _golden;
 	int _energy;
 	sf::SoundBuffer _buffer;

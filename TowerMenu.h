@@ -9,7 +9,7 @@ protected:
 	bool _isVisible;
 	std::vector <Button*> _buttons;
 	Spot _currentSpot; //DEBERIA SER PUNTERO
-	int _NumberMenu;
+	int _NumberMenu; //CREO QUE NO LO USO
 public:
 	virtual void setCurrentTower(Tower*)=0;
 

@@ -82,19 +82,19 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 				_currentMenu->setCurrentTower(currentSp.getCurrentTower());
 
 				Tower* tower = currentSp.getCurrentTower(); // Crear una nueva instancia de la torre
-				Button* btn = _currentMenu->getButtonByIndex(0);
-				btn->setPrice(tower->getPriceUpgrade());
-				btn->setDamage(tower->getDamageUpgrade());
-				btn->setPriceText();;
-				btn->setInfo();
+				Button* btnCashSale = _currentMenu->getButtonByIndex(0);
+				btnCashSale->setPrice(tower->getSalesValue());
+				btnCashSale->setPriceText();
 				_currentMenu->setPosition(currentSp.getPosition());
 				_currentMenu->show();
+			}
+			else { //se clickeo en un spot ocupado y el menu3 era visible
+				_currentMenu->hide();
 			}
 		}
 	}
 	else 
 	{  //spot libre
-		//_currentMenu2->hide(); //Necesario, en caso q se haya estado mostrando por otro spot
 		_currentMenu = _menu1;
 		currentSp.setCurrentTower(_currentMenu->getCurrentSpot().getCurrentTower()); //me aseguro que el currentSpot esta asociado a la tower ahora
 		if (!_currentMenu->getIsVisible()) { //se clickeo en un spot libre y el menu no era visible
