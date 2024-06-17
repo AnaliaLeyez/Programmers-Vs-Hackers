@@ -3,7 +3,6 @@
 
 ButtonUpgrade::ButtonUpgrade()
 {
-	_type = 2;
 	_mouseHover = false;
 	if (!_texture.loadFromFile("img/menuContextual/button_tower_updateMenu_attack.png"))
 	{

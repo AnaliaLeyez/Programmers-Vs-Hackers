@@ -39,6 +39,7 @@ public:
 	int getSalesValue() const;
 	int getDamage() const;
 	int getDamageUpgrade() const;
+	float getFireRate() const;
 	int getRange() const;
 	int getUpgradesAmount() const;
 	int getSpotNumber() const;
