@@ -24,7 +24,7 @@ protected:
 	int _type; //new
 
 	sf::Clock _clock;
-	int _cooldown;
+	//int _cooldown;
 	float _fireRate;
 	Bullet* _bullet;
 
