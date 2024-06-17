@@ -86,6 +86,31 @@ void Level::setSpots(int arr[][30], std::vector<Spot*>& spots, int cant) {
 }
 void Level::setCurrentSpot(Spot sp) { _currentMenu->setCurrentSpot(sp); }
 void Level::setCurrentMenu(TowerMenu* menu) { _currentMenu = menu; }
+void Level::setCurrentMenu(Spot* currentSp)
+{
+	_currentMenu->setCurrentSpot(*currentSp); //guardo el nro de spot en el tower Menu2;
+	_currentMenu->setCurrentTower(currentSp->getCurrentTower());
+
+	setInfoBtn(_currentMenu, currentSp, 0); //debe recibir Tw*, *_currentMenu e Index
+	if (_currentMenu->getNumberMenu() == 2) {  //solo en el menu 2 se setea upgrade
+		setInfoBtn(_currentMenu, currentSp, 1);
+	}
+	_currentMenu->setPosition(currentSp->getPosition());
+}
+void Level::setInfoBtn(TowerMenu* menu, Spot* currentSp, int index)
+{
+	Tower* tower = currentSp->getCurrentTower();
+	Button* btn = _currentMenu->getButtonByIndex(index);
+	if (index == 1) {
+		btn->setPrice(tower->getPriceUpgrade());
+		btn->setDamage(tower->getDamageUpgrade());
+		btn->setInfo();
+	}
+	else {
+		btn->setPrice(tower->getSalesValue());
+	}
+	btn->setPriceText();
+}
 void Level::setNoCoinsText()
 {
 	if (!_font.loadFromFile("fuentes/TowerPrice.ttf"))

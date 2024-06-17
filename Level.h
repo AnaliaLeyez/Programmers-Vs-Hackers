@@ -101,10 +101,12 @@ public:
 	void setSound(bool);
 	void setTowersAvailable(Tower*);
 	void setActiveTowers(Tower*);
-	void setSpot(Spot*); //setea la info de un spot en particular
+	void setSpot(Spot*);
 	void setSpots(int arr[][30], std::vector<Spot*>&, int);
 	void setCurrentSpot(Spot); //para que el currentMenu tenga su Spot asociado
 	void setCurrentMenu(TowerMenu*);
+	void setCurrentMenu(Spot*);  //SOBRECARGA DE FUNCION
+	void setInfoBtn(TowerMenu*, Spot*, int);
 	void setNoCoinsText();
 
 	void mouseCheck(sf::Vector2i&);

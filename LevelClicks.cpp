@@ -53,45 +53,24 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot& currentSp) {
 	if (currentSp.getIsOccupied()) { //spot ocupado
 		if (currentSp.getCurrentTower()->getUpgradesAmount() != 0) {
 			_currentMenu = _menu2;
-			if (!_currentMenu->getIsVisible()) { //se clickeo en un spot ocupado y el menu2 no era visible
-				std::cout << "--- ACA VA EL MENU 2 ---" << std::endl;
-				_currentMenu->setCurrentSpot(currentSp); //guardo el nro de spot en el tower Menu2;
-				_currentMenu->setCurrentTower(currentSp.getCurrentTower());
-
-				Tower* tower = currentSp.getCurrentTower(); // CREAR UNA FUNCION PARA ESTAS LINEAS
-				Button* btnUp = _currentMenu->getButtonByIndex(1);
-				btnUp->setPrice(tower->getPriceUpgrade());
-				btnUp->setDamage(tower->getDamageUpgrade());
-				btnUp->setPriceText();
-				btnUp->setInfo();
-				Button* btnCashSale = _currentMenu->getButtonByIndex(0);
-				btnCashSale->setPrice(tower->getSalesValue());
-				btnCashSale->setPriceText();
-				_currentMenu->setPosition(currentSp.getPosition());
-				_currentMenu->show();
-			}
-			else { //se clickeo en un spot ocupado y el menu2 era visible
-				_currentMenu->hide();
-			}
 		}
 		else {
 			_currentMenu = _menu3;
-			if (!_currentMenu->getIsVisible()) { //se clickeo en un spot ocupado y el menu2 no era visible
-				std::cout << "--- ACA VA EL MENU 3 ---" << std::endl;
-				_currentMenu->setCurrentSpot(currentSp); //guardo el nro de spot en el tower Menu2;
-				_currentMenu->setCurrentTower(currentSp.getCurrentTower());
-
-				Tower* tower = currentSp.getCurrentTower(); // Crear una nueva instancia de la torre
-				Button* btnCashSale = _currentMenu->getButtonByIndex(0);
-				btnCashSale->setPrice(tower->getSalesValue());
-				btnCashSale->setPriceText();
-				_currentMenu->setPosition(currentSp.getPosition());
-				_currentMenu->show();
-			}
-			else { //se clickeo en un spot ocupado y el menu3 era visible
-				_currentMenu->hide();
-			}
 		}
+
+		
+		if (!_currentMenu->getIsVisible()) { //se clickeo en un spot ocupado y el menu2 o 3 no era visible
+
+
+			//TODO ESTO EN UNA FUNCION:
+			std::cout << "--- ACA VA EL MENU 2 o 3 ---" << std::endl;
+			setCurrentMenu(&currentSp);
+			_currentMenu->show();
+		}
+		else { //se clickeo en un spot ocupado y el menu2 era visible
+			_currentMenu->hide();
+		}
+		
 	}
 	else 
 	{  //spot libre
