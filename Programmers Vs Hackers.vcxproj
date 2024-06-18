@@ -192,6 +192,7 @@
     <ClInclude Include="ButtonMaxiWenner.h" />
     <ClInclude Include="ButtonUpgrade.h" />
     <ClInclude Include="Collisionable.h" />
+    <ClInclude Include="FileLevel.h" />
     <ClInclude Include="HackerDios.h" />
     <ClInclude Include="HackerJunior.h" />
     <ClInclude Include="HackerSemiSr.h" />
