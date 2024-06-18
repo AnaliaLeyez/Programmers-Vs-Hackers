@@ -22,3 +22,13 @@ int HackerTrainee::attackUtn()
 {
 	return 30;
 }
+
+void HackerTrainee::saySth()
+{
+	if (!_bufferHacker.loadFromFile("music/TraineeSaySth.wav")) {
+		throw std::runtime_error("Error al cargar Frase Hacker Trainee");
+	};
+	_soundHacker.setBuffer(_bufferHacker);
+	_soundHacker.setVolume(25);
+	_soundHacker.play();
+}

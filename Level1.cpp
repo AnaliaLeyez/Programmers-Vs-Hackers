@@ -21,10 +21,10 @@ void Level1::spawnWave() {
 	std::srand(std::time(nullptr));
 	//los contadores son de tipo static porque asi las variables mantienen su valor incluso
 	//despues de que la funcion haya terminado de ejecutarse
-	static int enemyIndex = 0;
+	static int enemyIndex = 1;
 	static bool spawnedGodHacker = false;
 
-	if (enemyIndex < _enemiesPerWave) {
+	if (enemyIndex <= _enemiesPerWave) {
 		// Genera un nuevo enemigo
 		int randomTime = std::rand() % 4 + 1;
 		if (_enemyClock.getElapsedTime().asSeconds() >= randomTime) {
@@ -35,6 +35,9 @@ void Level1::spawnWave() {
 				HackerTrainee* hk = new HackerTrainee();
 				hk->setPosition(_hackerStartPosition);
 				_enemies.push_back(hk);
+				if (enemyIndex == 1) {
+					hk->saySth();
+				}
 			}
 			break;
 			case 2:
@@ -43,12 +46,19 @@ void Level1::spawnWave() {
 					HackerTrainee* hk = new HackerTrainee();
 					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
+					if (enemyIndex == 1) {
+						hk->saySth();
+					}
 				}
 				else {
 					HackerJunior* hk = new HackerJunior();
 					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
+					if (enemyIndex == 1) {
+						hk->saySth();
+					}
 				}
+				
 			}
 			break;
 			case 3:
@@ -57,11 +67,17 @@ void Level1::spawnWave() {
 					HackerSemiSr* hk = new HackerSemiSr();
 					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
+					if (enemyIndex == 1) {
+						hk->saySth();
+					}
 				}
 				else {
 					HackerDios* hk = new HackerDios();
 					hk->setPosition(_hackerStartPosition);
 					_enemies.push_back(hk);
+					if (enemyIndex == 1) {
+						hk->saySth();
+					}
 				}
 			}
 			break;
@@ -72,11 +88,11 @@ void Level1::spawnWave() {
 			_enemyClock.restart();
 		}
 	}
-	else if(_waveClock.getElapsedTime().asSeconds()>_timeBetweenWaves && _enemies.empty() && enemyIndex==_enemiesPerWave) {
+	else if(_waveClock.getElapsedTime().asSeconds()>_timeBetweenWaves && _enemies.empty() && enemyIndex>_enemiesPerWave) {
 		++_currentWave; // Incrementa el número de oleada
 		if (_currentWave <= _totalWaves) {
-			enemyIndex = 0; // Reinicia el índice para la próxima oleada
-			_enemiesPerWave += 1; // Incrementa la cantidad de enemigos para la próxima oleada
+			enemyIndex = 1; // Reinicia el índice para la próxima oleada
+			_enemiesPerWave += 2; // Incrementa la cantidad de enemigos para la próxima oleada
 
 			_ui.setText(2, std::to_string(getCurrentWave()));
 			spawnedGodHacker = false;
@@ -89,7 +105,7 @@ void Level1::spawnWave() {
 Level1::Level1()
 {
 	_currentWave = 1;
-	_totalWaves = 1;
+	_totalWaves = 3;
 	_enemiesPerWave = 1;
 	_timeBetweenWaves = 15;
 	//_timeBetweenEnemies = std::rand() % 15 + 1; ///ver si esta queda o se va 

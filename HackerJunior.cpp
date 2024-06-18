@@ -25,6 +25,12 @@ int HackerJunior::attackUtn() {
 	return 100;
 }
 
-// int HackerJunior::getType() const  {
-//	return 1; // Identificador único para HackerJunior
-//}
+void HackerJunior::saySth()
+{
+	if (!_bufferHacker.loadFromFile("music/JuniorSaySth.wav")) {
+		throw std::runtime_error("Error al cargar Frase Hacker Junior");
+	};
+	_soundHacker.setBuffer(_bufferHacker);
+	_soundHacker.setVolume(25);
+	_soundHacker.play();
+}

@@ -24,3 +24,13 @@ int HackerSemiSr::attackUtn() {
 
 	return 60;
 }
+
+void HackerSemiSr::saySth()
+{
+	if (!_bufferHacker.loadFromFile("music/SemiSrSaySth.wav")) {
+		throw std::runtime_error("Error al cargar Frase Hacker SemiSr");
+	};
+	_soundHacker.setBuffer(_bufferHacker);
+	_soundHacker.setVolume(25);
+	_soundHacker.play();
+}

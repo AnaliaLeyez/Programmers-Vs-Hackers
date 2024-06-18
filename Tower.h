@@ -17,7 +17,7 @@ protected:
 	int _priceUpgrade;
 	int _salesValue;
 
-	//audios=
+	//audios
 	sf::SoundBuffer _bufferTeacher;
 	sf::Sound _soundTeacher;
 

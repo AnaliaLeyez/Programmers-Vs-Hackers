@@ -21,3 +21,13 @@ int HackerDios::attackUtn() {
 
 	return 200;
 }
+
+void HackerDios::saySth()
+{
+	if (!_bufferHacker.loadFromFile("music/TraineeSaySth.wav")) {
+		throw std::runtime_error("Error al cargar Frase Hacker Dios");
+	};
+	_soundHacker.setBuffer(_bufferHacker);
+	_soundHacker.setVolume(25);
+	_soundHacker.play();
+}

@@ -1,6 +1,8 @@
 #pragma once
-#include "Collisionable.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Audio/Sound.hpp>
+#include "Collisionable.h"
 
 class Hacker :public sf::Drawable, public sf::Transformable, public Collisionable
 {
@@ -10,7 +12,10 @@ protected:
 	std::string _name;
 	sf::Vector2f _velocity;
 	sf::Vector2f _direction;
-	//int _seniority;
+	//audios
+	sf::SoundBuffer _bufferHacker;
+	sf::Sound _soundHacker;
+
 	int _life;
 	int _damage;
 	bool _isABoss;
@@ -19,7 +24,7 @@ protected:
 	bool _reachedEnd; // llego al final del camino ?
 public:
 	virtual int attackUtn() = 0;
-
+	virtual void saySth() = 0;
 	int getLife() const;
 	int getDamage() const;
 	sf::Vector2f getVelocity() const;
