@@ -165,6 +165,8 @@
     <ClCompile Include="Map1.cpp" />
     <ClCompile Include="Map2.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuHome.cpp" />
+    <ClCompile Include="MenuLevels.cpp" />
     <ClCompile Include="TowerMenu3.cpp" />
     <ClCompile Include="MenuAbstract.cpp" />
     <ClCompile Include="Spot.cpp" />
@@ -206,6 +208,8 @@
     <ClInclude Include="Map1.h" />
     <ClInclude Include="Map2.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuHome.h" />
+    <ClInclude Include="MenuLevels.h" />
     <ClInclude Include="TowerMenu3.h" />
     <ClInclude Include="MenuAbstract.h" />
     <ClInclude Include="resource.h" />
