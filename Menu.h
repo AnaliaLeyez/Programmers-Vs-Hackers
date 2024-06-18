@@ -15,10 +15,7 @@ protected:
 public:
 	Menu();
 	virtual void validateClick(int, int, sf::RenderWindow&, int&)=0;
-	//void validateClick(int, int, MenuHome&, sf::RenderWindow&, int&);
-	bool getMusicPlaying() const;
 	void setMusicPlaying(bool);
-	sf::Sound getSound() const;
 	void setSound(bool);
 
 	void update() {}

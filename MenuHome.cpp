@@ -1,3 +1,4 @@
+#include "MenuAbstract.h"
 #include "MenuHome.h"
 
 MenuHome::MenuHome() : Menu() {
@@ -46,11 +47,9 @@ sf::Text MenuHome::getText4() const { return _text[3]; }
 sf::Text MenuHome::getText5() const { return _text[4]; }
 bool MenuHome::getMusicPlaying() const { return _musicPlaying; }
 sf::Sound MenuHome::getSound() const { return _sound; }
-void MenuHome::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 
-void MenuHome::setSound(bool play) {
+void MenuHome::setSoundText(bool play) {
 	if (play) {
-		_sound.play();
 		_text[3].setString("Pause music");
 	}
 	else {
@@ -62,19 +61,21 @@ void MenuHome::setSound(bool play) {
 void MenuHome::validateClick(int mousex, int mousey, sf::RenderWindow& window, int& view)
 {
 	if (getText1().getGlobalBounds().contains(mousex, mousey)) {
+		setSoundText(false);
 		setSound(false);
 		setMusicPlaying(false);
 		view = 2;
 	} else if (getText2().getGlobalBounds().contains(mousex, mousey)) {
-		
-		view = 2;
+		MenuAbstract::getInstance().setNumberMenu(2);
 	}
 	else if (getText4().getGlobalBounds().contains(mousex, mousey)) {
 		if (getMusicPlaying()) {
+			setSoundText(false);
 			setSound(false);
 			setMusicPlaying(false);
 		}		 
 		else {
+			setSoundText(true);
 			setSound(true);
 			setMusicPlaying(true);
 		}

@@ -13,19 +13,36 @@ MenuAbstract& MenuAbstract::getInstance() {
 	return *MenuAbstract::_currentInstance;
 }
 
-void MenuAbstract::validateClick(int mousex, int mousey, sf::RenderWindow& window, int& view)
+void MenuAbstract::setNumberMenu(int idMenu)
 {
-	_menu->validateClick(mousex, mousey, window, view);
+		if (_currentMenu != nullptr) {
+			delete _currentMenu;
+		}
+		switch (idMenu)
+		{
+		case 1:
+			_currentMenu = new MenuHome();
+			break;
+		case 2:
+			_currentMenu = new MenuLevels();
+			break;
+		default:
+			break;
+		}
 }
 
-MenuAbstract::MenuAbstract() {
-	_menu = new MenuHome();
-	//_menu = new MenuLevels();
+void MenuAbstract::validateClick(int mousex, int mousey, sf::RenderWindow& window, int& view)
+{
+	_currentMenu->validateClick(mousex, mousey, window, view);
+}
+
+MenuAbstract::MenuAbstract(int idMenu) : _currentMenu(nullptr) {
+	setNumberMenu(idMenu);
 }
 
 void MenuAbstract::draw(sf::RenderTarget& target, sf::RenderStates states)const {
-	target.draw(*_menu, states);
+	target.draw(*_currentMenu, states);
 }
 void MenuAbstract::update() {
-	_menu->update();
+	_currentMenu->update();
 }

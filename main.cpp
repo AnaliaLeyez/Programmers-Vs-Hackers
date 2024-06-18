@@ -44,12 +44,6 @@ int main()
 				break;
 				case 2:
 				{
-					//MenuLevels& menuLevels = MenuLevels::getInstance();
-					//menuLevels.validateClick(mousex, mousey, window, view);
-				}
-				break;
-				case 3:
-				{
 					Manager& mg = Manager::getInstance();
 					mg.validateClick(mousex, mousey, window);
 				}
