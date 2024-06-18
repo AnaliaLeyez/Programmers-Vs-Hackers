@@ -30,6 +30,26 @@ TowerKloster::TowerKloster()
 	_clock.restart();
 }
 
+void TowerKloster::sayHi()
+{
+	if (!_bufferTeacher.loadFromFile("music/KlosterHi.wav")) {
+		throw std::runtime_error("Error al cargar Saludo Kloster");
+	};
+	_soundTeacher.setBuffer(_bufferTeacher);
+	_soundTeacher.setVolume(25);
+	_soundTeacher.play();
+}
+
+void TowerKloster::sayBye()
+{
+	if (!_bufferTeacher.loadFromFile("music/KlosterBye.wav")) {
+		throw std::runtime_error("Error al cargar Saludo Kloster");
+	};
+	_soundTeacher.setBuffer(_bufferTeacher);
+	_soundTeacher.setVolume(25);
+	_soundTeacher.play();
+}
+
 void TowerKloster::upgrade()
 {
 	switch (_upgradesAmount)

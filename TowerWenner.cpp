@@ -30,6 +30,26 @@ TowerWenner::TowerWenner()
 	_clock.restart();
 }
 
+void TowerWenner::sayHi()
+{
+	if (!_bufferTeacher.loadFromFile("music/WennerHi.wav")) {
+		throw std::runtime_error("Error al cargar Saludo Kloster");
+	};
+	_soundTeacher.setBuffer(_bufferTeacher);
+	_soundTeacher.setVolume(25);
+	_soundTeacher.play();
+}
+
+void TowerWenner::sayBye()
+{
+	if (!_bufferTeacher.loadFromFile("music/WennerBye.wav")) {
+		throw std::runtime_error("Error al cargar Saludo Kloster");
+	};
+	_soundTeacher.setBuffer(_bufferTeacher);
+	_soundTeacher.setVolume(25);
+	_soundTeacher.play();
+}
+
 void TowerWenner::upgrade()
 {
 	switch (_upgradesAmount)

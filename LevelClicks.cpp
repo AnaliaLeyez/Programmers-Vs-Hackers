@@ -100,6 +100,7 @@ void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 
 				tower->setSpotNumber(sp.getSpotNumber());
 				tower->setPosition(0,0);
+				tower->sayHi();
 				setActiveTowers(tower);
 				setSpot(&sp); //CUIDADO esta linea parece innecesaria pero la saco y se rompe el programa
 		}
@@ -132,6 +133,7 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 		}
 	}
 	else if (btn->getBtnNumber() == 2) { //se hizo click en el boton 2 que es reventa:
+		tower->sayBye();
 		resellTower(sp);
 	}
 

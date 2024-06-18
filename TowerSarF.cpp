@@ -31,6 +31,26 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 	_clock.restart();
 }
 
+void TowerSarF::sayHi()
+{
+	if (!_bufferTeacher.loadFromFile("music/SarFHi.wav")) {
+		throw std::runtime_error("Error al cargar Saludo Kloster");
+	};
+	_soundTeacher.setBuffer(_bufferTeacher);
+	_soundTeacher.setVolume(25);
+	_soundTeacher.play();
+}
+
+void TowerSarF::sayBye()
+{
+	if (!_bufferTeacher.loadFromFile("music/SarFBye.wav")) {
+		throw std::runtime_error("Error al cargar Saludo Kloster");
+	};
+	_soundTeacher.setBuffer(_bufferTeacher);
+	_soundTeacher.setVolume(25);
+	_soundTeacher.play();
+}
+
 void TowerSarF::upgrade()
 {
 	switch (_upgradesAmount)

@@ -33,7 +33,27 @@ TowerBrian::TowerBrian()
 	_clock.restart();
 }
 
-void TowerBrian::upgrade() 
+void TowerBrian::sayHi()
+{
+	if (!_bufferTeacher.loadFromFile("music/BrianHi.wav")) {
+		throw std::runtime_error("Error al cargar Saludo Brian");
+	};
+	_soundTeacher.setBuffer(_bufferTeacher);
+	_soundTeacher.setVolume(25);
+	_soundTeacher.play();
+}
+
+void TowerBrian::sayBye()
+{
+	if (!_bufferTeacher.loadFromFile("music/BrianBye.wav")) {
+		throw std::runtime_error("Error al cargar Saludo Brian");
+	};
+	_soundTeacher.setBuffer(_bufferTeacher);
+	_soundTeacher.setVolume(25);
+	_soundTeacher.play();
+}
+
+void TowerBrian::upgrade()
 {
 	switch (_upgradesAmount)
 	{
