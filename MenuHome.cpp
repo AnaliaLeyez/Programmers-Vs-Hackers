@@ -65,6 +65,9 @@ void MenuHome::validateClick(int mousex, int mousey, sf::RenderWindow& window, i
 		setSound(false);
 		setMusicPlaying(false);
 		view = 2;
+	} else if (getText2().getGlobalBounds().contains(mousex, mousey)) {
+		
+		view = 2;
 	}
 	else if (getText4().getGlobalBounds().contains(mousex, mousey)) {
 		if (getMusicPlaying()) {
