@@ -1,3 +1,4 @@
+#include "FileLevel.h"
 #include "MenuAbstract.h"
 #include "MenuHome.h"
 
@@ -12,7 +13,7 @@ MenuHome::MenuHome() : Menu() {
 		{
 		case 0:
 			posY = 100;
-			texto = "New Game";
+			texto = "Continue Game";
 			break;
 		case 1:
 			posY = 200;
@@ -66,6 +67,8 @@ void MenuHome::validateClick(int mousex, int mousey, sf::RenderWindow& window, i
 		setMusicPlaying(false);
 		view = 2;
 	} else if (getText2().getGlobalBounds().contains(mousex, mousey)) {
+		FileLevels arc;
+		arc.reset();
 		MenuAbstract::getInstance().setNumberMenu(2);
 	}
 	else if (getText4().getGlobalBounds().contains(mousex, mousey)) {

@@ -1,38 +1,46 @@
+#include "FileLevel.h"
 #include "MenuAbstract.h"
 #include "MenuLevels.h"
 
 MenuLevels::MenuLevels() : Menu() {
+	FileLevels arc;
+	Levels reg;
 	//texto
 	for (int i = 0; i < 5; i++) {
 		_text[i].setFont(_font);
 		_text[i].setCharacterSize(30);
 		int posY;
 		std::string texto;
+
+		reg = arc.read(i);
+
 		switch (i)
 		{
 		case 0:
 			posY = 100;
-			texto = "Game";
 			break;
 		case 1:
 			posY = 200;
-			texto = "Game";
 			break;
 		case 2:
 			posY = 300;
-			texto = "About";
 			break;
 		case 3:
 			posY = 400;
-			texto = "music";
 			break;
 		case 4:
 			posY = 500;
-			texto = "Exit";
 			break;
 		default:
 			break;
 		}
+		if (reg.getStatus()) {
+			texto = reg.getName();
+		}
+		else {
+			texto = "";
+		}
+		
 		_text[i].setPosition(250, posY);
 		_text[i].setString(texto);
 		_text[i].setOrigin(_text[i].getGlobalBounds().getPosition().x / 2, _text[i].getGlobalBounds().height / 2);
