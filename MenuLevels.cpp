@@ -34,6 +34,7 @@ MenuLevels::MenuLevels() : Menu() {
 		default:
 			break;
 		}
+
 		if (reg.getStatus()) {
 			texto = reg.getName();
 		}

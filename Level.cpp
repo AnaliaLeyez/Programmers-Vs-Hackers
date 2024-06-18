@@ -5,6 +5,7 @@
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>
 
+#include "FileLevel.h"
 #include "UI.h"
 #include "Map.h"
 #include "Manager.h"
@@ -248,6 +249,11 @@ void Level::checkLevelCompletion() {
 	if (_currentWave > _totalWaves && _enemies.empty()) {
 		_finishedLevel = true;
 		_levelUpClock.restart();
+		FileLevels arc;
+		Levels reg;
+		reg=arc.read(_idLevel);
+		reg.setStatus(true);
+		arc.edit(reg,_idLevel);
 	}
 }
 

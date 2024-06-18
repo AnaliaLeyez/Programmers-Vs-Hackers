@@ -62,10 +62,7 @@ void MenuHome::setSoundText(bool play) {
 void MenuHome::validateClick(int mousex, int mousey, sf::RenderWindow& window, int& view)
 {
 	if (getText1().getGlobalBounds().contains(mousex, mousey)) {
-		setSoundText(false);
-		setSound(false);
-		setMusicPlaying(false);
-		view = 2;
+		MenuAbstract::getInstance().setNumberMenu(2);
 	} else if (getText2().getGlobalBounds().contains(mousex, mousey)) {
 		FileLevels arc;
 		arc.reset();
