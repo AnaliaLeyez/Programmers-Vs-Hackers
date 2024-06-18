@@ -254,6 +254,9 @@
     <ClInclude Include="TowerMenu3.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="FileLevel.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Programmers Vs Hackers.rc">

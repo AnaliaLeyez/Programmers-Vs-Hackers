@@ -4,10 +4,13 @@
 #include <SFML/Audio/Sound.hpp>
 
 #include "MenuAbstract.h"
+#include "FileLevel.h"
 #include "Manager.h"
 
 int main()
 {
+	//altaLevels();  //ESTO YA SE HIZO! NO SE REPITE
+	leerLevels();
 	sf::RenderWindow window(sf::VideoMode(960, 640), "Programmers Vs Hackers");
 	window.setFramerateLimit(60);
 	sf::Image icon;
