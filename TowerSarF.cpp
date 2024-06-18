@@ -31,6 +31,8 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 	_clock.restart();
 }
 
+Tower* TowerSarF::clone() const { return new TowerSarF(); }
+
 void TowerSarF::sayHi()
 {
 	if (!_bufferTeacher.loadFromFile("music/SarFHi.wav")) {

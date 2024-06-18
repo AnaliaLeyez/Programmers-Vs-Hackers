@@ -30,6 +30,8 @@ TowerWenner::TowerWenner()
 	_clock.restart();
 }
 
+Tower* TowerWenner::clone() const { return new TowerWenner(); }
+
 void TowerWenner::sayHi()
 {
 	if (!_bufferTeacher.loadFromFile("music/WennerHi.wav")) {

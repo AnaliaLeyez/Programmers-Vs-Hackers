@@ -33,6 +33,8 @@ TowerBrian::TowerBrian()
 	_clock.restart();
 }
 
+Tower* TowerBrian::clone() const { return new TowerBrian(); }
+
 void TowerBrian::sayHi()
 {
 	if (!_bufferTeacher.loadFromFile("music/BrianHi.wav")) {

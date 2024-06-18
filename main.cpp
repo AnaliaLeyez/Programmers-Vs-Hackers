@@ -10,7 +10,7 @@
 int main()
 {
 	//altaLevels();  //ESTO YA SE HIZO! NO SE REPITE
-	leerLevels();
+	//leerLevels();  //MUESTRA COMO ESTA ACTUALMENTE EL ARCHIVO
 	sf::RenderWindow window(sf::VideoMode(960, 640), "Programmers Vs Hackers");
 	window.setFramerateLimit(60);
 	sf::Image icon;

@@ -4,7 +4,7 @@ class TowerWenner : public Tower
 {
 public:
 	TowerWenner();
-	Tower* clone() const override { return new TowerWenner(*this); }
+	Tower* clone() const override;
 	void sayHi() override;
 	void sayBye() override;
 	void upgrade()override;

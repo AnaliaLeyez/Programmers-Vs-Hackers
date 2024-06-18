@@ -30,6 +30,8 @@ TowerKloster::TowerKloster()
 	_clock.restart();
 }
 
+Tower* TowerKloster::clone() const { return new TowerKloster(); }
+
 void TowerKloster::sayHi()
 {
 	if (!_bufferTeacher.loadFromFile("music/KlosterHi.wav")) {
