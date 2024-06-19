@@ -63,7 +63,8 @@ void MenuHome::validateClick(int mousex, int mousey, sf::RenderWindow& window, i
 {
 	if (getText1().getGlobalBounds().contains(mousex, mousey)) {
 		MenuAbstract::getInstance().setNumberMenu(2);
-	} else if (getText2().getGlobalBounds().contains(mousex, mousey)) {
+	}
+	else if (getText2().getGlobalBounds().contains(mousex, mousey)) {
 		FileLevels arc;
 		arc.reset();
 		MenuAbstract::getInstance().setNumberMenu(2);
@@ -79,8 +80,7 @@ void MenuHome::validateClick(int mousex, int mousey, sf::RenderWindow& window, i
 			setSound(true);
 			setMusicPlaying(true);
 		}
-	}
-	if (getText5().getGlobalBounds().contains(mousex, mousey)) {
+	}else if (getText5().getGlobalBounds().contains(mousex, mousey)) {
 		window.close();
 	}
 }

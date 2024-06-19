@@ -4,7 +4,7 @@
 class MenuLevels : public Menu
 {
 private:
-	sf::Text _text[5];
+	sf::Text _text[6];
 public:
 	MenuLevels();
 	sf::Text getText1() const;
@@ -12,6 +12,7 @@ public:
 	sf::Text getText3() const;
 	sf::Text getText4() const;
 	sf::Text getText5() const;
+	sf::Text getText6() const;
 
 	void validateClick(int, int, sf::RenderWindow&, int&) override;
 
