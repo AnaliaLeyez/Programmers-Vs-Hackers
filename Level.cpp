@@ -194,7 +194,6 @@ void Level::sell(Tower* tower, Spot& currentSpot) {
 void Level::resellTower(Spot& sp) {
 	Tower* tower = sp.getCurrentTower();
 	int resaleValue = tower->getSalesValue();
-	std::cout << "Valor reventa:" << resaleValue << std::endl;
 	setGolden(getGolden() + resaleValue); // Agregar el valor de reventa al oro del jugador
 	_ui.setText(0, std::to_string(getGolden()));
 	sp.clearCurrentTower(); // Limpiar la torre del spot
@@ -230,7 +229,6 @@ void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, in
 		if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
 		{
 			hacker->takeDamage(bullet->getDamage());
-			std::cout << "Vida Hacker" << hacker->getLife() << std::endl;
 			delete bullet;
 			it = _bullets.erase(it);
 		}/*else if (.....)  //ACA SE BORRARIAN LAS BALAS
@@ -322,7 +320,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 							spot->getCurrentTower()->getBounds())).intersects(hacker->getBounds()
 							))
 					{
-						//std::cout << "COliSIONO" << std::endl;
 						if (spot->getCurrentTower()->canShoot())
 						{
 							shoot(spot->getPosition(),
@@ -376,7 +373,6 @@ void Level::update(sf::Vector2i& mousePosition) {
 	else if(_levelUpClock.getElapsedTime().asSeconds()>4) {
 
 		if (getIdLevel() < 5) { // aca digo que solo puede llegar hasta el nivel 5
-			std::cout << "NIVEL 2:" << std::endl;
 			Manager::getInstance().setNumberLevel(getIdLevel() + 1); // cambia al siguiente nivel
 		}
 		else {

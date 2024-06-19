@@ -23,7 +23,7 @@ void Level1::spawnWave() {
 	//despues de que la funcion haya terminado de ejecutarse
 	static int enemyIndex = 1;
 	static bool spawnedGodHacker = false;
-
+	Hacker* hk;
 	if (enemyIndex <= _enemiesPerWave) {
 		// Genera un nuevo enemigo
 		int randomTime = std::rand() % 4 + 1;
@@ -32,57 +32,35 @@ void Level1::spawnWave() {
 			{
 			case 1:
 			{
-				HackerTrainee* hk = new HackerTrainee();
-				hk->setPosition(_hackerStartPosition);
-				_enemies.push_back(hk);
-				if (enemyIndex == 1) {
-					hk->saySth();
-				}
+				hk = new HackerTrainee();
 			}
 			break;
 			case 2:
 			{
 				if (enemyIndex % 2 == 0) {
-					HackerTrainee* hk = new HackerTrainee();
-					hk->setPosition(_hackerStartPosition);
-					_enemies.push_back(hk);
-					if (enemyIndex == 1) {
-						hk->saySth();
-					}
+					hk = new HackerTrainee();
 				}
 				else {
-					HackerJunior* hk = new HackerJunior();
-					hk->setPosition(_hackerStartPosition);
-					_enemies.push_back(hk);
-					if (enemyIndex == 1) {
-						hk->saySth();
-					}
+					hk = new HackerJunior();
 				}
-				
 			}
 			break;
 			case 3:
+			default:
 			{
 				if (enemyIndex % 3 != 0) {
-					HackerSemiSr* hk = new HackerSemiSr();
-					hk->setPosition(_hackerStartPosition);
-					_enemies.push_back(hk);
-					if (enemyIndex == 1) {
-						hk->saySth();
-					}
+					hk = new HackerSemiSr();
 				}
 				else {
-					HackerDios* hk = new HackerDios();
-					hk->setPosition(_hackerStartPosition);
-					_enemies.push_back(hk);
-					if (enemyIndex == 1) {
-						hk->saySth();
-					}
+					hk = new HackerDios();
 				}
 			}
 			break;
-			default:
-				break;
+			}
+			hk->setPosition(_hackerStartPosition);
+			_enemies.push_back(hk);
+			if (enemyIndex == 1) {
+				hk->saySth();
 			}
 			++enemyIndex;
 			_enemyClock.restart();

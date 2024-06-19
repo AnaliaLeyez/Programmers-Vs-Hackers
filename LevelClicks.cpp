@@ -53,8 +53,7 @@ void Level::manageClickOnSpot(int mousex, int mousey, Spot* currentSp) {
 
 	if (currentSp->getIsOccupied()) { //spot ocupado
 		currentSp->getCurrentTower()->getUpgradesAmount() != 0 ? _currentMenu = _menu2 : _currentMenu = _menu3;
-			std::cout << "--- ACA VA EL MENU 2 o 3 ---" << std::endl;
-			setCurrentMenu(currentSp);
+			setCurrentMenu(currentSp);  //Menu2 o 3 segun corresponda
 	}
 	else 
 	{  //spot libre
@@ -116,9 +115,8 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 	Button* btn = _currentMenu->validateClickOnButton(mousex, mousey, sp);
 	Tower* tower = sp.getCurrentTower();
 
-	if (btn->getBtnNumber() == 1) {  //se hizo click en el boton 1 que es upgrade:
-		
-		std::cout << "UPGRADE" << std::endl;
+	if (btn->getBtnNumber() == 1) {  //se hizo click en el boton 1 que es UPGRADE
+	
 		if (validateSale(tower, false)) { //validar si alcanza el dinero
 			
 				sell(tower, sp);
@@ -132,7 +130,7 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 			_noCoinsClock.restart(); // reseteo el clock para que se muestre el cartel
 		}
 	}
-	else if (btn->getBtnNumber() == 2) { //se hizo click en el boton 2 que es reventa:
+	else if (btn->getBtnNumber() == 2) { //se hizo click en el boton 2 que es REVENTA:
 		tower->sayBye();
 		resellTower(sp);
 	}
