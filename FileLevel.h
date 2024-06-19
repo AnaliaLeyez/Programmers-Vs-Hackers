@@ -20,76 +20,23 @@ private:
 	char _name[40];
 	bool _status;
 public:
-    int getId() const { return _id; }
-    std::string getName() const { return _name; }
-    bool getStatus() const { return _status; }
-    void setId(int i) { _id = i; }
-    void setStatus(bool s) { _status = s; }
-    //void Cargar(int i) {
-    //    std::cout << "NOMBRE: ";
-    //    cargarCadena(_name, 39);
-    //    _id=i;
-    //    i==0 ? _status = true : _status = false;
-    //}
-    //void Mostrar() {
-    //    std::cout << "NOMBRE: " << _name << std::endl;
-    //    std::cout << "ID: " << _id << std::endl;
-    //    std::cout << "ESTADO: " << _status << std::endl << std::endl;
-    //}
+    int getId() const;
+    std::string getName() const;
+    bool getStatus() const;
+    void setId(int i);
+    void setStatus(bool s);
+    //void Cargar(int i);
+    void Mostrar();
 };
 
 class FileLevels {
 private:
     char name[20]= "unlockedLevels.dat";
 public:
-    Levels read(int pos) {
-        Levels reg;
-        FILE* p;
-        fopen_s(&p, name, "rb");
-        if (p != nullptr) {
-            fseek(p, pos * sizeof reg, 0);
-            fread(&reg, sizeof reg, 1, p);
-            fclose(p);
-            return reg;
-        }
-        else {
-            reg.setId(-1);
-            return reg;
-        }
-    }
-    void save(Levels reg) {
-        FILE* p;
-        fopen_s(&p, name, "ab");
-        if (p != nullptr) {
-            fwrite(&reg, sizeof reg, 1, p);
-            fclose(p);
-        }
-        else return;
-    }
-    void edit(Levels reg, int pos) {
-        FILE* p;
-        fopen_s(&p, name, "rb+");
-        if (p != nullptr) {
-        fseek(p, pos * sizeof(Levels), 0);
-        fwrite(&reg, sizeof(Levels), 1, p);
-        fclose(p);
-        }
-        else return;
-    }
-    void reset() {
-        Levels reg;
-        FILE* p;
-        fopen_s(&p, name, "rb");
-        int pos= 0;
-        if (p != nullptr) {
-            while (fread(&reg, sizeof reg, 1, p) == 1) {
-                if (reg.getId() != 0) {
-                    reg.setStatus(false);
-                    edit(reg, pos);
-                }
-            }
-        }
-    }
+    Levels read(int pos);
+    void save(Levels reg);
+    void edit(Levels &reg, int pos);
+    void reset();
 };
 
 //void altaLevels() {
@@ -102,11 +49,3 @@ public:
 //    }  
 //}
 
-//void leerLevels() {
-//    FileLevels arc;
-//    Levels reg;
-//    for (int i = 0; i < 5; i++) {
-//        reg= arc.read(i);
-//        reg.Mostrar();
-//    }
-//}

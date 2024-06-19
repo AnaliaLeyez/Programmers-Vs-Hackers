@@ -39,10 +39,10 @@ void Manager::setNumberLevel(int IdLevel) {
 	}
 	switch (IdLevel)
 	{
-	case 1:
+	case 0:
 		 _currentLevel = new Level1();
 		break;
-	case 2:
+	case 1:
 		_currentLevel = new Level2();
 		break;
 	default:

@@ -5,7 +5,7 @@
 class Manager : public sf::Drawable
 {
 private:
-	Manager(int level=1); //Singleton
+	Manager(int level=0); //Singleton
 	static Manager* _currentInstance; //Singleton
 	Level *_currentLevel;
 public:

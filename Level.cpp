@@ -39,7 +39,7 @@ sf::Vector2f Level::getHackerStartPosition() const { return _hackerStartPosition
 const std::list<Tower*> Level::getTowersAvailable() const { return _towersAvailable; }
 std::list<Tower*> Level::getActiveTowers() const { return _activeTowers; }
 
-void Level::setIdLevel(int idLevel) { _idLevel = idLevel; }
+//void Level::setIdLevel(int idLevel) { _idLevel = idLevel; }
 void Level::setFinishedLevel(bool finished) { _finishedLevel = finished; }
 void Level::setUI(const UI& ui) { _ui = ui; }
 void Level::setMap(const Map& map) { *_map = map; }
@@ -249,11 +249,13 @@ void Level::checkLevelCompletion() {
 	if (_currentWave > _totalWaves && _enemies.empty()) {
 		_finishedLevel = true;
 		_levelUpClock.restart();
-		FileLevels arc;
-		Levels reg;
-		reg=arc.read(_idLevel);
-		reg.setStatus(true);
-		arc.edit(reg,_idLevel);
+		if (_idLevel < 4) {  // cuando llega al ultimo nivel no se abre el archivo
+			FileLevels arc;
+			Levels reg;
+			reg = arc.read(_idLevel + 1);
+			reg.setStatus(true);
+			arc.edit(reg, _idLevel + 1);
+		}
 	}
 }
 
@@ -373,7 +375,7 @@ void Level::update(sf::Vector2i& mousePosition) {
 	}
 	else if(_levelUpClock.getElapsedTime().asSeconds()>4) {
 
-		if (getIdLevel() < 4) { // aca digo que solo puede llegar hasta el nivel 4
+		if (getIdLevel() < 5) { // aca digo que solo puede llegar hasta el nivel 5
 			std::cout << "NIVEL 2:" << std::endl;
 			Manager::getInstance().setNumberLevel(getIdLevel() + 1); // cambia al siguiente nivel
 		}

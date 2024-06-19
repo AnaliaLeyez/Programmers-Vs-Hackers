@@ -150,6 +150,7 @@
     <ClCompile Include="ButtonMaxiWenner.cpp" />
     <ClCompile Include="ButtonUpgrade.cpp" />
     <ClCompile Include="Collisionable.cpp" />
+    <ClCompile Include="FileLevel.cpp" />
     <ClCompile Include="HackerDios.cpp" />
     <ClCompile Include="HackerJunior.cpp" />
     <ClCompile Include="HackerSemiSr.cpp" />

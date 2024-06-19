@@ -94,7 +94,7 @@ public:
 	const std::list<Tower*> getTowersAvailable() const;
 	std::list <Tower*> getActiveTowers() const;
 
-	void setIdLevel(int);
+	//void setIdLevel(int);
 	void setFinishedLevel(bool);
 	void setUI(const UI&);
 	void setMap(const Map&);

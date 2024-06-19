@@ -113,7 +113,7 @@ Level1::Level1()
 	_enemyClock.restart();
 	_hackerStartPosition = { 960 / 32 * 9.5, 640 / 32 * 0.5 };
 
-	_idLevel = 1;
+	_idLevel = 0;
 	_finishedLevel = false;
 	_map = new Map1();
 	int arr[22][30] = {
