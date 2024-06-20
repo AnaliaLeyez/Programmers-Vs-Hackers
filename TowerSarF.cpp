@@ -66,7 +66,7 @@ void TowerSarF::upgrade()
 		_salesValue = 336;
 		_damage = 5;
 		_damageUpgrade = 7;
-		_fireRate = 0.7f; //dispara mas rapido
+		_fireRate = 2.7f; //dispara mas rapido
 		_upgradesAmount = 1;
 	}
 	break;

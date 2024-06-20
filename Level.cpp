@@ -221,28 +221,58 @@ void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, in
 		break;
 	}
 
+}
+
+void Level::updateBullets()
+{
 	auto it = _bullets.begin();
 	while (it != _bullets.end())
 	{
 		Bullet* bullet = *it;
+		bool bulletErased = false;
 
-		if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
+		for (auto& hacker : _enemies)
 		{
-			hacker->takeDamage(bullet->getDamage());
-			std::cout << "Vida Hacker" << hacker->getLife() << std::endl;
-			delete bullet;
-			it = _bullets.erase(it);
-		}/*else if (.....)  //ACA SE BORRARIAN LAS BALAS
+			if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
+			{
+				hacker->takeDamage(bullet->getDamage());
+				std::cout << "Vida Hacker: " << hacker->getLife() << std::endl;
+				delete bullet;
+				bulletErased = true;
+				it = _bullets.erase(it);
+				std::cout << "Bullet erased due to collision" << std::endl;
+				break;
+			}
+		}
+
+		if (!bulletErased)
 		{
-			delete bullet;
-			it = _bullets.erase(it);
-		}*/
-		else
-		{
-			++it;
+			bullet->update();
+
+			// Fallback check to remove stuck bullets
+			if (bullet->getPosition() == bullet->getPosition()) // This should always be true unless the bullet moved
+			{
+				sf::Vector2f lastPosition = bullet->getPosition();
+				bullet->update();
+				if (bullet->getPosition() == lastPosition)
+				{
+					delete bullet;
+					it = _bullets.erase(it);
+					std::cout << "Bullet erased due to being stuck" << std::endl;
+				}
+				else
+				{
+					++it;
+				}
+			}
+			else
+			{
+				++it;
+			}
 		}
 	}
 }
+
 
 void Level::checkLevelCompletion() {
 	if (_currentWave > _totalWaves && _enemies.empty()) {
@@ -272,110 +302,91 @@ void Level::setGameOverText()
 	_gameOverSkull.setOrigin(_gameOverSkull.getGlobalBounds().width / 2, _gameOverSkull.getGlobalBounds().height / 2);
 }
 
-void Level::update(sf::Vector2i& mousePosition) {
-	if (!_finishedLevel) {
-		checkLevelCompletion(); //xq quiero que una sola vez pase por el check level si se gana el nivel, ya que ahi reseteo un clock
-		if (!_finishedLevel) {
-			mouseCheck(mousePosition);
+void Level::update(sf::Vector2i& mousePosition)
+{
+	checkLevelCompletion();
+	if (!getFinisheLevel())
+	{
+		mouseCheck(mousePosition);
 
-			if (_currentWave <= _totalWaves) {
-				spawnWave(); // Generar una nueva oleada de enemigos
-			}
+		if (_currentWave <= _totalWaves)
+		{
+			spawnWave(); // Generar una nueva oleada de enemigos
+		}
 
-			// Actualizar los enemigos en el nivel
-			for (auto& hacker : _enemies) {
-				hacker->update(getMapArray());
+		// Actualizar los enemigos en el nivel
+		for (auto& hacker : _enemies)
+		{
+			hacker->update(getMapArray());
 
-				if (hacker->getEnd() == true) {
-					if (getEnergy() - hacker->attackUtn() >= 0) {
-						_dying = true;
-						decreaseEnergy(hacker->attackUtn());
-					}
-					else {
-						setEnergy(0);
-						_flagGameOver = true;
-						setGameOverText();
-					}
-					_ui.setText(1, std::to_string(getEnergy()));
-					break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
-				}
-				else {
-					_dying = false;
-				}
-			}
-
-
-			for (auto& spot : _spots)
+			if (hacker->getEnd() == true)
 			{
-				for (auto& hacker : _enemies)
+				if (getEnergy() - hacker->attackUtn() >= 0)
 				{
-					if (spot->getIsOccupied() &&
-						spot->getTransform().transformRect((
-							spot->getCurrentTower()->getBounds())).intersects(hacker->getBounds()
-							))
-					{
-						//std::cout << "COliSIONO" << std::endl;
-						if (spot->getCurrentTower()->canShoot())
-						{
-							shoot(spot->getPosition(),
-								hacker->getPosition(),
-								spot->getCurrentTower()->getDamage(),
-								spot->getCurrentTower()->getType(), hacker);
-						}
-					}
+					_dying = true;
+					decreaseEnergy(hacker->attackUtn());
 				}
+				else
+				{
+					setEnergy(0);
+					_flagGameOver = true;
+					setGameOverText();
+				}
+				_ui.setText(1, std::to_string(getEnergy()));
+				break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
 			}
-
-			for (auto& bullet : _bullets) {
-				bullet->update();
+			else
+			{
+				_dying = false;
 			}
+		}
+        for (auto& spot : _spots)
+        {
+            for (auto& hacker : _enemies)
+            {
+                if (spot->getIsOccupied() &&
+                    spot->getTransform().transformRect(spot->getCurrentTower()->getBounds()).intersects(hacker->getBounds()))
+                {
+                    if (spot->getCurrentTower()->canShoot())
+                    {
+                        shoot(spot->getPosition(), hacker->getPosition(),
+                              spot->getCurrentTower()->getDamage(), spot->getCurrentTower()->getType(), hacker);
+                    }
+                }
+            }
+        }
 
-			auto itH = _enemies.begin();
-			while (itH != _enemies.end()) {
-				Hacker* hacker = *itH;
-				hacker->update(getMapArray());
-				if (hacker->getLife() <= 0) {
-					itH = _enemies.erase(itH);
-				}
-				else {
-					++itH;
-				}
+		updateBullets();
 
-				for (auto& hacker : _enemies) {
-					if (hacker->getEnd() == true) {
-						if (getEnergy() - 20 >= 0) {
-							_dying = true;
-							setEnergy(getEnergy() - 20);
-							_ui.setText(1, std::to_string(getEnergy()));
-						}
-						else {
-							_flagGameOver = true;
-							setGameOverText();
-						}
-						break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
-					}
-					else {
-						_dying = false;
-					}
-				}
-
-				if (_currentMenu->getIsVisible()) {
-					_currentMenu->update(mousePosition);
-				}
+		auto itH = _enemies.begin();
+		while (itH != _enemies.end())
+		{
+			Hacker* hacker = *itH;
+			hacker->update(getMapArray());
+			if (hacker->getLife() <= 0)
+			{
+				itH = _enemies.erase(itH);
 			}
+			else
+			{
+				++itH;
+			}
+		}
+
+		if (_currentMenu->getIsVisible())
+		{
+			_currentMenu->update(mousePosition);
 		}
 	}
-	else if(_levelUpClock.getElapsedTime().asSeconds()>4) {
-
-		if (getIdLevel() < 4) { // aca digo que solo puede llegar hasta el nivel 4
-			std::cout << "NIVEL 2:" << std::endl;
-			Manager::getInstance().setNumberLevel(getIdLevel() + 1); // cambia al siguiente nivel
-		}
-		else {
-			// lógica para cuando se termina el juego, cuando se pasaron todos los niveles
+	else
+	{
+		if (getIdLevel() < 4) // Ensure only up to level 4
+		{
+			Manager::getInstance().setNumberLevel(2); // Move to the next level
 		}
 	}
 }
+
 
 void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 {

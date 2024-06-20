@@ -134,7 +134,7 @@ public:
 
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update(sf::Vector2i&);
-
+	void updateBullets();
 
 	~Level() { //revisar eliminar todo lo que haya sido asignado con memoria dinamica
 		for (Spot* spot : _spots) {

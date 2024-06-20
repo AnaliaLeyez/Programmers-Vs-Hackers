@@ -14,6 +14,8 @@ protected:
 	float _speed;
 	sf::Vector2f _enemyPosition;
 
+	bool _crash;
+
 public:
 	//virtual void upgrade() = 0;
 
@@ -25,6 +27,8 @@ public:
 	virtual sf::Vector2f getDirection() const;
 	virtual sf::Vector2f getVelocity() const;
 	sf::Vector2f getEnemyPosition() const;
+	void setCrash(bool);
+	bool getCrash();
 
 	virtual int getDamage() const;
 	virtual void setDirection(sf::Vector2f);
@@ -32,6 +36,7 @@ public:
 	virtual void setDamage(int);
 
 	void setEnemyPosition(sf::Vector2f);
+
 
 	virtual sf::FloatRect getBounds() const;
 	virtual void update();

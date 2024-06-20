@@ -28,6 +28,11 @@ sf::FloatRect Bullet::getBounds() const
 sf::Vector2f Bullet::getDirection() const { return _direction; }
 sf::Vector2f Bullet::getVelocity() const { return _velocity; }
 sf::Vector2f Bullet::getEnemyPosition() const {	return _enemyPosition; }
+void Bullet::setCrash(bool state)
+{
+	_crash = state;
+}
+bool Bullet::getCrash() { return _crash; }
 int Bullet::getDamage() const { return _damage; }
 
 void Bullet::setDirection(sf::Vector2f d) { _direction = d; }
