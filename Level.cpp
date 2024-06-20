@@ -12,6 +12,11 @@
 #include "TowerMenu.h"
 #include "Spot.h"
 #include "Tower.h"
+#include "Hacker.h"
+#include "HackerTrainee.h"
+#include "HackerJunior.h"
+#include "HackerSemiSr.h"
+#include "HackerDios.h"
 #include "Level.h"
 
 
@@ -202,7 +207,24 @@ void Level::resellTower(Spot& sp) {
 
 }
 
-
+Hacker* Level::returnHacker(int type) {
+	switch (type)
+	{
+	case 1:
+		return new HackerTrainee;
+		break;
+	case 2:
+		return new HackerJunior;
+		break;
+	case 3:
+		return new HackerSemiSr;
+		break;
+	case 4:
+	default:
+		return new HackerDios;
+		break;
+	}
+}
 void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, int damage, int type, Hacker* hacker)
 {
 	switch (type)

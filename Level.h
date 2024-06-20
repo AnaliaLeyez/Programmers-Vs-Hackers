@@ -128,6 +128,7 @@ public:
 	void resellTower(Spot&);
 	void decreaseEnergy(int);
 
+	Hacker* returnHacker(int);
 	void shoot(sf::Vector2f, sf::Vector2f, int, int, Hacker*);
 	void checkLevelCompletion();
 	void setGameOverText();

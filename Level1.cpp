@@ -9,13 +9,10 @@
 #include "TowerKloster.h"
 #include "TowerSarF.h"
 #include "TowerWenner.h"
-#include "HackerTrainee.h"
-#include "HackerJunior.h"
-#include "HackerSemiSr.h"
-#include "HackerDios.h"
 #include "Level.h"
 #include "Spot.h"
 #include "Level1.h"
+
 
 void Level1::spawnWave() {
 	std::srand(std::time(nullptr));
@@ -32,23 +29,23 @@ void Level1::spawnWave() {
 			{
 			case 1:
 			{
-				hk = _wave1[enemyIndex];
+				hk= returnHacker(_wave1[enemyIndex]);
 			}
 			break;
 			case 2:
 			{
-				hk = _wave2[enemyIndex];
+				hk = returnHacker(_wave2[enemyIndex]);
 			}
 			break;
 			case 3:
 			{
-				hk = _wave3[enemyIndex];
+				hk = returnHacker(_wave3[enemyIndex]);
 			}
 			break;
 			case 4:
 			default:
 			{
-				hk = _wave4[enemyIndex];
+				hk = returnHacker(_wave4[enemyIndex]);
 			}
 			break;
 			}
