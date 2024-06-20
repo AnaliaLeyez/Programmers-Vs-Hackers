@@ -15,79 +15,17 @@
 #include "Spot.h"
 #include "Level2.h"
 
-void Level2::spawnWave() {
-	std::srand(std::time(nullptr));
-	static int enemyIndex = 0;
-	static bool spawnedGodHacker = false;
-
-	if (enemyIndex < _enemiesPerWave) {
-		// Genera un nuevo enemigo
-		int randomTime = std::rand() % 8 + 1;
-		if (_enemyClock.getElapsedTime().asSeconds() >= randomTime) {
-			switch (_currentWave)
-			{
-			case 1:
-			{
-				HackerTrainee* hk = new HackerTrainee();
-				hk->setPosition(_hackerStartPosition);
-				_enemies.push_back(hk);
-			}
-			break;
-			case 2:
-			{
-				if (enemyIndex % 2 == 0) {
-					HackerTrainee* hk = new HackerTrainee();
-					hk->setPosition(_hackerStartPosition);
-					_enemies.push_back(hk);
-				}
-				else {
-					HackerJunior* hk = new HackerJunior();
-					hk->setPosition(_hackerStartPosition);
-					_enemies.push_back(hk);
-				}
-			}
-			break;
-			case 3:
-			{
-				if (enemyIndex % 3 != 0) {
-					HackerJunior* hk = new HackerJunior();
-					hk->setPosition(_hackerStartPosition);
-					_enemies.push_back(hk);
-				}
-				else {
-					HackerTrainee* hk = new HackerTrainee();
-					hk->setPosition(_hackerStartPosition);
-					_enemies.push_back(hk);
-				}
-			}
-			break;
-			default:
-				break;
-			}
-			++enemyIndex;
-			_enemyClock.restart();
-		}
-	}
-	else if (_waveClock.getElapsedTime().asSeconds() > _timeBetweenWaves && _enemies.empty() && enemyIndex == _enemiesPerWave) {
-		++_currentWave; // Incrementa el número de oleada
-		if (_currentWave <= _totalWaves) {
-			enemyIndex = 0; // Reinicia el índice para la próxima oleada
-			_enemiesPerWave += 1; // Incrementa la cantidad de enemigos para la próxima oleada
-
-			_ui.setText(2, std::to_string(getCurrentWave()));
-			spawnedGodHacker = false;
-			_waveClock.restart(); // Reinicia el temporizador de la oleada
-		}
-	}
-}
-
 Level2::Level2()
 {
+	_hackersPerWave = new int[3] { 6, 8, 10 };
+	_wave1 = new int[6] { 2, 2, 2, 2, 2, 3 };
+	_wave2 = new int[8] { 2, 2, 2, 2, 2, 3, 3, 3 };
+	_wave3 = new int[10] { 1, 2, 3, 3, 3, 3, 3, 3, 2, 3 };
+
 	_currentWave = 1;
-	_totalWaves = 4;
-	_enemiesPerWave = 5;
+	_totalWaves = 3;
+	_enemiesPerWave = 6;
 	_timeBetweenWaves = 10;
-	//_timeBetweenEnemies = std::rand() % 15 + 1; ///ver si esta queda o se va 
 	_waveClock.restart();
 	_enemyClock.restart();
 	_hackerStartPosition = { 960 / 32 * 0.5, 640 / 32 * 28 };

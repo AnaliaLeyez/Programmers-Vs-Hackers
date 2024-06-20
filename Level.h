@@ -42,6 +42,13 @@ protected:
 	sf::Sound _sound;
 	bool _musicPlaying;
 
+
+	int *_hackersPerWave;
+	int *_wave1;
+	int *_wave2;
+	int *_wave3;
+	int *_wave4;
+
 	std::vector<Hacker*> _enemies;
 	int _currentWave;
 	int _totalWaves;
@@ -73,7 +80,7 @@ protected:
 	sf::Text _levelUp;
 
 public:
-	void virtual spawnWave() = 0;
+	void spawnWave();
 	int getIdLevel() const;
 	bool getFinisheLevel()const;
 	UI getUI() const;

@@ -14,66 +14,16 @@
 #include "Level1.h"
 
 
-void Level1::spawnWave() {
-	std::srand(std::time(nullptr));
-	//los contadores son de tipo static porque asi las variables mantienen su valor incluso
-	//despues de que la funcion haya terminado de ejecutarse
-	static int enemyIndex = 0;
-	static bool spawnedGodHacker = false;
-	Hacker* hk;
-	if (enemyIndex < _enemiesPerWave) {
-		// Genera un nuevo enemigo
-		int randomTime = std::rand() % 4 + 1;
-		if (_enemyClock.getElapsedTime().asSeconds() >= randomTime) {
-			switch (_currentWave)
-			{
-			case 1:
-			{
-				hk= returnHacker(_wave1[enemyIndex]);
-			}
-			break;
-			case 2:
-			{
-				hk = returnHacker(_wave2[enemyIndex]);
-			}
-			break;
-			case 3:
-			{
-				hk = returnHacker(_wave3[enemyIndex]);
-			}
-			break;
-			case 4:
-			default:
-			{
-				hk = returnHacker(_wave4[enemyIndex]);
-			}
-			break;
-			}
-			hk->setPosition(_hackerStartPosition);
-			_enemies.push_back(hk);
-			if (enemyIndex == 0) {
-				hk->saySth();
-			}
-			++enemyIndex;
-			_enemyClock.restart();
-		}
-	}
-	else if(_waveClock.getElapsedTime().asSeconds()>_timeBetweenWaves && _enemies.empty() && enemyIndex==_enemiesPerWave) {
-		++_currentWave; // Incrementa el número de oleada
-		if (_currentWave <= _totalWaves) {
-			enemyIndex = 0; // Reinicia el índice para la próxima oleada
-			_enemiesPerWave = _hackersPerWave[_currentWave-1]; // Incrementa la cantidad de enemigos para la próxima oleada
-
-			_ui.setText(2, std::to_string(getCurrentWave()));
-			spawnedGodHacker = false;
-			_waveClock.restart(); // Reinicia el temporizador de la oleada
-		}
-	}
-}
 
 
 Level1::Level1()
 {
+	_hackersPerWave = new int[4] { 4, 6, 8, 8 };
+	_wave1 = new int[4] { 1, 1, 1, 1};
+	_wave2 = new int[6] { 1, 1, 1, 2, 2, 1 };
+	_wave3 = new int[8] { 1, 2, 1, 1, 2, 2, 2, 1};
+	_wave4 = new int [8] { 2, 1, 2, 2, 2, 2, 2, 2 };
+
 	_currentWave = 1;
 	_totalWaves = 4;
 	_enemiesPerWave = 4;
