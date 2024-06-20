@@ -160,7 +160,7 @@ Level1::Level1()
 	_UTNRed.setOrigin(_UTNRed.getGlobalBounds().width / 2, _UTNRed.getGlobalBounds().height / 2);
 
 	setSpots(arr, _spots, 5);
-	_golden = 1000;
+	_golden = 10000;
 	_energy = 500;
 	_ui.setText(0, std::to_string(getGolden()));
 	_ui.setText(1, std::to_string(getEnergy()));

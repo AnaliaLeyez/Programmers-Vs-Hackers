@@ -7,11 +7,18 @@
 void Bullet::moveToward()
 {
 	//Calcular el vector de direccion entre la torre y el objetivo
-	sf::Vector2f _direction = getEnemyPosition() - getPosition();
-	float length = std::sqrt(_direction.x * _direction.x + _direction.y * _direction.y);
-	_direction /= length;
+	sf::Vector2f direction = _enemyPosition - getPosition();
+	float distanceToTarget = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 
-	move(_direction * _speed);
+	if (distanceToTarget < 1.0f) // Threshold distance
+	{
+		setPosition(_enemyPosition);
+	}
+	else
+	{
+		direction /= distanceToTarget;
+		move(direction * _speed);
+	}
 }
 
 sf::FloatRect Bullet::getBounds() const

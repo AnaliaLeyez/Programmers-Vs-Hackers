@@ -73,7 +73,7 @@ void TowerSarF::upgrade()
 	case 1:
 	{
 		_name = "Torre MAXI F";
-		if (!_texture.loadFromFile("img/towers/torreD_4.png")) {
+		if (!_texture.loadFromFile("img/towers/torreD_3.png")) {
 			throw std::runtime_error("Error img tower MAXI F");
 		}
 		_sprite.setTexture(_texture);
