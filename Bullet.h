@@ -15,8 +15,6 @@ protected:
 	sf::Vector2f _enemyPosition;
 
 public:
-	//virtual void upgrade() = 0;
-
 	virtual ~Bullet() {};
 
 	virtual void moveToward();

@@ -19,12 +19,12 @@ std::string Levels::getName() const { return _name; }
 bool Levels::getStatus() const { return _status; }
 void Levels::setId(int i) { _id = i; }
 void Levels::setStatus(bool s) { _status = s; }
-void Levels::Cargar(int i) {
-    std::cout << "NOMBRE: ";
-    cargarCadena(_name, 39);
-    _id=i;
-    i==0 ? _status = true : _status = false;
-}
+//void Levels::Cargar(int i) {
+//    std::cout << "NOMBRE: ";
+//    cargarCadena(_name, 39);
+//    _id=i;
+//    i==0 ? _status = true : _status = false;
+//}
 void Levels::Mostrar() {
     std::cout << "NOMBRE: " << _name << std::endl;
     std::cout << "ID: " << _id << std::endl;

@@ -14,7 +14,7 @@ public:
     bool getStatus() const;
     void setId(int i);
     void setStatus(bool s);
-    void Cargar(int i);
+   // void Cargar(int i);
     void Mostrar();
 };
 
@@ -22,9 +22,9 @@ class FileLevels {
 private:
     char name[20]= "unlockedLevels.dat";
 public:
-    Levels read(int pos);
-    void save(Levels reg);
-    void edit(Levels &reg, int pos);
+    Levels read(int);
+    void save(Levels);
+    void edit(Levels&, int);
     void reset();
 };
 

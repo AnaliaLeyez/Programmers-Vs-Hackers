@@ -29,11 +29,9 @@ void Menu::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 void Menu::setSound(bool play) {
 	if (play) {
 		_sound.play();
-		//_text[3].setString("Pause music");
 	}
 	else {
 		_sound.pause();
-		//_text[3].setString("Play music");
 	}
 }
 void Menu::draw(sf::RenderTarget& target, sf::RenderStates states)const {
