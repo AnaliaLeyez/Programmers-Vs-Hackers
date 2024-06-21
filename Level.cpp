@@ -501,12 +501,10 @@ void Level::updateBullets()
 			if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
 			{
 				hacker->takeDamage(bullet->getDamage());
-				std::cout << "Vida Hacker: " << hacker->getLife() << std::endl;
 				delete bullet;
 				bulletErased = true;
 
 				it = _bullets.erase(it);
-				std::cout << "Bullet erased due to collision" << std::endl;
 				break;
 			}
 		}
@@ -524,7 +522,6 @@ void Level::updateBullets()
 				{
 					delete bullet;
 					it = _bullets.erase(it);
-					std::cout << "Bullet erased due to being stuck" << std::endl;
 				}
 				else
 				{
