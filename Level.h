@@ -124,8 +124,8 @@ public:
 	void mouseCheck(sf::Vector2i&);
 	void validateClick(int, int);
 	int validateClickOnSpot(int, int);
-	void manageClickOnSpot(int, int, Spot*);
-	Spot manageOutOfSpotClick(int, int); //DEBERIA SER PUNTERO??????
+	void manageClickOnSpot(int, int, Spot*, int);
+	void manageOutOfSpotClick(int, int); //DEBERIA SER PUNTERO??????
 	void clickWithMenu1Open(int, int, Spot&);
 	void clickWithMenu2Open(int, int, Spot&);
 	void validateClickOnSpeaker(int, int);

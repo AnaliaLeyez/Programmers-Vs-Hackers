@@ -15,25 +15,21 @@
 
 void Level::validateClick(int mousex, int mousey)
 {
-	Spot* currentSpot; //nuevo
+	Spot* currentSpot;
 	int clickSpot = validateClickOnSpot(mousex, mousey);
 	if (clickSpot != 0)
 	{ //si se clickeo spot, esto devuelve el nro de spot
 		currentSpot = getSpotByNumber(clickSpot);
-		currentSpot->setSpotNumber(clickSpot);
-		currentSpot->setOccupied(getSpotByNumber(currentSpot->getSpotNumber())->getIsOccupied());
-		_currentMenu->setCurrentSpot(currentSpot);  //si se clickeo en spot e estoy diciendo a menu q se asocie a ese spot, sino nose
-		manageClickOnSpot(mousex, mousey, currentSpot); //currentSpot tiene el nro de spot y el estado
-		setSpot(currentSpot);
+		manageClickOnSpot(mousex, mousey, currentSpot, clickSpot); //currentSpot tiene el nro de spot y el estado
 	}
 	else if(_currentMenu->getCurrentSpot()!=nullptr) //quiza es mi primer click y no tengo spot
 	{ //si NO se clickeo spot
 		currentSpot = _currentMenu->getCurrentSpot();
-		*currentSpot = manageOutOfSpotClick(mousex, mousey);
-		setSpot(currentSpot);
+		manageOutOfSpotClick(mousex, mousey);
 	}	
 
 	validateClickOnSpeaker(mousex, mousey);
+	//validateClickOnMenu(mousex, mousey);
 }
 int Level::validateClickOnSpot(int mousex, int mousey) 
 {
@@ -46,46 +42,51 @@ int Level::validateClickOnSpot(int mousex, int mousey)
 	}
 	return 0;  //seria como decir "no se clickeo en ningun spot"
 }
-void Level::manageClickOnSpot(int mousex, int mousey, Spot* currentSp) {
+void Level::manageClickOnSpot(int mousex, int mousey, Spot* currentSpot, int clickSpot) {
+	
+	currentSpot->setSpotNumber(clickSpot);
+	currentSpot->setOccupied(getSpotByNumber(currentSpot->getSpotNumber())->getIsOccupied());
+	_currentMenu->setCurrentSpot(currentSpot);  //si se clickeo en spot e estoy diciendo a menu q se asocie a ese spot, sino nose
+
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(mousex, mousey);
-	_currentMenu->setCurrentSpot(currentSp);
+	_currentMenu->setCurrentSpot(currentSpot);
 	_currentMenu->setPosition(transformedMousePos); 
 
-	if (currentSp->getIsOccupied()) { //spot ocupado
-		currentSp->getCurrentTower()->getUpgradesAmount() != 0 ? _currentMenu = _menu2 : _currentMenu = _menu3;
-			setCurrentMenu(currentSp);  //Menu2 o 3 segun corresponda
+	if (currentSpot->getIsOccupied()) { //spot ocupado
+		currentSpot->getCurrentTower()->getUpgradesAmount() != 0 ? _currentMenu = _menu2 : _currentMenu = _menu3;
+			setCurrentMenu(currentSpot);  //Menu2 o 3 segun corresponda
 	}
 	else 
 	{  //spot libre
 		_currentMenu = _menu1;
-		currentSp->setCurrentTower(_currentMenu->getCurrentSpot()->getCurrentTower()); //me aseguro que el currentSpot esta asociado a la tower ahora
-		_currentMenu->setPosition(currentSp->getPosition()); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
+		currentSpot->setCurrentTower(_currentMenu->getCurrentSpot()->getCurrentTower()); //me aseguro que el currentSpot esta asociado a la tower ahora
+		_currentMenu->setPosition(currentSpot->getPosition()); //ver como hacemos que la posicion de la torre quede siempre centrada en spot. O por ahora ignoramos esto
 	}
 	_currentMenu->getIsVisible() ? _currentMenu->hide() : _currentMenu->show();
-	setCurrentSpot(currentSp);
-	setSpot(currentSp);
+	setCurrentSpot(currentSpot);
+	setSpot(currentSpot);
 }
 
 
-Spot Level::manageOutOfSpotClick(int mousex, int mousey) {
-	Spot sp;
+void Level::manageOutOfSpotClick(int mousex, int mousey) {
+	
 	if (_currentMenu->getIsVisible())
 	{
+		Spot* sp;
 		//click fuera de spot y towerMenu estaba visible
-		sp = *_currentMenu->getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
+		sp = _currentMenu->getCurrentSpot(); //sp ya viene con su nro q se seteo previamente al hacer click en el spot
 		
 		if (_currentMenu->getNumberMenu() == 1) 
 		{
-			clickWithMenu1Open(mousex, mousey, sp);
+			clickWithMenu1Open(mousex, mousey, *sp);
 		}
 		else 
 		{
-			clickWithMenu2Open(mousex, mousey, sp);
+			clickWithMenu2Open(mousex, mousey, *sp);
 		}
-		_currentMenu->setCurrentSpot(&sp); //guardo la informacion del spot en el Menu
-	}
-	setSpot(&sp);
-	return sp;
+		_currentMenu->setCurrentSpot(sp); //guardo la informacion del spot en el Menu
+		setSpot(sp);
+	}	
 }
 void Level::clickWithMenu1Open(int mousex, int mousey, Spot& sp)
 {

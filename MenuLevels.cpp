@@ -67,14 +67,14 @@ sf::Text MenuLevels::getText6() const { return _text[5]; }
 void MenuLevels::validateClick(int mousex, int mousey, sf::RenderWindow& window, int& view)
 {
 	if (getText1().getGlobalBounds().contains(mousex, mousey)) {
-		/*setSound(false);
-		setMusicPlaying(false);*/
+		setSound(false);
+		setMusicPlaying(false);
 		Manager::getInstance().setNumberLevel(0);
 		view = 2;
 	}
 	else if (getText2().getGlobalBounds().contains(mousex, mousey) && getText2().getString()!="") {
-		/*setSound(false);
-		setMusicPlaying(false);*/
+		setSound(false);
+		setMusicPlaying(false);
 		Manager::getInstance().setNumberLevel(1);
 		view = 2;
 	}
