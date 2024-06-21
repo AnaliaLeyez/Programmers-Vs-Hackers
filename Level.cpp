@@ -339,6 +339,7 @@ void Level::checkLevelCompletion() {
 
 void Level::setGameOverText()
 {
+	static int cont = 0;
 	if (!_fontGameOver.loadFromFile("fuentes/TowerPrice.ttf")) {
 		throw std::runtime_error("Error al cargar la fuente del Price Menu");
 	}
@@ -356,87 +357,35 @@ void Level::setGameOverText()
 	_gameOverSkull.setPosition(400, 150);
 	_gameOverSkull.setScale(0.5, 0.5);
 	_gameOverSkull.setOrigin(_gameOverSkull.getGlobalBounds().width / 2, _gameOverSkull.getGlobalBounds().height / 2);
+	_gameOverClock.restart();
 }
 
 void Level::update(sf::Vector2i& mousePosition, int& view) {
 	if (!_finishedLevel) {
 		checkLevelCompletion(); //xq quiero que una sola vez pase por el check level si se gana el nivel, ya que ahi reseteo un clock
 		if (!_finishedLevel) {
-			mouseCheck(mousePosition);
+			if (!_flagGameOver) {
+				mouseCheck(mousePosition);
 
-			if (_currentWave <= _totalWaves) {
-				spawnWave(); // Generar una nueva oleada de enemigos
-			}
-
-			// Actualizar los enemigos en el nivel
-			for (auto& hacker : _enemies) {
-				hacker->update(getMapArray());
-
-				if (hacker->getEnd() == true) {
-					if (getEnergy() - hacker->attackUtn() >= 0) {
-						_dying = true;
-						decreaseEnergy(hacker->attackUtn());
-					}
-					else {
-						setEnergy(0);
-						_flagGameOver = true;
-						setGameOverText();
-					}
-					_ui.setText(1, std::to_string(getEnergy()));
-					break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
-				}
-				else {
-					_dying = false;
-				}
-			}
-
-
-			for (auto& spot : _spots)
-			{
-				for (auto& hacker : _enemies)
-				{
-					if (spot->getIsOccupied() &&
-						spot->getTransform().transformRect((
-							spot->getCurrentTower()->getBounds())).intersects(hacker->getBounds()
-							))
-					{
-						if (spot->getCurrentTower()->canShoot())
-						{
-							shoot(spot->getPosition(),
-								hacker->getPosition(),
-								spot->getCurrentTower()->getDamage(),
-								spot->getCurrentTower()->getType(), hacker);
-						}
-					}
-				}
-			}
-
-			for (auto& bullet : _bullets) {
-				bullet->update();
-			}
-
-			auto itH = _enemies.begin();
-			while (itH != _enemies.end()) {
-				Hacker* hacker = *itH;
-				hacker->update(getMapArray());
-				if (hacker->getLife() <= 0) {
-					itH = _enemies.erase(itH);
-				}
-				else {
-					++itH;
+				if (_currentWave <= _totalWaves) {
+					spawnWave(); // Generar una nueva oleada de enemigos
 				}
 
+				// Actualizar los enemigos en el nivel
 				for (auto& hacker : _enemies) {
+					hacker->update(getMapArray());
+
 					if (hacker->getEnd() == true) {
-						if (getEnergy() - 20 >= 0) {
+						if (getEnergy() - hacker->attackUtn() >= 0) {
 							_dying = true;
-							setEnergy(getEnergy() - 20);
-							_ui.setText(1, std::to_string(getEnergy()));
+							decreaseEnergy(hacker->attackUtn());
 						}
 						else {
+							setEnergy(0);
 							_flagGameOver = true;
 							setGameOverText();
 						}
+						_ui.setText(1, std::to_string(getEnergy()));
 						break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
 					}
 					else {
@@ -444,16 +393,77 @@ void Level::update(sf::Vector2i& mousePosition, int& view) {
 					}
 				}
 
-				if (_currentMenu->getIsVisible()) {
-					_currentMenu->update(mousePosition);
+
+				for (auto& spot : _spots)
+				{
+					for (auto& hacker : _enemies)
+					{
+						if (spot->getIsOccupied() &&
+							spot->getTransform().transformRect((
+								spot->getCurrentTower()->getBounds())).intersects(hacker->getBounds()
+								))
+						{
+							if (spot->getCurrentTower()->canShoot())
+							{
+								shoot(spot->getPosition(),
+									hacker->getPosition(),
+									spot->getCurrentTower()->getDamage(),
+									spot->getCurrentTower()->getType(), hacker);
+							}
+						}
+					}
+				}
+
+				for (auto& bullet : _bullets) {
+					bullet->update();
+				}
+
+				auto itH = _enemies.begin();
+				while (itH != _enemies.end()) {
+					Hacker* hacker = *itH;
+					hacker->update(getMapArray());
+					if (hacker->getLife() <= 0) {
+						itH = _enemies.erase(itH);
+					}
+					else {
+						++itH;
+					}
+
+					for (auto& hacker : _enemies) {
+						if (hacker->getEnd() == true) {
+							if (getEnergy() - 20 >= 0) {
+								_dying = true;
+								setEnergy(getEnergy() - 20);
+								_ui.setText(1, std::to_string(getEnergy()));
+							}
+							else {
+								_flagGameOver = true;
+								setGameOverText();
+							}
+							break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
+						}
+						else {
+							_dying = false;
+						}
+					}
+
+					if (_currentMenu->getIsVisible()) {
+						_currentMenu->update(mousePosition);
+					}
+				}
+			}
+			else {
+				if (_gameOverClock.getElapsedTime().asSeconds() > 5) {
+					MenuAbstract::getInstance().setNumberMenu(2);
+					view = 1;
 				}
 			}
 		}
 	}
-	else if(_levelUpClock.getElapsedTime().asSeconds()>4) {
+	else if (_levelUpClock.getElapsedTime().asSeconds() > 4) {
 		MenuAbstract::getInstance().setNumberMenu(2);
 		view = 1;
-		
+
 		//if (getIdLevel() < 5) { // aca digo que solo puede llegar hasta el nivel 5
 		//	Manager::getInstance().setNumberLevel(getIdLevel() + 1); // cambia al siguiente nivel
 		//}

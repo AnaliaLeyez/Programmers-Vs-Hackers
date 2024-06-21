@@ -75,6 +75,7 @@ protected:
 	sf::Texture _textureGameOverSkull;
 	sf::Sprite _gameOverSkull;
 	bool _flagGameOver;
+	sf::Clock _gameOverClock;
 	sf::Font _fontLevelUp;
 	sf::Clock _levelUpClock;
 	sf::Text _levelUp;
