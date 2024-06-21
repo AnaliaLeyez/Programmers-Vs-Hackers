@@ -27,7 +27,7 @@ Spot* Level::getSpotByNumber(int n) const {
 	}
 }
 TowerMenu* Level::getCurrentMenu() const { return _currentMenu; }
-int Level::getGolden() { return _golden; }
+int& Level::getGolden() { return _golden; }
 int Level::getEnergy() { return _energy; }
 int Level::getCurrentWave() { return _currentWave; }
 int Level::getTotalWaves() { return _totalWaves; }
@@ -239,6 +239,7 @@ void Level::updateBullets()
 				std::cout << "Vida Hacker: " << hacker->getLife() << std::endl;
 				delete bullet;
 				bulletErased = true;
+				
 				it = _bullets.erase(it);
 				std::cout << "Bullet erased due to collision" << std::endl;
 				break;
@@ -365,6 +366,11 @@ void Level::update(sf::Vector2i& mousePosition)
 			hacker->update(getMapArray());
 			if (hacker->getLife() <= 0)
 			{
+				std::cout << "A VERGASTON " << std::endl;
+				setGolden(getGolden() + hacker->getGoldenDrop());
+				_ui.setText(0, std::to_string(getGolden()));
+				
+
 				itH = _enemies.erase(itH);
 			}
 			else

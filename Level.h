@@ -83,7 +83,8 @@ public:
 	Spot* getCurrentSpot() const;
 	Spot* getSpotByNumber(int) const;
 	TowerMenu* getCurrentMenu() const;
-	int getGolden();
+	//Cambié acá por refrefencia
+	int& getGolden();
 	int getEnergy();
 	int getCurrentWave();
 	int getTotalWaves();
@@ -113,6 +114,7 @@ public:
 	void setInfoBtn(TowerMenu*, Spot*, int);
 	void setNoCoinsText();
 	void setLevelUpText();
+
 
 	void mouseCheck(sf::Vector2i&);
 	void validateClick(int, int);
