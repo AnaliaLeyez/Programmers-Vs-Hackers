@@ -33,12 +33,38 @@ void Hacker::takeDamage(int damageBullet)
 	_life -= damageBullet;
 }
 
+void Hacker::animation(float _frame)
+{
+	//Vertical:
+	if (_currentPosition.y > _previousPosition.y)
+		_sprite.setTextureRect({ 0 + (int)_frame * 64, 0, 64, 64 });
+	if (_currentPosition.y < _previousPosition.y)
+		_sprite.setTextureRect({ 0 + (int)_frame * 64, 192, 64, 64 });
+
+	if (_currentPosition.x > _previousPosition.x)
+		_sprite.setTextureRect({ 0 + (int)_frame * 64, 128, 64, 64 });
+	//if (_currentPosition.y < _previousPosition.y)
+		//_sprite.setTextureRect({ 0 + (int)_frame * 64, 64, 64, 64 });
+
+}
+
 void Hacker::moveHacker(int arr[][30])
 {
+	_frame += 0.2;
+
+	if (_frame > 4)
+	{
+		_frame = 0;
+	}
+	_previousPosition = _currentPosition;
+	_currentPosition = getPosition();
+	animation(_frame);
+
 	switch (arr[(int)getPosition().y / 32][(int)getPosition().x / 32])
 	{
 	case 2:
 		_direction = { 1.0f,0.0f };
+
 		break;
 	case 3:
 		_direction = { 0.0f,-1.0f };

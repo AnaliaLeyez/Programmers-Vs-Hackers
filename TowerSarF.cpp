@@ -68,14 +68,14 @@ void TowerSarF::upgrade()
 		_salesValue = 336;
 		_damage = 5;
 		_damageUpgrade = 7;
-		_fireRate = 0.7f; //dispara mas rapido
+		_fireRate = 2.7f; //dispara mas rapido
 		_upgradesAmount = 1;
 	}
 	break;
 	case 1:
 	{
 		_name = "Torre MAXI F";
-		if (!_texture.loadFromFile("img/towers/torreD_4.png")) {
+		if (!_texture.loadFromFile("img/towers/torreD_3.png")) {
 			throw std::runtime_error("Error img tower MAXI F");
 		}
 		_sprite.setTexture(_texture);

@@ -72,7 +72,6 @@ int main()
 			case 1:
 			{
 				MenuAbstract& menu = MenuAbstract::getInstance();
-				//menu.update();
 				window.draw(menu);
 			}
 			break;

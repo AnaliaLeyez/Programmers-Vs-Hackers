@@ -6,7 +6,7 @@
 
 TowerKloster::TowerKloster()
 {
-	if (!_texture.loadFromFile("img/towers/torreC_1.png")) {
+	if (!_texture.loadFromFile("img/towers/torreC_2.png")) {
 		throw std::runtime_error("Error img Tower Kloster");
 	}
 	_sprite.setTexture(_texture);

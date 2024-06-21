@@ -34,7 +34,7 @@ Spot* Level::getSpotByNumber(int n) const {
 	}
 }
 TowerMenu* Level::getCurrentMenu() const { return _currentMenu; }
-int Level::getGolden() { return _golden; }
+int& Level::getGolden() { return _golden; }
 int Level::getEnergy() { return _energy; }
 int Level::getCurrentWave() { return _currentWave; }
 int Level::getTotalWaves() { return _totalWaves; }
@@ -296,10 +296,6 @@ void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, in
 		break;
 	}
 
-}
-
-void Level::updateBullets()
-{
 	auto it = _bullets.begin();
 	while (it != _bullets.end())
 	{
