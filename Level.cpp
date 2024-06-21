@@ -370,7 +370,7 @@ void Level::update(sf::Vector2i& mousePosition)
 				setGolden(getGolden() + hacker->getGoldenDrop());
 				_ui.setText(0, std::to_string(getGolden()));
 				
-
+				//cosao
 				itH = _enemies.erase(itH);
 			}
 			else
