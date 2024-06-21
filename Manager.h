@@ -13,7 +13,7 @@ public:
 	Level* getLevel() const;
 	void setLevel(Level&);
 	void setNumberLevel(int);
-	void validateClick(int, int, sf::RenderWindow&);
+	void validateClick(int, int, sf::RenderWindow&, int&);
 	void mouseCheck(sf::Vector2i&);
 	void update(sf::Vector2i&, int& view);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;

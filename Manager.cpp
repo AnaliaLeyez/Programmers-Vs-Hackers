@@ -50,8 +50,8 @@ void Manager::setNumberLevel(int IdLevel) {
 	}
 }
 
-void Manager::validateClick(int mousex, int mousey, sf::RenderWindow& window) {
-	_currentLevel->validateClick(mousex, mousey);
+void Manager::validateClick(int mousex, int mousey, sf::RenderWindow& window, int& view) {
+	_currentLevel->validateClick(mousex, mousey, view);
 }
 void Manager::mouseCheck(sf::Vector2i& mousePosition)
 {

@@ -311,11 +311,7 @@ void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, in
 			hacker->takeDamage(bullet->getDamage());
 			delete bullet;
 			it = _bullets.erase(it);
-		}/*else if (.....)  //ACA SE BORRARIAN LAS BALAS
-		{
-			delete bullet;
-			it = _bullets.erase(it);
-		}*/
+		}
 		else
 		{
 			++it;

@@ -86,6 +86,8 @@ UI::UI() {
 }
 sf::RectangleShape UI::getSpeaker() const { return _speaker; }
 
+sf::Text UI::getText5() const { return _text[4]; }
+
 void UI::setText(int i, std::string text)
 {
 	_text[i].setString(text);

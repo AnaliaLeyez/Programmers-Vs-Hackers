@@ -2,6 +2,7 @@
 #include "MenuAbstract.h"
 #include "MenuHome.h"
 
+
 MenuHome::MenuHome() : Menu() {
 	//texto
 	for (int i = 0; i < 5; i++) {

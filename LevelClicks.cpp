@@ -5,6 +5,7 @@
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>
 
+#include "MenuAbstract.h"
 #include "UI.h"
 #include "Map.h"
 #include "Manager.h"
@@ -13,7 +14,7 @@
 #include "Tower.h"
 #include "Level.h"
 
-void Level::validateClick(int mousex, int mousey)
+void Level::validateClick(int mousex, int mousey, int& view)
 {
 	Spot* currentSpot;
 	int clickSpot = validateClickOnSpot(mousex, mousey);
@@ -29,7 +30,7 @@ void Level::validateClick(int mousex, int mousey)
 	}	
 
 	validateClickOnSpeaker(mousex, mousey);
-	//validateClickOnMenu(mousex, mousey);
+	validateClickOnBackMenu(mousex, mousey, view);
 }
 int Level::validateClickOnSpot(int mousex, int mousey) 
 {
@@ -150,5 +151,15 @@ void Level::validateClickOnSpeaker(int mousex, int mousey) {
 			setMusicPlaying(true);
 			_ui.setTextureSpeaker("img/complementarias/musicOn.png");
 		}
+	}
+}
+
+void Level::validateClickOnBackMenu(int mousex, int mousey, int& view)
+{
+	if(_ui.getText5().getGlobalBounds().contains(mousex, mousey)){
+		setSound(false);
+		setMusicPlaying(false);
+		MenuAbstract::getInstance().setNumberMenu(1);
+		view = 1;
 	}
 }
