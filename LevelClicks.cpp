@@ -30,7 +30,7 @@ void Level::validateClick(int mousex, int mousey, int& view)
 	}	
 
 	validateClickOnSpeaker(mousex, mousey);
-	validateClickOnBackMenu(mousex, mousey, view);
+	validateClickOnHome(mousex, mousey, view);
 }
 int Level::validateClickOnSpot(int mousex, int mousey) 
 {
@@ -154,7 +154,7 @@ void Level::validateClickOnSpeaker(int mousex, int mousey) {
 	}
 }
 
-void Level::validateClickOnBackMenu(int mousex, int mousey, int& view)
+void Level::validateClickOnHome(int mousex, int mousey, int& view)
 {
 	if(_ui.getText5().getGlobalBounds().contains(mousex, mousey)){
 		setSound(false);

@@ -73,7 +73,7 @@ UI::UI() {
 		case 4:
 			posX = 800;
 			posY = 600;
-			texto = "Menu";
+			texto = "Home";
 			break;
 		default:
 			break;

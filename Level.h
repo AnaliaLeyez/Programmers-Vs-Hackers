@@ -129,7 +129,7 @@ public:
 	void clickWithMenu1Open(int, int, Spot&);
 	void clickWithMenu2Open(int, int, Spot&);
 	void validateClickOnSpeaker(int, int);
-	void validateClickOnBackMenu(int, int, int&);
+	void validateClickOnHome(int, int, int&);
 
 	bool validateSale(Tower*, bool);
 	void sell(Tower*, Spot&);

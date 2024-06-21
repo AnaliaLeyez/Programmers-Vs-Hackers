@@ -22,7 +22,7 @@ MenuHome::MenuHome() : Menu() {
 			break;
 		case 2:
 			posY = 300;
-			texto = "About";
+			texto = "Info";
 			break;
 		case 3:
 			posY = 400;
