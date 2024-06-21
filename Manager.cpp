@@ -57,9 +57,9 @@ void Manager::mouseCheck(sf::Vector2i& mousePosition)
 {
 	_currentLevel->mouseCheck(mousePosition);
 }
-void Manager::update(sf::Vector2i& mousePosition)
+void Manager::update(sf::Vector2i& mousePosition, int& view)
 {
-	_currentLevel->update(mousePosition);
+	_currentLevel->update(mousePosition, view);
 }
 
 void Manager::draw(sf::RenderTarget& target, sf::RenderStates states) const

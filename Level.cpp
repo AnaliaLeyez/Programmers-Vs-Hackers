@@ -6,6 +6,7 @@
 #include <SFML/Audio/Sound.hpp>
 
 #include "FileLevel.h"
+#include "MenuAbstract.h"
 #include "UI.h"
 #include "Map.h"
 #include "Manager.h"
@@ -357,7 +358,7 @@ void Level::setGameOverText()
 	_gameOverSkull.setOrigin(_gameOverSkull.getGlobalBounds().width / 2, _gameOverSkull.getGlobalBounds().height / 2);
 }
 
-void Level::update(sf::Vector2i& mousePosition) {
+void Level::update(sf::Vector2i& mousePosition, int& view) {
 	if (!_finishedLevel) {
 		checkLevelCompletion(); //xq quiero que una sola vez pase por el check level si se gana el nivel, ya que ahi reseteo un clock
 		if (!_finishedLevel) {
@@ -450,13 +451,15 @@ void Level::update(sf::Vector2i& mousePosition) {
 		}
 	}
 	else if(_levelUpClock.getElapsedTime().asSeconds()>4) {
-
-		if (getIdLevel() < 5) { // aca digo que solo puede llegar hasta el nivel 5
-			Manager::getInstance().setNumberLevel(getIdLevel() + 1); // cambia al siguiente nivel
-		}
-		else {
-			// lógica para cuando se termina el juego, cuando se pasaron todos los niveles
-		}
+		MenuAbstract::getInstance().setNumberMenu(2);
+		view = 1;
+		
+		//if (getIdLevel() < 5) { // aca digo que solo puede llegar hasta el nivel 5
+		//	Manager::getInstance().setNumberLevel(getIdLevel() + 1); // cambia al siguiente nivel
+		//}
+		//else {
+		//	// lógica para cuando se termina el juego, cuando se pasaron todos los niveles
+		//}
 	}
 }
 

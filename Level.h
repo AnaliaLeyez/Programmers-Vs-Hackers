@@ -141,7 +141,7 @@ public:
 	void setGameOverText();
 
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
-	void update(sf::Vector2i&);
+	void update(sf::Vector2i&, int&);
 
 
 	~Level() { //revisar eliminar todo lo que haya sido asignado con memoria dinamica

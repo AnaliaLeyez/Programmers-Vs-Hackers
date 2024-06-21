@@ -79,7 +79,7 @@ int main()
 			case 2:
 			{
 				Manager& mg = Manager::getInstance();
-				mg.update(mousePosition);
+				mg.update(mousePosition, view);
 				window.draw(mg);
 			}
 			break;
