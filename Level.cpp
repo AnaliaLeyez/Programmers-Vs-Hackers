@@ -216,12 +216,7 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
 	for (auto& spot : _spots)
 	{
-		//spot->mouseCheck(mousePosition);  //por que si lo hago con esta linea no funciona? 
-		// deberia ser un pasamanos igual que lo es con currentMenu e igual que validateClick
-		if (spot->getGlobalBounds().contains(transformedMousePos))
-			spot->setMouseHover(true);
-		else
-			spot->setMouseHover(false);
+		spot->mouseCheck(transformedMousePos);
 	}
 	if (_currentMenu->getIsVisible() && _currentMenu->getGlobalBounds().contains(transformedMousePos))
 	{
@@ -316,11 +311,9 @@ void Level::updateBullets()
 			if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
 			{
 				hacker->takeDamage(bullet->getDamage());
-				std::cout << "Vida Hacker: " << hacker->getLife() << std::endl;
 				delete bullet;
 				bulletErased = true;
 				it = _bullets.erase(it);
-				std::cout << "Bullet erased due to collision" << std::endl;
 				break;
 			}
 		}
@@ -329,8 +322,7 @@ void Level::updateBullets()
 		{
 			bullet->update();
 
-			// Fallback check to remove stuck bullets
-			if (bullet->getPosition() == bullet->getPosition()) // This should always be true unless the bullet moved
+			if (bullet->getPosition() == bullet->getPosition()) // Esta linea es una locura pero es la unica que funciono....
 			{
 				sf::Vector2f lastPosition = bullet->getPosition();
 				bullet->update();
@@ -338,7 +330,6 @@ void Level::updateBullets()
 				{
 					delete bullet;
 					it = _bullets.erase(it);
-					std::cout << "Bullet erased due to being stuck" << std::endl;
 				}
 				else
 				{

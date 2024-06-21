@@ -15,7 +15,9 @@ public:
 
 	void saveSoundPosition();
 	void restoreSoundPosition();
+	void stopMusic();
 
-	void update();
+	//void update();
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
+
 };

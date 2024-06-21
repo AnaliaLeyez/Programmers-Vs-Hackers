@@ -22,6 +22,6 @@ public:
 	float getSoundPosition() const;
 	void setSoundPosition(float);
 
-	void update() {}
+	//void update() {}
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 };

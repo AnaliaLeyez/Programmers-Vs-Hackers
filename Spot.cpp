@@ -44,6 +44,14 @@ void Spot::validateClick(int mousex, int mousey)
 {
 }
 
+void Spot::mouseCheck(sf::Vector2f& transformedMousePos)
+{
+	if (getGlobalBounds().contains(transformedMousePos))
+		setMouseHover(true);
+	else
+		setMouseHover(false);
+}
+
 void Spot::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();

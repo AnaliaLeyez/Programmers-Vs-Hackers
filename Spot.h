@@ -23,6 +23,7 @@ public:
 	void setCurrentTower(Tower*);
 	void validateMouseHover(bool&);
 	void validateClick(int, int);
+	void mouseCheck(sf::Vector2f&);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 
 	sf::FloatRect getGlobalBounds() const;

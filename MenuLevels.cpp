@@ -72,12 +72,14 @@ void MenuLevels::validateClick(int mousex, int mousey, sf::RenderWindow& window,
 	if (getText1().getGlobalBounds().contains(mousex, mousey)) {
 		setSound(false);
 		setMusicPlaying(false);
+		MenuAbstract::getInstance().stopMusic();
 		Manager::getInstance().setNumberLevel(0);
 		view = 2;
 	}
 	else if (getText2().getGlobalBounds().contains(mousex, mousey) && getText2().getString()!="") {
-		setSound(false);
-		setMusicPlaying(false);
+		/*setSound(false);
+		setMusicPlaying(false);*/
+		MenuAbstract::getInstance().stopMusic();
 		Manager::getInstance().setNumberLevel(1);
 		view = 2;
 	}

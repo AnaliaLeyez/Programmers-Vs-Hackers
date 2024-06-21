@@ -63,10 +63,15 @@ void MenuAbstract::restoreSoundPosition() {
 		_currentMenu->setSoundPosition(_soundPosition);
 	}
 }
-
+void MenuAbstract::stopMusic() {
+	if (_currentMenu) {
+		_currentMenu->setSound(false);
+		_currentMenu->setMusicPlaying(false);
+	}
+}
 void MenuAbstract::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	target.draw(*_currentMenu, states);
 }
-void MenuAbstract::update() {
-	_currentMenu->update();
-}
+//void MenuAbstract::update() {
+//	_currentMenu->update();
+//}
