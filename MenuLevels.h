@@ -6,7 +6,7 @@ class MenuLevels : public Menu
 private:
 	sf::Text _text[6];
 public:
-	MenuLevels();
+	MenuLevels(bool);
 	sf::Text getText1() const;
 	sf::Text getText2() const;
 	sf::Text getText3() const;

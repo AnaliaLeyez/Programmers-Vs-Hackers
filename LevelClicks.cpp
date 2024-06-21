@@ -26,7 +26,7 @@ void Level::validateClick(int mousex, int mousey, int& view)
 	else if(_currentMenu->getCurrentSpot()!=nullptr) //quiza es mi primer click y no tengo spot
 	{ //si NO se clickeo spot
 		currentSpot = _currentMenu->getCurrentSpot();
-		manageOutOfSpotClick(mousex, mousey);
+		manageOutOfSpotClick(mousex, mousey);		
 	}	
 
 	validateClickOnSpeaker(mousex, mousey);

@@ -34,7 +34,7 @@ Spot* Level::getSpotByNumber(int n) const {
 	}
 }
 TowerMenu* Level::getCurrentMenu() const { return _currentMenu; }
-int Level::getGolden() { return _golden; }
+int& Level::getGolden() { return _golden; }
 int Level::getEnergy() { return _energy; }
 int Level::getCurrentWave() { return _currentWave; }
 int Level::getTotalWaves() { return _totalWaves; }
@@ -216,12 +216,7 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
 	for (auto& spot : _spots)
 	{
-		//spot->mouseCheck(mousePosition);  //por que si lo hago con esta linea no funciona? 
-		// deberia ser un pasamanos igual que lo es con currentMenu e igual que validateClick
-		if (spot->getGlobalBounds().contains(transformedMousePos))
-			spot->setMouseHover(true);
-		else
-			spot->setMouseHover(false);
+		spot->mouseCheck(transformedMousePos);
 	}
 	if (_currentMenu->getIsVisible() && _currentMenu->getGlobalBounds().contains(transformedMousePos))
 	{
@@ -300,24 +295,8 @@ void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, in
 		_bullets.push_back(new BulletD(shootingPosition, targetPosition, damage));
 		break;
 	}
-
-	auto it = _bullets.begin();
-	while (it != _bullets.end())
-	{
-		Bullet* bullet = *it;
-
-		if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
-		{
-			hacker->takeDamage(bullet->getDamage());
-			delete bullet;
-			it = _bullets.erase(it);
-		}
-		else
-		{
-			++it;
-		}
-	}
 }
+
 
 void Level::checkLevelCompletion() {
 	if (_currentWave > _totalWaves && _enemies.empty()) {
@@ -352,87 +331,35 @@ void Level::setGameOverText()
 	_gameOverSkull.setPosition(400, 150);
 	_gameOverSkull.setScale(0.5, 0.5);
 	_gameOverSkull.setOrigin(_gameOverSkull.getGlobalBounds().width / 2, _gameOverSkull.getGlobalBounds().height / 2);
+	_gameOverClock.restart();
 }
 
 void Level::update(sf::Vector2i& mousePosition, int& view) {
 	if (!_finishedLevel) {
 		checkLevelCompletion(); //xq quiero que una sola vez pase por el check level si se gana el nivel, ya que ahi reseteo un clock
 		if (!_finishedLevel) {
-			mouseCheck(mousePosition);
+			if (!_flagGameOver) {
+				mouseCheck(mousePosition);
 
-			if (_currentWave <= _totalWaves) {
-				spawnWave(); // Generar una nueva oleada de enemigos
-			}
-
-			// Actualizar los enemigos en el nivel
-			for (auto& hacker : _enemies) {
-				hacker->update(getMapArray());
-
-				if (hacker->getEnd() == true) {
-					if (getEnergy() - hacker->attackUtn() >= 0) {
-						_dying = true;
-						decreaseEnergy(hacker->attackUtn());
-					}
-					else {
-						setEnergy(0);
-						_flagGameOver = true;
-						setGameOverText();
-					}
-					_ui.setText(1, std::to_string(getEnergy()));
-					break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
-				}
-				else {
-					_dying = false;
-				}
-			}
-
-
-			for (auto& spot : _spots)
-			{
-				for (auto& hacker : _enemies)
-				{
-					if (spot->getIsOccupied() &&
-						spot->getTransform().transformRect((
-							spot->getCurrentTower()->getBounds())).intersects(hacker->getBounds()
-							))
-					{
-						if (spot->getCurrentTower()->canShoot())
-						{
-							shoot(spot->getPosition(),
-								hacker->getPosition(),
-								spot->getCurrentTower()->getDamage(),
-								spot->getCurrentTower()->getType(), hacker);
-						}
-					}
-				}
-			}
-
-			for (auto& bullet : _bullets) {
-				bullet->update();
-			}
-
-			auto itH = _enemies.begin();
-			while (itH != _enemies.end()) {
-				Hacker* hacker = *itH;
-				hacker->update(getMapArray());
-				if (hacker->getLife() <= 0) {
-					itH = _enemies.erase(itH);
-				}
-				else {
-					++itH;
+				if (_currentWave <= _totalWaves) {
+					spawnWave(); // Generar una nueva oleada de enemigos
 				}
 
+				// Actualizar los enemigos en el nivel
 				for (auto& hacker : _enemies) {
+					hacker->update(getMapArray());
+
 					if (hacker->getEnd() == true) {
-						if (getEnergy() - 20 >= 0) {
+						if (getEnergy() - hacker->attackUtn() >= 0) {
 							_dying = true;
-							setEnergy(getEnergy() - 20);
-							_ui.setText(1, std::to_string(getEnergy()));
+							decreaseEnergy(hacker->attackUtn());
 						}
 						else {
+							setEnergy(0);
 							_flagGameOver = true;
 							setGameOverText();
 						}
+						_ui.setText(1, std::to_string(getEnergy()));
 						break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
 					}
 					else {
@@ -440,16 +367,77 @@ void Level::update(sf::Vector2i& mousePosition, int& view) {
 					}
 				}
 
-				if (_currentMenu->getIsVisible()) {
-					_currentMenu->update(mousePosition);
+
+				for (auto& spot : _spots)
+				{
+					for (auto& hacker : _enemies)
+					{
+						if (spot->getIsOccupied() &&
+							spot->getTransform().transformRect((
+								spot->getCurrentTower()->getBounds())).intersects(hacker->getBounds()
+								))
+						{
+							if (spot->getCurrentTower()->canShoot())
+							{
+								shoot(spot->getPosition(),
+									hacker->getPosition(),
+									spot->getCurrentTower()->getDamage(),
+									spot->getCurrentTower()->getType(), hacker);
+							}
+						}
+					}
+				}
+
+				updateBullets();
+
+				auto itH = _enemies.begin();
+				while (itH != _enemies.end()) {
+					Hacker* hacker = *itH;
+					hacker->update(getMapArray());
+					if (hacker->getLife() <= 0) {
+						itH = _enemies.erase(itH);
+					}
+					else {
+						++itH;
+					}
+
+					for (auto& hacker : _enemies) {
+						if (hacker->getEnd() == true) {
+							if (getEnergy() - 20 >= 0) {
+								_dying = true;
+								setEnergy(getEnergy() - 20);
+								_ui.setText(1, std::to_string(getEnergy()));
+							}
+							else {
+								_flagGameOver = true;
+								setGameOverText();
+							}
+							break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
+						}
+						else {
+							_dying = false;
+						}
+					}
+
+					if (_currentMenu->getIsVisible()) {
+						_currentMenu->update(mousePosition);
+					}
+				}
+			}
+			else {
+				if (_gameOverClock.getElapsedTime().asSeconds() > 5) {
+					MenuAbstract::getInstance().setNumberMenu(2);
+					view = 1;
 				}
 			}
 		}
 	}
-	else if(_levelUpClock.getElapsedTime().asSeconds()>4) {
+	else if (_levelUpClock.getElapsedTime().asSeconds() > 4) {
+		setSound(false);
+		setMusicPlaying(false);
 		MenuAbstract::getInstance().setNumberMenu(2);
 		view = 1;
-		
+
 		//if (getIdLevel() < 5) { // aca digo que solo puede llegar hasta el nivel 5
 		//	Manager::getInstance().setNumberLevel(getIdLevel() + 1); // cambia al siguiente nivel
 		//}
@@ -499,3 +487,60 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 	}
 
 }
+
+void Level::updateBullets()
+{
+	auto it = _bullets.begin();
+	while (it != _bullets.end())
+	{
+		Bullet* bullet = *it;
+		bool bulletErased = false;
+
+		for (auto& hacker : _enemies)
+		{
+			if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
+			{
+				hacker->takeDamage(bullet->getDamage());
+				std::cout << "Vida Hacker: " << hacker->getLife() << std::endl;
+				delete bullet;
+				bulletErased = true;
+
+				it = _bullets.erase(it);
+				std::cout << "Bullet erased due to collision" << std::endl;
+				break;
+			}
+		}
+
+		if (!bulletErased)
+		{
+			bullet->update();
+
+			// Fallback check to remove stuck bullets
+			if (bullet->getPosition() == bullet->getPosition()) // This should always be true unless the bullet moved
+			{
+				sf::Vector2f lastPosition = bullet->getPosition();
+				bullet->update();
+				if (bullet->getPosition() == lastPosition)
+				{
+					delete bullet;
+					it = _bullets.erase(it);
+					std::cout << "Bullet erased due to being stuck" << std::endl;
+				}
+				else
+				{
+					++it;
+				}
+			}
+			else
+			{
+				++it;
+			}
+		}
+	}
+}
+
+Level::~Level() { //revisar eliminar todo lo que haya sido asignado con memoria dinamica
+		for (Spot* spot : _spots) {
+			delete spot;
+		}
+	}

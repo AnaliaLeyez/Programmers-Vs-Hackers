@@ -28,13 +28,4 @@ public:
     void reset();
 };
 
-//void altaLevels() {
-//    FileLevels arc;
-//    Levels reg;
-//    for (int i = 0; i < 5; i++) {
-//        reg.Cargar(i);
-//        arc.save(reg);
-//        system("pause");
-//    }  
-//}
 

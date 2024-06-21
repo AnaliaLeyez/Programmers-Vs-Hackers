@@ -6,7 +6,7 @@ class MenuHome : public Menu
 private:
 	sf::Text _text[5];
 public:
-	MenuHome();
+	MenuHome(bool state);
 	sf::Text getText1() const;
 	sf::Text getText2() const;
 	sf::Text getText3() const;

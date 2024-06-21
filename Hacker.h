@@ -22,6 +22,12 @@ protected:
 	int _goldenDrop;
 	sf::Vector2f _position;
 	bool _reachedEnd; // llego al final del camino ?
+
+	//Animation
+	float _frame;
+	sf::Vector2f _currentPosition;
+	sf::Vector2f _previousPosition;
+
 public:
 	virtual int attackUtn() = 0;
 	virtual void saySth() = 0;
@@ -49,4 +55,6 @@ public:
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 
 	void takeDamage(int);
+
+	void animation(float);
 };

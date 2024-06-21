@@ -3,9 +3,12 @@
 #include "MenuAbstract.h"
 #include "MenuLevels.h"
 
-MenuLevels::MenuLevels() : Menu() {
+MenuLevels::MenuLevels(bool state) {
+	_musicPlaying = state;
+
 	FileLevels arc;
 	Levels reg;
+	
 	//texto
 	for (int i = 0; i < 5; i++) {
 		_text[i].setFont(_font);
@@ -69,12 +72,14 @@ void MenuLevels::validateClick(int mousex, int mousey, sf::RenderWindow& window,
 	if (getText1().getGlobalBounds().contains(mousex, mousey)) {
 		setSound(false);
 		setMusicPlaying(false);
+		MenuAbstract::getInstance().stopMusic();
 		Manager::getInstance().setNumberLevel(0);
 		view = 2;
 	}
 	else if (getText2().getGlobalBounds().contains(mousex, mousey) && getText2().getString()!="") {
-		setSound(false);
-		setMusicPlaying(false);
+		/*setSound(false);
+		setMusicPlaying(false);*/
+		MenuAbstract::getInstance().stopMusic();
 		Manager::getInstance().setNumberLevel(1);
 		view = 2;
 	}
@@ -87,7 +92,9 @@ void MenuLevels::validateClick(int mousex, int mousey, sf::RenderWindow& window,
 	}*/
 	//VOLVER:
 	else if (getText6().getGlobalBounds().contains(mousex, mousey)) {
+		MenuAbstract::getInstance().saveSoundPosition();
 		MenuAbstract::getInstance().setNumberMenu(1);
+		MenuAbstract::getInstance().restoreSoundPosition();
 	}
 }
 

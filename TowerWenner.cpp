@@ -6,7 +6,7 @@
 
 TowerWenner::TowerWenner()
 {
-	if (!_texture.loadFromFile("img/towers/torreB_1.png")) {
+	if (!_texture.loadFromFile("img/towers/torreB_3.png")) {
 		throw std::runtime_error("Error img Tower Wenner");
 	}
 	_sprite.setTexture(_texture);
@@ -59,7 +59,7 @@ void TowerWenner::upgrade()
 	case 2:
 	{
 		_name = "estadistica";
-		if (!_texture.loadFromFile("img/towers/torreB_3.png")) {
+		if (!_texture.loadFromFile("img/towers/torreB_4.png")) {
 			throw std::runtime_error("Error img tower estadistica");
 		}
 		_sprite.setTexture(_texture);

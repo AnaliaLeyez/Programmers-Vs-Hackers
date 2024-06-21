@@ -75,6 +75,7 @@ protected:
 	sf::Texture _textureGameOverSkull;
 	sf::Sprite _gameOverSkull;
 	bool _flagGameOver;
+	sf::Clock _gameOverClock;
 	sf::Font _fontLevelUp;
 	sf::Clock _levelUpClock;
 	sf::Text _levelUp;
@@ -90,7 +91,8 @@ public:
 	Spot* getCurrentSpot() const;
 	Spot* getSpotByNumber(int) const;
 	TowerMenu* getCurrentMenu() const;
-	int getGolden();
+	//Cambié acá por refrefencia
+	int& getGolden();
 	int getEnergy();
 	int getCurrentWave();
 	int getTotalWaves();
@@ -121,6 +123,7 @@ public:
 	void setNoCoinsText();
 	void setLevelUpText();
 
+
 	void mouseCheck(sf::Vector2i&);
 	void validateClick(int, int, int&);
 	int validateClickOnSpot(int, int);
@@ -143,12 +146,8 @@ public:
 
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update(sf::Vector2i&, int&);
+	void updateBullets();
 
-
-	~Level() { //revisar eliminar todo lo que haya sido asignado con memoria dinamica
-		for (Spot* spot : _spots) {
-			delete spot;
-		}
-	}
+	~Level();
 };
 

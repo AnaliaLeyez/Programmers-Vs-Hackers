@@ -15,8 +15,6 @@ Menu::Menu() {
 	_buffer.loadFromFile("music/menuMusic.wav");
 	_sound.setBuffer(_buffer);
 	_sound.setVolume(5);
-	_musicPlaying = true;
-	_sound.play();
 
 	//texto
 	if (!_font.loadFromFile("fuentes/fuenteMenu.ttf")) {
@@ -34,6 +32,19 @@ void Menu::setSound(bool play) {
 		_sound.pause();
 	}
 }
+
+bool Menu::getMusicPlaying() const {
+	return _musicPlaying;
+}
+
+float Menu::getSoundPosition() const {
+	return _sound.getPlayingOffset().asSeconds();
+}
+
+void Menu::setSoundPosition(float position) {
+	_sound.setPlayingOffset(sf::seconds(position));
+}
+
 void Menu::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	target.draw(_banner, states);
 }

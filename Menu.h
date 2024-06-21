@@ -18,6 +18,10 @@ public:
 	void setMusicPlaying(bool);
 	void setSound(bool);
 
-	void update() {}
+	bool getMusicPlaying() const;
+	float getSoundPosition() const;
+	void setSoundPosition(float);
+
+	//void update() {}
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 };
