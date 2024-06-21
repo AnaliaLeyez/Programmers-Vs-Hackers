@@ -12,19 +12,33 @@ MenuAbstract& MenuAbstract::getInstance() {
 	}
 	return *MenuAbstract::_currentInstance;
 }
+Menu* MenuAbstract::getCurrentMenu() const {
+	return _currentMenu;
+}
+MenuAbstract::MenuAbstract(int idMenu) : _currentMenu(nullptr) {
+	setNumberMenu(idMenu);
+}
 
 void MenuAbstract::setNumberMenu(int idMenu)
 {
+	bool state;
+	switch (idMenu)
+	{
+	case 1:
 		if (_currentMenu != nullptr) {
-			delete _currentMenu;
+			state = _currentMenu->getMusicPlaying();
+			_currentMenu = new MenuHome(state);
 		}
-		switch (idMenu)
+		else {
+			_currentMenu = new MenuHome(true);
+			_currentMenu->setSound(true);
+		}
+		break;
+	case 2:
 		{
-		case 1:
-			_currentMenu = new MenuHome();
-			break;
-		case 2:
-			_currentMenu = new MenuLevels();
+		state = _currentMenu->getMusicPlaying();
+		_currentMenu = new MenuLevels(state);
+		}
 			break;
 		default:
 			break;
@@ -36,8 +50,18 @@ void MenuAbstract::validateClick(int mousex, int mousey, sf::RenderWindow& windo
 	_currentMenu->validateClick(mousex, mousey, window, view);
 }
 
-MenuAbstract::MenuAbstract(int idMenu) : _currentMenu(nullptr) {
-	setNumberMenu(idMenu);
+
+
+void MenuAbstract::saveSoundPosition() {
+	if (_currentMenu) {
+		_soundPosition = _currentMenu->getSoundPosition();
+	}
+}
+
+void MenuAbstract::restoreSoundPosition() {
+	if (_currentMenu) {
+		_currentMenu->setSoundPosition(_soundPosition);
+	}
 }
 
 void MenuAbstract::draw(sf::RenderTarget& target, sf::RenderStates states)const {

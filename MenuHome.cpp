@@ -2,7 +2,9 @@
 #include "MenuAbstract.h"
 #include "MenuHome.h"
 
-MenuHome::MenuHome() : Menu() {
+MenuHome::MenuHome(bool state) {
+	_musicPlaying = state;
+
 	//texto
 	for (int i = 0; i < 5; i++) {
 		_text[i].setFont(_font);
@@ -62,14 +64,18 @@ void MenuHome::setSoundText(bool play) {
 void MenuHome::validateClick(int mousex, int mousey, sf::RenderWindow& window, int& view)
 {
 	if (getText1().getGlobalBounds().contains(mousex, mousey)) {
-		setSound(false);
-		setMusicPlaying(false);
+		bool wasMusicPlaying = getMusicPlaying();
+		MenuAbstract::getInstance().saveSoundPosition();
 		MenuAbstract::getInstance().setNumberMenu(2);
+		MenuAbstract::getInstance().restoreSoundPosition();
+		MenuAbstract::getInstance().getCurrentMenu()->setMusicPlaying(wasMusicPlaying);
 	}
 	else if (getText2().getGlobalBounds().contains(mousex, mousey)) {
 		FileLevels arc;
 		arc.reset();
+		MenuAbstract::getInstance().saveSoundPosition();
 		MenuAbstract::getInstance().setNumberMenu(2);
+		MenuAbstract::getInstance().restoreSoundPosition();
 	}
 	else if (getText4().getGlobalBounds().contains(mousex, mousey)) {
 		if (getMusicPlaying()) {
