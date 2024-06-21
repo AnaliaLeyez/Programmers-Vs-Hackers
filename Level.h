@@ -129,7 +129,7 @@ public:
 	void manageOutOfSpotClick(int, int); //DEBERIA SER PUNTERO??????
 	void clickWithMenu1Open(int, int, Spot&);
 	void clickWithMenu2Open(int, int, Spot&);
-	void validateClickOnSpeaker(int, int);
+	bool validateClickOnSpeaker(int, int);
 
 	bool validateSale(Tower*, bool);
 	void sell(Tower*, Spot&);
@@ -143,12 +143,8 @@ public:
 
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update(sf::Vector2i&, int&);
+	void updateBullets();
 
-
-	~Level() { //revisar eliminar todo lo que haya sido asignado con memoria dinamica
-		for (Spot* spot : _spots) {
-			delete spot;
-		}
-	}
+	~Level();
 };
 

@@ -26,10 +26,13 @@ void Level::validateClick(int mousex, int mousey)
 	{ //si NO se clickeo spot
 		currentSpot = _currentMenu->getCurrentSpot();
 		manageOutOfSpotClick(mousex, mousey);
+		if (!validateClickOnSpeaker(mousex, mousey)) { //si ya sabe que el click fue en el parlante, solo hace eso
+			//validateClickOnMenu(mousex, mousey);
+		}
+		
 	}	
 
-	validateClickOnSpeaker(mousex, mousey);
-	//validateClickOnMenu(mousex, mousey);
+	
 }
 int Level::validateClickOnSpot(int mousex, int mousey) 
 {
@@ -138,7 +141,7 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 
 	_currentMenu->hide();
 }
-void Level::validateClickOnSpeaker(int mousex, int mousey) {
+bool Level::validateClickOnSpeaker(int mousex, int mousey) {
 	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
 		if (getMusicPlaying()) {
 			setSound(false);
@@ -150,5 +153,7 @@ void Level::validateClickOnSpeaker(int mousex, int mousey) {
 			setMusicPlaying(true);
 			_ui.setTextureSpeaker("img/complementarias/musicOn.png");
 		}
+		return true;
 	}
+	return false;
 }

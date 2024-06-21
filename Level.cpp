@@ -301,27 +301,58 @@ void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, in
 		break;
 	}
 
+}
+
+void Level::updateBullets()
+{
 	auto it = _bullets.begin();
 	while (it != _bullets.end())
 	{
 		Bullet* bullet = *it;
+		bool bulletErased = false;
 
-		if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
+		for (auto& hacker : _enemies)
 		{
-			hacker->takeDamage(bullet->getDamage());
-			delete bullet;
-			it = _bullets.erase(it);
-		}/*else if (.....)  //ACA SE BORRARIAN LAS BALAS
+			if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
+			{
+				hacker->takeDamage(bullet->getDamage());
+				std::cout << "Vida Hacker: " << hacker->getLife() << std::endl;
+				delete bullet;
+				bulletErased = true;
+				it = _bullets.erase(it);
+				std::cout << "Bullet erased due to collision" << std::endl;
+				break;
+			}
+		}
+
+		if (!bulletErased)
 		{
-			delete bullet;
-			it = _bullets.erase(it);
-		}*/
-		else
-		{
-			++it;
+			bullet->update();
+
+			// Fallback check to remove stuck bullets
+			if (bullet->getPosition() == bullet->getPosition()) // This should always be true unless the bullet moved
+			{
+				sf::Vector2f lastPosition = bullet->getPosition();
+				bullet->update();
+				if (bullet->getPosition() == lastPosition)
+				{
+					delete bullet;
+					it = _bullets.erase(it);
+					std::cout << "Bullet erased due to being stuck" << std::endl;
+				}
+				else
+				{
+					++it;
+				}
+			}
+			else
+			{
+				++it;
+			}
 		}
 	}
 }
+
 
 void Level::checkLevelCompletion() {
 	if (_currentWave > _totalWaves && _enemies.empty()) {
@@ -414,9 +445,7 @@ void Level::update(sf::Vector2i& mousePosition, int& view) {
 					}
 				}
 
-				for (auto& bullet : _bullets) {
-					bullet->update();
-				}
+				updateBullets();
 
 				auto itH = _enemies.begin();
 				while (itH != _enemies.end()) {
@@ -461,6 +490,8 @@ void Level::update(sf::Vector2i& mousePosition, int& view) {
 		}
 	}
 	else if (_levelUpClock.getElapsedTime().asSeconds() > 4) {
+		setSound(false);
+		setMusicPlaying(false);
 		MenuAbstract::getInstance().setNumberMenu(2);
 		view = 1;
 
@@ -513,3 +544,9 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 	}
 
 }
+
+Level::~Level() { //revisar eliminar todo lo que haya sido asignado con memoria dinamica
+		for (Spot* spot : _spots) {
+			delete spot;
+		}
+	}
