@@ -295,49 +295,6 @@ void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, in
 		_bullets.push_back(new BulletD(shootingPosition, targetPosition, damage));
 		break;
 	}
-
-	auto it = _bullets.begin();
-	while (it != _bullets.end())
-	{
-		Bullet* bullet = *it;
-		bool bulletErased = false;
-
-		for (auto& hacker : _enemies)
-		{
-			if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
-			{
-				hacker->takeDamage(bullet->getDamage());
-				delete bullet;
-				bulletErased = true;
-				it = _bullets.erase(it);
-				break;
-			}
-		}
-
-		if (!bulletErased)
-		{
-			bullet->update();
-
-			if (bullet->getPosition() == bullet->getPosition()) // Esta linea es una locura pero es la unica que funciono....
-			{
-				sf::Vector2f lastPosition = bullet->getPosition();
-				bullet->update();
-				if (bullet->getPosition() == lastPosition)
-				{
-					delete bullet;
-					it = _bullets.erase(it);
-				}
-				else
-				{
-					++it;
-				}
-			}
-			else
-			{
-				++it;
-			}
-		}
-	}
 }
 
 
@@ -530,6 +487,57 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 		target.draw(_levelUp, states);
 	}
 
+}
+
+void Level::updateBullets()
+{
+	auto it = _bullets.begin();
+	while (it != _bullets.end())
+	{
+		Bullet* bullet = *it;
+		bool bulletErased = false;
+
+		for (auto& hacker : _enemies)
+		{
+			if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
+			{
+				hacker->takeDamage(bullet->getDamage());
+				std::cout << "Vida Hacker: " << hacker->getLife() << std::endl;
+				delete bullet;
+				bulletErased = true;
+
+				it = _bullets.erase(it);
+				std::cout << "Bullet erased due to collision" << std::endl;
+				break;
+			}
+		}
+
+		if (!bulletErased)
+		{
+			bullet->update();
+
+			// Fallback check to remove stuck bullets
+			if (bullet->getPosition() == bullet->getPosition()) // This should always be true unless the bullet moved
+			{
+				sf::Vector2f lastPosition = bullet->getPosition();
+				bullet->update();
+				if (bullet->getPosition() == lastPosition)
+				{
+					delete bullet;
+					it = _bullets.erase(it);
+					std::cout << "Bullet erased due to being stuck" << std::endl;
+				}
+				else
+				{
+					++it;
+				}
+			}
+			else
+			{
+				++it;
+			}
+		}
+	}
 }
 
 Level::~Level() { //revisar eliminar todo lo que haya sido asignado con memoria dinamica
