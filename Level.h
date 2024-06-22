@@ -57,6 +57,7 @@ protected:
 	int _timeBetweenEnemies;
 	sf::Clock _waveClock;
 	sf::Clock _enemyClock;
+	float _enemiesRandomTime= std::rand() % 320 * 0.01f + 0.4f;
 
 	sf::Vector2f _hackerStartPosition;
 	sf::Vector2f _hackerStartPosition1;

@@ -157,12 +157,15 @@ void Level::spawnWave() {
 	//despues de que la funcion haya terminado de ejecutarse
 	static int enemyIndex = 0;
 	static bool spawnedGodHacker = false;
-	int randomTime;
 	Hacker* hk;
 	if (enemyIndex < _enemiesPerWave) {
 		// Genera un nuevo enemigo
-		randomTime = std::rand() % 4000 + 300; //REVISAR, este random es como q lo hace una vez por cada oleada..
-		if (_enemyClock.getElapsedTime().asMilliseconds() >= randomTime) {
+		float newRandom= std::rand() % 320  *0.01f+ 0.4f;
+		while (_enemiesRandomTime == newRandom) {
+			newRandom = std::rand() % 320 * 0.01f + 0.4f;
+		}
+		_enemiesRandomTime = newRandom; //REVISAR, este random es como q lo hace una vez por cada oleada..
+		if (_enemyClock.getElapsedTime().asMilliseconds() *0.001f >= _enemiesRandomTime) {
 			switch (_currentWave)
 			{
 			case 1:
