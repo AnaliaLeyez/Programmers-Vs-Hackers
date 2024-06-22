@@ -14,8 +14,8 @@ TowerKloster::TowerKloster()
 	_name = "Torre SPD";
 
 	//Rango de ataque:
-	_visualRange.setRadius(125);
-	_visualRange.setFillColor(sf::Color(0, 255, 0, 120));
+	_visualRange.setRadius(130);
+	_visualRange.setFillColor(sf::Color(0, 255, 0, 30));
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
 	_type = 2;

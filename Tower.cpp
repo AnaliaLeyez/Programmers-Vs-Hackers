@@ -36,11 +36,9 @@ bool Tower::canShoot()
 {
     if (_clock.getElapsedTime().asSeconds() >= _fireRate)
     {
-        setRangeColor(sf::Color(255, 0, 0, 120));
         _clock.restart();
         return true;
     }
-    setRangeColor(sf::Color(0, 255, 0, 120));
     return false;
 }
 

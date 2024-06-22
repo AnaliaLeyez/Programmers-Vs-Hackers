@@ -15,8 +15,8 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 	_name = "Torre Programacion 1";
 
 	//Rango de ataque:
-	_visualRange.setRadius(130);
-	_visualRange.setFillColor(sf::Color(0, 255, 0, 120));
+	_visualRange.setRadius(140);
+	_visualRange.setFillColor(sf::Color(0, 255, 0, 30));
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
 	_type = 3;

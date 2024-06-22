@@ -32,7 +32,7 @@ Level3::Level3()
 	_enemyClock.restart();
 	_hackerStartPosition = { 960 / 32 * 8.7, 640 / 32 * 0.5 };
 	_hackerStartPosition1 = { 960 / 32 * 8.7, 640 / 32 * 0.5 };
-	_hackerStartPosition2 = { 960 / 32 * 19.7, 640 / 32 * 0.5 };
+	_hackerStartPosition2 = { 960 / 32 * 19.3, 640 / 32 * 0.5 };
 
 	_idLevel = 2;
 	_finishedLevel = false;
