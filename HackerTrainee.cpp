@@ -16,16 +16,16 @@ HackerTrainee::HackerTrainee()
 	_previousPosition = _currentPosition;
 
 	_frame = 0;
-	_life = 5;
-	_damage = 1;
-	_velocity = { 3,3 };
-	_goldenDrop = 10;
+	_life = 7;
+	_damage = 5;
+	_velocity = { 4, 4 };
+	_goldenDrop = 3;
 }
 
 
 int HackerTrainee::attackUtn() 
 {
-	return 30;
+	return 40;
 }
 
 void HackerTrainee::saySth()

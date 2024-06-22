@@ -91,12 +91,13 @@ Level2::Level2()
 	_sound.setVolume(5);
 	_sound.play();
 	_musicPlaying = true;
-	_towersAvailable.push_back(new TowerBrian());
-	_towersAvailable.push_back(new TowerKloster());
-	_towersAvailable.push_back(new TowerSarF());
-	_towersAvailable.push_back(new TowerWenner());
+	//_towersAvailable.push_back(new TowerBrian());
+	//_towersAvailable.push_back(new TowerKloster());
+	//_towersAvailable.push_back(new TowerSarF());
+	//_towersAvailable.push_back(new TowerWenner());
 
 	_currentMenu = _menu1;
 
 	setNoCoinsText(); //NUEVO
+	setLevelUpText();
 }

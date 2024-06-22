@@ -16,10 +16,10 @@ HackerJunior::HackerJunior()
 	_previousPosition = _currentPosition;
 
 	_frame = 0;
-	_life = 10;
-	_damage = 1;
+	_life = 15;
+	_damage = 10;
 	_velocity = { 3,3 };
-	_goldenDrop = 10;
+	_goldenDrop = 9;
 
 }
 

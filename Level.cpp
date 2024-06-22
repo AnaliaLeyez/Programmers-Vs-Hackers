@@ -42,7 +42,7 @@ sf::SoundBuffer Level::getBuffer() const { return _buffer; }
 sf::Sound Level::getSound() const { return _sound; }
 bool Level::getMusicPlaying() const { return _musicPlaying; }
 sf::Vector2f Level::getHackerStartPosition() const { return _hackerStartPosition; }
-const std::list<Tower*> Level::getTowersAvailable() const { return _towersAvailable; }
+//const std::list<Tower*> Level::getTowersAvailable() const { return _towersAvailable; }
 std::list<Tower*> Level::getActiveTowers() const { return _activeTowers; }
 
 //void Level::setIdLevel(int idLevel) { _idLevel = idLevel; }
@@ -56,7 +56,7 @@ void Level::setGolden(int golden) { _golden = golden; }
 void Level::setEnergy(int energy) { _energy = energy; }
 void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
-void Level::setTowersAvailable(Tower* towerAvailable) { _towersAvailable.push_back(towerAvailable); }
+//void Level::setTowersAvailable(Tower* towerAvailable) { _towersAvailable.push_back(towerAvailable); }
 void Level::setActiveTowers(Tower* tower) { _activeTowers.push_back(tower); }
 void Level::setSpot(Spot* sp)
 {
@@ -391,41 +391,32 @@ void Level::update(sf::Vector2i& mousePosition, int& view) {
 				updateBullets();
 
 				auto itH = _enemies.begin();
-				while (itH != _enemies.end()) {
+				while (itH != _enemies.end())
+				{
 					Hacker* hacker = *itH;
 					hacker->update(getMapArray());
-					if (hacker->getLife() <= 0) {
+					if (hacker->getLife() <= 0)
+					{
+						setGolden(getGolden() + hacker->getGoldenDrop());
+						_ui.setText(0, std::to_string(getGolden()));
+
 						itH = _enemies.erase(itH);
 					}
-					else {
+					else
+					{
 						++itH;
 					}
+				}
 
-					for (auto& hacker : _enemies) {
-						if (hacker->getEnd() == true) {
-							if (getEnergy() - 20 >= 0) {
-								_dying = true;
-								setEnergy(getEnergy() - 20);
-								_ui.setText(1, std::to_string(getEnergy()));
-							}
-							else {
-								_flagGameOver = true;
-								setGameOverText();
-							}
-							break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
-						}
-						else {
-							_dying = false;
-						}
-					}
-
-					if (_currentMenu->getIsVisible()) {
-						_currentMenu->update(mousePosition);
-					}
+				if (_currentMenu->getIsVisible())
+				{
+					_currentMenu->update(mousePosition);
 				}
 			}
 			else {
 				if (_gameOverClock.getElapsedTime().asSeconds() > 5) {
+					setSound(false);
+					setMusicPlaying(false);
 					MenuAbstract::getInstance().setNumberMenu(2);
 					view = 1;
 				}
@@ -536,8 +527,32 @@ void Level::updateBullets()
 	}
 }
 
-Level::~Level() { //revisar eliminar todo lo que haya sido asignado con memoria dinamica
-		for (Spot* spot : _spots) {
-			delete spot;
-		}
+Level::~Level() { //eliminar todo lo que haya sido asignado con memoria dinamica
+	delete _menu1;
+	delete _menu2;
+	delete _menu3;
+
+	delete[] _hackersPerWave;
+	delete[] _wave1;
+	delete[] _wave2;
+	delete[] _wave3;
+	delete[] _wave4;
+
+	for (Hacker* hacker : _enemies) {
+		delete hacker;
 	}
+
+	for (Tower* tower : _activeTowers) {
+		delete tower;
+	}
+
+	for (Bullet* bullet : _bullets) {
+		delete bullet;
+	}
+
+	delete _map;
+
+	for (Spot* spot : _spots) {
+		delete spot;
+	}
+}

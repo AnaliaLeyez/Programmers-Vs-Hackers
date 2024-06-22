@@ -12,9 +12,9 @@ MenuAbstract& MenuAbstract::getInstance() {
 	}
 	return *MenuAbstract::_currentInstance;
 }
-Menu* MenuAbstract::getCurrentMenu() const {
-	return _currentMenu;
-}
+//Menu* MenuAbstract::getCurrentMenu() const {
+//	return _currentMenu;
+//}
 MenuAbstract::MenuAbstract(int idMenu) : _currentMenu(nullptr) {
 	setNumberMenu(idMenu);
 }
@@ -52,23 +52,23 @@ void MenuAbstract::validateClick(int mousex, int mousey, sf::RenderWindow& windo
 
 
 
-void MenuAbstract::saveSoundPosition() {
-	if (_currentMenu) {
-		_soundPosition = _currentMenu->getSoundPosition();
-	}
-}
-
-void MenuAbstract::restoreSoundPosition() {
-	if (_currentMenu) {
-		_currentMenu->setSoundPosition(_soundPosition);
-	}
-}
-void MenuAbstract::stopMusic() {
-	if (_currentMenu) {
-		_currentMenu->setSound(false);
-		_currentMenu->setMusicPlaying(false);
-	}
-}
+//void MenuAbstract::saveSoundPosition() {
+//	if (_currentMenu) {
+//		_soundPosition = _currentMenu->getSoundPosition();
+//	}
+//}
+//
+//void MenuAbstract::restoreSoundPosition() {
+//	if (_currentMenu) {
+//		_currentMenu->setSoundPosition(_soundPosition);
+//	}
+//}
+//void MenuAbstract::stopMusic() {
+//	if (_currentMenu) {
+//		_currentMenu->setSound(false);
+//		_currentMenu->setMusicPlaying(false);
+//	}
+//}
 void MenuAbstract::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	target.draw(*_currentMenu, states);
 }

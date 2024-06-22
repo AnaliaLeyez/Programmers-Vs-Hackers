@@ -59,7 +59,7 @@ protected:
 	sf::Clock _enemyClock;
 
 	sf::Vector2f _hackerStartPosition;
-	std::list <Tower*> _towersAvailable;
+	//std::list <Tower*> _towersAvailable;
 	std::list <Tower*> _activeTowers;
 
 	std::list<Bullet*> _bullets;
@@ -100,7 +100,7 @@ public:
 	bool getMusicPlaying() const;
 	sf::Sound getSound() const;
 	sf::Vector2f getHackerStartPosition() const;
-	const std::list<Tower*> getTowersAvailable() const;
+	//const std::list<Tower*> getTowersAvailable() const;
 	std::list <Tower*> getActiveTowers() const;
 
 	//void setIdLevel(int);
@@ -112,7 +112,7 @@ public:
 	void setEnergy(int);
 	void setMusicPlaying(bool);
 	void setSound(bool);
-	void setTowersAvailable(Tower*);
+	//void setTowersAvailable(Tower*);
 	void setActiveTowers(Tower*);
 	void setSpot(Spot*);
 	void setSpots(int arr[][30], std::vector<Spot*>&, int);

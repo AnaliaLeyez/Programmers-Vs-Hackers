@@ -13,9 +13,6 @@
 #include "Spot.h"
 #include "Level1.h"
 
-
-
-
 Level1::Level1()
 {
 	_hackersPerWave = new int[4] { 4, 6, 8, 8 };
@@ -28,7 +25,6 @@ Level1::Level1()
 	_totalWaves = 4;
 	_enemiesPerWave = 4;
 	_timeBetweenWaves = 15;
-	//_timeBetweenEnemies = std::rand() % 15 + 1; ///ver si esta queda o se va 
 	_waveClock.restart();
 	_enemyClock.restart();
 	_hackerStartPosition = { 960 / 32 * 9.5, 640 / 32 * 0.5 };
@@ -95,10 +91,10 @@ Level1::Level1()
 	_sound.play();
 	_musicPlaying = true;
 
-	_towersAvailable.push_back(new TowerBrian());
-	_towersAvailable.push_back(new TowerKloster());
-	_towersAvailable.push_back(new TowerSarF());
-	_towersAvailable.push_back(new TowerWenner());
+	//_towersAvailable.push_back(new TowerBrian());
+	//_towersAvailable.push_back(new TowerKloster());
+	//_towersAvailable.push_back(new TowerSarF());
+	//_towersAvailable.push_back(new TowerWenner());
 
 	_currentMenu = _menu1;
 

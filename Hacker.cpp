@@ -50,7 +50,7 @@ void Hacker::animation(float _frame)
 
 void Hacker::moveHacker(int arr[][30])
 {
-	_frame += 0.2;
+	_frame += 0.2f;
 
 	if (_frame > 4)
 	{

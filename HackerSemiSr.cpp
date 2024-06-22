@@ -16,10 +16,10 @@ HackerSemiSr::HackerSemiSr()
 	_previousPosition = _currentPosition;
 
 	_frame = 0;
-	_life = 20;
-	_damage = 1;
+	_life = 35;
+	_damage = 20;
 	_velocity = { 2,2 };
-	_goldenDrop = 10;
+	_goldenDrop = 12;
 
 }
 

@@ -72,14 +72,14 @@ void MenuLevels::validateClick(int mousex, int mousey, sf::RenderWindow& window,
 	if (getText1().getGlobalBounds().contains(mousex, mousey)) {
 		setSound(false);
 		setMusicPlaying(false);
-		MenuAbstract::getInstance().stopMusic();
+		//MenuAbstract::getInstance().stopMusic();
 		Manager::getInstance().setNumberLevel(0);
 		view = 2;
 	}
 	else if (getText2().getGlobalBounds().contains(mousex, mousey) && getText2().getString()!="") {
-		/*setSound(false);
-		setMusicPlaying(false);*/
-		MenuAbstract::getInstance().stopMusic();
+		setSound(false);
+		setMusicPlaying(false);
+		//MenuAbstract::getInstance().stopMusic();
 		Manager::getInstance().setNumberLevel(1);
 		view = 2;
 	}
@@ -92,9 +92,9 @@ void MenuLevels::validateClick(int mousex, int mousey, sf::RenderWindow& window,
 	}*/
 	//VOLVER:
 	else if (getText6().getGlobalBounds().contains(mousex, mousey)) {
-		MenuAbstract::getInstance().saveSoundPosition();
+		//MenuAbstract::getInstance().saveSoundPosition();
 		MenuAbstract::getInstance().setNumberMenu(1);
-		MenuAbstract::getInstance().restoreSoundPosition();
+		//MenuAbstract::getInstance().restoreSoundPosition();
 	}
 }
 
