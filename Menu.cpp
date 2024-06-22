@@ -1,7 +1,5 @@
 #include "Menu.h"
 
-#include "Menu.h"
-
 Menu::Menu() {
 	//fondo
 	if (!_textureBanner.loadFromFile("img/banner/imgPortada.png")) {

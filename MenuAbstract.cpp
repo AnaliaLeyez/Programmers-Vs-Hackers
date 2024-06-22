@@ -2,6 +2,7 @@
 #include "Menu.h"
 #include "MenuHome.h"
 #include "MenuLevels.h"
+#include "MenuInfo.h"
 #include "MenuAbstract.h"
 
 MenuAbstract* MenuAbstract::_currentInstance = nullptr;
@@ -38,6 +39,12 @@ void MenuAbstract::setNumberMenu(int idMenu)
 	{
 		state = _currentMenu->getMusicPlaying();
 		_currentMenu = new MenuLevels(state);
+	}
+	break;
+	case 3:
+	{
+		state = _currentMenu->getMusicPlaying();
+		_currentMenu = new MenuInfo(state);
 	}
 	break;
 	default:
