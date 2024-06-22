@@ -12,6 +12,7 @@
 #include "HackerTrainee.h"
 #include "HackerJunior.h"
 #include "HackerSemiSr.h"
+#include "HackerDios.h"
 #include "Level.h"
 #include "Spot.h"
 #include "Level3.h"
@@ -19,9 +20,9 @@
 Level3::Level3()
 {
 	_hackersPerWave = new int[3] { 6, 8, 10 };
-	_wave1 = new int[6] { 2, 3, 2, 2, 2, 3 };
-	_wave2 = new int[8] { 2, 2, 2, 2, 2, 3, 3, 3 };
-	_wave3 = new int[10] { 1, 2, 3, 3, 3, 3, 3, 3, 2, 3 };
+	_wave1 = new int[6] { 1, 2, 3, 3, 2, 3 };
+	_wave2 = new int[8] { 2, 3, 3, 3, 2, 3, 3, 4 };
+	_wave3 = new int[10] { 4, 2, 3, 1, 4, 3, 3, 1, 2, 4 };
 
 	_currentWave = 1;
 	_totalWaves = 3;
