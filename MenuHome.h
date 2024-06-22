@@ -9,7 +9,5 @@ public:
 	bool getMusicPlaying() const;
 	//sf::Sound getSound() const;
 	void setSoundText(bool);
-
-	void update() {}
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 };

@@ -7,7 +7,5 @@ public:
 	MenuLevels(bool);
 
 	void validateClick(int, int, sf::RenderWindow&, int&) override;
-
-	void update() {}
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 };
