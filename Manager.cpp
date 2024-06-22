@@ -3,6 +3,7 @@
 #include "Level.h"
 #include "Level1.h"
 #include "Level2.h"
+#include "Level3.h"
 #include "Manager.h"
 
 Manager* Manager::_currentInstance = nullptr;
@@ -41,6 +42,9 @@ void Manager::setNumberLevel(int IdLevel) {
 		break;
 	case 1:
 		_currentLevel = new Level2();
+		break;
+	case 2:
+		_currentLevel = new Level3();
 		break;
 	default:
 		break;

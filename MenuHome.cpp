@@ -45,7 +45,7 @@ MenuHome::MenuHome(bool state) {
 
 
 bool MenuHome::getMusicPlaying() const { return _musicPlaying; }
-sf::Sound MenuHome::getSound() const { return _sound; }
+//sf::Sound MenuHome::getSound() const { return _sound; }
 
 void MenuHome::setSoundText(bool play) {
 	if (play) {

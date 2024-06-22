@@ -59,6 +59,8 @@ protected:
 	sf::Clock _enemyClock;
 
 	sf::Vector2f _hackerStartPosition;
+	sf::Vector2f _hackerStartPosition1;
+	sf::Vector2f _hackerStartPosition2;
 	//std::list <Tower*> _towersAvailable;
 	std::list <Tower*> _activeTowers;
 

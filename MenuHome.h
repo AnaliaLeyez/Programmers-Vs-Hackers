@@ -7,7 +7,7 @@ public:
 	MenuHome(bool state);
 	void validateClick(int, int, sf::RenderWindow&, int&) override;
 	bool getMusicPlaying() const;
-	sf::Sound getSound() const;
+	//sf::Sound getSound() const;
 	void setSoundText(bool);
 
 	void update() {}

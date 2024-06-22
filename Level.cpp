@@ -193,6 +193,9 @@ void Level::spawnWave() {
 				hk->saySth();
 			}
 			++enemyIndex;
+			if (_currentWave > 1) {
+				enemyIndex % 3 == 0 ? _hackerStartPosition = _hackerStartPosition1 : _hackerStartPosition = _hackerStartPosition2;
+			}
 			_enemyClock.restart();
 		}
 	}
@@ -200,6 +203,7 @@ void Level::spawnWave() {
 		++_currentWave; // Incrementa el número de oleada
 		enemyIndex = 0; // Reinicia el índice para la próxima oleada
 		if (_currentWave <= _totalWaves) {
+			_currentWave%2 !=0? _hackerStartPosition = _hackerStartPosition1 : _hackerStartPosition = _hackerStartPosition2;
 			_enemiesPerWave = _hackersPerWave[_currentWave - 1]; // Acutaliza la cantidad de enemigos para la próxima oleada
 			_ui.setText(2, std::to_string(getCurrentWave()));
 			spawnedGodHacker = false;
