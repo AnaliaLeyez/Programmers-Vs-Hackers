@@ -43,11 +43,7 @@ MenuHome::MenuHome(bool state) {
 	}
 }
 
-sf::Text MenuHome::getText1() const { return _text[0]; }
-sf::Text MenuHome::getText2() const { return _text[1]; }
-sf::Text MenuHome::getText3() const { return _text[2]; }
-sf::Text MenuHome::getText4() const { return _text[3]; }
-sf::Text MenuHome::getText5() const { return _text[4]; }
+
 bool MenuHome::getMusicPlaying() const { return _musicPlaying; }
 sf::Sound MenuHome::getSound() const { return _sound; }
 

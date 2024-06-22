@@ -18,5 +18,5 @@ public:
 	void stopMusic();*/
 
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
-
+	~MenuAbstract();
 };

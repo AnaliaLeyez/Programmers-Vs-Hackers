@@ -22,6 +22,13 @@ Menu::Menu() {
 	}
 }
 
+sf::Text Menu::getText1() const { return _text[0]; }
+sf::Text Menu::getText2() const { return _text[1]; }
+sf::Text Menu::getText3() const { return _text[2]; }
+sf::Text Menu::getText4() const { return _text[3]; }
+sf::Text Menu::getText5() const { return _text[4]; }
+sf::Text Menu::getText6() const { return _text[5]; }
+
 void Menu::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 
 void Menu::setSound(bool play) {
@@ -47,4 +54,10 @@ void Menu::setSoundPosition(float position) {
 
 void Menu::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	target.draw(_banner, states);
+}
+
+Menu::~Menu()
+{
+	/*_sound.stop();
+	_sound.resetBuffer();*/
 }

@@ -35,14 +35,14 @@ void MenuAbstract::setNumberMenu(int idMenu)
 		}
 		break;
 	case 2:
-		{
+	{
 		state = _currentMenu->getMusicPlaying();
 		_currentMenu = new MenuLevels(state);
-		}
-			break;
-		default:
-			break;
-		}
+	}
+	break;
+	default:
+		break;
+	}
 }
 
 void MenuAbstract::validateClick(int mousex, int mousey, sf::RenderWindow& window, int& view)
@@ -71,6 +71,13 @@ void MenuAbstract::validateClick(int mousex, int mousey, sf::RenderWindow& windo
 //}
 void MenuAbstract::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	target.draw(*_currentMenu, states);
+}
+MenuAbstract::~MenuAbstract()
+{
+	//if (_currentMenu) {
+	//	delete _currentMenu; // Eliminar el menú actual
+	//	_currentMenu = nullptr;
+	//}
 }
 //void MenuAbstract::update() {
 //	_currentMenu->update();

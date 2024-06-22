@@ -60,13 +60,6 @@ MenuLevels::MenuLevels(bool state) {
 	_text[5].setFillColor(sf::Color(0, 0, 0));
 }
 
-sf::Text MenuLevels::getText1() const { return _text[0]; }
-sf::Text MenuLevels::getText2() const { return _text[1]; }
-sf::Text MenuLevels::getText3() const { return _text[2]; }
-sf::Text MenuLevels::getText4() const { return _text[3]; }
-sf::Text MenuLevels::getText5() const { return _text[4]; }
-sf::Text MenuLevels::getText6() const { return _text[5]; }
-
 void MenuLevels::validateClick(int mousex, int mousey, sf::RenderWindow& window, int& view)
 {
 	if (getText1().getGlobalBounds().contains(mousex, mousey)) {

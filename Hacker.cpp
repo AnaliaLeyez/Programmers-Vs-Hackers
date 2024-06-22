@@ -72,9 +72,8 @@ void Hacker::moveHacker(int arr[][30])
 	case 4:
 		_direction = { 0.0f,1.0f };
 		break;
-	case 5: //esto lo podemos sacar, cambiar numeracion
+	case 5:
 		_direction = { 0.0f,-1.0f };
-		
 		break;
 	case 8:
 		_direction = { 0.0f,1.0f };
