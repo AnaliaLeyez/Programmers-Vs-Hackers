@@ -19,7 +19,7 @@ MenuInfo::MenuInfo(bool state)
 	_text[0].setPosition(20, 20);
 	_text[0].setString("BACK");
 	_text[0].setOrigin(_text[0].getGlobalBounds().getPosition().x / 2, _text[0].getGlobalBounds().height / 2);
-	_text[0].setFillColor(sf::Color(255, 0, 0));
+	_text[0].setFillColor(sf::Color(255, 255, 255));
 }
 
 void MenuInfo::validateClick(int mousex, int mousey, sf::RenderWindow& window, int& view)
