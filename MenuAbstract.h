@@ -17,6 +17,7 @@ public:
 	void restoreSoundPosition();
 	void stopMusic();*/
 
+	void update(sf::Vector2i&);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	~MenuAbstract();
 };

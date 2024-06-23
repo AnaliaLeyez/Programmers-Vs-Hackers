@@ -64,7 +64,6 @@ void Hacker::moveHacker(int arr[][30])
 	{
 	case 2:
 		_direction = { 1.0f,0.0f };
-
 		break;
 	case 3:
 		_direction = { 0.0f,-1.0f };

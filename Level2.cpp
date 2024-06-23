@@ -99,6 +99,6 @@ Level2::Level2()
 
 	_currentMenu = _menu1;
 
-	setNoCoinsText(); //NUEVO
+	setNoCoinsText();
 	setLevelUpText();
 }

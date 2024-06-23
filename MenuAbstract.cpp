@@ -59,6 +59,11 @@ void MenuAbstract::validateClick(int mousex, int mousey, sf::RenderWindow& windo
 
 
 
+void MenuAbstract::update(sf::Vector2i& mousePosition)
+{
+	_currentMenu->update(mousePosition);
+}
+
 //void MenuAbstract::saveSoundPosition() {
 //	if (_currentMenu) {
 //		_soundPosition = _currentMenu->getSoundPosition();

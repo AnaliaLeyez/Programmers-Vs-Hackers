@@ -11,13 +11,11 @@ MenuLevels::MenuLevels(bool state)
 	Levels reg;
 	
 	//texto
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 6; i++) {
 		_text[i].setFont(_font);
 		_text[i].setCharacterSize(30);
-		int posY;
+		int posY, posX=250;
 		std::string texto;
-
-		reg = arc.read(i);
 
 		switch (i)
 		{
@@ -37,28 +35,25 @@ MenuLevels::MenuLevels(bool state)
 			posY = 500;
 			break;
 		case 5:
-			posY = 600;
+			posX = 25;
+			posY = 25;
+			texto = "BACK";
 			break;
 		}
-
-		if (reg.getStatus()) {
-			texto = reg.getName();
-		}
-		else {
-			texto = "";
-		}
-		
-		_text[i].setPosition(250, posY);
+		if (i != 5) {
+			reg = arc.read(i);
+			if (reg.getStatus()) {
+				texto = reg.getName();
+			}
+			else {
+				texto = "";
+			}
+		}		
+		_text[i].setPosition(posX, posY);
 		_text[i].setString(texto);
 		_text[i].setOrigin(_text[i].getGlobalBounds().getPosition().x / 2, _text[i].getGlobalBounds().height / 2);
 		_text[i].setFillColor(sf::Color(255, 255, 255));
 	}
-	_text[5].setFont(_font);
-	_text[5].setCharacterSize(25);
-	_text[5].setPosition(20, 20);
-	_text[5].setString("BACK");
-	_text[5].setOrigin(_text[5].getGlobalBounds().getPosition().x / 2, _text[5].getGlobalBounds().height / 2);
-	_text[5].setFillColor(sf::Color(0, 0, 0));
 }
 
 void MenuLevels::validateClick(int mousex, int mousey, sf::RenderWindow& window, int& view)

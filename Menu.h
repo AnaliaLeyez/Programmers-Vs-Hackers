@@ -20,6 +20,7 @@ protected:
 public:
 	Menu();
 	virtual void validateClick(int, int, sf::RenderWindow&, int&)=0;
+	void mouseCheck(sf::Vector2i&);
 	sf::Text getText1() const;
 	sf::Text getText2() const;
 	sf::Text getText3() const;
@@ -33,7 +34,7 @@ public:
 	float getSoundPosition() const;
 	void setSoundPosition(float);
 
-	//void update() {}
+	void update(sf::Vector2i&);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	~Menu();
 };

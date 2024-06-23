@@ -25,6 +25,18 @@ Menu::Menu()
 	}
 }
 
+void Menu::mouseCheck(sf::Vector2i& mousePosition)
+{
+	for (int i = 0; i <6; i++) {
+		if (_text[i].getGlobalBounds().contains(sf::Vector2f(mousePosition))){
+			_text[i].setFillColor(sf::Color(0, 50, 255));
+		}
+		else {
+			_text[i].setFillColor(sf::Color(255, 255, 255));
+		}
+	}
+}
+
 sf::Text Menu::getText1() const { return _text[0]; }
 sf::Text Menu::getText2() const { return _text[1]; }
 sf::Text Menu::getText3() const { return _text[2]; }
@@ -53,6 +65,11 @@ float Menu::getSoundPosition() const {
 
 void Menu::setSoundPosition(float position) {
 	_sound.setPlayingOffset(sf::seconds(position));
+}
+
+void Menu::update(sf::Vector2i& mousePosition)
+{
+	mouseCheck(mousePosition);
 }
 
 void Menu::draw(sf::RenderTarget& target, sf::RenderStates states)const {
