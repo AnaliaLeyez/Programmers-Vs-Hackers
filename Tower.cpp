@@ -13,7 +13,10 @@ int Tower::getPriceUpgrade() const { return _priceUpgrade; }
 int Tower::getSalesValue() const { return _salesValue; }
 sf::Sprite Tower::getSprite() const { return _sprite; }
 int Tower::getDamage() const { return _damage; }
+int Tower::getDamageUpgrade() const { return _damageUpgrade; }
+float Tower::getFireRate() const { return _fireRate; }
 int Tower::getRange() const { return _range; }
+int Tower::getUpgradesAmount() const { return _upgradesAmount;}
 int Tower::getSpotNumber() const { return _spotNumber; }
 Bullet* Tower::getBullet() const { return _bullet; }
 
@@ -31,16 +34,11 @@ void Tower::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 bool Tower::canShoot()
 {
-    //if (_clock.getElapsedTime().asSeconds() >= _fireRate)
-    if (_cooldown >= 20)
+    if (_clock.getElapsedTime().asSeconds() >= _fireRate)
     {
-        setRangeColor(sf::Color(255, 0, 0, 120));
-        //_clock.restart();
-        _cooldown = 0;
+        _clock.restart();
         return true;
     }
-    setRangeColor(sf::Color(0, 255, 0, 120));
-    _cooldown++;
     return false;
 }
 

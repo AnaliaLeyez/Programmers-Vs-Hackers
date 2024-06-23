@@ -4,8 +4,9 @@ class TowerSarF : public Tower
 {
 public:
 	TowerSarF();
-	Tower* clone() const override { return new TowerSarF(*this); }
+	Tower* clone() const override;
+	void sayHi() override;
+	void sayBye() override;
 	void upgrade() override;
-	//void setBullet(sf::Vector2f, sf::Vector2f) override;
 };
 

@@ -24,7 +24,7 @@ Spot::Spot()
 
 int Spot::getSpotNumber() const { return _spotNumber; }
 bool Spot::getIsOccupied() const { return _occupied; }
-Tower& Spot::getCurrentTower() const { return *_currentTower; }
+Tower* Spot::getCurrentTower() const { return _currentTower; }
 bool Spot::getMouseHover() const { return _mouseHover; }
 
 void Spot::setSpot(int spotNumber, bool status) {
@@ -42,6 +42,14 @@ void Spot::validateMouseHover(bool &_mouseHover)
 
 void Spot::validateClick(int mousex, int mousey)
 {
+}
+
+void Spot::mouseCheck(sf::Vector2f& transformedMousePos)
+{
+	if (getGlobalBounds().contains(transformedMousePos))
+		setMouseHover(true);
+	else
+		setMouseHover(false);
 }
 
 void Spot::draw(sf::RenderTarget& target, sf::RenderStates states) const

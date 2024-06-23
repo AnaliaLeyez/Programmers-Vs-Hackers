@@ -1,4 +1,6 @@
 ﻿#pragma once
+#include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Audio/Sound.hpp>
 #include "Bullet.h"
 #include "HackerTrainee.h"
 
@@ -14,30 +16,39 @@ protected:
 	int _price;
 	int _priceUpgrade;
 	int _salesValue;
+
+	//audios
+	sf::SoundBuffer _bufferTeacher;
+	sf::Sound _soundTeacher;
+
 	//Propiedades belicas:
 	int _damage;
+	int _damageUpgrade;
 	int _range;
 	int _upgradesAmount;
 
 	int _spotNumber;
 	int _type; //new
 
-	//sf::Clock _clock;
-	int _cooldown;
+	sf::Clock _clock;
 	float _fireRate;
 	Bullet* _bullet;
 
 public:
 	virtual Tower* clone() const = 0; // Método clone para crear nuevas instancias
 	virtual void upgrade()=0;
-
+	virtual void sayHi() = 0;
+	virtual void sayBye() = 0;
 	//Getters
 	sf::Sprite getSprite() const;
 	int getPrice() const;
 	int getPriceUpgrade() const;
 	int getSalesValue() const;
 	int getDamage() const;
+	int getDamageUpgrade() const;
+	float getFireRate() const;
 	int getRange() const;
+	int getUpgradesAmount() const;
 	int getSpotNumber() const;
 	Bullet* getBullet() const;
 	int getType() const;

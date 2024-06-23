@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream> //borrar
 #include "Hacker.h"
-//#include "BulletBrian.h" //cambiar por Sar F
 #include "Tower.h"
 #include "TowerSarF.h"
 
@@ -16,8 +15,8 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 	_name = "Torre Programacion 1";
 
 	//Rango de ataque:
-	_visualRange.setRadius(130);
-	_visualRange.setFillColor(sf::Color(0, 255, 0, 120));
+	_visualRange.setRadius(140);
+	_visualRange.setFillColor(sf::Color(0, 255, 0, 30));
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
 	_type = 3;
@@ -25,9 +24,33 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 	_priceUpgrade = 240;
 	_salesValue = 144;
 	_damage = 3;
+	_damageUpgrade = 5;
 	_range = 8;
 	_upgradesAmount = 2;
 	_fireRate = 1.0f; // Tiempo en segundos entre disparos
+	_clock.restart();
+}
+
+Tower* TowerSarF::clone() const { return new TowerSarF(); }
+
+void TowerSarF::sayHi()
+{
+	if (!_bufferTeacher.loadFromFile("music/SarFHi.wav")) {
+		throw std::runtime_error("Error al cargar Saludo Kloster");
+	};
+	_soundTeacher.setBuffer(_bufferTeacher);
+	_soundTeacher.setVolume(25);
+	_soundTeacher.play();
+}
+
+void TowerSarF::sayBye()
+{
+	if (!_bufferTeacher.loadFromFile("music/SarFBye.wav")) {
+		throw std::runtime_error("Error al cargar Saludo Kloster");
+	};
+	_soundTeacher.setBuffer(_bufferTeacher);
+	_soundTeacher.setVolume(25);
+	_soundTeacher.play();
 }
 
 void TowerSarF::upgrade()
@@ -44,14 +67,15 @@ void TowerSarF::upgrade()
 		_priceUpgrade = 300;
 		_salesValue = 336;
 		_damage = 5;
-		//_speedAttack = 3;  //no terminamos de definir esto como es en el juego real
+		_damageUpgrade = 7;
+		_fireRate = 2.7f; //dispara mas rapido
 		_upgradesAmount = 1;
 	}
 	break;
 	case 1:
 	{
 		_name = "Torre MAXI F";
-		if (!_texture.loadFromFile("img/towers/torreD_4.png")) {
+		if (!_texture.loadFromFile("img/towers/torreD_3.png")) {
 			throw std::runtime_error("Error img tower MAXI F");
 		}
 		_sprite.setTexture(_texture);
@@ -59,7 +83,7 @@ void TowerSarF::upgrade()
 		_priceUpgrade = 9990;
 		_salesValue = 576;
 		_damage = 7;
-		//_speedAttack = 3;   //no terminamos de definir esto como es en el juego real
+		//_fireRate  se mantiene
 		_upgradesAmount = 0;
 	}
 	default:

@@ -41,6 +41,6 @@ TowerMenu1::TowerMenu1()
 		i++;
 	}
 
-	Spot sp;
-	setCurrentSpot(sp);
+	/*Spot sp;
+	setCurrentSpot(sp);*/
 }

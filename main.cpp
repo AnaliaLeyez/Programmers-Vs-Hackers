@@ -4,10 +4,26 @@
 #include <SFML/Audio/Sound.hpp>
 
 #include "MenuAbstract.h"
+#include "FileLevel.h"
 #include "Manager.h"
+#include "SoundManager.h"
 
 int main()
 {
+	//altaLevels();  //ESTO YA SE HIZO! NO SE REPITE
+	FileLevels arc;
+	Levels reg;
+	//for (int i = 0; i < 5; i++) {
+	//	reg.Cargar(i);
+	//	arc.save(reg);
+	//	//system("pause");
+	//}
+	////leerLevels();  //MUESTRA COMO ESTA ACTUALMENTE EL ARCHIVO
+	for (int i = 0; i < 5; i++) {
+		reg = arc.read(i);
+		reg.Mostrar();
+	}
+
 	sf::RenderWindow window(sf::VideoMode(960, 640), "Programmers Vs Hackers");
 	window.setFramerateLimit(60);
 	sf::Image icon;
@@ -16,10 +32,11 @@ int main()
 	}
 	// Establecer el icono de la ventana
 	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-	int view = 2;
+	int view = 1;
 	sf::Vector2i mousePosition; //xq no es 2f? si despues lo terminamos pasando a 2f siempre...
 	while (window.isOpen())
 	{
+		SoundManager& soundManager = SoundManager::getInstance();
 		mousePosition = sf::Mouse::getPosition(window);
 
 		sf::Event ev;
@@ -42,7 +59,7 @@ int main()
 				case 2:
 				{
 					Manager& mg = Manager::getInstance();
-					mg.validateClick(mousex, mousey, window);
+					mg.validateClick(mousex, mousey, window, view);
 				}
 				break;
 				}
@@ -56,15 +73,15 @@ int main()
 			{
 			case 1:
 			{
-				//Menu& menu = Menu::getInstance();
 				MenuAbstract& menu = MenuAbstract::getInstance();
+				menu.update(mousePosition);
 				window.draw(menu);
 			}
 			break;
 			case 2:
 			{
 				Manager& mg = Manager::getInstance();
-				mg.update(mousePosition);
+				mg.update(mousePosition, view);
 				window.draw(mg);
 			}
 			break;

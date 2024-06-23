@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream> //borrar
 #include "Hacker.h"
-#include "BulletA.h"
 #include "Tower.h"
 #include "TowerBrian.h"
 
@@ -19,7 +18,7 @@ TowerBrian::TowerBrian()
 
 	//Rango de ataque:
 	_visualRange.setRadius(150);
-	_visualRange.setFillColor(sf::Color(0, 255, 0, 120));
+	_visualRange.setFillColor(sf::Color(0, 255, 0, 30));
 	_visualRange.setOrigin(_visualRange.getGlobalBounds().width / 2, _visualRange.getGlobalBounds().height / 2);
 
 	_type = 1;
@@ -27,12 +26,36 @@ TowerBrian::TowerBrian()
 	_priceUpgrade = 340;
 	_salesValue = 176;
 	_damage = 3;
+	_damageUpgrade = 5;
 	_range = 9;
 	_upgradesAmount = 2;
 	_fireRate = 0.8f; // Tiempo en segundos entre disparos
+	_clock.restart();
 }
 
-void TowerBrian::upgrade() 
+Tower* TowerBrian::clone() const { return new TowerBrian(); }
+
+void TowerBrian::sayHi()
+{
+	if (!_bufferTeacher.loadFromFile("music/BrianHi.wav")) {
+		throw std::runtime_error("Error al cargar Saludo Brian");
+	};
+	_soundTeacher.setBuffer(_bufferTeacher);
+	_soundTeacher.setVolume(25);
+	_soundTeacher.play();
+}
+
+void TowerBrian::sayBye()
+{
+	if (!_bufferTeacher.loadFromFile("music/BrianBye.wav")) {
+		throw std::runtime_error("Error al cargar Saludo Brian");
+	};
+	_soundTeacher.setBuffer(_bufferTeacher);
+	_soundTeacher.setVolume(25);
+	_soundTeacher.play();
+}
+
+void TowerBrian::upgrade()
 {
 	switch (_upgradesAmount)
 	{
@@ -47,14 +70,15 @@ void TowerBrian::upgrade()
 		_priceUpgrade = 460;
 		_salesValue = 448;
 		_damage = 5;
-		//_speedAttack = 3;   //no terminamos de definir esto como es en el juego real
+		_damageUpgrade = 8;
+		_fireRate = 1.f; //dispara mas lento
 		_upgradesAmount = 1;
 	}
 	break;
 	case 1:
 	{
 		_name = "Torre BRIAN";
-		if (!_texture.loadFromFile("img/towers/torreA_5.png")) {
+		if (!_texture.loadFromFile("img/towers/torreA_3.png")) {
 			throw std::runtime_error("Error img tower Labo3 BRIAN");
 		}
 		_sprite.setTexture(_texture);
@@ -62,7 +86,7 @@ void TowerBrian::upgrade()
 		_priceUpgrade = 9990;
 		_salesValue = 816;
 		_damage = 8;
-		//_speedAttack = 3;   //no terminamos de definir esto como es en el juego real
+		_fireRate = 0.6f; //dispara mas rapido
 		_upgradesAmount = 0;
 	}
 	default:
