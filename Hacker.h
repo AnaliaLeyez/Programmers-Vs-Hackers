@@ -39,7 +39,7 @@ public:
 	int getGoldenDrop() const;
 	bool getEnd() const;
 
-	void setEnd(bool end);
+	void setEnd(bool);
 	void setLife(int);
 	void setDamage(int);
 	void setVelocity(sf::Vector2f);
@@ -49,7 +49,7 @@ public:
 
 	//Comportamiento
 	void moveHacker(int arr[][30]);
-	void attack(float*);
+	//void attack(float*);
 	sf::FloatRect getBounds() const;
 	void update(int arr[][30]);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;

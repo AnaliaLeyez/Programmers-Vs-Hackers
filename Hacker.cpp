@@ -1,8 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-
 #include <string>
-
 #include "Collisionable.h"
 #include "Hacker.h"
 
@@ -24,10 +22,10 @@ void Hacker::setDirection(sf::Vector2f direction) { _direction = direction; }
 void Hacker::setBoos(bool boss) { _isABoss = boss; }
 void Hacker::setGoldenDrop(int drop) { _goldenDrop = drop; }
 
-void Hacker::attack(float* hackerLife)
-{
-	*hackerLife -= getDamage();
-}
+//void Hacker::attack(float* hackerLife)
+//{
+//	*hackerLife -= getDamage();
+//}
 void Hacker::takeDamage(int damageBullet)
 {
 	_life -= damageBullet;
@@ -43,7 +41,7 @@ void Hacker::animation(float _frame)
 
 	if (_currentPosition.x > _previousPosition.x)
 		_sprite.setTextureRect({ 0 + (int)_frame * 64, 128, 64, 64 });
-	//if (_currentPosition.y < _previousPosition.y)
+	//if (_currentPosition.x < _previousPosition.x)
 		//_sprite.setTextureRect({ 0 + (int)_frame * 64, 64, 64, 64 });
 
 }
