@@ -13,7 +13,7 @@
 #include "Spot.h"
 #include "Level1.h"
 
-Level1::Level1()
+Level1::Level1() 
 {
 	_hackersPerWave = new int[4] { 4, 6, 8, 8 };
 	_wave1 = new int[4] { 1, 1, 1, 1};
@@ -84,6 +84,7 @@ Level1::Level1()
 	_ui.setText(1, std::to_string(getEnergy()));
 	_ui.setText(2, std::to_string(getCurrentWave()));
 	_ui.setText(3, "/" + std::to_string(getTotalWaves()));
+
 
 	if (!_buffer.loadFromFile("music/level1.wav")) {
 		throw std::runtime_error("Error al cargar musica nivel 1");

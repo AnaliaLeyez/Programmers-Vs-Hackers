@@ -3,6 +3,8 @@
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>
 
+#include "SoundManager.h"
+
 class Menu :  public sf::Drawable
 {
 protected:
@@ -13,6 +15,8 @@ protected:
 	sf::SoundBuffer _buffer;
 	sf::Sound _sound;
 	bool _musicPlaying;
+	SoundManager& _soundManager;
+
 public:
 	Menu();
 	virtual void validateClick(int, int, sf::RenderWindow&, int&)=0;

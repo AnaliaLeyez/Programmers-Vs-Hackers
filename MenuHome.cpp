@@ -2,8 +2,10 @@
 #include "MenuAbstract.h"
 #include "MenuHome.h"
 
-MenuHome::MenuHome(bool state) {
+MenuHome::MenuHome(bool state)
+{
 	_musicPlaying = state;
+	_soundManager.loadMusic("music/menuMusic.wav");
 
 	//texto
 	for (int i = 0; i < 5; i++) {

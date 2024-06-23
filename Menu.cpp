@@ -1,6 +1,8 @@
 #include "Menu.h"
 
-Menu::Menu() {
+Menu::Menu()
+	: _soundManager(SoundManager::getInstance())
+{
 	//fondo
 	if (!_textureBanner.loadFromFile("img/banner/imgPortada.png")) {
 		throw std::runtime_error("Error al cargar img Banner");
@@ -10,9 +12,12 @@ Menu::Menu() {
 	_banner.setPosition(sf::Vector2f(0, 0));
 
 	//musica
-	_buffer.loadFromFile("music/menuMusic.wav");
-	_sound.setBuffer(_buffer);
-	_sound.setVolume(5);
+	
+	
+	//_buffer.loadFromFile("music/menuMusic.wav");
+	
+	//_sound.setBuffer(_buffer);
+	//_sound.setVolume(5);
 
 	//texto
 	if (!_font.loadFromFile("fuentes/fuenteMenu.ttf")) {
@@ -31,10 +36,10 @@ void Menu::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 
 void Menu::setSound(bool play) {
 	if (play) {
-		_sound.play();
+		_soundManager.playMusic();
 	}
 	else {
-		_sound.pause();
+		_soundManager.pauseMusic();
 	}
 }
 

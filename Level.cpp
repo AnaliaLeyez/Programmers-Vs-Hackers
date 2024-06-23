@@ -151,6 +151,11 @@ void Level::setLevelUpText()
 }
 
 
+Level::Level()
+	: _soundManager(SoundManager::getInstance())
+{
+}
+
 void Level::spawnWave() {
 	std::srand(std::time(nullptr));
 	//los contadores son de tipo static porque asi las variables mantienen su valor incluso

@@ -3,9 +3,10 @@
 #include "MenuAbstract.h"
 #include "MenuLevels.h"
 
-MenuLevels::MenuLevels(bool state) {
+MenuLevels::MenuLevels(bool state)
+{
 	_musicPlaying = state;
-
+	_soundManager.playMusic();
 	FileLevels arc;
 	Levels reg;
 	

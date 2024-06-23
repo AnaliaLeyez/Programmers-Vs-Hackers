@@ -10,4 +10,5 @@ public:
 	//sf::Sound getSound() const;
 	void setSoundText(bool);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
+	
 };

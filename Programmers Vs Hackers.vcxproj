@@ -171,6 +171,7 @@
     <ClCompile Include="MenuHome.cpp" />
     <ClCompile Include="MenuInfo.cpp" />
     <ClCompile Include="MenuLevels.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="TowerMenu3.cpp" />
     <ClCompile Include="MenuAbstract.cpp" />
     <ClCompile Include="Spot.cpp" />
@@ -217,6 +218,7 @@
     <ClInclude Include="MenuHome.h" />
     <ClInclude Include="MenuInfo.h" />
     <ClInclude Include="MenuLevels.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="TowerMenu3.h" />
     <ClInclude Include="MenuAbstract.h" />
     <ClInclude Include="resource.h" />

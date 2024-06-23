@@ -8,8 +8,10 @@
 
 Manager* Manager::_currentInstance = nullptr;
 
-Manager& Manager::getInstance() {
-	if (Manager::_currentInstance == nullptr) {
+Manager& Manager::getInstance()
+{
+	if (Manager::_currentInstance == nullptr)
+	{
 		Manager::_currentInstance = new Manager(); //el Manager nace con nivel=1
 	}
 	return *Manager::_currentInstance;
@@ -23,7 +25,8 @@ Manager& Manager::getInstance() {
 //	*_currentInstance = mg;
 //}
 
-Manager::Manager(int level): _currentLevel(nullptr) {
+Manager::Manager(int level): _currentLevel(nullptr)
+{
 	setNumberLevel(level);
 }
 
@@ -31,7 +34,7 @@ Level* Manager::getLevel() const { return _currentLevel; }
 
 void Manager::setLevel(Level& level)
 {
-	*_currentLevel = level;
+	_currentLevel = &level;
 }
 
 void Manager::setNumberLevel(int IdLevel) {

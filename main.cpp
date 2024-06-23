@@ -6,6 +6,7 @@
 #include "MenuAbstract.h"
 #include "FileLevel.h"
 #include "Manager.h"
+#include "SoundManager.h"
 
 int main()
 {
@@ -35,6 +36,7 @@ int main()
 	sf::Vector2i mousePosition; //xq no es 2f? si despues lo terminamos pasando a 2f siempre...
 	while (window.isOpen())
 	{
+		SoundManager& soundManager = SoundManager::getInstance();
 		mousePosition = sf::Mouse::getPosition(window);
 
 		sf::Event ev;

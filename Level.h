@@ -17,6 +17,8 @@
 #include "BulletC.h"
 #include "BulletD.h"
 
+#include "SoundManager.h"
+
 class Level: public sf::Drawable, public sf::Transformable
 {
 protected:
@@ -42,6 +44,7 @@ protected:
 	sf::Sound _sound;
 	bool _musicPlaying;
 
+	SoundManager& _soundManager;
 
 	int *_hackersPerWave;
 	int *_wave1;
@@ -84,6 +87,7 @@ protected:
 	sf::Text _levelUp;
 
 public:
+	Level();
 	void spawnWave();
 	int getIdLevel() const;
 	bool getFinisheLevel()const;
