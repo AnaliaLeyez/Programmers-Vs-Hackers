@@ -15,6 +15,7 @@ protected:
 	sf::SoundBuffer _buffer;
 	sf::Sound _sound;
 	bool _musicPlaying;
+
 	SoundManager& _soundManager;
 
 public:

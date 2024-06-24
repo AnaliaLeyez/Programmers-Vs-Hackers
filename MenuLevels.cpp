@@ -6,7 +6,7 @@
 MenuLevels::MenuLevels(bool state)
 {
 	_musicPlaying = state;
-	if(_soundManager.getMusicOn())
+
 	_soundManager.playMusic();
 
 	FileLevels arc;

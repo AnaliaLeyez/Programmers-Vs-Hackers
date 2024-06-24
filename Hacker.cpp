@@ -68,12 +68,10 @@ void Hacker::moveHacker(int arr[][30])
 	_currentPosition = getPosition();
 	animation(_frame);
 
-
-
 	switch (arr[(int)getPosition().y / 32][(int)getPosition().x / 32])
 	{
 	case 2:
-		_direction = { 1.0,0.0 };
+		_direction = { 1.0f,0.0f };
 		break;
 	case 3:
 		_direction = { 0.0f,-1.0f };

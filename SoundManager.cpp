@@ -44,6 +44,11 @@ void SoundManager::pauseMusic()
     _currentMusic.pause();
 }
 
+void SoundManager::setVolume(float volume)
+{
+    _currentMusic.setVolume(volume);
+}
+
 void SoundManager::setMusicOn(bool state)
 {
     _musicOn = state;
