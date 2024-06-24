@@ -23,6 +23,9 @@ protected:
 	sf::Vector2f _position;
 	bool _reachedEnd; // llego al final del camino ?
 
+	bool _isFreezed;
+	bool _isPoisoned;
+
 	//Animation
 	float _frame;
 	sf::Vector2f _currentPosition;
@@ -54,7 +57,9 @@ public:
 	void update(int arr[][30]);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 
-	void takeDamage(int);
+	void getFreezed();
+
+	virtual void takeDamage(int,int);
 
 	void animation(float);
 };

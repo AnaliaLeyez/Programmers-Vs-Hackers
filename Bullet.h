@@ -10,6 +10,7 @@ protected:
 	sf::Vector2f _direction;
 	sf::Vector2f _velocity;
 	
+	int _type;
 	int _damage;
 	float _speed;
 	sf::Vector2f _enemyPosition;
@@ -29,6 +30,7 @@ public:
 	bool getCrash();
 
 	virtual int getDamage() const;
+	virtual int getType();
 	virtual void setDirection(sf::Vector2f);
 	virtual void setVelocity(sf::Vector2f);
 	virtual void setDamage(int);

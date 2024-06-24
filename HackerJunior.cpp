@@ -18,7 +18,7 @@ HackerJunior::HackerJunior()
 	_frame = 0;
 	_life = 15;
 	_damage = 10;
-	_velocity = { 3,3 };
+	_velocity = { 1.2,1.2 };
 	_goldenDrop = 9;
 
 }

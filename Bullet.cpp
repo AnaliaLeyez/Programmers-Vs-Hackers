@@ -35,6 +35,11 @@ void Bullet::setCrash(bool state)
 bool Bullet::getCrash() { return _crash; }
 int Bullet::getDamage() const { return _damage; }
 
+int Bullet::getType()
+{
+	return _type;
+}
+
 void Bullet::setDirection(sf::Vector2f d) { _direction = d; }
 void Bullet::setVelocity(sf::Vector2f velocity) { _velocity = velocity; }
 void Bullet::setDamage(int damage) { _damage = damage; }

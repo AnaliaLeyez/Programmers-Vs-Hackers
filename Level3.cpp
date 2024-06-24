@@ -41,7 +41,7 @@ Level3::Level3()
 {0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,6,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,},
@@ -52,7 +52,7 @@ Level3::Level3()
 {0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,2,1,1,8,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,6,0,0,0,},
+{0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,6,0,0,0,0,0,0,0,0,6,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
@@ -80,14 +80,15 @@ Level3::Level3()
 	_UTNRed.setPosition(sf::Vector2f(950, 350));
 	_UTNRed.setOrigin(_UTNRed.getGlobalBounds().width / 2, _UTNRed.getGlobalBounds().height / 2);
 
-	setSpots(arr, _spots, 5);
+	setSpots(arr, _spots, 7);
 	_golden = 5000;
-	_energy = 300;
+	_energy = 600;
 	_ui.setText(0, std::to_string(getGolden()));
 	_ui.setText(1, std::to_string(getEnergy()));
 	_ui.setText(2, std::to_string(getCurrentWave()));
 	_ui.setText(3, "/" + std::to_string(getTotalWaves()));
 
+	/*
 	if (!_buffer.loadFromFile("music/level2.wav")) {
 		throw std::runtime_error("Error al cargar musica nivel 2");
 	};
@@ -95,6 +96,10 @@ Level3::Level3()
 	_sound.setVolume(5);
 	_sound.play();
 	_musicPlaying = true;
+	*/
+	_soundManager.stopMusic();
+	_soundManager.loadMusic("music/level3.wav");
+	_soundManager.playMusic();
 	//_towersAvailable.push_back(new TowerBrian());
 	//_towersAvailable.push_back(new TowerKloster());
 	//_towersAvailable.push_back(new TowerSarF());

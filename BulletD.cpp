@@ -6,6 +6,7 @@
 
 BulletD::BulletD(sf::Vector2f position, sf::Vector2f target, int damage)
 {
+	_type = 4;
 	setPosition(position);
 	_enemyPosition = target;
 

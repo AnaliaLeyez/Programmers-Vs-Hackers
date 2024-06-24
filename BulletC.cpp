@@ -6,6 +6,7 @@
 
 BulletC::BulletC(sf::Vector2f position, sf::Vector2f target, int damage)
 {
+	_type = 3;
 	setPosition(position);
 	_enemyPosition = target;
 
