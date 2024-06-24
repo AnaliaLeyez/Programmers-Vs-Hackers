@@ -81,7 +81,13 @@ void MenuLevels::validateClick(int mousex, int mousey, sf::RenderWindow& window,
 	else if (getText4().getGlobalBounds().contains(mousex, mousey) && getText2().getString() != "") {
 		setSound(false);
 		setMusicPlaying(false);
-		Manager::getInstance().setNumberLevel(2); //ajustar para que vaya a level 4 (mandar un 3)
+		Manager::getInstance().setNumberLevel(3); //ajustar para que vaya a level 4 (mandar un 3)
+		view = 2;
+	}
+	else if (getText5().getGlobalBounds().contains(mousex, mousey) && getText2().getString() != "") {
+		setSound(false);
+		setMusicPlaying(false);
+		Manager::getInstance().setNumberLevel(4); //ajustar para que vaya a level 4 (mandar un 3)
 		view = 2;
 	}
 	//VOLVER:

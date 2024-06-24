@@ -145,9 +145,16 @@ void Level::setLevelUpText()
 	_levelUp.setFont(_fontLevelUp);
 	_levelUp.setCharacterSize(70);
 	_levelUp.setOrigin(_levelUp.getGlobalBounds().getPosition().x / 2, _levelUp.getGlobalBounds().height / 2);
-	_levelUp.setPosition(250, 250);
+	_levelUp.setPosition(350, 250);
 	_levelUp.setFillColor(sf::Color(0, 0, 255));
 	_levelUp.setString("CONGRATS! \n LEVEL UP");
+
+	_congrats.setFont(_fontLevelUp);
+	_congrats.setCharacterSize(90);
+	_congrats.setOrigin(_levelUp.getGlobalBounds().getPosition().x / 2, _levelUp.getGlobalBounds().height / 2);
+	_congrats.setPosition(350, 250);
+	_congrats.setFillColor(sf::Color(0, 255, 0));
+	_congrats.setString("CONGRATS! \n YOU WIN");
 }
 
 
@@ -442,7 +449,6 @@ void Level::update(sf::Vector2i& mousePosition, int& view) {
 		view = 1;
 
 		//if (getIdLevel() < 5) { // aca digo que solo puede llegar hasta el nivel 5
-		//	Manager::getInstance().setNumberLevel(getIdLevel() + 1); // cambia al siguiente nivel
 		//}
 		//else {
 		//	// lógica para cuando se termina el juego, cuando se pasaron todos los niveles
@@ -486,7 +492,7 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 		}
 	}
 	else {
-		target.draw(_levelUp, states);
+		_idLevel != 4 ? target.draw(_levelUp, states) : target.draw(_congrats, states);
 	}
 
 }

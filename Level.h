@@ -85,7 +85,7 @@ protected:
 	sf::Font _fontLevelUp;
 	sf::Clock _levelUpClock;
 	sf::Text _levelUp;
-
+	sf::Text _congrats;
 public:
 	Level();
 	void spawnWave();

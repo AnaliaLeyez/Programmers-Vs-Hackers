@@ -41,8 +41,8 @@ void Hacker::animation(float _frame)
 
 	if (_currentPosition.x > _previousPosition.x)
 		_sprite.setTextureRect({ 0 + (int)_frame * 64, 128, 64, 64 });
-	//if (_currentPosition.x < _previousPosition.x)
-		//_sprite.setTextureRect({ 0 + (int)_frame * 64, 64, 64, 64 });
+	if (_currentPosition.x < _previousPosition.x)
+		_sprite.setTextureRect({ 0 + (int)_frame * 64, 64, 64, 64 });
 
 }
 

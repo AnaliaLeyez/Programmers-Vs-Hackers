@@ -1,18 +1,9 @@
-#include <iostream>
-#include <cstdlib> // Necesario para std::rand() y std::srand()
-#include <ctime> 
-#include "UI.h"
-#include "Map.h"
-#include "Tower.h"
-#include "TowerBrian.h"
-#include "TowerKloster.h"
-#include "TowerSarF.h"
 #include "TowerWenner.h"
 #include "Level.h"
 #include "Spot.h"
-#include "Level1.h"
+#include "Level4.h"
 
-Level1::Level1() 
+Level4::Level4()
 {
 	_hackersPerWave = new int[4] { 4, 6, 8, 8 };
 	_wave1 = new int[4] { 1, 1, 1, 1};
@@ -26,31 +17,31 @@ Level1::Level1()
 	_timeBetweenWaves = 15;
 	_waveClock.restart();
 	_enemyClock.restart();
-	_hackerStartPosition = { 960 / 32 * 9.5, 640 / 32 * 0.5 };
-	_hackerStartPosition1 = _hackerStartPosition;
-	_hackerStartPosition2 = _hackerStartPosition;
+	_hackerStartPosition = { 960 / 32 * 13, 640 / 32 * 0 };
+	_hackerStartPosition1 = { 960 / 32 * 13, 640 / 32 * 0 };
+	_hackerStartPosition2 = { 960 / 32 * 0, 640 / 32 * 19 };
 
-	_idLevel = 0;
+	_idLevel = 3;
 	_finishedLevel = false;
-	_map = new Map("img/maps/map1.png");;
+	_map = new Map("img/maps/map4.png");;
 	int arr[22][30] = {
-{0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,3,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,6,0,1,0,0,0,0,0,0,0,0,1,0,0,6,0,0,0,0,0,0,6,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,3,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,6,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0},
+{0,0,0,0,0,0,0,0,0,6,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,9},
+{0,0,0,0,0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,9},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,6,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -65,7 +56,7 @@ Level1::Level1()
 	};
 	_UTN.setSize(sf::Vector2f(200, 173));
 	_UTN.setTexture(&_textureUTN);
-	_UTN.setPosition(sf::Vector2f(850, 130));
+	_UTN.setPosition(sf::Vector2f(950, 400));
 	_UTN.setOrigin(_UTN.getGlobalBounds().width / 2, _UTN.getGlobalBounds().height / 2);
 
 	if (!_textureUTNRed.loadFromFile("img/towers/facuRed.png")) {
@@ -73,12 +64,12 @@ Level1::Level1()
 	};
 	_UTNRed.setSize(sf::Vector2f(200, 173));
 	_UTNRed.setTexture(&_textureUTNRed);
-	_UTNRed.setPosition(sf::Vector2f(850, 130));
+	_UTNRed.setPosition(sf::Vector2f(950, 400));
 	_UTNRed.setOrigin(_UTNRed.getGlobalBounds().width / 2, _UTNRed.getGlobalBounds().height / 2);
 
-	setSpots(arr, _spots, 5);
+	setSpots(arr, _spots, 7);
 	_golden = 9900;
-	_energy = 500;
+	_energy = 1800;
 	_ui.setText(0, std::to_string(getGolden()));
 	_ui.setText(1, std::to_string(getEnergy()));
 	_ui.setText(2, std::to_string(getCurrentWave()));
@@ -92,11 +83,6 @@ Level1::Level1()
 	_sound.setVolume(5);
 	_sound.play();
 	_musicPlaying = true;
-
-	//_towersAvailable.push_back(new TowerBrian());
-	//_towersAvailable.push_back(new TowerKloster());
-	//_towersAvailable.push_back(new TowerSarF());
-	//_towersAvailable.push_back(new TowerWenner());
 
 	_currentMenu = _menu1;
 

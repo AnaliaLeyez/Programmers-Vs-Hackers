@@ -3,7 +3,6 @@
 #include <ctime> 
 #include "UI.h"
 #include "Map.h"
-#include "Map2.h"
 #include "Tower.h"
 #include "TowerBrian.h"
 #include "TowerKloster.h"
@@ -33,7 +32,7 @@ Level2::Level2()
 	_hackerStartPosition2 = _hackerStartPosition;
 	_idLevel = 1;
 	_finishedLevel = false;
-	_map = new Map2();
+	_map = new Map("img/maps/map2.png");;
 	int arr[22][30] = {
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -92,10 +91,6 @@ Level2::Level2()
 	_sound.setVolume(5);
 	_sound.play();
 	_musicPlaying = true;
-	//_towersAvailable.push_back(new TowerBrian());
-	//_towersAvailable.push_back(new TowerKloster());
-	//_towersAvailable.push_back(new TowerSarF());
-	//_towersAvailable.push_back(new TowerWenner());
 
 	_currentMenu = _menu1;
 

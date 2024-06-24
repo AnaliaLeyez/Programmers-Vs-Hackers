@@ -3,7 +3,6 @@
 #include <ctime> 
 #include "UI.h"
 #include "Map.h"
-#include "Map3.h"
 #include "Tower.h"
 #include "TowerBrian.h"
 #include "TowerKloster.h"
@@ -30,13 +29,13 @@ Level3::Level3()
 	_timeBetweenWaves = 2;
 	_waveClock.restart();
 	_enemyClock.restart();
-	_hackerStartPosition = { 960 / 32 * 8.7, 640 / 32 * 0.5 };
-	_hackerStartPosition1 = { 960 / 32 * 8.7, 640 / 32 * 0.5 };
-	_hackerStartPosition2 = { 960 / 32 * 19.3, 640 / 32 * 0.5 };
+	_hackerStartPosition = { 960 / 32 * 9, 640 / 32 * 0.5 };
+	_hackerStartPosition1 = { 960 / 32 * 9, 640 / 32 * 0.5 };
+	_hackerStartPosition2 = { 960 / 32 * 20, 640 / 32 * 0.5 };
 
 	_idLevel = 2;
 	_finishedLevel = false;
-	_map = new Map3();
+	_map = new Map("img/maps/map3.png");;
 	int arr[22][30] = {
 {0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,},
@@ -48,9 +47,9 @@ Level3::Level3()
 {0,0,0,0,0,0,0,0,1,0,0,6,0,0,0,0,0,0,1,0,0,6,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,6,0,0,0,},
 {0,0,0,0,0,6,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,2,1,1,8,},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,2,0,0,9,},
+{0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,2,1,1,9,},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,9,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,6,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
@@ -95,10 +94,6 @@ Level3::Level3()
 	_sound.setVolume(5);
 	_sound.play();
 	_musicPlaying = true;
-	//_towersAvailable.push_back(new TowerBrian());
-	//_towersAvailable.push_back(new TowerKloster());
-	//_towersAvailable.push_back(new TowerSarF());
-	//_towersAvailable.push_back(new TowerWenner());
 
 	_currentMenu = _menu1;
 
