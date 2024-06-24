@@ -4,8 +4,12 @@
 
 MenuHome::MenuHome(bool state)
 {
+	std::cout << "Paso por MenuHome " << std::endl;
 	_musicPlaying = state;
+
 	_soundManager.loadMusic("music/menuMusic.wav");
+	_soundManager.playMusic();
+
 
 	//texto
 	for (int i = 0; i < 5; i++) {

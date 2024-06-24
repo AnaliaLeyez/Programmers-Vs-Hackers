@@ -141,14 +141,17 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 }
 void Level::validateClickOnSpeaker(int mousex, int mousey) {
 	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
-		if (getMusicPlaying()) {
+		if (getMusicPlaying())
+		{
 			setSound(false);
 			setMusicPlaying(false);
+			_soundManager.pauseMusic();
 			_ui.setTextureSpeaker("img/complementarias/mute.png");
 		}
 		else {
 			setSound(true);
 			setMusicPlaying(true);
+			_soundManager.playMusic();
 			_ui.setTextureSpeaker("img/complementarias/musicOn.png");
 		}
 	}
@@ -159,6 +162,7 @@ void Level::validateClickOnHome(int mousex, int mousey, int& view)
 	if(_ui.getText5().getGlobalBounds().contains(mousex, mousey)){
 		setSound(false);
 		setMusicPlaying(false);
+		_soundManager.stopMusic();
 		MenuAbstract::getInstance().setNumberMenu(1);
 		view = 1;
 	}

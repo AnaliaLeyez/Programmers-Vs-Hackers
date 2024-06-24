@@ -28,7 +28,15 @@ void Hacker::setGoldenDrop(int drop) { _goldenDrop = drop; }
 //}
 void Hacker::takeDamage(int damageBullet)
 {
+	std::cout << "Recibio danio tipo " << type << std::endl;
+	if (type == 4)
+	{
+		getFreezed();
+	}
 	_life -= damageBullet;
+
+
+
 }
 
 void Hacker::animation(float _frame)
@@ -58,10 +66,12 @@ void Hacker::moveHacker(int arr[][30])
 	_currentPosition = getPosition();
 	animation(_frame);
 
+
+
 	switch (arr[(int)getPosition().y / 32][(int)getPosition().x / 32])
 	{
 	case 2:
-		_direction = { 1.0f,0.0f };
+		_direction = { 1.0,0.0 };
 		break;
 	case 3:
 		_direction = { 0.0f,-1.0f };
@@ -99,4 +109,9 @@ void Hacker::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
 	target.draw(_sprite, states);
+}
+
+void Hacker::getFreezed()
+{
+	_isFreezed = true;
 }

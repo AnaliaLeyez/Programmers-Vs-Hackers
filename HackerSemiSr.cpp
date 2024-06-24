@@ -18,7 +18,7 @@ HackerSemiSr::HackerSemiSr()
 	_frame = 0;
 	_life = 35;
 	_damage = 20;
-	_velocity = { 2,2 };
+	_velocity = { 1.3,1.3 };
 	_goldenDrop = 12;
 
 }

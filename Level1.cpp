@@ -85,7 +85,7 @@ Level1::Level1()
 	_ui.setText(2, std::to_string(getCurrentWave()));
 	_ui.setText(3, "/" + std::to_string(getTotalWaves()));
 
-
+	/*
 	if (!_buffer.loadFromFile("music/level1.wav")) {
 		throw std::runtime_error("Error al cargar musica nivel 1");
 	};
@@ -93,6 +93,11 @@ Level1::Level1()
 	_sound.setVolume(5);
 	_sound.play();
 	_musicPlaying = true;
+	*/
+
+	_soundManager.stopMusic();
+	_soundManager.loadMusic("music/level1.wav");
+	_soundManager.playMusic();
 
 	//_towersAvailable.push_back(new TowerBrian());
 	//_towersAvailable.push_back(new TowerKloster());

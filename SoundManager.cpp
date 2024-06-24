@@ -44,5 +44,15 @@ void SoundManager::pauseMusic()
     _currentMusic.pause();
 }
 
+void SoundManager::setMusicOn(bool state)
+{
+    _musicOn = state;
+}
+
+bool SoundManager::getMusicOn()
+{
+    return _musicOn;
+}
+
 
 
