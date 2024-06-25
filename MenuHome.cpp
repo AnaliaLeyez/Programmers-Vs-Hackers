@@ -9,7 +9,7 @@ MenuHome::MenuHome(bool state)
 
 	_soundManager.loadMusic("music/menuMusic.wav");
 	_soundManager.playMusic();
-
+	_soundManager.setVolume(15);
 
 	//texto
 	for (int i = 0; i < 5; i++) {

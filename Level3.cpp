@@ -96,9 +96,12 @@ Level3::Level3()
 	_sound.play();
 	_musicPlaying = true;
 	*/
+
 	_soundManager.stopMusic();
 	_soundManager.loadMusic("music/level3.wav");
+	_soundManager.setVolume(8);
 	_soundManager.playMusic();
+	
 	//_towersAvailable.push_back(new TowerBrian());
 	//_towersAvailable.push_back(new TowerKloster());
 	//_towersAvailable.push_back(new TowerSarF());

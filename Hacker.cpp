@@ -53,36 +53,44 @@ void Hacker::animation(float _frame)
 
 void Hacker::moveHacker(int arr[][30])
 {
-	_frame += 0.2f;
+	_isFreezed ? _frame += 0.02f : _frame += 0.2f;
 
 	if (_frame > 4)
 	{
 		_frame = 0;
 	}
+
 	_previousPosition = _currentPosition;
 	_currentPosition = getPosition();
+
+
+	if (_isFreezed)
+	{
+		_sprite.setColor(sf::Color(135, 206, 250, 255));
+	}
+
 	animation(_frame);
 
 	switch (arr[(int)getPosition().y / 32][(int)getPosition().x / 32])
 	{
 	case 2:
-		_direction = { 1.0,0.0 };
+		_direction = { _velocity.x,0.0f };
 		break;
 	case 3:
-		_direction = { 0.0f,-1.0f };
+		_direction = { 0.0f,-_velocity.y };
 		break;
 	case 4:
-		_direction = { 0.0f,1.0f };
+		_direction = { 0.0f,_velocity.y };
 		break;
 	case 5:
-		_direction = { 0.0f,-1.0f };
+		_direction = { 0.0f,-_velocity.y};
 		break;
 	case 8:
-		_direction = { 0.0f,1.0f };
+		_direction = { 0.0f,_velocity.y };
 		_reachedEnd = true;
 		break;
 	case 9:
-		_direction = { -1.0f,0.0f };
+		_direction = { -_velocity.x,0.0f };
 		_reachedEnd = true;
 		break;
 	default:
@@ -108,5 +116,8 @@ void Hacker::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void Hacker::getFreezed()
 {
-	_isFreezed = true;
+	if (!_isFreezed) {
+		_isFreezed = true;
+		_velocity *= 0.2f;
+	}
 }

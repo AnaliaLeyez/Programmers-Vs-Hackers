@@ -10,6 +10,8 @@ HackerTrainee::HackerTrainee()
 	_sprite.setTextureRect({0,0,64,64});
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 
+	_isFreezed = false;
+	_isPoisoned = false;
 
 	_name = "Trainee";
 	_currentPosition = getPosition();
@@ -18,7 +20,7 @@ HackerTrainee::HackerTrainee()
 	_frame = 0;
 	_life = 7;
 	_damage = 5;
-	_velocity = { 1.7, 1.7 };
+	_velocity = { 1.7f, 1.7f };
 	_goldenDrop = 3;
 }
 

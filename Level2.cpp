@@ -96,6 +96,7 @@ Level2::Level2()
 	*/
 	_soundManager.stopMusic();
 	_soundManager.loadMusic("music/level2.wav");
+	_soundManager.setVolume(15);
 	_soundManager.playMusic();
 
 	//_towersAvailable.push_back(new TowerBrian());
