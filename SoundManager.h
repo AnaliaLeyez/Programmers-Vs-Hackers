@@ -9,6 +9,7 @@ private:
 	SoundManager(const SoundManager&) = delete;
 	SoundManager& operator=(const SoundManager&) = delete;
 	static SoundManager* _currentInstance; //Singleton
+	bool _musicOn;
 	sf::Music _currentMusic;
 
 public:
@@ -18,5 +19,10 @@ public:
 	void playMusic();
 	void stopMusic();
 	void pauseMusic();
+
+	void setVolume(float);
+
+	void setMusicOn(bool);
+	bool getMusicOn();
 };
 

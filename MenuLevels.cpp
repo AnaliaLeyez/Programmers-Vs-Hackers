@@ -6,7 +6,9 @@
 MenuLevels::MenuLevels(bool state)
 {
 	_musicPlaying = state;
+
 	_soundManager.playMusic();
+
 	FileLevels arc;
 	Levels reg;
 	

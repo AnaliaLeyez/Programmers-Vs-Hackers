@@ -10,6 +10,8 @@ HackerSemiSr::HackerSemiSr()
 	_sprite.setTextureRect({ 0,0,64,64 });
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 
+	_isFreezed = false;
+	_isPoisoned = false;
 
 	_name = "SemiSR";
 	_currentPosition = getPosition();
@@ -18,7 +20,7 @@ HackerSemiSr::HackerSemiSr()
 	_frame = 0;
 	_life = 35;
 	_damage = 20;
-	_velocity = { 2,2 };
+	_velocity = { 1.3,1.3 };
 	_goldenDrop = 12;
 
 }

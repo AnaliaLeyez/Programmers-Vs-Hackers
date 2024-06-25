@@ -9,6 +9,8 @@ HackerDios::HackerDios()
 	_sprite.setTextureRect({ 0,0,64,64 });
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 
+	_isFreezed = false;
+	_isPoisoned = false;
 
 	_name = "BOSS";
 	_currentPosition = getPosition();

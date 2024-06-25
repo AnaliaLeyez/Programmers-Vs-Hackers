@@ -20,8 +20,13 @@
 #include "HackerDios.h"
 #include "Level.h"
 
+Level::Level()
+	: _soundManager(SoundManager::getInstance())
+{
+}
 
 int Level::getIdLevel() const { return _idLevel; }
+
 bool Level::getFinisheLevel() const { return _finishedLevel; }
 UI Level::getUI() const { return _ui; }
 Map Level::getMap() const { return *_map; }
@@ -157,11 +162,6 @@ void Level::setLevelUpText()
 	_congrats.setString("CONGRATS! \n YOU WIN");
 }
 
-
-Level::Level()
-	: _soundManager(SoundManager::getInstance())
-{
-}
 
 void Level::spawnWave() {
 	std::srand(std::time(nullptr));
@@ -317,11 +317,16 @@ void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, in
 }
 
 
-void Level::checkLevelCompletion() {
+void Level::checkLevelCompletion()
+{
 	if (_currentWave > _totalWaves && _enemies.empty()) {
 		_finishedLevel = true;
 		_levelUpClock.restart();
-		if (_idLevel < 4) {  // cuando llega al ultimo nivel no se abre el archivo
+		_soundManager.stopMusic();
+		_soundManager.loadMusic("music/menuMusic.wav");
+
+		if (_idLevel < 4)
+		{  // cuando llega al ultimo nivel no se abre el archivo
 			FileLevels arc;
 			Levels reg;
 			reg = arc.read(_idLevel + 1);
@@ -351,6 +356,8 @@ void Level::setGameOverText()
 	_gameOverSkull.setScale(0.5, 0.5);
 	_gameOverSkull.setOrigin(_gameOverSkull.getGlobalBounds().width / 2, _gameOverSkull.getGlobalBounds().height / 2);
 	_gameOverClock.restart();
+	_soundManager.stopMusic();
+	_soundManager.loadMusic("music/menuMusic.wav");
 }
 
 void Level::update(sf::Vector2i& mousePosition, int& view) {
@@ -509,7 +516,7 @@ void Level::updateBullets()
 		{
 			if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
 			{
-				hacker->takeDamage(bullet->getDamage());
+				hacker->takeDamage(bullet->getDamage(), bullet->getType());
 				delete bullet;
 				bulletErased = true;
 

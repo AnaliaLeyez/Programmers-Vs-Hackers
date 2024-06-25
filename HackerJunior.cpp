@@ -10,6 +10,8 @@ HackerJunior::HackerJunior()
 	_sprite.setTextureRect({ 0,0,64,64 });
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 
+	_isFreezed = false;
+	_isPoisoned = false;
 
 	_name = "Junior";
 	_currentPosition = getPosition();
@@ -18,7 +20,7 @@ HackerJunior::HackerJunior()
 	_frame = 0;
 	_life = 15;
 	_damage = 10;
-	_velocity = { 3,3 };
+	_velocity = { 1.2,1.2 };
 	_goldenDrop = 9;
 
 }

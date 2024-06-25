@@ -6,6 +6,7 @@
 
 BulletA::BulletA(sf::Vector2f position, sf::Vector2f target, int damage)
 {
+	_type = 1;
 	setPosition(position);
 	_enemyPosition = target;
 	_crash = false;
