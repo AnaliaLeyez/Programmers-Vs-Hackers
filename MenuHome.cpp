@@ -4,12 +4,17 @@
 
 MenuHome::MenuHome(bool state)
 {
-	std::cout << "Paso por MenuHome " << std::endl;
-	_musicPlaying = state;
-
 	_soundManager.loadMusic("music/menuMusic.wav");
-	_soundManager.playMusic();
-	_soundManager.setVolume(15);
+	_soundManager.setVolume(5);
+
+	if (_soundManager.getMusicOn())
+	{
+		_soundManager.playMusic();
+	}
+	else {
+		_soundManager.pauseMusic();
+	}
+	
 
 	//texto
 	for (int i = 0; i < 5; i++) {
@@ -53,11 +58,14 @@ MenuHome::MenuHome(bool state)
 bool MenuHome::getMusicPlaying() const { return _musicPlaying; }
 //sf::Sound MenuHome::getSound() const { return _sound; }
 
-void MenuHome::setSoundText(bool play) {
-	if (play) {
+void MenuHome::setSoundText(bool play)
+{
+	if(play)
+	{
 		_text[3].setString("Pause music");
 	}
-	else {
+	else
+	{
 		_sound.pause();
 		_text[3].setString("Play music");
 	}
@@ -65,44 +73,47 @@ void MenuHome::setSoundText(bool play) {
 
 void MenuHome::validateClick(int mousex, int mousey, sf::RenderWindow& window, int& view)
 {
-	if (getText1().getGlobalBounds().contains(mousex, mousey)) {
-		//bool wasMusicPlaying = getMusicPlaying();
-		//MenuAbstract::getInstance().saveSoundPosition();
-		setSound(false);
-		setMusicPlaying(false);
+	//Opción para jugar.
+	if (getText1().getGlobalBounds().contains(mousex, mousey))
+	{
 		MenuAbstract::getInstance().setNumberMenu(2);
-		//MenuAbstract::getInstance().restoreSoundPosition();
-		//MenuAbstract::getInstance().getCurrentMenu()->setMusicPlaying(wasMusicPlaying);
 	}
-	else if (getText2().getGlobalBounds().contains(mousex, mousey)) {
+	//Resetear los niveles.
+	else if (getText2().getGlobalBounds().contains(mousex, mousey))
+	{
 		FileLevels arc;
 		arc.reset();
-		//MenuAbstract::getInstance().saveSoundPosition();
 		MenuAbstract::getInstance().setNumberMenu(2);
-		//MenuAbstract::getInstance().restoreSoundPosition();
 	}
-	else if (getText3().getGlobalBounds().contains(mousex, mousey)) {
+	//Info
+	else if (getText3().getGlobalBounds().contains(mousex, mousey))
+	{
 		FileLevels arc;
 		arc.reset();
-		//MenuAbstract::getInstance().saveSoundPosition();
 		MenuAbstract::getInstance().setNumberMenu(3);
-		//MenuAbstract::getInstance().restoreSoundPosition();
 	}
-	else if (getText4().getGlobalBounds().contains(mousex, mousey)) {
-		if (getMusicPlaying()) {
+	//Activar desactivar Sonido.
+	else if (getText4().getGlobalBounds().contains(mousex, mousey))
+	{
+		//SoundManager& soundManager = SoundManager::getInstance();
+		if (_soundManager.getMusicOn()) {
 			setSoundText(false);
-			setSound(false);
-			setMusicPlaying(false);
-		}		 
+			_soundManager.setMusicOn(false);
+			_soundManager.pauseMusic();
+		}
 		else {
 			setSoundText(true);
-			setSound(true);
-			setMusicPlaying(true);
+			_soundManager.setMusicOn(true);
+			_soundManager.playMusic();
 		}
-	}else if (getText5().getGlobalBounds().contains(mousex, mousey)) {
+	}
+	//Exit
+	else if (getText5().getGlobalBounds().contains(mousex, mousey))
+	{
 		window.close();
 	}
 }
+
 
 void MenuHome::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	Menu::draw(target, states);

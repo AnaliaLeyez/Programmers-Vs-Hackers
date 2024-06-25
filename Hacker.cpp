@@ -51,8 +51,8 @@ void Hacker::animation(float _frame)
 
 	if (_currentPosition.x > _previousPosition.x)
 		_sprite.setTextureRect({ 0 + (int)_frame * 64, 128, 64, 64 });
-	//if (_currentPosition.y < _previousPosition.y)
-		//_sprite.setTextureRect({ 0 + (int)_frame * 64, 64, 64, 64 });
+	if (_currentPosition.x < _previousPosition.x)
+		_sprite.setTextureRect({ 0 + (int)_frame * 64, 64, 64, 64 });
 
 }
 
@@ -121,8 +121,9 @@ void Hacker::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void Hacker::getFreezed()
 {
-	if (!_isFreezed) {
+	if (!_isFreezed)
+	{
 		_isFreezed = true;
-		_velocity *= 0.2f;
+		_velocity *= 0.6f;
 	}
 }

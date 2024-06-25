@@ -139,18 +139,19 @@ void Level::clickWithMenu2Open(int mousex, int mousey, Spot& sp)
 
 	_currentMenu->hide();
 }
-void Level::validateClickOnSpeaker(int mousex, int mousey) {
-	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey)) {
-		if (getMusicPlaying())
+void Level::validateClickOnSpeaker(int mousex, int mousey)
+{
+	if (_ui.getSpeaker().getGlobalBounds().contains(mousex, mousey))
+	{
+		if (_soundManager.getMusicOn())
 		{
-			setSound(false);
-			setMusicPlaying(false);
+			_soundManager.setMusicOn(false);
 			_soundManager.pauseMusic();
 			_ui.setTextureSpeaker("img/complementarias/mute.png");
 		}
-		else {
-			setSound(true);
-			setMusicPlaying(true);
+		else
+		{
+			_soundManager.setMusicOn(true);
 			_soundManager.playMusic();
 			_ui.setTextureSpeaker("img/complementarias/musicOn.png");
 		}
@@ -159,11 +160,16 @@ void Level::validateClickOnSpeaker(int mousex, int mousey) {
 
 void Level::validateClickOnHome(int mousex, int mousey, int& view)
 {
-	if(_ui.getText5().getGlobalBounds().contains(mousex, mousey)){
-		setSound(false);
-		setMusicPlaying(false);
+	if(_ui.getText5().getGlobalBounds().contains(mousex, mousey))
+	{
+		
+		//setSound(false);
+		//setMusicPlaying(false);
 		_soundManager.stopMusic();
 		MenuAbstract::getInstance().setNumberMenu(1);
 		view = 1;
+		
+
+		std::cout << "Clic en Home " << std::endl;
 	}
 }

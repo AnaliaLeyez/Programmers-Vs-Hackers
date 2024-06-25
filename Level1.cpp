@@ -94,11 +94,11 @@ Level1::Level1()
 	_sound.play();
 	_musicPlaying = true;
 	*/
-
 	_soundManager.stopMusic();
 	_soundManager.loadMusic("music/level1.wav");
 	_soundManager.setVolume(15);
-	_soundManager.playMusic();
+
+	_soundManager.getMusicOn() ? _soundManager.playMusic() : _soundManager.stopMusic();
 
 	//_towersAvailable.push_back(new TowerBrian());
 	//_towersAvailable.push_back(new TowerKloster());

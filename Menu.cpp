@@ -46,11 +46,14 @@ sf::Text Menu::getText6() const { return _text[5]; }
 
 void Menu::setMusicPlaying(bool playing) { _musicPlaying = playing; }
 
-void Menu::setSound(bool play) {
-	if (play) {
+void Menu::setSound(bool play)
+{
+	if (_soundManager.getMusicOn())
+	{
 		_soundManager.playMusic();
 	}
-	else {
+	else
+	{
 		_soundManager.pauseMusic();
 	}
 }
