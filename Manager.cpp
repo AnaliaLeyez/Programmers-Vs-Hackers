@@ -44,7 +44,7 @@ void Manager::setNumberLevel(int IdLevel) {
 	switch (IdLevel)
 	{
 	case 0:
-		 _currentLevel = new Level1();
+		 _currentLevel = new Level4();
 		break;
 	case 1:
 		_currentLevel = new Level2();
