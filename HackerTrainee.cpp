@@ -13,14 +13,16 @@ HackerTrainee::HackerTrainee()
 	_isFreezed = false;
 	_isPoisoned = false;
 
+	_type = 4;
+
 	_name = "Trainee";
 	_currentPosition = getPosition();
 	_previousPosition = _currentPosition;
 
 	_frame = 0;
-	_life = 7;
-	_damage = 5;
-	_velocity = { 1.3f, 1.3f };
+	_life = 20;
+	_damage = 10;
+	_velocity = { 1.2f, 1.2f };
 	_goldenDrop = 3;
 }
 

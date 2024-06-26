@@ -96,12 +96,14 @@ void MenuHome::validateClick(int mousex, int mousey, sf::RenderWindow& window, i
 	else if (getText4().getGlobalBounds().contains(mousex, mousey))
 	{
 		//SoundManager& soundManager = SoundManager::getInstance();
-		if (_soundManager.getMusicOn()) {
+		if (_soundManager.getMusicOn())
+		{
 			setSoundText(false);
 			_soundManager.setMusicOn(false);
 			_soundManager.pauseMusic();
 		}
-		else {
+		else
+		{
 			setSoundText(true);
 			_soundManager.setMusicOn(true);
 			_soundManager.playMusic();

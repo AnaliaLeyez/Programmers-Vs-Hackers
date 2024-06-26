@@ -12,14 +12,16 @@ HackerDios::HackerDios()
 	_isFreezed = false;
 	_isPoisoned = false;
 
-	_name = "BOSS";
+	_type = 1;
+
+	_name = "God";
 	_currentPosition = getPosition();
 	_previousPosition = _currentPosition;
 
 	_frame = 0;
 	_life = 100;
 	_damage = 50;
-	_velocity = { 1,1 };
+	_velocity = { 0.8f,0.8f };
 	_goldenDrop = 20;
 }
 
