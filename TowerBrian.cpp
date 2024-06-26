@@ -25,7 +25,7 @@ TowerBrian::TowerBrian()
 	_price = 220;
 	_priceUpgrade = 340;
 	_salesValue = 176;
-	_damage = 3;
+	_damage = 5;
 	_damageUpgrade = 5;
 	_range = 9;
 	_upgradesAmount = 2;

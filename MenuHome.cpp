@@ -93,7 +93,8 @@ void MenuHome::validateClick(int mousex, int mousey, sf::RenderWindow& window, i
 			_soundManager.setMusicOn(false);
 			_soundManager.pauseMusic();
 		}
-		else {
+		else
+		{
 			setSoundText(true);
 			_soundManager.setMusicOn(true);
 			_soundManager.playMusic();

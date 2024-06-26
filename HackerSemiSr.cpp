@@ -13,6 +13,9 @@ HackerSemiSr::HackerSemiSr()
 	_isFreezed = false;
 	_isPoisoned = false;
 
+	_type = 3;
+
+	_name = "SemiSR";
 	_currentPosition = getPosition();
 	_previousPosition = _currentPosition;
 

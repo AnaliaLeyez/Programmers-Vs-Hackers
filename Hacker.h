@@ -17,6 +17,7 @@ protected:
 
 	int _life;
 	int _damage;
+	int _type;
 	bool _isABoss;
 	int _goldenDrop;
 	sf::Vector2f _position;
@@ -55,9 +56,9 @@ public:
 	void update(int arr[][30]);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 
-	void getFreezed();
+	virtual void getFreezed();
 
 	virtual void takeDamage(int,int);
 
-	void animation(float);
+	virtual void animation(float);
 };

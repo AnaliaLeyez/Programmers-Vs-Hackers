@@ -13,6 +13,9 @@ HackerJunior::HackerJunior()
 	_isFreezed = false;
 	_isPoisoned = false;
 
+	_type = 2;
+
+	_name = "Junior";
 	_currentPosition = getPosition();
 	_previousPosition = _currentPosition;
 

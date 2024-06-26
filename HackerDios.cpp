@@ -12,6 +12,9 @@ HackerDios::HackerDios()
 	_isFreezed = false;
 	_isPoisoned = false;
 
+	_type = 1;
+
+	_name = "God";
 	_currentPosition = getPosition();
 	_previousPosition = _currentPosition;
 

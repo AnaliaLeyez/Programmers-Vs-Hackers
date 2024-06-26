@@ -13,6 +13,9 @@ HackerTrainee::HackerTrainee()
 	_isFreezed = false;
 	_isPoisoned = false;
 
+	_type = 4;
+
+	_name = "Trainee";
 	_currentPosition = getPosition();
 	_previousPosition = _currentPosition;
 

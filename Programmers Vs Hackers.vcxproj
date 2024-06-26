@@ -151,6 +151,7 @@
     <ClCompile Include="ButtonUpgrade.cpp" />
     <ClCompile Include="Collisionable.cpp" />
     <ClCompile Include="FileLevel.cpp" />
+    <ClCompile Include="HackerBoss.cpp" />
     <ClCompile Include="HackerDios.cpp" />
     <ClCompile Include="HackerJunior.cpp" />
     <ClCompile Include="HackerSemiSr.cpp" />
@@ -199,6 +200,7 @@
     <ClInclude Include="ButtonUpgrade.h" />
     <ClInclude Include="Collisionable.h" />
     <ClInclude Include="FileLevel.h" />
+    <ClInclude Include="HackerBoss.h" />
     <ClInclude Include="HackerDios.h" />
     <ClInclude Include="HackerJunior.h" />
     <ClInclude Include="HackerSemiSr.h" />
