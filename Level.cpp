@@ -514,22 +514,15 @@ void Level::updateBullets()
 
 		if (!bulletErased)
 		{
+			sf::Vector2f lastPosition = bullet->getPosition();
+
+			bullet->update();
 			bullet->update();
 
-			// Fallback check to remove stuck bullets
-			if (bullet->getPosition() == bullet->getPosition()) // This should always be true unless the bullet moved
+			if (bullet->getPosition() == lastPosition)
 			{
-				sf::Vector2f lastPosition = bullet->getPosition();
-				bullet->update();
-				if (bullet->getPosition() == lastPosition)
-				{
-					delete bullet;
-					it = _bullets.erase(it);
-				}
-				else
-				{
-					++it;
-				}
+				delete bullet;
+				it = _bullets.erase(it);
 			}
 			else
 			{

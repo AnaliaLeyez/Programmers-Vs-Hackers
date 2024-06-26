@@ -10,7 +10,6 @@ BulletB::BulletB(sf::Vector2f position, sf::Vector2f target, int damage)
 	setScale({ 0.5f, 0.5f });
 	setPosition(position);
 	_enemyPosition = target;
-
 	_damage = damage; //esto ver que valores segun la torre q le corresponde
 	_speed = 6.f;
 	loadTexture();
@@ -33,5 +32,4 @@ void BulletB::update1BulletB()
 void BulletB::update2BulletB()
 {
 	_damage = 4;
-	_velocity = { 3.f,3.f };
 }

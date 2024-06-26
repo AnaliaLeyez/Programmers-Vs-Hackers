@@ -33,5 +33,4 @@ void BulletC::update1BulletC()
 void BulletC::update2BulletC()
 {
 	_damage = 4;
-	_velocity = { 3.f,3.f };
 }

@@ -26,13 +26,8 @@ sf::FloatRect Bullet::getBounds() const
 	return _sprite.getTransform().transformRect(_sprite.getGlobalBounds());
 }
 sf::Vector2f Bullet::getDirection() const { return _direction; }
-sf::Vector2f Bullet::getVelocity() const { return _velocity; }
 sf::Vector2f Bullet::getEnemyPosition() const {	return _enemyPosition; }
-void Bullet::setCrash(bool state)
-{
-	_crash = state;
-}
-bool Bullet::getCrash() { return _crash; }
+
 int Bullet::getDamage() const { return _damage; }
 
 int Bullet::getType()
@@ -41,7 +36,6 @@ int Bullet::getType()
 }
 
 void Bullet::setDirection(sf::Vector2f d) { _direction = d; }
-void Bullet::setVelocity(sf::Vector2f velocity) { _velocity = velocity; }
 void Bullet::setDamage(int damage) { _damage = damage; }
 void Bullet::setEnemyPosition(sf::Vector2f position) { _enemyPosition = position; }
 

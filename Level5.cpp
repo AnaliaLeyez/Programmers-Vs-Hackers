@@ -76,7 +76,7 @@ Level5::Level5()
 	_ui.setText(3, "/" + std::to_string(getTotalWaves()));
 
 	_soundManager.stopMusic();
-	_soundManager.loadMusic("music/level3.wav");
+	_soundManager.loadMusic("music/level5.wav");
 	_soundManager.setVolume(15);
 	_soundManager.getMusicOn() ? _soundManager.playMusic() : _soundManager.stopMusic();
 	_currentMenu = _menu1;
