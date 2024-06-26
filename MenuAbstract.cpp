@@ -35,7 +35,6 @@ void MenuAbstract::setNumberMenu(int idMenu)
 		{
 			//state = _currentMenu->getMusicPlaying();
 			state = _soundManger.getMusicOn();
-			std::cout << "Click en Switch de MenuAbstract case 1" << std::endl;
 			_currentMenu = new MenuHome(state);
 		}
 		else
@@ -48,7 +47,6 @@ void MenuAbstract::setNumberMenu(int idMenu)
 	{
 		//state = _currentMenu->getMusicPlaying();
 		state = _soundManger.getMusicOn();
-		std::cout << "Click en Switch de MenuAbstract case 2" << std::endl;
 		_currentMenu = new MenuLevels(state);
 	}
 	break;
@@ -57,7 +55,6 @@ void MenuAbstract::setNumberMenu(int idMenu)
 		//state = _currentMenu->getMusicPlaying();
 		state = _soundManger.getMusicOn();
 		_currentMenu = new MenuInfo(state);
-		std::cout << "Click en Switch de MenuAbstract case 3" << std::endl;
 	}
 	break;
 	default:
@@ -77,23 +74,7 @@ void MenuAbstract::update(sf::Vector2i& mousePosition)
 	_currentMenu->update(mousePosition);
 }
 
-//void MenuAbstract::saveSoundPosition() {
-//	if (_currentMenu) {
-//		_soundPosition = _currentMenu->getSoundPosition();
-//	}
-//}
-//
-//void MenuAbstract::restoreSoundPosition() {
-//	if (_currentMenu) {
-//		_currentMenu->setSoundPosition(_soundPosition);
-//	}
-//}
-//void MenuAbstract::stopMusic() {
-//	if (_currentMenu) {
-//		_currentMenu->setSound(false);
-//		_currentMenu->setMusicPlaying(false);
-//	}
-//}
+
 void MenuAbstract::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	target.draw(*_currentMenu, states);
 }
@@ -104,6 +85,3 @@ MenuAbstract::~MenuAbstract()
 	//	_currentMenu = nullptr;
 	//}
 }
-//void MenuAbstract::update() {
-//	_currentMenu->update();
-//}

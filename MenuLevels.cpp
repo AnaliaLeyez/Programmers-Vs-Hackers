@@ -3,18 +3,8 @@
 #include "MenuAbstract.h"
 #include "MenuLevels.h"
 
-MenuLevels::MenuLevels(bool state)
+MenuLevels::MenuLevels(bool state) //state no se usa?
 {
-	/*
-	_musicPlaying = state;
-
-	if (_soundManager.getMusicOn()) {
-		_soundManager.playMusic();
-	}
-	else {
-		_soundManager.pauseMusic();
-	}
-	*/
 	FileLevels arc;
 	Levels reg;
 	
@@ -67,43 +57,28 @@ MenuLevels::MenuLevels(bool state)
 void MenuLevels::validateClick(int mousex, int mousey, sf::RenderWindow& window, int& view)
 {
 	if (getText1().getGlobalBounds().contains(mousex, mousey)) {
-		//setSound(false);
-		//setMusicPlaying(false);
-		//_soundManager.setMusicOn(false);
-		//MenuAbstract::getInstance().stopMusic();
 		Manager::getInstance().setNumberLevel(0);
 		view = 2;
 	}
 	else if (getText2().getGlobalBounds().contains(mousex, mousey) && getText2().getString()!="") {
-		//setSound(false);
-		//setMusicPlaying(false);
-		//_soundManager.setMusicOn(false);
-		//MenuAbstract::getInstance().stopMusic();
 		Manager::getInstance().setNumberLevel(1);
-		std::cout << "Menulevls validate elsif" << std::endl;
 		view = 2;
 	}
 	else if (getText3().getGlobalBounds().contains(mousex, mousey) && getText2().getString() != "") {
-		//setSound(false);
-		//setMusicPlaying(false);
-		//_soundManager.setMusicOn(false);
-		std::cout << "Menulevls validate 2eslif" << std::endl;
 		Manager::getInstance().setNumberLevel(2);
 		view = 2;
 	}
 	else if (getText4().getGlobalBounds().contains(mousex, mousey) && getText2().getString() != "") {
-		//setSound(false);
-		//setMusicPlaying(false);
-		//_soundManager.setMusicOn(false);
-		std::cout << "Menulevls validate 3eslif" << std::endl;
-		Manager::getInstance().setNumberLevel(2); //ajustar para que vaya a level 4 (mandar un 3)
+		Manager::getInstance().setNumberLevel(3);
+		view = 2;
+	}
+	else if (getText5().getGlobalBounds().contains(mousex, mousey) && getText2().getString() != "") {
+		Manager::getInstance().setNumberLevel(4);
 		view = 2;
 	}
 	//VOLVER:
 	else if (getText6().getGlobalBounds().contains(mousex, mousey)) {
-		//MenuAbstract::getInstance().saveSoundPosition();
 		MenuAbstract::getInstance().setNumberMenu(1);
-		//MenuAbstract::getInstance().restoreSoundPosition();
 	}
 }
 

@@ -58,6 +58,9 @@ void Manager::setNumberLevel(int IdLevel) {
 	case 4:
 		_currentLevel = new Level5();
 		break;
+	/*case -1:
+		_currentLevel=nullptr;
+		break;*/
 	default:
 		break;
 	}

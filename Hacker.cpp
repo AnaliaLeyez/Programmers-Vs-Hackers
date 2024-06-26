@@ -28,7 +28,6 @@ void Hacker::setGoldenDrop(int drop) { _goldenDrop = drop; }
 //}
 void Hacker::takeDamage(int damageBullet, int type)
 {
-	std::cout << "Recibio danio tipo " << type << std::endl;
 	if (type == 4)
 	{
 		getFreezed();

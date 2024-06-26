@@ -14,7 +14,6 @@ MenuHome::MenuHome(bool state)
 	else {
 		_soundManager.pauseMusic();
 	}
-	
 
 	//texto
 	for (int i = 0; i < 5; i++) {
@@ -54,9 +53,7 @@ MenuHome::MenuHome(bool state)
 	}
 }
 
-
 bool MenuHome::getMusicPlaying() const { return _musicPlaying; }
-//sf::Sound MenuHome::getSound() const { return _sound; }
 
 void MenuHome::setSoundText(bool play)
 {
@@ -91,7 +88,6 @@ void MenuHome::validateClick(int mousex, int mousey, sf::RenderWindow& window, i
 	//Activar desactivar Sonido.
 	else if (getText4().getGlobalBounds().contains(mousex, mousey))
 	{
-		//SoundManager& soundManager = SoundManager::getInstance();
 		if (_soundManager.getMusicOn()) {
 			setSoundText(false);
 			_soundManager.setMusicOn(false);
