@@ -66,27 +66,17 @@ void MenuHome::setSoundText(bool play) {
 void MenuHome::validateClick(int mousex, int mousey, sf::RenderWindow& window, int& view)
 {
 	if (getText1().getGlobalBounds().contains(mousex, mousey)) {
-		//bool wasMusicPlaying = getMusicPlaying();
-		//MenuAbstract::getInstance().saveSoundPosition();
 		setSound(false);
 		setMusicPlaying(false);
 		MenuAbstract::getInstance().setNumberMenu(2);
-		//MenuAbstract::getInstance().restoreSoundPosition();
-		//MenuAbstract::getInstance().getCurrentMenu()->setMusicPlaying(wasMusicPlaying);
 	}
 	else if (getText2().getGlobalBounds().contains(mousex, mousey)) {
 		FileLevels arc;
 		arc.reset();
-		//MenuAbstract::getInstance().saveSoundPosition();
 		MenuAbstract::getInstance().setNumberMenu(2);
-		//MenuAbstract::getInstance().restoreSoundPosition();
 	}
 	else if (getText3().getGlobalBounds().contains(mousex, mousey)) {
-		FileLevels arc;
-		arc.reset();
-		//MenuAbstract::getInstance().saveSoundPosition();
 		MenuAbstract::getInstance().setNumberMenu(3);
-		//MenuAbstract::getInstance().restoreSoundPosition();
 	}
 	else if (getText4().getGlobalBounds().contains(mousex, mousey)) {
 		if (getMusicPlaying()) {

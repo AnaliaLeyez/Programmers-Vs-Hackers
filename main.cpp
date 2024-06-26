@@ -10,15 +10,14 @@
 
 int main()
 {
-	//altaLevels();  //ESTO YA SE HIZO! NO SE REPITE
 	FileLevels arc;
 	Levels reg;
-	//for (int i = 0; i < 5; i++) {
+	//for (int i = 0; i < 5; i++) {   //ESTO YA SE HIZO! NO SE REPITE
 	//	reg.Cargar(i);
 	//	arc.save(reg);
 	//	//system("pause");
 	//}
-	////leerLevels();  //MUESTRA COMO ESTA ACTUALMENTE EL ARCHIVO
+	//MUESTRO COMO ESTA ACTUALMENTE EL ARCHIVO:
 	for (int i = 0; i < 5; i++) {
 		reg = arc.read(i);
 		reg.Mostrar();

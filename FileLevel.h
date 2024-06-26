@@ -14,7 +14,7 @@ public:
     bool getStatus() const;
     void setId(int i);
     void setStatus(bool s);
-   // void Cargar(int i);
+    void Cargar(int i);
     void Mostrar();
 };
 
