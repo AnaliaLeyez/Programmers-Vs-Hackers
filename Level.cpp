@@ -176,7 +176,7 @@ void Level::spawnWave() {
 		while (_enemiesRandomTime == newRandom) {
 			newRandom = std::rand() % 320 * 0.01f + 0.4f;
 		}
-		_enemiesRandomTime = newRandom; //REVISAR, este random es como q lo hace una vez por cada oleada..
+		_enemiesRandomTime = newRandom;
 		if (_enemyClock.getElapsedTime().asMilliseconds() *0.001f >= _enemiesRandomTime) {
 			switch (_currentWave)
 			{
