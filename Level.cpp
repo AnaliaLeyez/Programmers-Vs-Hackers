@@ -155,7 +155,6 @@ void Level::setLevelUpText()
 	_levelUp.setString("CONGRATS! \n LEVEL UP");
 }
 
-
 void Level::spawnWave() {
 	std::srand(std::time(nullptr));
 	//los contadores son de tipo static porque asi las variables mantienen su valor incluso
@@ -165,12 +164,12 @@ void Level::spawnWave() {
 	Hacker* hk;
 	if (enemyIndex < _enemiesPerWave) {
 		// Genera un nuevo enemigo
-		float newRandom= std::rand() % 320  *0.01f+ 0.4f;
+		float newRandom = std::rand() % 320 * 0.01f + 0.4f;
 		while (_enemiesRandomTime == newRandom) {
 			newRandom = std::rand() % 320 * 0.01f + 0.4f;
 		}
 		_enemiesRandomTime = newRandom; //REVISAR, este random es como q lo hace una vez por cada oleada..
-		if (_enemyClock.getElapsedTime().asMilliseconds() *0.001f >= _enemiesRandomTime) {
+		if (_enemyClock.getElapsedTime().asMilliseconds() * 0.001f >= _enemiesRandomTime) {
 			switch (_currentWave)
 			{
 			case 1:
@@ -211,7 +210,7 @@ void Level::spawnWave() {
 		++_currentWave; // Incrementa el número de oleada
 		enemyIndex = 0; // Reinicia el índice para la próxima oleada
 		if (_currentWave <= _totalWaves) {
-			_currentWave%2 !=0? _hackerStartPosition = _hackerStartPosition1 : _hackerStartPosition = _hackerStartPosition2;
+			_currentWave % 2 != 0 ? _hackerStartPosition = _hackerStartPosition1 : _hackerStartPosition = _hackerStartPosition2;
 			_enemiesPerWave = _hackersPerWave[_currentWave - 1]; // Acutaliza la cantidad de enemigos para la próxima oleada
 			_ui.setText(2, std::to_string(getCurrentWave()));
 			spawnedGodHacker = false;
@@ -312,7 +311,8 @@ void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, in
 
 void Level::checkLevelCompletion()
 {
-	if (_currentWave > _totalWaves && _enemies.empty()) {
+	if (_currentWave > _totalWaves && _enemies.empty())
+	{
 		_finishedLevel = true;
 		_levelUpClock.restart();
 		_soundManager.stopMusic();
@@ -391,10 +391,7 @@ void Level::update(sf::Vector2i& mousePosition, int& view) {
 				{
 					for (auto& hacker : _enemies)
 					{
-						if (spot->getIsOccupied() &&
-							spot->getTransform().transformRect((
-								spot->getCurrentTower()->getBounds())).intersects(hacker->getBounds()
-								))
+						if (spot->getIsOccupied() && spot->getTransform().transformRect((spot->getCurrentTower()->getBounds())).intersects(hacker->getBounds()))
 						{
 							if (spot->getCurrentTower()->canShoot())
 							{
@@ -510,6 +507,8 @@ void Level::updateBullets()
 		{
 			if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
 			{
+				std::cout << "Choco con hacker" << std::endl;
+
 				hacker->takeDamage(bullet->getDamage(), bullet->getType());
 				delete bullet;
 				bulletErased = true;

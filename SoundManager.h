@@ -6,8 +6,6 @@ class SoundManager
 {
 private:
 	SoundManager();
-	SoundManager(const SoundManager&) = delete;
-	SoundManager& operator=(const SoundManager&) = delete;
 	static SoundManager* _currentInstance; //Singleton
 	bool _musicOn;
 	sf::Music _currentMusic;

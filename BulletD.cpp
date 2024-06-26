@@ -8,10 +8,11 @@ BulletD::BulletD(sf::Vector2f position, sf::Vector2f target, int damage)
 {
 	_type = 4;
 	setPosition(position);
+	setScale({ 0.5f, 0.5f });
 	_enemyPosition = target;
 
 	_damage = damage; //esto ver que valores segun la torre q le corresponde
-	_speed = 9.0f;
+	_speed = 6.f;
 	loadTexture();
 }
 

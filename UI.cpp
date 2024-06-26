@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 
+#include "SoundManager.h"
+
 #include "UI.h"
 UI::UI() {
 	if (!_textureBgPlyInfo.loadFromFile("img/complementarias/player_info_background.png")) {
@@ -36,9 +38,22 @@ UI::UI() {
 
 
 	//parlante
-	if (!_textureSpeaker.loadFromFile("img/complementarias/musicOn.png")) {
-		throw std::runtime_error("Error al cargar img mute");
-	};
+
+	if (SoundManager::getInstance().getMusicOn())
+	{
+		if (!_textureSpeaker.loadFromFile("img/complementarias/musicOn.png"))
+		{
+			throw std::runtime_error("Error al cargar img mute");
+		}
+	}
+	else
+	{
+		if (!_textureSpeaker.loadFromFile("img/complementarias/mute.png"))
+		{
+			throw std::runtime_error("Error al cargar img mute");
+		}
+	}
+
 	_speaker.setSize(sf::Vector2f(80, 80));
 	_speaker.setTexture(&_textureSpeaker);
 	_speaker.setPosition(sf::Vector2f(900, 550));

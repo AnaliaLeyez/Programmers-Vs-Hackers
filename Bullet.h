@@ -2,7 +2,7 @@
 #include "Collisionable.h"
 #include <SFML/Graphics.hpp>
 
-class Bullet : public Collisionable, public sf::Drawable, public sf::Transformable
+class Bullet : public sf::Drawable, public sf::Transformable
 {
 protected:
 	sf::Sprite _sprite;
