@@ -21,7 +21,7 @@ HackerJunior::HackerJunior()
 	_life = 15;
 	_damage = 10;
 	_velocity = { 1.2,1.2 };
-	_goldenDrop = 9;
+	_goldenDrop = 35;
 
 }
 

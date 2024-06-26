@@ -79,8 +79,8 @@ Level3::Level3()
 	_UTNRed.setOrigin(_UTNRed.getGlobalBounds().width / 2, _UTNRed.getGlobalBounds().height / 2);
 
 	setSpots(arr, _spots, 7);
-	_golden = 5000;
-	_energy = 600;
+	_golden = 1000;
+	_energy = 900;
 	_ui.setText(0, std::to_string(getGolden()));
 	_ui.setText(1, std::to_string(getEnergy()));
 	_ui.setText(2, std::to_string(getCurrentWave()));

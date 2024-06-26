@@ -7,8 +7,8 @@ Level4::Level4()
 {
 	_hackersPerWave = new int[4] { 4, 6, 8, 8 };
 	_wave1 = new int[4] { 1, 1, 1, 1};
-	_wave2 = new int[6] { 1, 1, 1, 2, 2, 1 };
-	_wave3 = new int[8] { 1, 2, 1, 1, 2, 2, 2, 1};
+	_wave2 = new int[6] { 2, 1, 1, 2, 2, 1 };
+	_wave3 = new int[8] { 3, 2, 1, 1, 2, 2, 2, 1};
 	_wave4 = new int [8] { 2, 1, 2, 2, 2, 2, 2, 2 };
 
 	_currentWave = 1;
@@ -68,8 +68,8 @@ Level4::Level4()
 	_UTNRed.setOrigin(_UTNRed.getGlobalBounds().width / 2, _UTNRed.getGlobalBounds().height / 2);
 
 	setSpots(arr, _spots, 4);
-	_golden = 9900;
-	_energy = 1800;
+	_golden = 500;
+	_energy = 900;
 	_ui.setText(0, std::to_string(getGolden()));
 	_ui.setText(1, std::to_string(getEnergy()));
 	_ui.setText(2, std::to_string(getCurrentWave()));

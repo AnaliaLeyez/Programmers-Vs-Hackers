@@ -71,7 +71,7 @@ void TowerBrian::upgrade()
 		_salesValue = 448;
 		_damage = 5;
 		_damageUpgrade = 8;
-		_fireRate = 1.f; //dispara mas lento
+		_fireRate = 0.7f; //dispara mas rapido
 		_upgradesAmount = 1;
 	}
 	break;
@@ -86,7 +86,7 @@ void TowerBrian::upgrade()
 		_priceUpgrade = 9990;
 		_salesValue = 816;
 		_damage = 8;
-		_fireRate = 0.6f; //dispara mas rapido
+		_fireRate = 0.6f;
 		_upgradesAmount = 0;
 	}
 	default:

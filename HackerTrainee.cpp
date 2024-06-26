@@ -21,7 +21,7 @@ HackerTrainee::HackerTrainee()
 	_life = 7;
 	_damage = 5;
 	_velocity = { 1.3f, 1.3f };
-	_goldenDrop = 3;
+	_goldenDrop = 15;
 }
 
 
