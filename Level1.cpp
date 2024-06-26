@@ -22,6 +22,7 @@ Level1::Level1()
 
 	_currentWave = 1;
 	_totalWaves = 4;
+	_enemyIndex = 0;
 	_enemiesPerWave = 4;
 	_timeBetweenWaves = 15;
 	_waveClock.restart();

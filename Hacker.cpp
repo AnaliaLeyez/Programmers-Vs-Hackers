@@ -22,10 +22,6 @@ void Hacker::setDirection(sf::Vector2f direction) { _direction = direction; }
 void Hacker::setBoos(bool boss) { _isABoss = boss; }
 void Hacker::setGoldenDrop(int drop) { _goldenDrop = drop; }
 
-//void Hacker::attack(float* hackerLife)
-//{
-//	*hackerLife -= getDamage();
-//}
 void Hacker::takeDamage(int damageBullet, int type)
 {
 	if (type == 4)

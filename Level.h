@@ -53,6 +53,7 @@ protected:
 	int *_wave4;
 
 	std::vector<Hacker*> _enemies;
+	int _enemyIndex;
 	int _currentWave;
 	int _totalWaves;
 	int _enemiesPerWave;

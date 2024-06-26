@@ -164,7 +164,6 @@ void Level::validateClickOnHome(int mousex, int mousey, int& view)
 	{
 		_soundManager.stopMusic();
 		MenuAbstract::getInstance().setNumberMenu(1);
-		//Manager::getInstance().setNumberLevel(-1); //para que currentLevel quede nullptr
 		view = 1;
 	}
 }

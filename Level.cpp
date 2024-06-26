@@ -166,10 +166,10 @@ void Level::spawnWave() {
 	std::srand(std::time(nullptr));
 	//los contadores son de tipo static porque asi las variables mantienen su valor incluso
 	//despues de que la funcion haya terminado de ejecutarse
-	static int enemyIndex = 0;
-	static bool spawnedGodHacker = false;
+	//static int enemyIndex = 0;
+	//static bool spawnedGodHacker = false;
 	Hacker* hk;
-	if (enemyIndex < _enemiesPerWave) {
+	if (_enemyIndex < _enemiesPerWave) {
 		// Genera un nuevo enemigo
 		float newRandom = std::rand() % 320 * 0.01f + 0.4f;
 		while (_enemiesRandomTime == newRandom) {
@@ -181,46 +181,46 @@ void Level::spawnWave() {
 			{
 			case 1:
 			{
-				hk = returnHacker(_wave1[enemyIndex]);
+				hk = returnHacker(_wave1[_enemyIndex]);
 			}
 			break;
 			case 2:
 			{
-				hk = returnHacker(_wave2[enemyIndex]);
+				hk = returnHacker(_wave2[_enemyIndex]);
 			}
 			break;
 			case 3:
 			{
-				hk = returnHacker(_wave3[enemyIndex]);
+				hk = returnHacker(_wave3[_enemyIndex]);
 			}
 			break;
 			case 4:
 			default:
 			{
-				hk = returnHacker(_wave4[enemyIndex]);
+				hk = returnHacker(_wave4[_enemyIndex]);
 			}
 			break;
 			}
 			hk->setPosition(_hackerStartPosition);
 			_enemies.push_back(hk);
-			if (enemyIndex == 0) {
+			if (_enemyIndex == 0) {
 				hk->saySth();
 			}
-			++enemyIndex;
+			++_enemyIndex;
 			if (_currentWave > 1) {
-				enemyIndex % 3 == 0 ? _hackerStartPosition = _hackerStartPosition1 : _hackerStartPosition = _hackerStartPosition2;
+				_enemyIndex % 3 == 0 ? _hackerStartPosition = _hackerStartPosition1 : _hackerStartPosition = _hackerStartPosition2;
 			}
 			_enemyClock.restart();
 		}
 	}
-	else if (_waveClock.getElapsedTime().asSeconds() > _timeBetweenWaves && _enemies.empty() && enemyIndex == _enemiesPerWave) {
+	else if (_waveClock.getElapsedTime().asSeconds() > _timeBetweenWaves && _enemies.empty() && _enemyIndex == _enemiesPerWave) {
 		++_currentWave; // Incrementa el número de oleada
-		enemyIndex = 0; // Reinicia el índice para la próxima oleada
+		_enemyIndex = 0; // Reinicia el índice para la próxima oleada
 		if (_currentWave <= _totalWaves) {
 			_currentWave % 2 != 0 ? _hackerStartPosition = _hackerStartPosition1 : _hackerStartPosition = _hackerStartPosition2;
 			_enemiesPerWave = _hackersPerWave[_currentWave - 1]; // Acutaliza la cantidad de enemigos para la próxima oleada
 			_ui.setText(2, std::to_string(getCurrentWave()));
-			spawnedGodHacker = false;
+			//spawnedGodHacker = false;
 			_waveClock.restart(); // Reinicia el temporizador de la oleada
 		}
 	}
@@ -343,7 +343,6 @@ void Level::setGameOverText()
 	}
 	_gameOver.setFont(_fontGameOver);
 	_gameOver.setCharacterSize(70);
-	//_gameOver.setOrigin(_gameOver.getGlobalBounds().width/ 2, _gameOver.getGlobalBounds().height / 2);
 	_gameOver.setPosition(300, 250);
 	_gameOver.setFillColor(sf::Color(255, 0, 0));
 	_gameOver.setString("GAME OVER");
@@ -451,12 +450,6 @@ void Level::update(sf::Vector2i& mousePosition, int& view) {
 		setMusicPlaying(false);
 		MenuAbstract::getInstance().setNumberMenu(2);
 		view = 1;
-
-		//if (getIdLevel() < 5) { // aca digo que solo puede llegar hasta el nivel 5
-		//}
-		//else {
-		//	// lógica para cuando se termina el juego, cuando se pasaron todos los niveles
-		//}
 	}
 }
 
