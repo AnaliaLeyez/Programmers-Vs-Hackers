@@ -12,20 +12,19 @@ HackerDios::HackerDios()
 	_isFreezed = false;
 	_isPoisoned = false;
 
-	_name = "BOSS";
 	_currentPosition = getPosition();
 	_previousPosition = _currentPosition;
 
 	_frame = 0;
 	_life = 50;
-	_damage = 50;
-	_velocity = { 1,1 };
+	//_damage = 60;
+	_velocity = { 0.8f,0.8f };
 	_goldenDrop = 70;
 }
 
 int HackerDios::attackUtn() {
 
-	return 200;
+	return 80;
 }
 
 void HackerDios::saySth()

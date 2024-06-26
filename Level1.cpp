@@ -14,16 +14,16 @@
 
 Level1::Level1() 
 {
-	_hackersPerWave = new int[4] { 4, 6, 8, 8 };
+	_hackersPerWave = new int[4] { 8, 6, 8, 16 };
 	_wave1 = new int[8] { 1, 1, 1, 1, 1, 1, 1, 1};
 	_wave2 = new int[6] { 1, 1, 1, 2, 2, 1 };
 	_wave3 = new int[8] { 1, 2, 1, 1, 2, 2, 2, 1};
-	_wave4 = new int [8] { 2, 1, 2, 2, 2, 2, 2, 2 };
+	_wave4 = new int [16] { 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 2, 2};
 
 	_currentWave = 1;
 	_totalWaves = 4;
 	_enemyIndex = 0;
-	_enemiesPerWave = 4;
+	_enemiesPerWave = 8;
 	_timeBetweenWaves = 15;
 	_waveClock.restart();
 	_enemyClock.restart();

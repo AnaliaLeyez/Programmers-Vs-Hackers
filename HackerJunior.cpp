@@ -13,22 +13,20 @@ HackerJunior::HackerJunior()
 	_isFreezed = false;
 	_isPoisoned = false;
 
-	_name = "Junior";
 	_currentPosition = getPosition();
 	_previousPosition = _currentPosition;
 
 	_frame = 0;
 	_life = 15;
-	_damage = 10;
-	_velocity = { 1.2,1.2 };
-	_goldenDrop = 35;
+	_velocity = { 1.1f, 1.1f };
+	_goldenDrop = 15;
 
 }
 
 
 int HackerJunior::attackUtn() {
 	
-	return 100;
+	return 20;
 }
 
 void HackerJunior::saySth()

@@ -9,7 +9,6 @@ class Hacker :public sf::Drawable, public sf::Transformable, public Collisionabl
 protected:
 	sf::Texture _texture;
 	sf::Sprite _sprite;
-	std::string _name;
 	sf::Vector2f _velocity;
 	sf::Vector2f _direction;
 	//audios

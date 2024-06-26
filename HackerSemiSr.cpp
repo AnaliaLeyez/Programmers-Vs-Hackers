@@ -13,21 +13,20 @@ HackerSemiSr::HackerSemiSr()
 	_isFreezed = false;
 	_isPoisoned = false;
 
-	_name = "SemiSR";
 	_currentPosition = getPosition();
 	_previousPosition = _currentPosition;
 
 	_frame = 0;
 	_life = 35;
-	_damage = 20;
-	_velocity = { 1.1,1.1 };
-	_goldenDrop = 50;
+	//_damage = 40;
+	_velocity = { 0.8f,0.8f };
+	_goldenDrop = 30;
 
 }
 
 int HackerSemiSr::attackUtn() {
 
-	return 60;
+	return 40;
 }
 
 void HackerSemiSr::saySth()
