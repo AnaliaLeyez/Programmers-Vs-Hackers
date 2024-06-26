@@ -16,7 +16,7 @@
 Level1::Level1() 
 {
 	_hackersPerWave = new int[4] { 4, 6, 8, 8 };
-	_wave1 = new int[4] { 1, 1, 1, 1};
+	_wave1 = new int[4] { 4, 1, 1, 1};
 	_wave2 = new int[6] { 1, 1, 1, 2, 2, 1 };
 	_wave3 = new int[8] { 1, 2, 1, 1, 2, 2, 2, 1};
 	_wave4 = new int [8] { 2, 1, 2, 2, 2, 2, 2, 2 };

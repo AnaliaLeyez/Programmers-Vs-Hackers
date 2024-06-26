@@ -13,14 +13,16 @@ HackerJunior::HackerJunior()
 	_isFreezed = false;
 	_isPoisoned = false;
 
+	_type = 2;
+
 	_name = "Junior";
 	_currentPosition = getPosition();
 	_previousPosition = _currentPosition;
 
 	_frame = 0;
-	_life = 15;
+	_life = 35;
 	_damage = 10;
-	_velocity = { 1.2,1.2 };
+	_velocity = { 1.0f,1.0f };
 	_goldenDrop = 9;
 
 }

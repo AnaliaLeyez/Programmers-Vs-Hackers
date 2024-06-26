@@ -28,12 +28,22 @@ void Hacker::setGoldenDrop(int drop) { _goldenDrop = drop; }
 //}
 void Hacker::takeDamage(int damageBullet, int type)
 {
-	std::cout << "Recibio danio tipo " << type << std::endl;
 	if (type == 4)
 	{
 		getFreezed();
 	}
-	_life -= damageBullet;
+
+	if (_type == type)
+	{
+		_life -= damageBullet * 1.7;
+		std::cout << "CRIT" << std::endl;
+	}
+	else
+	{
+		_life -= damageBullet;
+
+	}
+
 }
 
 void Hacker::animation(float _frame)
@@ -119,6 +129,6 @@ void Hacker::getFreezed()
 	if (!_isFreezed)
 	{
 		_isFreezed = true;
-		_velocity *= 0.6f;
+		_velocity *= 0.5f;
 	}
 }

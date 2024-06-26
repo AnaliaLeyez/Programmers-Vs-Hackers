@@ -13,14 +13,16 @@ HackerSemiSr::HackerSemiSr()
 	_isFreezed = false;
 	_isPoisoned = false;
 
+	_type = 3;
+
 	_name = "SemiSR";
 	_currentPosition = getPosition();
 	_previousPosition = _currentPosition;
 
 	_frame = 0;
-	_life = 35;
+	_life = 50;
 	_damage = 20;
-	_velocity = { 1.1,1.1 };
+	_velocity = { 0.9f,0.9f };
 	_goldenDrop = 12;
 
 }
