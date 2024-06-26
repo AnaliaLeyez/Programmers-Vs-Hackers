@@ -5,10 +5,16 @@
 
 MenuLevels::MenuLevels(bool state)
 {
+	/*
 	_musicPlaying = state;
 
-	_soundManager.playMusic();
-
+	if (_soundManager.getMusicOn()) {
+		_soundManager.playMusic();
+	}
+	else {
+		_soundManager.pauseMusic();
+	}
+	*/
 	FileLevels arc;
 	Levels reg;
 	
@@ -61,35 +67,36 @@ MenuLevels::MenuLevels(bool state)
 void MenuLevels::validateClick(int mousex, int mousey, sf::RenderWindow& window, int& view)
 {
 	if (getText1().getGlobalBounds().contains(mousex, mousey)) {
-		setSound(false);
-		setMusicPlaying(false);
+		//setSound(false);
+		//setMusicPlaying(false);
+		//_soundManager.setMusicOn(false);
 		//MenuAbstract::getInstance().stopMusic();
 		Manager::getInstance().setNumberLevel(0);
 		view = 2;
 	}
 	else if (getText2().getGlobalBounds().contains(mousex, mousey) && getText2().getString()!="") {
-		setSound(false);
-		setMusicPlaying(false);
+		//setSound(false);
+		//setMusicPlaying(false);
+		//_soundManager.setMusicOn(false);
 		//MenuAbstract::getInstance().stopMusic();
 		Manager::getInstance().setNumberLevel(1);
+		std::cout << "Menulevls validate elsif" << std::endl;
 		view = 2;
 	}
 	else if (getText3().getGlobalBounds().contains(mousex, mousey) && getText2().getString() != "") {
-		setSound(false);
-		setMusicPlaying(false);
+		//setSound(false);
+		//setMusicPlaying(false);
+		//_soundManager.setMusicOn(false);
+		std::cout << "Menulevls validate 2eslif" << std::endl;
 		Manager::getInstance().setNumberLevel(2);
 		view = 2;
 	}
 	else if (getText4().getGlobalBounds().contains(mousex, mousey) && getText2().getString() != "") {
-		setSound(false);
-		setMusicPlaying(false);
-		Manager::getInstance().setNumberLevel(3); //ajustar para que vaya a level 4 (mandar un 3)
-		view = 2;
-	}
-	else if (getText5().getGlobalBounds().contains(mousex, mousey) && getText2().getString() != "") {
-		setSound(false);
-		setMusicPlaying(false);
-		Manager::getInstance().setNumberLevel(4); //ajustar para que vaya a level 4 (mandar un 3)
+		//setSound(false);
+		//setMusicPlaying(false);
+		//_soundManager.setMusicOn(false);
+		std::cout << "Menulevls validate 3eslif" << std::endl;
+		Manager::getInstance().setNumberLevel(2); //ajustar para que vaya a level 4 (mandar un 3)
 		view = 2;
 	}
 	//VOLVER:

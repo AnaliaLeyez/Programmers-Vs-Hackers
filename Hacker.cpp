@@ -116,8 +116,9 @@ void Hacker::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void Hacker::getFreezed()
 {
-	if (!_isFreezed) {
+	if (!_isFreezed)
+	{
 		_isFreezed = true;
-		_velocity *= 0.2f;
+		_velocity *= 0.6f;
 	}
 }

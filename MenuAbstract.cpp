@@ -1,9 +1,12 @@
 #include <SFML/Graphics.hpp>
+
+#include <iostream>
 #include "Menu.h"
 #include "MenuHome.h"
 #include "MenuLevels.h"
 #include "MenuInfo.h"
 #include "MenuAbstract.h"
+#include "SoundManager.h"
 
 MenuAbstract* MenuAbstract::_currentInstance = nullptr;
 
@@ -23,28 +26,38 @@ MenuAbstract::MenuAbstract(int idMenu) : _currentMenu(nullptr) {
 void MenuAbstract::setNumberMenu(int idMenu)
 {
 	bool state;
+	SoundManager& _soundManger = SoundManager::getInstance();
+
 	switch (idMenu)
 	{
 	case 1:
-		if (_currentMenu != nullptr) {
-			state = _currentMenu->getMusicPlaying();
+		if (_currentMenu != nullptr)
+		{
+			//state = _currentMenu->getMusicPlaying();
+			state = _soundManger.getMusicOn();
+			std::cout << "Click en Switch de MenuAbstract case 1" << std::endl;
 			_currentMenu = new MenuHome(state);
 		}
-		else {
+		else
+		{
 			_currentMenu = new MenuHome(true);
 			_currentMenu->setSound(true);
 		}
 		break;
 	case 2:
 	{
-		state = _currentMenu->getMusicPlaying();
+		//state = _currentMenu->getMusicPlaying();
+		state = _soundManger.getMusicOn();
+		std::cout << "Click en Switch de MenuAbstract case 2" << std::endl;
 		_currentMenu = new MenuLevels(state);
 	}
 	break;
 	case 3:
 	{
-		state = _currentMenu->getMusicPlaying();
+		//state = _currentMenu->getMusicPlaying();
+		state = _soundManger.getMusicOn();
 		_currentMenu = new MenuInfo(state);
+		std::cout << "Click en Switch de MenuAbstract case 3" << std::endl;
 	}
 	break;
 	default:
