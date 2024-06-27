@@ -3,10 +3,8 @@
 #include "Menu.h"
 #include "MenuInfo.h"
 
-MenuInfo::MenuInfo(bool state)
+MenuInfo::MenuInfo()
 {
-	_musicPlaying = state;
-
 	if (!_textureInfo.loadFromFile("img/info/info.png")) {
 		throw std::runtime_error("Error al cargar img Banner");
 	}
@@ -25,9 +23,7 @@ MenuInfo::MenuInfo(bool state)
 void MenuInfo::validateClick(int mousex, int mousey, sf::RenderWindow& window, int& view)
 {
 	if (getText1().getGlobalBounds().contains(mousex, mousey)) {
-		//MenuAbstract::getInstance().saveSoundPosition();
 		MenuAbstract::getInstance().setNumberMenu(1);
-		//MenuAbstract::getInstance().restoreSoundPosition();
 	}
 }
 

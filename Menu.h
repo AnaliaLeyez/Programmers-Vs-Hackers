@@ -12,9 +12,7 @@ protected:
 	sf::RectangleShape _banner;
 	sf::Font _font;
 	sf::Text _text[6];
-	sf::SoundBuffer _buffer;
-	sf::Sound _sound;
-	bool _musicPlaying;
+	//bool _musicPlaying;
 
 	SoundManager& _soundManager;
 
@@ -28,12 +26,7 @@ public:
 	sf::Text getText4() const;
 	sf::Text getText5() const;
 	sf::Text getText6() const;
-	void setMusicPlaying(bool);
 	void setSound(bool);
-
-	bool getMusicPlaying() const;
-	float getSoundPosition() const;
-	void setSoundPosition(float);
 
 	void update(sf::Vector2i&);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;

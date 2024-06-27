@@ -2,7 +2,7 @@
 #include "MenuAbstract.h"
 #include "MenuHome.h"
 
-MenuHome::MenuHome(bool state)
+MenuHome::MenuHome()
 {
 	_soundManager.loadMusic("music/menuMusic.wav");
 	_soundManager.setVolume(5);
@@ -53,8 +53,6 @@ MenuHome::MenuHome(bool state)
 	}
 }
 
-bool MenuHome::getMusicPlaying() const { return _musicPlaying; }
-
 void MenuHome::setSoundText(bool play)
 {
 	if(play)
@@ -63,7 +61,6 @@ void MenuHome::setSoundText(bool play)
 	}
 	else
 	{
-		_sound.pause();
 		_text[3].setString("Play music");
 	}
 }

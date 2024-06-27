@@ -11,15 +11,6 @@ Menu::Menu()
 	_banner.setTexture(&_textureBanner);
 	_banner.setPosition(sf::Vector2f(0, 0));
 
-	//musica
-	
-	
-	//_buffer.loadFromFile("music/menuMusic.wav");
-	
-	//_sound.setBuffer(_buffer);
-	//_sound.setVolume(5);
-
-	//texto
 	if (!_font.loadFromFile("fuentes/fuenteMenu.ttf")) {
 		throw std::runtime_error("Error al cargar la fuente del Menu \n");
 	}
@@ -44,8 +35,6 @@ sf::Text Menu::getText4() const { return _text[3]; }
 sf::Text Menu::getText5() const { return _text[4]; }
 sf::Text Menu::getText6() const { return _text[5]; }
 
-void Menu::setMusicPlaying(bool playing) { _musicPlaying = playing; }
-
 void Menu::setSound(bool play)
 {
 	if (_soundManager.getMusicOn())
@@ -56,18 +45,6 @@ void Menu::setSound(bool play)
 	{
 		_soundManager.pauseMusic();
 	}
-}
-
-bool Menu::getMusicPlaying() const {
-	return _musicPlaying;
-}
-
-float Menu::getSoundPosition() const {
-	return _sound.getPlayingOffset().asSeconds();
-}
-
-void Menu::setSoundPosition(float position) {
-	_sound.setPlayingOffset(sf::seconds(position));
 }
 
 void Menu::update(sf::Vector2i& mousePosition)
@@ -81,6 +58,4 @@ void Menu::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 
 Menu::~Menu()
 {
-	/*_sound.stop();
-	_sound.resetBuffer();*/
 }

@@ -3,7 +3,7 @@
 #include "MenuAbstract.h"
 #include "MenuLevels.h"
 
-MenuLevels::MenuLevels(bool state) //state no se usa?
+MenuLevels::MenuLevels()
 {
 	FileLevels arc;
 	Levels reg;

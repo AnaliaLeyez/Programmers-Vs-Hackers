@@ -4,10 +4,8 @@
 class MenuHome : public Menu
 {
 public:
-	MenuHome(bool state);
+	MenuHome();
 	void validateClick(int, int, sf::RenderWindow&, int&) override;
-	bool getMusicPlaying() const;
-	//sf::Sound getSound() const;
 	void setSoundText(bool);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	

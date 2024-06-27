@@ -16,16 +16,13 @@ MenuAbstract& MenuAbstract::getInstance() {
 	}
 	return *MenuAbstract::_currentInstance;
 }
-//Menu* MenuAbstract::getCurrentMenu() const {
-//	return _currentMenu;
-//}
+
 MenuAbstract::MenuAbstract(int idMenu) : _currentMenu(nullptr) {
 	setNumberMenu(idMenu);
 }
 
 void MenuAbstract::setNumberMenu(int idMenu)
 {
-	bool state;
 	SoundManager& _soundManger = SoundManager::getInstance();
 
 	switch (idMenu)
@@ -33,28 +30,21 @@ void MenuAbstract::setNumberMenu(int idMenu)
 	case 1:
 		if (_currentMenu != nullptr)
 		{
-			//state = _currentMenu->getMusicPlaying();
-			state = _soundManger.getMusicOn();
-			_currentMenu = new MenuHome(state);
+			_currentMenu = new MenuHome();
 		}
 		else
 		{
-			_currentMenu = new MenuHome(true);
-			_currentMenu->setSound(true);
+			_currentMenu = new MenuHome();
 		}
 		break;
 	case 2:
 	{
-		//state = _currentMenu->getMusicPlaying();
-		state = _soundManger.getMusicOn();
-		_currentMenu = new MenuLevels(state);
+		_currentMenu = new MenuLevels();
 	}
 	break;
 	case 3:
 	{
-		//state = _currentMenu->getMusicPlaying();
-		state = _soundManger.getMusicOn();
-		_currentMenu = new MenuInfo(state);
+		_currentMenu = new MenuInfo();
 	}
 	break;
 	default:
