@@ -19,11 +19,8 @@ public:
 
 	virtual void moveToward();
 	virtual void loadTexture() = 0;
-
 	virtual sf::Vector2f getDirection() const;
 	sf::Vector2f getEnemyPosition() const;
-	void setCrash(bool);
-	bool getCrash();
 
 	virtual int getDamage() const;
 	virtual int getType();
@@ -31,7 +28,6 @@ public:
 	virtual void setDamage(int);
 
 	void setEnemyPosition(sf::Vector2f);
-
 
 	virtual sf::FloatRect getBounds() const;
 	virtual void update();
