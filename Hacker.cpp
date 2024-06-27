@@ -27,7 +27,7 @@ void Hacker::setGoldenDrop(int drop) { _goldenDrop = drop; }
 
 void Hacker::takeDamage(int damageBullet, int type)
 {
-	if (type == 4)
+	if (type == 1)
 	{
 		getFreezed();
 	}
