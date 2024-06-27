@@ -1,13 +1,10 @@
 #include <SFML/Graphics.hpp>
-#include <iostream> //una vez que todo funcione, esta libreria se va
-#include "Spot.h"
 #include "Button.h"
 #include "ButtonBrian.h"
 #include "ButtonKloster.h"
 #include "ButtonMaxiSar.h"
 #include "ButtonMaxiWenner.h"
 #include "TowerMenu1.h"
-
 
 TowerMenu1::TowerMenu1()
 {
@@ -37,10 +34,6 @@ TowerMenu1::TowerMenu1()
 	int i = 0;
 	for (Button* button : _buttons) {
 		button->setBtnNumber(i);
-		//button->setPriceText();
 		i++;
 	}
-
-	/*Spot sp;
-	setCurrentSpot(sp);*/
 }

@@ -1,4 +1,3 @@
-#include <iostream> //borrar
 #include <SFML/Graphics.hpp>
 
 #include "Spot.h"
@@ -35,14 +34,6 @@ void Spot::setSpotNumber(int n) { _spotNumber = n; }
 void Spot::setMouseHover(bool state) { _mouseHover = state; }
 void Spot::setOccupied(bool status){ _occupied = status; }
 void Spot::setCurrentTower(Tower* tower) { _currentTower = tower; }
-
-void Spot::validateMouseHover(bool &_mouseHover)
-{
-}
-
-void Spot::validateClick(int mousex, int mousey)
-{
-}
 
 void Spot::mouseCheck(sf::Vector2f& transformedMousePos)
 {

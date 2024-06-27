@@ -1,4 +1,3 @@
-#include <iostream> //borrar
 #include <vector>
 #include <list>
 #include "SFML/Graphics.hpp"
@@ -44,25 +43,15 @@ int& Level::getGolden() { return _golden; }
 int Level::getEnergy() { return _energy; }
 int Level::getCurrentWave() { return _currentWave; }
 int Level::getTotalWaves() { return _totalWaves; }
-sf::SoundBuffer Level::getBuffer() const { return _buffer; }
-sf::Sound Level::getSound() const { return _sound; }
-bool Level::getMusicPlaying() const { return _musicPlaying; }
 sf::Vector2f Level::getHackerStartPosition() const { return _hackerStartPosition; }
-//const std::list<Tower*> Level::getTowersAvailable() const { return _towersAvailable; }
 std::list<Tower*> Level::getActiveTowers() const { return _activeTowers; }
 
-//void Level::setIdLevel(int idLevel) { _idLevel = idLevel; }
 void Level::setFinishedLevel(bool finished) { _finishedLevel = finished; }
-void Level::setUI(const UI& ui) { _ui = ui; }
-void Level::setMap(const Map& map) { *_map = map; }
 void Level::setMapArray(const int(&mapArray)[22][30]) {
 	std::copy(&mapArray[0][0], &mapArray[0][0] + 22 * 30, &_mapArray[0][0]);
 }
 void Level::setGolden(int golden) { _golden = golden; }
 void Level::setEnergy(int energy) { _energy = energy; }
-void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
-void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
-//void Level::setTowersAvailable(Tower* towerAvailable) { _towersAvailable.push_back(towerAvailable); }
 void Level::setActiveTowers(Tower* tower) { _activeTowers.push_back(tower); }
 void Level::setSpot(Spot* sp)
 {
@@ -165,8 +154,6 @@ void Level::setLevelUpText()
 
 void Level::spawnWave() {
 	std::srand(std::time(nullptr));
-	//los contadores son de tipo static porque asi las variables mantienen su valor incluso
-	//despues de que la funcion haya terminado de ejecutarse
 	Hacker* hk;
 	if (_enemyIndex < _enemiesPerWave) {
 		// Genera un nuevo enemigo
@@ -219,7 +206,7 @@ void Level::spawnWave() {
 			_currentWave % 2 != 0 ? _hackerStartPosition = _hackerStartPosition1 : _hackerStartPosition = _hackerStartPosition2;
 			_enemiesPerWave = _hackersPerWave[_currentWave - 1]; // Acutaliza la cantidad de enemigos para la próxima oleada
 			_ui.setText(2, std::to_string(getCurrentWave()));
-			_waveClock.restart(); // Reinicia el temporizador de la oleada
+			_waveClock.restart();
 		}
 	}
 }
@@ -268,12 +255,11 @@ void Level::sell(Tower* tower, Spot& currentSpot) {
 void Level::resellTower(Spot& sp) {
 	Tower* tower = sp.getCurrentTower();
 	int resaleValue = tower->getSalesValue();
-	setGolden(getGolden() + resaleValue); // Agregar el valor de reventa al oro del jugador
+	setGolden(getGolden() + resaleValue); // Agrega el valor de reventa al oro del jugador
 	_ui.setText(0, std::to_string(getGolden()));
-	sp.clearCurrentTower(); // Limpiar la torre del spot
-	sp.setOccupied(false); // Marcar el spot como no ocupado
+	sp.clearCurrentTower(); // Limpia la torre del spot
+	sp.setOccupied(false); // Marca el spot como no ocupado
 	_activeTowers.remove(tower);
-
 }
 
 Hacker* Level::returnHacker(int type) {
@@ -366,69 +352,15 @@ void Level::update(sf::Vector2i& mousePosition, int& view) {
 			if (!_flagGameOver) {
 				mouseCheck(mousePosition);
 
-				if (_currentWave <= _totalWaves) {
+				if (_currentWave <= _totalWaves) 
+				{
 					spawnWave(); // Generar una nueva oleada de enemigos
 				}
 
-				// Actualizar los enemigos en el nivel
-				for (auto& hacker : _enemies) {
-					hacker->update(getMapArray());
-
-					if (hacker->getEnd() == true) {
-						if (getEnergy() - hacker->attackUtn() >= 0) {
-							_dying = true;
-							decreaseEnergy(hacker->attackUtn());
-						}
-						else {
-							setEnergy(0);
-							_flagGameOver = true;
-							setGameOverText();
-						}
-						_ui.setText(1, std::to_string(getEnergy()));
-						break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
-					}
-					else {
-						_dying = false;
-					}
-				}
-
-
-				for (auto& spot : _spots)
-				{
-					for (auto& hacker : _enemies)
-					{
-						if (spot->getIsOccupied() && spot->getTransform().transformRect((spot->getCurrentTower()->getBounds())).intersects(hacker->getBounds()))
-						{
-							if (spot->getCurrentTower()->canShoot())
-							{
-								shoot(spot->getPosition(),
-									hacker->getPosition(),
-									spot->getCurrentTower()->getDamage(),
-									spot->getCurrentTower()->getType(), hacker);
-							}
-						}
-					}
-				}
-
+				updateHackers();
+				updateSpots();
 				updateBullets();
-
-				auto itH = _enemies.begin();
-				while (itH != _enemies.end())
-				{
-					Hacker* hacker = *itH;
-					hacker->update(getMapArray());
-					if (hacker->getLife() <= 0)
-					{
-						setGolden(getGolden() + hacker->getGoldenDrop());
-						_ui.setText(0, std::to_string(getGolden()));
-
-						itH = _enemies.erase(itH);
-					}
-					else
-					{
-						++itH;
-					}
-				}
+				updateEnemies();
 
 				if (_currentMenu->getIsVisible())
 				{
@@ -437,8 +369,6 @@ void Level::update(sf::Vector2i& mousePosition, int& view) {
 			}
 			else {
 				if (_gameOverClock.getElapsedTime().asSeconds() > 5) {
-					setSound(false);
-					setMusicPlaying(false);
 					MenuAbstract::getInstance().setNumberMenu(2);
 					view = 1;
 				}
@@ -446,10 +376,111 @@ void Level::update(sf::Vector2i& mousePosition, int& view) {
 		}
 	}
 	else if (_levelUpClock.getElapsedTime().asSeconds() > 4) {
-		setSound(false);
-		setMusicPlaying(false);
 		MenuAbstract::getInstance().setNumberMenu(2);
 		view = 1;
+	}
+}
+
+void Level::updateBullets()
+{
+	auto it = _bullets.begin();
+	while (it != _bullets.end())
+	{
+		Bullet* bullet = *it;
+		bool bulletErased = false;
+
+		for (auto& hacker : _enemies)
+		{
+			if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
+			{
+				hacker->takeDamage(bullet->getDamage(), bullet->getType());
+				delete bullet;
+				bulletErased = true;
+
+				it = _bullets.erase(it);
+				break;
+			}
+		}
+
+		if (!bulletErased)
+		{
+			sf::Vector2f lastPosition = bullet->getPosition();
+
+			bullet->update();
+			bullet->update();
+
+			if (bullet->getPosition() == lastPosition)
+			{
+				delete bullet;
+				it = _bullets.erase(it);
+			}
+			else
+			{
+				++it;
+			}
+		}
+	}
+}
+void Level::updateHackers()
+{
+	for (auto& hacker : _enemies) {
+		hacker->update(getMapArray());
+
+		if (hacker->getEnd() == true) {
+			if (getEnergy() - hacker->attackUtn() >= 0) {
+				_dying = true;
+				decreaseEnergy(hacker->attackUtn());
+			}
+			else {
+				setEnergy(0);
+				_flagGameOver = true;
+				setGameOverText();
+			}
+			_ui.setText(1, std::to_string(getEnergy()));
+			break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
+		}
+		else {
+			_dying = false;
+		}
+	}
+}
+
+void Level::updateSpots() {
+	for (auto& spot : _spots)
+	{
+		for (auto& hacker : _enemies)
+		{
+			if (spot->getIsOccupied() && spot->getTransform().transformRect((spot->getCurrentTower()->getBounds())).intersects(hacker->getBounds()))
+			{
+				if (spot->getCurrentTower()->canShoot())
+				{
+					shoot(spot->getPosition(),
+						hacker->getPosition(),
+						spot->getCurrentTower()->getDamage(),
+						spot->getCurrentTower()->getType(), hacker);
+				}
+			}
+		}
+	}
+}
+
+void Level::updateEnemies() {
+	auto itH = _enemies.begin();
+	while (itH != _enemies.end())
+	{
+		Hacker* hacker = *itH;
+		hacker->update(getMapArray());
+		if (hacker->getLife() <= 0)
+		{
+			setGolden(getGolden() + hacker->getGoldenDrop());
+			_ui.setText(0, std::to_string(getGolden()));
+
+			itH = _enemies.erase(itH);
+		}
+		else
+		{
+			++itH;
+		}
 	}
 }
 
@@ -493,48 +524,6 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 	}
 
 }
-
-void Level::updateBullets()
-{
-	auto it = _bullets.begin();
-	while (it != _bullets.end())
-	{
-		Bullet* bullet = *it;
-		bool bulletErased = false;
-
-		for (auto& hacker : _enemies)
-		{
-			if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
-			{
-				hacker->takeDamage(bullet->getDamage(), bullet->getType());
-				delete bullet;
-				bulletErased = true;
-
-				it = _bullets.erase(it);
-				break;
-			}
-		}
-
-		if (!bulletErased)
-		{
-			sf::Vector2f lastPosition = bullet->getPosition();
-
-			bullet->update();
-			bullet->update();
-
-			if (bullet->getPosition() == lastPosition)
-			{
-				delete bullet;
-				it = _bullets.erase(it);
-			}
-			else
-			{
-				++it;
-			}
-		}
-	}
-}
-
 Level::~Level() { //eliminar todo lo que haya sido asignado con memoria dinamica
 	delete _menu1;
 	delete _menu2;

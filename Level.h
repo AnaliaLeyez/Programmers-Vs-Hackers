@@ -40,9 +40,6 @@ protected:
 	TowerMenu3* _menu3 = new TowerMenu3();
 	int _golden;
 	int _energy;
-	sf::SoundBuffer _buffer;
-	sf::Sound _sound;
-	bool _musicPlaying;
 
 	SoundManager& _soundManager;
 
@@ -66,7 +63,6 @@ protected:
 	sf::Vector2f _hackerStartPosition;
 	sf::Vector2f _hackerStartPosition1;
 	sf::Vector2f _hackerStartPosition2;
-	//std::list <Tower*> _towersAvailable;
 	std::list <Tower*> _activeTowers;
 
 	std::list<Bullet*> _bullets;
@@ -99,28 +95,18 @@ public:
 	Spot* getCurrentSpot() const;
 	Spot* getSpotByNumber(int) const;
 	TowerMenu* getCurrentMenu() const;
-	//Cambié acá por refrefencia
 	int& getGolden();
 	int getEnergy();
 	int getCurrentWave();
 	int getTotalWaves();
-	sf::SoundBuffer getBuffer() const;
-	bool getMusicPlaying() const;
-	sf::Sound getSound() const;
 	sf::Vector2f getHackerStartPosition() const;
-	//const std::list<Tower*> getTowersAvailable() const;
 	std::list <Tower*> getActiveTowers() const;
 
 	//void setIdLevel(int);
 	void setFinishedLevel(bool);
-	void setUI(const UI&);
-	void setMap(const Map&);
 	void setMapArray(const int(&)[22][30]);
 	void setGolden(int);
 	void setEnergy(int);
-	void setMusicPlaying(bool);
-	void setSound(bool);
-	//void setTowersAvailable(Tower*);
 	void setActiveTowers(Tower*);
 	void setSpot(Spot*);
 	void setSpots(int arr[][30], std::vector<Spot*>&, int);
@@ -130,13 +116,13 @@ public:
 	void setInfoBtn(TowerMenu*, Spot*, int);
 	void setNoCoinsText();
 	void setLevelUpText();
-
+	void setGameOverText();
 
 	void mouseCheck(sf::Vector2i&);
 	void validateClick(int, int, int&);
 	int validateClickOnSpot(int, int);
 	void manageClickOnSpot(int, int, Spot*, int);
-	void manageOutOfSpotClick(int, int); //DEBERIA SER PUNTERO??????
+	void manageOutOfSpotClick(int, int);
 	void clickWithMenu1Open(int, int, Spot&);
 	void clickWithMenu2Open(int, int, Spot&);
 	void validateClickOnSpeaker(int, int);
@@ -146,16 +132,17 @@ public:
 	void sell(Tower*, Spot&);
 	void resellTower(Spot&);
 	void decreaseEnergy(int);
-
 	Hacker* returnHacker(int);
 	void shoot(sf::Vector2f, sf::Vector2f, int, int, Hacker*);
 	void checkLevelCompletion();
-	void setGameOverText();
 
-	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	void update(sf::Vector2i&, int&);
 	void updateBullets();
+	void updateHackers();
+	void updateSpots();
+	void updateEnemies();
 
+	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	~Level();
 };
 

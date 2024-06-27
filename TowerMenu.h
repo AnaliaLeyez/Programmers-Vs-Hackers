@@ -29,6 +29,4 @@ public:
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 
 	sf::FloatRect getGlobalBounds() const;
-
-	void adjustPosition();
 };

@@ -2,7 +2,6 @@
 #include <list>
 #include <SFML/Graphics.hpp>
 
-#include "HackerTrainee.h"
 #include "Bullet.h"
 #include "Tower.h"
 
@@ -16,17 +15,9 @@ float Tower::getFireRateUpgrade() const { return _fireRateUpgrade; }
 int Tower::getUpgradesAmount() const { return _upgradesAmount;}
 int Tower::getSpotNumber() const { return _spotNumber; }
 Bullet* Tower::getBullet() const { return _bullet; }
-
-void Tower::setSpotNumber(int n) { _spotNumber = n; }
-
 int Tower::getType() const { return _type; }
 
-void Tower::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-    states.transform *= getTransform();
-    target.draw(_visualRange, states);
-    target.draw(_sprite, states);
-}
+void Tower::setSpotNumber(int n) { _spotNumber = n; }
 
 bool Tower::canShoot()
 {
@@ -42,3 +33,10 @@ sf::FloatRect Tower::getBounds() const {
         
     return getTransform().transformRect(_visualRange.getGlobalBounds());
 }
+void Tower::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    states.transform *= getTransform();
+    target.draw(_visualRange, states);
+    target.draw(_sprite, states);
+}
+

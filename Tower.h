@@ -9,7 +9,6 @@ class Tower : public sf::Drawable, public sf::Transformable
 protected:
 	sf::CircleShape _visualRange;
 	sf::Sprite _sprite;
-	//Propiedades esteticas
 	sf::Texture _texture;
 	std::string _name;
 	//Propiedades oro
@@ -27,7 +26,7 @@ protected:
 	int _upgradesAmount;
 
 	int _spotNumber;
-	int _type; //new
+	int _type;
 
 	sf::Clock _clock;
 	float _fireRate;
@@ -55,7 +54,8 @@ public:
 	void setSpotNumber(int);
 
 	//Comportamiento
+	bool canShoot();
+
 	sf::FloatRect getBounds() const;
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
-	bool canShoot();
 };

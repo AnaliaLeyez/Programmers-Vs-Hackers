@@ -1,10 +1,8 @@
 #include <SFML/Graphics.hpp>
-#include <iostream> //una vez que todo funcione, esta libreria se va
 #include "Spot.h"
 #include "Button.h"
 #include "ButtonBrian.h"
 #include "TowerMenu.h"
-
 
 bool TowerMenu::getIsVisible() { return _isVisible; }
 Button* TowerMenu::getButtonByIndex(int i) const { return _buttons[i]; }
@@ -65,28 +63,4 @@ void TowerMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 sf::FloatRect TowerMenu::getGlobalBounds() const {
 	return getTransform().transformRect(_sprite.getGlobalBounds());
-}
-
-void TowerMenu::adjustPosition()
-{
-	sf::Vector2f spotPosition = _currentSpot->getPosition();
-	sf::FloatRect menuBounds = _sprite.getGlobalBounds();
-
-	// Adjust if near the left or right edge
-	if (spotPosition.x - menuBounds.width / 2 < 0) {
-		spotPosition.x = menuBounds.width / 2;
-	}
-	else if (spotPosition.x + menuBounds.width / 2 > 960) {
-		spotPosition.x = 960 - menuBounds.width / 2;
-	}
-
-	// Adjust if near the top or bottom edge
-	if (spotPosition.y - menuBounds.height / 2 < 0) {
-		spotPosition.y = menuBounds.height / 2;
-	}
-	else if (spotPosition.y + menuBounds.height / 2 > 640) {
-		spotPosition.y = 640 - menuBounds.height / 2;
-	}
-
-	setPosition(spotPosition);
 }

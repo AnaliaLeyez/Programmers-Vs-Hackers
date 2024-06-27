@@ -9,7 +9,7 @@ void Bullet::moveToward()
 	sf::Vector2f direction = _enemyPosition - getPosition();
 	float distanceToTarget = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 
-	if (distanceToTarget < 1.0f) // Threshold distance
+	if (distanceToTarget < 0.5f) // Threshold distance
 	{
 		setPosition(_enemyPosition);
 	}
