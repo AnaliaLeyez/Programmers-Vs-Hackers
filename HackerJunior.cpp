@@ -11,11 +11,8 @@ HackerJunior::HackerJunior()
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 
 	_isFreezed = false;
-	_isPoisoned = false;
-
 	_type = 2;
 
-	_name = "Junior";
 	_currentPosition = getPosition();
 	_previousPosition = _currentPosition;
 

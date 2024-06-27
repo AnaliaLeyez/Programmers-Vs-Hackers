@@ -10,17 +10,13 @@ HackerBoss::HackerBoss()
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height);
 
 	_isFreezed = false;
-	_isPoisoned = false;
-
 	_type = 5;
 
-	_name = "BOSS";
 	_currentPosition = getPosition();
 	_previousPosition = _currentPosition;
 
 	_frame = 0;
-	_life = 300;
-	_damage = 50;
+	_life = 100;
 	_velocity = { 0.4f,0.4f };
 	_goldenDrop = 20;
 }

@@ -289,10 +289,10 @@ Hacker* Level::returnHacker(int type) {
 		return new HackerSemiSr;
 		break;
 	case 4:
-		return new HackerBoss;
-		break;
-	default:
 		return new HackerDios;
+		break;
+	case 5:
+		return new HackerBoss;
 		break;
 	}
 }
@@ -376,7 +376,6 @@ void Level::update(sf::Vector2i& mousePosition, int& view) {
 
 					if (hacker->getEnd() == true) {
 						if (getEnergy() - hacker->attackUtn() >= 0) {
-							std::cout << getEnergy() << std::endl;
 							_dying = true;
 							decreaseEnergy(hacker->attackUtn());
 						}

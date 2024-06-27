@@ -80,7 +80,6 @@ void Level::manageOutOfSpotClick(int mousex, int mousey) {
 		if (_currentMenu->getNumberMenu() == 1) 
 		{
 			clickWithMenu1Open(mousex, mousey, *sp);
-			std::cout << "Ola ke ase" << std::endl;
 			_currentMenu->adjustPosition();
 		}
 		else 

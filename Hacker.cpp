@@ -7,7 +7,6 @@
 
 //sf::Sprite& Hacker::getSprite() { return _sprite; }
 int Hacker::getLife() const { return _life; }
-int Hacker::getDamage() const { return _damage; }
 sf::Vector2f Hacker::getVelocity() const { return _velocity; }
 sf::Vector2f Hacker::getDirection() const { return _direction; }
 bool Hacker::getBoss() const { return _isABoss; }
@@ -16,7 +15,6 @@ bool Hacker::getEnd() const { return _reachedEnd; }
 
 void Hacker::setEnd(bool end) { _reachedEnd = end; }
 void Hacker::setLife(int life) { _life = life; }
-void Hacker::setDamage(int damage) { _damage = damage; }
 void Hacker::setVelocity(sf::Vector2f velocity) { _velocity = velocity; }
 void Hacker::setDirection(sf::Vector2f direction) { _direction = direction; }
 void Hacker::setBoos(bool boss) { _isABoss = boss; }
@@ -32,7 +30,6 @@ void Hacker::takeDamage(int damageBullet, int type)
 	if (_type == type)
 	{
 		_life -= damageBullet * 1.7;
-		std::cout << "CRIT" << std::endl;
 	}
 	else
 	{

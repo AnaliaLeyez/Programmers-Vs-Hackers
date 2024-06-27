@@ -10,17 +10,14 @@ HackerDios::HackerDios()
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 
 	_isFreezed = false;
-	_isPoisoned = false;
 
 	_type = 1;
 
-	_name = "God";
 	_currentPosition = getPosition();
 	_previousPosition = _currentPosition;
 
 	_frame = 0;
 	_life = 50;
-	//_damage = 60;
 	_velocity = { 0.8f,0.8f };
 	_goldenDrop = 70;
 }

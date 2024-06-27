@@ -16,7 +16,6 @@ protected:
 	sf::Sound _soundHacker;
 
 	int _life;
-	int _damage;
 	int _type;
 	bool _isABoss;
 	int _goldenDrop;
@@ -24,7 +23,6 @@ protected:
 	bool _reachedEnd; // llego al final del camino ?
 
 	bool _isFreezed;
-	bool _isPoisoned;
 
 	//Animation
 	float _frame;
@@ -35,7 +33,6 @@ public:
 	virtual int attackUtn() = 0;
 	virtual void saySth() = 0;
 	int getLife() const;
-	int getDamage() const;
 	sf::Vector2f getVelocity() const;
 	sf::Vector2f getDirection() const;
 	bool getBoss() const;
@@ -44,14 +41,13 @@ public:
 
 	void setEnd(bool);
 	void setLife(int);
-	void setDamage(int);
 	void setVelocity(sf::Vector2f);
 	void setDirection(sf::Vector2f);
 	void setBoos(bool);
 	void setGoldenDrop(int);
 
 	//Comportamiento
-	void moveHacker(int arr[][30]);
+	virtual void moveHacker(int arr[][30]);
 	sf::FloatRect getBounds() const;
 	void update(int arr[][30]);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
