@@ -32,20 +32,9 @@ void Bullet::loadTexture(std::string file)
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 }
-sf::Vector2f Bullet::getDirection() const { return _direction; }
-sf::Vector2f Bullet::getEnemyPosition() const {	return _enemyPosition; }
 
 int Bullet::getDamage() const { return _damage; }
-
-int Bullet::getType()
-{
-	return _type;
-}
-
-void Bullet::setDirection(sf::Vector2f d) { _direction = d; }
-void Bullet::setDamage(int damage) { _damage = damage; }
-void Bullet::setEnemyPosition(sf::Vector2f position) { _enemyPosition = position; }
-
+int Bullet::getType() { return _type; }
 void Bullet::update()
 {
 	moveToward();

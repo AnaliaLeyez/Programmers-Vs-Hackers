@@ -14,21 +14,14 @@ protected:
 	sf::Vector2f _enemyPosition;
 
 public:
-	virtual ~Bullet() {};
-
-	virtual void moveToward();
+	void moveToward();
 	void loadTexture(std::string);
-	virtual sf::Vector2f getDirection() const;
-	sf::Vector2f getEnemyPosition() const;
 
-	virtual int getDamage() const;
-	virtual int getType();
-	virtual void setDirection(sf::Vector2f);
-	virtual void setDamage(int);
+	int getDamage() const;
+	int getType();
 
-	void setEnemyPosition(sf::Vector2f);
-
-	virtual sf::FloatRect getBounds() const;
-	virtual void update();
-	virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
+	sf::FloatRect getBounds() const;
+	void update();
+	void draw(sf::RenderTarget&, sf::RenderStates) const;
+	~Bullet() {};
 };

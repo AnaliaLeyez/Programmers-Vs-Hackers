@@ -81,7 +81,7 @@ void TowerKloster::upgrade()
 		_priceUpgrade = 9990;
 		_salesValue = 328;
 		_damage = 13;
-		_fireRate = 1.2f;
+		_fireRate = 1.1f;
 		_upgradesAmount = 0;
 	}
 	default:

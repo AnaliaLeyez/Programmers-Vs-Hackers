@@ -19,13 +19,18 @@ std::string Button::getFireRateText() const {
 		fireRt= _tower->getFireRate();
 	else fireRt = _fireRate;
 	
-	if (fireRt < 1.f) {
-		return "Rapido";
+	if (fireRt <= 0.8f) {
+		return "Fastest";
+	} else if (fireRt <= 1.1f) {
+		return "Fast";
 	}
-	else if (fireRt >=2.f) {
-		return "lento";
+	else if (fireRt <=1.5f) {
+		return "Normal";
 	}
-	else return "normal";
+	else if (fireRt <= 1.7f) {
+		return "Slow";
+	}
+	else return "Slowest";
 }
 int Button::getBtnNumber() const { return _btnNumber; }
 void Button::setMouseHover(bool state) { _mouseHover = state; }
@@ -88,7 +93,7 @@ void Button::setInfo()
 	_spriteHourGlass.setPosition(-15, 100);
 
 	if (!_fontInfo.loadFromFile("fuentes/futura.ttf")) {
-		throw std::runtime_error("Error al cargar la fuente del Info Menu \n");
+		throw std::runtime_error("Error al cargar la fuente del Info Menu");
 	}
 
 	for (int i = 0; i < 2; i++) {
