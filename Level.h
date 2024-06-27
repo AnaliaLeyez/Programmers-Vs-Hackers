@@ -16,7 +16,6 @@
 #include "BulletB.h"
 #include "BulletC.h"
 #include "BulletD.h"
-
 #include "SoundManager.h"
 
 class Level: public sf::Drawable, public sf::Transformable
@@ -25,9 +24,6 @@ protected:
 	int _idLevel;
 	bool _finishedLevel;
 	UI _ui;
-	//sf::Texture _textureUTN;
-	//sf::Sprite _spriteUTN;
-	//NUEVO
 	sf::Texture _textureUTN;
 	sf::RectangleShape _UTN;
 	sf::Texture _textureUTNRed;
@@ -61,7 +57,7 @@ protected:
 	int _timeBetweenEnemies;
 	sf::Clock _waveClock;
 	sf::Clock _enemyClock;
-	float _enemiesRandomTime= std::rand() % 320 * 0.01f + 0.4f;
+	float _enemiesRandomTime= std::rand() % 420 * 0.01f + 0.4f;
 
 	sf::Vector2f _hackerStartPosition;
 	sf::Vector2f _hackerStartPosition1;
@@ -105,7 +101,6 @@ public:
 	sf::Vector2f getHackerStartPosition() const;
 	std::list <Tower*> getActiveTowers() const;
 
-	//void setIdLevel(int);
 	void setFinishedLevel(bool);
 	void setMapArray(const int(&)[22][30]);
 	void setGolden(int);

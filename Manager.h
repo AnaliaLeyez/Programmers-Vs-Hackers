@@ -1,7 +1,5 @@
 #pragma once
-#include <iostream>
 #include "Level.h"
-#include "MenuAbstract.h"
 
 class Manager : public sf::Drawable
 {

@@ -20,14 +20,6 @@ Manager& Manager::getInstance()
 	return *Manager::_currentInstance;
 }
 
-//void Manager::setInstance(Manager& mg)
-//{
-//	if (Manager::_currentInstance == nullptr) {
-//		Manager::_currentInstance = new Manager();
-//	}
-//	*_currentInstance = mg;
-//}
-
 Manager::Manager(int level): _currentLevel(nullptr)
 {
 	setNumberLevel(level);
@@ -82,5 +74,5 @@ void Manager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 Manager::~Manager()
 {
-	//delete _currentLevel;
+	delete _currentLevel;
 }
