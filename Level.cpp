@@ -1,53 +1,57 @@
-#include <iostream> //borrar
 #include <vector>
 #include <list>
 #include "SFML/Graphics.hpp"
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>
 
+#include "FileLevel.h"
+#include "MenuAbstract.h"
 #include "UI.h"
 #include "Map.h"
 #include "Manager.h"
 #include "TowerMenu.h"
 #include "Spot.h"
 #include "Tower.h"
+#include "Hacker.h"
+#include "HackerTrainee.h"
+#include "HackerJunior.h"
+#include "HackerSemiSr.h"
+#include "HackerDios.h"
+#include "HackerBoss.h"
 #include "Level.h"
 
+Level::Level()
+	: _soundManager(SoundManager::getInstance())
+{
+}
 
 int Level::getIdLevel() const { return _idLevel; }
+
 bool Level::getFinisheLevel() const { return _finishedLevel; }
 UI Level::getUI() const { return _ui; }
 Map Level::getMap() const { return *_map; }
 int(*Level::getMapArray())[30] { return _mapArray; }
 const std::vector<Spot*> Level::getSpots() const { return _spots; }
-Spot Level::getCurrentSpot() const { return _currentMenu->getCurrentSpot(); }
-Spot Level::getSpotByNumber(int n) const {
+Spot* Level::getCurrentSpot() const { return _currentMenu->getCurrentSpot(); }
+Spot* Level::getSpotByNumber(int n) const {
 	for (auto& spot : _spots) {
-		if (spot->getSpotNumber() == n) { return *spot; }
+		if (spot->getSpotNumber() == n) { return spot; }
 	}
 }
-TowerMenu Level::getCurrentMenu() const { return *_currentMenu; }
-int Level::getGolden() { return _golden; }
+TowerMenu* Level::getCurrentMenu() const { return _currentMenu; }
+int& Level::getGolden() { return _golden; }
 int Level::getEnergy() { return _energy; }
-sf::SoundBuffer Level::getBuffer() const { return _buffer; }
-sf::Sound Level::getSound() const { return _sound; }
-bool Level::getMusicPlaying() const { return _musicPlaying; }
+int Level::getCurrentWave() { return _currentWave; }
+int Level::getTotalWaves() { return _totalWaves; }
 sf::Vector2f Level::getHackerStartPosition() const { return _hackerStartPosition; }
-const std::list<Tower*> Level::getTowersAvailable() const { return _towersAvailable; }
 std::list<Tower*> Level::getActiveTowers() const { return _activeTowers; }
 
-void Level::setIdLevel(int idLevel) { _idLevel = idLevel; }
 void Level::setFinishedLevel(bool finished) { _finishedLevel = finished; }
-void Level::setUI(const UI& ui) { _ui = ui; }
-void Level::setMap(const Map& map) { *_map = map; }
 void Level::setMapArray(const int(&mapArray)[22][30]) {
 	std::copy(&mapArray[0][0], &mapArray[0][0] + 22 * 30, &_mapArray[0][0]);
 }
 void Level::setGolden(int golden) { _golden = golden; }
 void Level::setEnergy(int energy) { _energy = energy; }
-void Level::setMusicPlaying(bool playing) { _musicPlaying = playing; }
-void Level::setSound(bool play) { play ? _sound.play() : _sound.pause(); }
-void Level::setTowersAvailable(Tower* towerAvailable) { _towersAvailable.push_back(towerAvailable); }
 void Level::setActiveTowers(Tower* tower) { _activeTowers.push_back(tower); }
 void Level::setSpot(Spot* sp)
 {
@@ -56,7 +60,7 @@ void Level::setSpot(Spot* sp)
 		if (spot->getSpotNumber() == sp->getSpotNumber())
 		{
 			spot->setOccupied(sp->getIsOccupied());
-			spot->setCurrentTower(&sp->getCurrentTower());
+			spot->setCurrentTower(sp->getCurrentTower());
 			break;
 		}
 	}
@@ -82,15 +86,41 @@ void Level::setSpots(int arr[][30], std::vector<Spot*>& spots, int cant) {
 		}
 	}
 }
-void Level::setCurrentSpot(Spot sp) { _currentMenu->setCurrentSpot(sp); }
+void Level::setCurrentSpot(Spot* sp) { _currentMenu->setCurrentSpot(sp); }
 void Level::setCurrentMenu(TowerMenu* menu) { _currentMenu = menu; }
+void Level::setCurrentMenu(Spot* currentSp)
+{
+	_currentMenu->setCurrentSpot(currentSp); //guardo el nro de spot en el tower Menu2;
+	_currentMenu->setCurrentTower(currentSp->getCurrentTower());
+
+	setInfoBtn(_currentMenu, currentSp, 0); //debe recibir Tw*, *_currentMenu e Index
+	if (_currentMenu->getNumberMenu() == 2) {  //solo en el menu 2 se setea upgrade
+		setInfoBtn(_currentMenu, currentSp, 1);
+	}
+	_currentMenu->setPosition(currentSp->getPosition());
+}
+void Level::setInfoBtn(TowerMenu* menu, Spot* currentSp, int index)
+{
+	Tower* tower = currentSp->getCurrentTower();
+	Button* btn = _currentMenu->getButtonByIndex(index);
+	if (index == 1) {
+		btn->setPrice(tower->getPriceUpgrade());
+		btn->setDamage(tower->getDamageUpgrade());
+		btn->setFireRate(tower->getFireRateUpgrade());
+		btn->setInfo();
+	}
+	else {
+		btn->setPrice(tower->getSalesValue());
+	}
+	btn->setPriceText();
+}
 void Level::setNoCoinsText()
 {
-	if (!_font.loadFromFile("fuentes/TowerPrice.ttf"))
+	if (!_fontNoCoins.loadFromFile("fuentes/TowerPrice.ttf"))
 	{
 		throw std::runtime_error("Error al cargar la fuente del Price Menu \n");
 	}
-	_NoCoins.setFont(_font);
+	_NoCoins.setFont(_fontNoCoins);
 	_NoCoins.setCharacterSize(70);
 	_NoCoins.setOrigin(_NoCoins.getGlobalBounds().getPosition().x / 2, _NoCoins.getGlobalBounds().height / 2);
 	_NoCoins.setPosition(250, 250);
@@ -101,8 +131,85 @@ void Level::setNoCoinsText()
 	_displayTimeNoCoins = sf::seconds(3);
 	_flagNoCoins = false;
 }
+void Level::setLevelUpText()
+{
+	if (!_fontLevelUp.loadFromFile("fuentes/TowerPrice.ttf"))
+	{
+		throw std::runtime_error("Error al cargar la fuente del Level Up");
+	}
+	_levelUp.setFont(_fontLevelUp);
+	_levelUp.setCharacterSize(70);
+	_levelUp.setOrigin(_levelUp.getGlobalBounds().getPosition().x / 2, _levelUp.getGlobalBounds().height / 2);
+	_levelUp.setPosition(350, 250);
+	_levelUp.setFillColor(sf::Color(0, 0, 255));
+	_levelUp.setString("CONGRATS! \n LEVEL UP");
 
+	_congrats.setFont(_fontLevelUp);
+	_congrats.setCharacterSize(90);
+	_congrats.setOrigin(_levelUp.getGlobalBounds().getPosition().x / 2, _levelUp.getGlobalBounds().height / 2);
+	_congrats.setPosition(350, 250);
+	_congrats.setFillColor(sf::Color(0, 255, 0));
+	_congrats.setString("CONGRATS! \n YOU WIN");
+}
 
+void Level::spawnWave() {
+	std::srand(std::time(nullptr));
+	Hacker* hk;
+	if (_enemyIndex < _enemiesPerWave) {
+		// Genera un nuevo enemigo
+		float newRandom = std::rand() % 420 * 0.01f + 0.4f;
+		while (_enemiesRandomTime == newRandom) {
+			newRandom = std::rand() % 420 * 0.01f + 0.4f;
+		}
+		_enemiesRandomTime = newRandom;
+		if (_enemyClock.getElapsedTime().asMilliseconds() *0.001f >= _enemiesRandomTime) {
+			switch (_currentWave)
+			{
+			case 1:
+			{
+				hk = returnHacker(_wave1[_enemyIndex]);
+			}
+			break;
+			case 2:
+			{
+				hk = returnHacker(_wave2[_enemyIndex]);
+			}
+			break;
+			case 3:
+			{
+				hk = returnHacker(_wave3[_enemyIndex]);
+			}
+			break;
+			case 4:
+			default:
+			{
+				hk = returnHacker(_wave4[_enemyIndex]);
+			}
+			break;
+			}
+			hk->setPosition(_hackerStartPosition);
+			_enemies.push_back(hk);
+			if (_enemyIndex == 0) {
+				hk->saySth();
+			}
+			++_enemyIndex;
+			if (_currentWave > 1) {
+				_enemyIndex % 3 == 0 ? _hackerStartPosition = _hackerStartPosition1 : _hackerStartPosition = _hackerStartPosition2;
+			}
+			_enemyClock.restart();
+		}
+	}
+	else if (_waveClock.getElapsedTime().asSeconds() > _timeBetweenWaves && _enemies.empty() && _enemyIndex == _enemiesPerWave) {
+		++_currentWave; // Incrementa el número de oleada
+		_enemyIndex = 0; // Reinicia el índice para la próxima oleada
+		if (_currentWave <= _totalWaves) {
+			_currentWave % 2 != 0 ? _hackerStartPosition = _hackerStartPosition1 : _hackerStartPosition = _hackerStartPosition2;
+			_enemiesPerWave = _hackersPerWave[_currentWave - 1]; // Acutaliza la cantidad de enemigos para la próxima oleada
+			_ui.setText(2, std::to_string(getCurrentWave()));
+			_waveClock.restart();
+		}
+	}
+}
 void Level::decreaseEnergy(int amount) {
 	_energy -= amount;
 }
@@ -112,12 +219,7 @@ void Level::mouseCheck(sf::Vector2i& mousePosition)
 	sf::Vector2f transformedMousePos = getInverseTransform().transformPoint(sf::Vector2f(mousePosition));
 	for (auto& spot : _spots)
 	{
-		//spot->mouseCheck(mousePosition);  //por que si lo hago con esta linea no funciona? 
-		// deberia ser un pasamanos igual que lo es con currentMenu e igual que validateClick
-		if (spot->getGlobalBounds().contains(transformedMousePos))
-			spot->setMouseHover(true);
-		else
-			spot->setMouseHover(false);
+		spot->mouseCheck(transformedMousePos);
 	}
 	if (_currentMenu->getIsVisible() && _currentMenu->getGlobalBounds().contains(transformedMousePos))
 	{
@@ -151,18 +253,35 @@ void Level::sell(Tower* tower, Spot& currentSpot) {
 	currentSpot.setOccupied(true);
 }
 void Level::resellTower(Spot& sp) {
-	Tower* tower = &sp.getCurrentTower();
+	Tower* tower = sp.getCurrentTower();
 	int resaleValue = tower->getSalesValue();
-	std::cout << "Valor reventa:" << resaleValue << std::endl;
-	setGolden(getGolden() + resaleValue); // Agregar el valor de reventa al oro del jugador
+	setGolden(getGolden() + resaleValue); // Agrega el valor de reventa al oro del jugador
 	_ui.setText(0, std::to_string(getGolden()));
-	sp.clearCurrentTower(); // Limpiar la torre del spot
-	sp.setOccupied(false); // Marcar el spot como no ocupado
+	sp.clearCurrentTower(); // Limpia la torre del spot
+	sp.setOccupied(false); // Marca el spot como no ocupado
 	_activeTowers.remove(tower);
-
 }
 
-//void Level::shoot(Bullet* bullet, sf::Vector2f shootingPosition, sf::Vector2f targetPosition)
+Hacker* Level::returnHacker(int type) {
+	switch (type)
+	{
+	case 1:
+		return new HackerTrainee;
+		break;
+	case 2:
+		return new HackerJunior;
+		break;
+	case 3:
+		return new HackerSemiSr;
+		break;
+	case 4:
+		return new HackerDios;
+		break;
+	case 5:
+		return new HackerBoss;
+		break;
+	}
+}
 void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, int damage, int type, Hacker* hacker)
 {
 	switch (type)
@@ -180,43 +299,36 @@ void Level::shoot(sf::Vector2f shootingPosition, sf::Vector2f targetPosition, in
 		_bullets.push_back(new BulletD(shootingPosition, targetPosition, damage));
 		break;
 	}
-
-	auto it = _bullets.begin();
-	while (it != _bullets.end())
-	{
-		Bullet* bullet = *it;
-
-		if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
-		{
-			hacker->takeDamage(bullet->getDamage());
-			std::cout << "Vida Hacker" << hacker->getLife() << std::endl;
-			delete bullet;
-			it = _bullets.erase(it);
-		}
-		else
-		{
-			++it;
-
-		}
-	}
-
-	//ACA SE PODRIA PONER LA LOGICA PARA QUE SE BORRE LA BALA
 }
 
-void Level::checkLevelCompletion() {
-	if (_currentWave == _totalWaves && _enemies.empty()) {
+
+void Level::checkLevelCompletion()
+{
+	if (_currentWave > _totalWaves && _enemies.empty())
+	{
 		_finishedLevel = true;
+		_levelUpClock.restart();
+		_soundManager.stopMusic();
+		_soundManager.loadMusic("music/menuMusic.wav");
+
+		if (_idLevel < 4)
+		{  // cuando llega al ultimo nivel no se abre el archivo
+			FileLevels arc;
+			Levels reg;
+			reg = arc.read(_idLevel + 1);
+			reg.setStatus(true);
+			arc.edit(reg, _idLevel + 1);
+		}
 	}
 }
 
 void Level::setGameOverText()
 {
-	if (!_font.loadFromFile("fuentes/TowerPrice.ttf")) {
+	if (!_fontGameOver.loadFromFile("fuentes/TowerPrice.ttf")) {
 		throw std::runtime_error("Error al cargar la fuente del Price Menu");
 	}
-	_gameOver.setFont(_font);
+	_gameOver.setFont(_fontGameOver);
 	_gameOver.setCharacterSize(70);
-	//_gameOver.setOrigin(_gameOver.getGlobalBounds().width/ 2, _gameOver.getGlobalBounds().height / 2);
 	_gameOver.setPosition(300, 250);
 	_gameOver.setFillColor(sf::Color(255, 0, 0));
 	_gameOver.setString("GAME OVER");
@@ -228,118 +340,149 @@ void Level::setGameOverText()
 	_gameOverSkull.setPosition(400, 150);
 	_gameOverSkull.setScale(0.5, 0.5);
 	_gameOverSkull.setOrigin(_gameOverSkull.getGlobalBounds().width / 2, _gameOverSkull.getGlobalBounds().height / 2);
+	_gameOverClock.restart();
+	_soundManager.stopMusic();
+	_soundManager.loadMusic("music/menuMusic.wav");
 }
 
-void Level::update(sf::Vector2i& mousePosition) {
-	checkLevelCompletion();
-	if (!getFinisheLevel()) {
-		mouseCheck(mousePosition);
+void Level::update(sf::Vector2i& mousePosition, int& view) {
+	if (!_finishedLevel) {
+		checkLevelCompletion(); //xq quiero que una sola vez pase por el check level si se gana el nivel, ya que ahi reseteo un clock
+		if (!_finishedLevel) {
+			if (!_flagGameOver) {
+				mouseCheck(mousePosition);
 
-		if (_waveClock.getElapsedTime().asSeconds() >= _timeBetweenWaves && _currentWave <= 3) {
-			spawnWave(); // Generar una nueva oleada de enemigos
-		}
-
-		// Actualizar los enemigos en el nivel
-		for (auto& hacker : _enemies) {
-			hacker->update(getMapArray());
-
-			if (hacker->getEnd() == true) {
-				if (getEnergy()- hacker->attackUtn()>=0) {
-					_dying = true;
-					decreaseEnergy(hacker->attackUtn());
-				}
-				else {
-					setEnergy(0);
-					_flagGameOver = true;
-					setGameOverText();
-				}
-				_ui.setText(1, std::to_string(getEnergy()));
-				break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
-			}
-			else {
-				_dying = false;
-			}
-		}
-
-
-		for (auto& spot : _spots)
-		{
-			for (auto& hacker : _enemies)
-			{
-				if (spot->getIsOccupied() &&
-					spot->getTransform().transformRect((
-						spot->getCurrentTower().getBounds())).intersects(hacker->getBounds()
-						))
+				if (_currentWave <= _totalWaves) 
 				{
-					//std::cout << "COliSIONO" << std::endl;
-					if (spot->getCurrentTower().canShoot())
-					{
-						shoot(spot->getPosition(),
-							hacker->getPosition(),
-							spot->getCurrentTower().getDamage(),
-							spot->getCurrentTower().getType(), hacker);
-					}
+					spawnWave(); // Generar una nueva oleada de enemigos
 				}
-			}
-		}
 
-		for (auto& bullet : _bullets) {
-			bullet->update();
-		}
+				updateHackers();
+				updateSpots();
+				updateBullets();
+				updateEnemies();
 
-		auto itH = _enemies.begin();
-		while (itH != _enemies.end()) {
-			Hacker* hacker = *itH;
-			hacker->update(getMapArray());
-			if (hacker->getLife() <= 0) {
-				itH = _enemies.erase(itH);
+				if (_currentMenu->getIsVisible())
+				{
+					_currentMenu->update(mousePosition);
+				}
 			}
 			else {
-				++itH;
-			}
-
-			for (auto& hacker : _enemies) {
-				if (hacker->getEnd() == true) {
-					if (getEnergy() - 20 >= 0) {
-						_dying = true;
-						setEnergy(getEnergy() - 20);
-						_ui.setText(1, std::to_string(getEnergy()));
-					}
-					else {
-						_flagGameOver = true;
-						setGameOverText();
-					}
-					break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
-				}
-				else {
-					_dying = false;
+				if (_gameOverClock.getElapsedTime().asSeconds() > 5) {
+					MenuAbstract::getInstance().setNumberMenu(2);
+					view = 1;
 				}
 			}
+		}
+	}
+	else if (_levelUpClock.getElapsedTime().asSeconds() > 4) {
+		MenuAbstract::getInstance().setNumberMenu(2);
+		view = 1;
+	}
+}
 
-			// Verificar si se ha completado el nivel
-			if (_currentWave > 3 && _enemies.empty()) {
-				setFinishedLevel(true);
-			}
-			if (_currentMenu->getIsVisible()) {
-				_currentMenu->update(mousePosition);
+void Level::updateBullets()
+{
+	auto it = _bullets.begin();
+	while (it != _bullets.end())
+	{
+		Bullet* bullet = *it;
+		bool bulletErased = false;
+
+		for (auto& hacker : _enemies)
+		{
+			if (bullet->getTransform().transformRect(bullet->getBounds()).intersects(hacker->getBounds()))
+			{
+				hacker->takeDamage(bullet->getDamage(), bullet->getType());
+				delete bullet;
+				bulletErased = true;
+
+				it = _bullets.erase(it);
+				break;
 			}
 		}
 
+		if (!bulletErased)
+		{
+			sf::Vector2f lastPosition = bullet->getPosition();
+
+			bullet->update();
+			bullet->update();
+
+			if (bullet->getPosition() == lastPosition)
+			{
+				delete bullet;
+				it = _bullets.erase(it);
+			}
+			else
+			{
+				++it;
+			}
+		}
 	}
-	else {
-		if (getIdLevel() < 4) { // aca digo que solo puede llegar hasta el nivel 4
-			std::cout << "NIVEL 2:" << std::endl;
-			Manager::getInstance().setNumberLevel(2);
-			/*Manager::getInstance().setNumberLevel(getIdLevel() + 1);*/ // cambia al siguiente nivel
+}
+void Level::updateHackers()
+{
+	for (auto& hacker : _enemies) {
+		hacker->update(getMapArray());
+
+		if (hacker->getEnd() == true) {
+			if (getEnergy() - hacker->attackUtn() >= 0) {
+				_dying = true;
+				decreaseEnergy(hacker->attackUtn());
+			}
+			else {
+				setEnergy(0);
+				_flagGameOver = true;
+				setGameOverText();
+			}
+			_ui.setText(1, std::to_string(getEnergy()));
+			break; // Si encontramos un enemigo en el final, no necesitamos seguir buscando
 		}
 		else {
-			// lógica para cuando se termina el juego, cuando se pasaron todos los niveles
+			_dying = false;
 		}
 	}
 }
 
+void Level::updateSpots() {
+	for (auto& spot : _spots)
+	{
+		for (auto& hacker : _enemies)
+		{
+			if (spot->getIsOccupied() && spot->getTransform().transformRect((spot->getCurrentTower()->getBounds())).intersects(hacker->getBounds()))
+			{
+				if (spot->getCurrentTower()->canShoot())
+				{
+					shoot(spot->getPosition(),
+						hacker->getPosition(),
+						spot->getCurrentTower()->getDamage(),
+						spot->getCurrentTower()->getType(), hacker);
+				}
+			}
+		}
+	}
+}
 
+void Level::updateEnemies() {
+	auto itH = _enemies.begin();
+	while (itH != _enemies.end())
+	{
+		Hacker* hacker = *itH;
+		hacker->update(getMapArray());
+		if (hacker->getLife() <= 0)
+		{
+			setGolden(getGolden() + hacker->getGoldenDrop());
+			_ui.setText(0, std::to_string(getGolden()));
 
+			itH = _enemies.erase(itH);
+		}
+		else
+		{
+			++itH;
+		}
+	}
+}
 
 void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 {
@@ -351,28 +494,62 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 	{
 		target.draw(*spot, states);
 	}
-	if (!_flagGameOver) {
-		for (const auto& hacker : _enemies)
-		{
-			if (hacker->getLife() > 0) {
-				target.draw(*hacker, states);
+	if (!_finishedLevel) {
+		if (!_flagGameOver) {
+			for (const auto& hacker : _enemies)
+			{
+				if (hacker->getLife() > 0) {
+					target.draw(*hacker, states);
+				}
+			}
+			if (_currentMenu->getIsVisible())
+			{
+				target.draw(*_currentMenu, states);
+			}
+			for (auto& bullet : _bullets)
+			{
+				target.draw(*bullet, states);
+			}
+			if (_noCoinsClock.getElapsedTime() < _displayTimeNoCoins && _flagNoCoins) {
+				target.draw(_NoCoins, states); // Dibujar el texto
 			}
 		}
-		if (_currentMenu->getIsVisible())
-		{
-			target.draw(*_currentMenu, states);
-		}
-		for (auto& bullet : _bullets)
-		{
-			target.draw(*bullet, states);
-		}
-		if (_noCoinsClock.getElapsedTime() < _displayTimeNoCoins && _flagNoCoins) {
-			target.draw(_NoCoins, states); // Dibujar el texto
+		else {
+			target.draw(_gameOverSkull, states);
+			target.draw(_gameOver, states);
 		}
 	}
 	else {
-		target.draw(_gameOverSkull, states);
-		target.draw(_gameOver, states);
+		_idLevel != 4 ? target.draw(_levelUp, states) : target.draw(_congrats, states);
 	}
 
+}
+Level::~Level() { //eliminar todo lo que haya sido asignado con memoria dinamica
+	delete _menu1;
+	delete _menu2;
+	delete _menu3;
+
+	delete[] _hackersPerWave;
+	delete[] _wave1;
+	delete[] _wave2;
+	delete[] _wave3;
+	delete[] _wave4;
+
+	for (Hacker* hacker : _enemies) {
+		delete hacker;
+	}
+
+	for (Tower* tower : _activeTowers) {
+		delete tower;
+	}
+
+	for (Bullet* bullet : _bullets) {
+		delete bullet;
+	}
+
+	delete _map;
+
+	for (Spot* spot : _spots) {
+		delete spot;
+	}
 }

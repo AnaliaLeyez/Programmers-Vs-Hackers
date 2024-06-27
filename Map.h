@@ -9,6 +9,7 @@ protected:
 	sf::Texture _tileMap;
 	std::list<sf::Sprite> _tiles;	
 public:
+	Map(std::string);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 };
 

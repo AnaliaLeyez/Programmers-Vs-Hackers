@@ -1,53 +1,61 @@
 ﻿#pragma once
+#include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Audio/Sound.hpp>
 #include "Bullet.h"
 #include "HackerTrainee.h"
 
-class Tower : public sf::Drawable, public sf::Transformable, public Collisionable
+class Tower : public sf::Drawable, public sf::Transformable
 {
 protected:
 	sf::CircleShape _visualRange;
 	sf::Sprite _sprite;
-	//Propiedades esteticas
 	sf::Texture _texture;
 	std::string _name;
 	//Propiedades oro
 	int _price;
 	int _priceUpgrade;
 	int _salesValue;
+
+	//audios
+	sf::SoundBuffer _bufferTeacher;
+	sf::Sound _soundTeacher;
+
 	//Propiedades belicas:
 	int _damage;
-	int _range;
+	int _damageUpgrade;
 	int _upgradesAmount;
 
 	int _spotNumber;
-	int _type; //new
+	int _type;
 
-	//sf::Clock _clock;
-	int _cooldown;
+	sf::Clock _clock;
 	float _fireRate;
+	float _fireRateUpgrade;
 	Bullet* _bullet;
 
 public:
 	virtual Tower* clone() const = 0; // Método clone para crear nuevas instancias
 	virtual void upgrade()=0;
-
-	//Getters
-	sf::Sprite getSprite() const;
+	virtual void sayHi() = 0;
+	virtual void sayBye() = 0;
+	
 	int getPrice() const;
 	int getPriceUpgrade() const;
 	int getSalesValue() const;
 	int getDamage() const;
-	int getRange() const;
+	int getDamageUpgrade() const;
+	float getFireRate() const;
+	float getFireRateUpgrade() const;
+	int getUpgradesAmount() const;
 	int getSpotNumber() const;
 	Bullet* getBullet() const;
 	int getType() const;
 
-	void setRangeColor(sf::Color);
 	void setSpotNumber(int);
 
 	//Comportamiento
-	sf::FloatRect getBounds() const;
-	void update();
-	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	bool canShoot();
+
+	sf::FloatRect getBounds() const;
+	void draw(sf::RenderTarget&, sf::RenderStates) const;
 };

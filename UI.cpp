@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
-
+#include "SoundManager.h"
 #include "UI.h"
+
 UI::UI() {
 	if (!_textureBgPlyInfo.loadFromFile("img/complementarias/player_info_background.png")) {
 		throw std::runtime_error("Error al cargar Background Points");
@@ -34,11 +35,21 @@ UI::UI() {
 	_skull.setScale(0.5, 0.5);
 	_skull.setOrigin(_skull.getGlobalBounds().width / 2, _skull.getGlobalBounds().height / 2);
 
+	if (SoundManager::getInstance().getMusicOn())
+	{
+		if (!_textureSpeaker.loadFromFile("img/complementarias/musicOn.png"))
+		{
+			throw std::runtime_error("Error al cargar img mute");
+		}
+	}
+	else
+	{
+		if (!_textureSpeaker.loadFromFile("img/complementarias/mute.png"))
+		{
+			throw std::runtime_error("Error al cargar img mute");
+		}
+	}
 
-	//parlante
-	if (!_textureSpeaker.loadFromFile("img/complementarias/musicOn.png")) {
-		throw std::runtime_error("Error al cargar img mute");
-	};
 	_speaker.setSize(sf::Vector2f(80, 80));
 	_speaker.setTexture(&_textureSpeaker);
 	_speaker.setPosition(sf::Vector2f(900, 550));
@@ -47,7 +58,7 @@ UI::UI() {
 	if (!_font.loadFromFile("fuentes/fuenteMenu.ttf")) {
 		throw std::runtime_error("Error al cargar la fuente del Menu \n");
 	}
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 5; i++) {
 		_text[i].setFont(_font);
 		_text[i].setCharacterSize(23);
 		int posX, posY;
@@ -65,30 +76,29 @@ UI::UI() {
 		case 2:
 			posX = 615;
 			posY = 20;
-			texto = "1/1";
 			break;
 		case 3:
+			posX = 630;
+			posY = 20;
+			break;
+		case 4:
 			posX = 800;
 			posY = 600;
-			texto = "Menu";
+			texto = "Home";
 			break;
 		default:
 			break;
 		}
 		_text[i].setPosition(posX, posY);
-		_text[i].setString(texto);  //no debe ir, cambia segun cada nivel
-		//text[i].setOrigin(text[i].getGlobalBounds().getPosition().x / 2, text[i].getGlobalBounds().height / 2);
+		_text[i].setString(texto);
 		_text[i].setFillColor(sf::Color(255, 255, 255));
 	}
 }
 sf::RectangleShape UI::getSpeaker() const { return _speaker; }
-
-void UI::setText(int i, std::string text)
-{
-	_text[i].setString(text);
-}
-
+sf::Text UI::getText5() const { return _text[4]; }
 sf::Texture UI::getTextureSpeaker() const { return _textureSpeaker; }
+
+void UI::setText(int i, std::string text) { _text[i].setString(text); }
 void UI::setTextureSpeaker(std::string path) {
 	if (!_textureSpeaker.loadFromFile(path)) {
 		throw std::runtime_error("Error al cargar img mute");
@@ -101,7 +111,7 @@ void UI::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(_coin, states);
 	target.draw(_skull, states);
 	target.draw(_speaker, states);
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 5; i++) {
 		target.draw(_text[i], states);
 	}
 }

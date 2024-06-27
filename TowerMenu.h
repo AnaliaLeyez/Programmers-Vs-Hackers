@@ -8,14 +8,16 @@ protected:
 	sf::Texture _texture;
 	bool _isVisible;
 	std::vector <Button*> _buttons;
-	Spot _currentSpot; //DEBERIA SER PUNTERO
+	Spot* _currentSpot;
 	int _NumberMenu;
 public:
+	virtual void setCurrentTower(Tower*)=0;
+
 	bool getIsVisible();
 	Button* getButtonByIndex(int) const;
-	Spot getCurrentSpot() const; //DEBERIA SER PUNTERO
+	Spot* getCurrentSpot() const;
 	int getNumberMenu() const;
-	void setCurrentSpot(Spot);
+	void setCurrentSpot(Spot*);
 	void setButton(bool, int);
 
 	void hide();

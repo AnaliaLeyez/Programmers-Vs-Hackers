@@ -3,12 +3,17 @@
 class MenuAbstract : public sf::Drawable
 {
 private:
-	MenuAbstract(); //Singleton
+	MenuAbstract(int idMenu=1); //Singleton
 	static MenuAbstract* _currentInstance; //Singleton
-	Menu* _menu;
+	Menu* _currentMenu;
+	//float _soundPosition;
 public:
 	static MenuAbstract& getInstance(); //Singleton
+	//Menu* getCurrentMenu() const;
+	void setNumberMenu(int);
 	void validateClick(int, int, sf::RenderWindow&, int&);
-	void update();
+
+	void update(sf::Vector2i&);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
+	~MenuAbstract();
 };

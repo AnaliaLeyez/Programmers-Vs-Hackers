@@ -1,4 +1,3 @@
-#include <iostream> //borrar
 #include <SFML/Graphics.hpp>
 
 #include "Spot.h"
@@ -24,7 +23,7 @@ Spot::Spot()
 
 int Spot::getSpotNumber() const { return _spotNumber; }
 bool Spot::getIsOccupied() const { return _occupied; }
-Tower& Spot::getCurrentTower() const { return *_currentTower; }
+Tower* Spot::getCurrentTower() const { return _currentTower; }
 bool Spot::getMouseHover() const { return _mouseHover; }
 
 void Spot::setSpot(int spotNumber, bool status) {
@@ -36,12 +35,12 @@ void Spot::setMouseHover(bool state) { _mouseHover = state; }
 void Spot::setOccupied(bool status){ _occupied = status; }
 void Spot::setCurrentTower(Tower* tower) { _currentTower = tower; }
 
-void Spot::validateMouseHover(bool &_mouseHover)
+void Spot::mouseCheck(sf::Vector2f& transformedMousePos)
 {
-}
-
-void Spot::validateClick(int mousex, int mousey)
-{
+	if (getGlobalBounds().contains(transformedMousePos))
+		setMouseHover(true);
+	else
+		setMouseHover(false);
 }
 
 void Spot::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -64,4 +63,10 @@ sf::FloatRect Spot::getGlobalBounds() const {
 void Spot::clearCurrentTower()
 {
 	_currentTower = nullptr;
+}
+
+Spot::~Spot()
+{
+	if (_currentTower != nullptr)
+		_currentTower = nullptr;
 }

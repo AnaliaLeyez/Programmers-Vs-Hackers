@@ -3,33 +3,39 @@
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>
 
-using namespace std;
+#include "SoundManager.h"
 
-class Menu : public sf::Drawable
+class Menu :  public sf::Drawable
 {
-private:
+protected:
 	sf::Texture _textureBanner;
 	sf::RectangleShape _banner;
 	sf::Font _font;
-	sf::Text _text[5];
+	sf::Text _text[6];
 	sf::SoundBuffer _buffer;
 	sf::Sound _sound;
 	bool _musicPlaying;
+
+	SoundManager& _soundManager;
+
 public:
 	Menu();
+	virtual void validateClick(int, int, sf::RenderWindow&, int&)=0;
+	void mouseCheck(sf::Vector2i&);
 	sf::Text getText1() const;
 	sf::Text getText2() const;
 	sf::Text getText3() const;
 	sf::Text getText4() const;
 	sf::Text getText5() const;
-
-	//MUSICA Podria heredarse de una clase Musica
-	void validateClick(int, int, Menu&, sf::RenderWindow&, int &);
-	bool getMusicPlaying() const;
+	sf::Text getText6() const;
 	void setMusicPlaying(bool);
-	sf::Sound getSound() const;
 	void setSound(bool);
 
-	void update() {}
+	bool getMusicPlaying() const;
+	float getSoundPosition() const;
+	void setSoundPosition(float);
+
+	void update(sf::Vector2i&);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
+	~Menu();
 };
