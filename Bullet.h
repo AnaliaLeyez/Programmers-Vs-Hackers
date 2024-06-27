@@ -17,7 +17,7 @@ public:
 	virtual ~Bullet() {};
 
 	virtual void moveToward();
-	virtual void loadTexture() = 0;
+	void loadTexture(std::string);
 	virtual sf::Vector2f getDirection() const;
 	sf::Vector2f getEnemyPosition() const;
 

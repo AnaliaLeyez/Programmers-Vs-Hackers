@@ -24,6 +24,14 @@ sf::FloatRect Bullet::getBounds() const
 { 
 	return _sprite.getTransform().transformRect(_sprite.getGlobalBounds());
 }
+void Bullet::loadTexture(std::string file)
+{
+	if (!_texture.loadFromFile(file)) {
+		throw std::runtime_error("Error loading Bullet texture");
+	}
+	_sprite.setTexture(_texture);
+	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
+}
 sf::Vector2f Bullet::getDirection() const { return _direction; }
 sf::Vector2f Bullet::getEnemyPosition() const {	return _enemyPosition; }
 
