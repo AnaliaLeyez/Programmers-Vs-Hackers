@@ -375,7 +375,7 @@ void Level::update(sf::Vector2i& mousePosition, int& view) {
 			}
 		}
 	}
-	else if (_levelUpClock.getElapsedTime().asSeconds() > 4) {
+	else if (_levelUpClock.getElapsedTime().asSeconds() > 5) {
 		MenuAbstract::getInstance().setNumberMenu(2);
 		view = 1;
 	}
