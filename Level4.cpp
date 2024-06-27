@@ -13,7 +13,7 @@ Level4::Level4()
 
 	_currentWave = 1;
 	_totalWaves = 4;
-	_enemiesPerWave = 4;
+	_enemiesPerWave = 8;
 	_timeBetweenWaves = 15;
 	_waveClock.restart();
 	_enemyClock.restart();

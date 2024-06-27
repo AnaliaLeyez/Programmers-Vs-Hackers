@@ -5,7 +5,7 @@
 
 Level5::Level5()
 {
-	_hackersPerWave = new int[4] { 4, 6, 8, 8 };
+	_hackersPerWave = new int[4] { 4, 11, 11, 11 };
 	_wave1 = new int[4] { 1, 2, 3, 4};
 	_wave2 = new int[11] { 1, 4, 1, 1, 2, 1, 2, 2, 3, 1, 1};
 	_wave3 = new int[11] { 2, 1, 3, 1, 4, 2, 1, 4, 2, 1, 3};

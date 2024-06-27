@@ -18,14 +18,14 @@
 
 Level3::Level3()
 {
-	_hackersPerWave = new int[3] { 1, 12, 10 };
+	_hackersPerWave = new int[3] { 14, 12, 14 };
 	_wave1 = new int[14] { 4, 1, 1, 1, 3, 2, 2, 1, 3, 1, 1, 1, 3, 2 };
 	_wave2 = new int[12] { 3, 1, 1, 2, 1, 4, 1, 1, 2, 1 ,1, 4 };
 	_wave3 = new int[14] { 4, 2, 1, 1, 3, 1, 1, 1, 4, 1, 3, 1, 2, 3 };
 
 	_currentWave = 1;
 	_totalWaves = 3;
-	_enemiesPerWave = 1;
+	_enemiesPerWave = 14;
 	_timeBetweenWaves = 15;
 	_waveClock.restart();
 	_enemyClock.restart();
