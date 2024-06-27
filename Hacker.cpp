@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
-#include "Collisionable.h"
 #include "Hacker.h"
 
 

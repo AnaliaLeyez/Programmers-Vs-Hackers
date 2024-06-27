@@ -24,7 +24,6 @@ TowerKloster::TowerKloster()
 	_salesValue = 80;
 	_damage = 7;
 	_damageUpgrade = 9;
-	_range = 7;
 	_upgradesAmount = 2;
 	_fireRate = 2.0f; // Tiempo en segundos entre disparos
 	_clock.restart();

@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include "Collisionable.h"
 #include <SFML/Graphics.hpp>
 
 class Bullet : public sf::Drawable, public sf::Transformable

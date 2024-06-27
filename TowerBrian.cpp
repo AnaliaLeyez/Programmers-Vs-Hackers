@@ -27,7 +27,6 @@ TowerBrian::TowerBrian()
 	_salesValue = 176;
 	_damage = 5;
 	_damageUpgrade = 5;
-	_range = 9;
 	_upgradesAmount = 2;
 	_fireRate = 0.8f; // Tiempo en segundos entre disparos
 	_clock.restart();

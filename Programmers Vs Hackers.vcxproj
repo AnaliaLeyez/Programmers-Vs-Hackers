@@ -149,7 +149,6 @@
     <ClCompile Include="ButtonMaxiSar.cpp" />
     <ClCompile Include="ButtonMaxiWenner.cpp" />
     <ClCompile Include="ButtonUpgrade.cpp" />
-    <ClCompile Include="Collisionable.cpp" />
     <ClCompile Include="FileLevel.cpp" />
     <ClCompile Include="HackerBoss.cpp" />
     <ClCompile Include="HackerDios.cpp" />
@@ -198,7 +197,6 @@
     <ClInclude Include="ButtonMaxiSar.h" />
     <ClInclude Include="ButtonMaxiWenner.h" />
     <ClInclude Include="ButtonUpgrade.h" />
-    <ClInclude Include="Collisionable.h" />
     <ClInclude Include="FileLevel.h" />
     <ClInclude Include="HackerBoss.h" />
     <ClInclude Include="HackerDios.h" />

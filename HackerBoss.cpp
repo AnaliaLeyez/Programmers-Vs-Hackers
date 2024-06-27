@@ -18,7 +18,7 @@ HackerBoss::HackerBoss()
 	_frame = 0;
 	_life = 100;
 	_velocity = { 0.4f,0.4f };
-	_goldenDrop = 20;
+	_goldenDrop = 900;
 }
 
 void HackerBoss::animation(float _frame)

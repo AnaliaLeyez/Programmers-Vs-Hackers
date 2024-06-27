@@ -4,7 +4,7 @@
 #include "Bullet.h"
 #include "HackerTrainee.h"
 
-class Tower : public sf::Drawable, public sf::Transformable, public Collisionable
+class Tower : public sf::Drawable, public sf::Transformable
 {
 protected:
 	sf::CircleShape _visualRange;
@@ -24,7 +24,6 @@ protected:
 	//Propiedades belicas:
 	int _damage;
 	int _damageUpgrade;
-	int _range;
 	int _upgradesAmount;
 
 	int _spotNumber;
@@ -47,13 +46,11 @@ public:
 	int getDamage() const;
 	int getDamageUpgrade() const;
 	float getFireRate() const;
-	int getRange() const;
 	int getUpgradesAmount() const;
 	int getSpotNumber() const;
 	Bullet* getBullet() const;
 	int getType() const;
 
-	void setRangeColor(sf::Color);
 	void setSpotNumber(int);
 
 	//Comportamiento

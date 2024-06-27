@@ -2,9 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>
-#include "Collisionable.h"
 
-class Hacker :public sf::Drawable, public sf::Transformable, public Collisionable
+class Hacker :public sf::Drawable, public sf::Transformable
 {
 protected:
 	sf::Texture _texture;

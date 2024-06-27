@@ -2,12 +2,10 @@
 #include <list>
 #include <SFML/Graphics.hpp>
 
-#include "Collisionable.h"
 #include "HackerTrainee.h"
 #include "Bullet.h"
 #include "Tower.h"
 
-//std::string Tower::getName() const { return _name;}
 int Tower::getPrice() const { return _price; }
 int Tower::getPriceUpgrade() const { return _priceUpgrade; }
 int Tower::getSalesValue() const { return _salesValue; }
@@ -15,12 +13,10 @@ sf::Sprite Tower::getSprite() const { return _sprite; }
 int Tower::getDamage() const { return _damage; }
 int Tower::getDamageUpgrade() const { return _damageUpgrade; }
 float Tower::getFireRate() const { return _fireRate; }
-int Tower::getRange() const { return _range; }
 int Tower::getUpgradesAmount() const { return _upgradesAmount;}
 int Tower::getSpotNumber() const { return _spotNumber; }
 Bullet* Tower::getBullet() const { return _bullet; }
 
-void Tower::setRangeColor(sf::Color color) { _visualRange.setFillColor(color); }
 void Tower::setSpotNumber(int n) { _spotNumber = n; }
 
 int Tower::getType() const { return _type; }

@@ -24,7 +24,7 @@ HackerDios::HackerDios()
 
 int HackerDios::attackUtn() {
 
-	return 80;
+	return 70;
 }
 
 void HackerDios::saySth()
