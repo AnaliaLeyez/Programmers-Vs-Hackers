@@ -9,7 +9,6 @@
 int Tower::getPrice() const { return _price; }
 int Tower::getPriceUpgrade() const { return _priceUpgrade; }
 int Tower::getSalesValue() const { return _salesValue; }
-sf::Sprite Tower::getSprite() const { return _sprite; }
 int Tower::getDamage() const { return _damage; }
 int Tower::getDamageUpgrade() const { return _damageUpgrade; }
 float Tower::getFireRate() const { return _fireRate; }
@@ -42,8 +41,4 @@ bool Tower::canShoot()
 sf::FloatRect Tower::getBounds() const {
         
     return getTransform().transformRect(_visualRange.getGlobalBounds());
-}
-
-void Tower::update()
-{
 }

@@ -73,3 +73,9 @@ void Spot::clearCurrentTower()
 {
 	_currentTower = nullptr;
 }
+
+Spot::~Spot()
+{
+	if (_currentTower != nullptr)
+		_currentTower = nullptr;
+}

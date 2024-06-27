@@ -39,8 +39,7 @@ public:
 	virtual void upgrade()=0;
 	virtual void sayHi() = 0;
 	virtual void sayBye() = 0;
-	//Getters
-	sf::Sprite getSprite() const;
+	
 	int getPrice() const;
 	int getPriceUpgrade() const;
 	int getSalesValue() const;
@@ -57,7 +56,6 @@ public:
 
 	//Comportamiento
 	sf::FloatRect getBounds() const;
-	void update();
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
 	bool canShoot();
 };
