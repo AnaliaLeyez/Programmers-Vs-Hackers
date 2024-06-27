@@ -31,6 +31,7 @@ protected:
 
 	sf::Clock _clock;
 	float _fireRate;
+	float _fireRateUpgrade;
 	Bullet* _bullet;
 
 public:
@@ -46,6 +47,7 @@ public:
 	int getDamage() const;
 	int getDamageUpgrade() const;
 	float getFireRate() const;
+	float getFireRateUpgrade() const;
 	int getUpgradesAmount() const;
 	int getSpotNumber() const;
 	Bullet* getBullet() const;

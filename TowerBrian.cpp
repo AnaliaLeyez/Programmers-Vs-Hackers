@@ -29,6 +29,7 @@ TowerBrian::TowerBrian()
 	_damageUpgrade = 5;
 	_upgradesAmount = 2;
 	_fireRate = 1.f; // Tiempo en segundos entre disparos
+	_fireRateUpgrade = 0.8f;
 	_clock.restart();
 }
 
@@ -71,6 +72,7 @@ void TowerBrian::upgrade()
 		_damage = 5;
 		_damageUpgrade = 8;
 		_fireRate = 0.8f; //dispara mas rapido
+		_fireRateUpgrade = 0.7f;
 		_upgradesAmount = 1;
 	}
 	break;

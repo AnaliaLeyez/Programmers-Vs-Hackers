@@ -26,6 +26,7 @@ TowerWenner::TowerWenner()
 	_damageUpgrade = 14;
 	_upgradesAmount = 2;
 	_fireRate = 1.5f; // Tiempo en segundos entre disparos
+	_fireRateUpgrade = 1.5f;
 	_clock.restart();
 }
 
@@ -68,6 +69,7 @@ void TowerWenner::upgrade()
 		_damage = 14;
 		_damageUpgrade = 20;
 		//fireRate se mantiene
+		_fireRateUpgrade = 2.f;
 		_upgradesAmount = 1;
 	}
 	break;

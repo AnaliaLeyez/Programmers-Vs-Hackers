@@ -13,6 +13,7 @@ sf::Sprite Tower::getSprite() const { return _sprite; }
 int Tower::getDamage() const { return _damage; }
 int Tower::getDamageUpgrade() const { return _damageUpgrade; }
 float Tower::getFireRate() const { return _fireRate; }
+float Tower::getFireRateUpgrade() const { return _fireRateUpgrade; }
 int Tower::getUpgradesAmount() const { return _upgradesAmount;}
 int Tower::getSpotNumber() const { return _spotNumber; }
 Bullet* Tower::getBullet() const { return _bullet; }

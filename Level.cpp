@@ -117,7 +117,7 @@ void Level::setInfoBtn(TowerMenu* menu, Spot* currentSp, int index)
 	if (index == 1) {
 		btn->setPrice(tower->getPriceUpgrade());
 		btn->setDamage(tower->getDamageUpgrade());
-		btn->setFireRate(tower->getFireRate());
+		btn->setFireRate(tower->getFireRateUpgrade());
 		btn->setInfo();
 	}
 	else {

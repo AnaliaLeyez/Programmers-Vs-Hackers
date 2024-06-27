@@ -27,6 +27,7 @@ TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
 	_damageUpgrade = 5;
 	_upgradesAmount = 2;
 	_fireRate = 1.0f; // Tiempo en segundos entre disparos
+	_fireRateUpgrade = 1.7f;
 	_clock.restart();
 }
 
@@ -68,6 +69,7 @@ void TowerSarF::upgrade()
 		_damage = 5;
 		_damageUpgrade = 7;
 		_fireRate = 1.7f; //dispara mas rapido
+		_fireRateUpgrade = 1.5f;
 		_upgradesAmount = 1;
 	}
 	break;

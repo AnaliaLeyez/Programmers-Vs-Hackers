@@ -26,6 +26,7 @@ TowerKloster::TowerKloster()
 	_damageUpgrade = 9;
 	_upgradesAmount = 2;
 	_fireRate = 2.0f; // Tiempo en segundos entre disparos
+	_fireRateUpgrade = 1.5f;
 	_clock.restart();
 }
 
@@ -67,6 +68,7 @@ void TowerKloster::upgrade()
 		_damage = 9;
 		_damageUpgrade = 13;
 		_fireRate = 1.5f; //dispara mas rapido
+		_fireRateUpgrade = 1.f;
 		_upgradesAmount = 1;
 	}
 	break;
@@ -81,7 +83,7 @@ void TowerKloster::upgrade()
 		_priceUpgrade = 9990;
 		_salesValue = 328;
 		_damage = 13;
-		_fireRate = 1.1f;
+		_fireRate = 1.f;
 		_upgradesAmount = 0;
 	}
 	default:
