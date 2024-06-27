@@ -23,13 +23,3 @@ void BulletA::loadTexture()
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 }
-
-void BulletA::update1BulletA()
-{
-	_damage = 3;
-}
-
-void BulletA::update2BulletA()
-{
-	_damage = 4;
-}

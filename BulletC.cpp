@@ -24,13 +24,3 @@ void BulletC::loadTexture()
 	_sprite.setTexture(_texture);
 	_sprite.setOrigin(_sprite.getGlobalBounds().width / 2, _sprite.getGlobalBounds().height / 2);
 }
-
-void BulletC::update1BulletC()
-{
-	_damage = 3;
-}
-
-void BulletC::update2BulletC()
-{
-	_damage = 4;
-}
