@@ -38,7 +38,7 @@ public:
 	bool getBoss() const;
 	int getGoldenDrop() const;
 	bool getEnd() const;
-	void getFreezed();
+	virtual void getFreezed();
 
 	void setEnd(bool);
 	void setLife(int);
@@ -48,9 +48,9 @@ public:
 	void setGoldenDrop(int);
 
 	//Comportamiento
-	void moveHacker(int arr[][30]);
+	virtual void moveHacker(int arr[][30]);
 	void takeDamage(int, int);
-	void animation(float);
+	virtual void animation(float);
 
 	sf::FloatRect getBounds() const;
 	void update(int arr[][30]);

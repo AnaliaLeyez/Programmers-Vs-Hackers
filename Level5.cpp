@@ -1,6 +1,5 @@
 #include "TowerWenner.h"
 #include "Level.h"
-#include "Spot.h"
 #include "Level5.h"
 
 Level5::Level5()

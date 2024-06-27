@@ -525,7 +525,7 @@ void Level::draw(sf::RenderTarget& target, sf::RenderStates states)const
 
 }
 Level::~Level() { //eliminar todo lo que haya sido asignado con memoria dinamica
-	delete _menu1;
+	/*delete _menu1;
 	delete _menu2;
 	delete _menu3;
 
@@ -551,5 +551,5 @@ Level::~Level() { //eliminar todo lo que haya sido asignado con memoria dinamica
 
 	for (Spot* spot : _spots) {
 		delete spot;
-	}
+	}*/
 }

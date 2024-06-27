@@ -1,17 +1,7 @@
 #include <iostream>
-#include <cstdlib> // Necesario para std::rand() y std::srand()
+#include <cstdlib>
 #include <ctime> 
-#include "UI.h"
-#include "Map.h"
-#include "Tower.h"
-#include "TowerBrian.h"
-#include "TowerKloster.h"
-#include "TowerSarF.h"
-#include "TowerWenner.h"
-#include "HackerTrainee.h"
-#include "HackerJunior.h"
 #include "Level.h"
-#include "Spot.h"
 #include "Level2.h"
 
 Level2::Level2()
