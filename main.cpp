@@ -32,7 +32,7 @@ int main()
 	// Establecer el icono de la ventana
 	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 	int view = 1;
-	sf::Vector2i mousePosition; //xq no es 2f? si despues lo terminamos pasando a 2f siempre...
+	sf::Vector2i mousePosition;
 	while (window.isOpen())
 	{
 		SoundManager& soundManager = SoundManager::getInstance();
@@ -41,8 +41,6 @@ int main()
 		sf::Event ev;
 		while (window.pollEvent(ev))
 		{
-			
-			//movi window close al final para que no pase por aca innecesariamente si ya se dio click en cerrar...
 			if (ev.type == sf::Event::MouseButtonPressed && ev.mouseButton.button == sf::Mouse::Left)
 			{
 				int mousex = ev.mouseButton.x;
@@ -91,7 +89,7 @@ int main()
 		if (ev.type == sf::Event::EventType::Closed) {
 			MenuAbstract& menu = MenuAbstract::getInstance();
 			Manager& mg = Manager::getInstance();
-			delete& menu;   //puse delete a ver si se corregia lo de "device not closed"
+			delete& menu;
 			delete& mg;
 			window.close();
 		}

@@ -3,8 +3,6 @@
 #include <string>
 #include "Hacker.h"
 
-
-//sf::Sprite& Hacker::getSprite() { return _sprite; }
 int Hacker::getLife() const { return _life; }
 sf::Vector2f Hacker::getVelocity() const { return _velocity; }
 sf::Vector2f Hacker::getDirection() const { return _direction; }

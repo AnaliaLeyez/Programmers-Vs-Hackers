@@ -19,7 +19,7 @@ protected:
 	bool _isABoss;
 	int _goldenDrop;
 	sf::Vector2f _position;
-	bool _reachedEnd; // llego al final del camino ?
+	bool _reachedEnd;
 
 	bool _isFreezed;
 

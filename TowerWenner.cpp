@@ -1,6 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <iostream> //borrar
-#include "Hacker.h"
 #include "Tower.h"
 #include "TowerWenner.h"
 

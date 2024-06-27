@@ -1,10 +1,8 @@
 #include <SFML/Graphics.hpp>
-#include <iostream> //borrar
-#include "Hacker.h"
 #include "Tower.h"
 #include "TowerSarF.h"
 
-TowerSarF::TowerSarF() //elimine sf::Vector2f position   del argumento
+TowerSarF::TowerSarF()
 {
 	if (!_texture.loadFromFile("img/towers/torreD_1.png")) {
 		throw std::runtime_error("Error img Sar F");

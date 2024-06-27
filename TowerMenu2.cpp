@@ -1,6 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <iostream> //una vez que todo funcione, esta libreria se va
-#include "Spot.h"
 #include "Button.h"
 #include "ButtonCashSale.h"
 #include "ButtonUpgrade.h"
@@ -20,16 +18,13 @@ TowerMenu2::TowerMenu2()
 	//Buttons initialization
 	Button* btn = new ButtonCashSale();
 	_buttons.push_back(btn);
-	 btn = new ButtonUpgrade(); //aca va el boton de upgrade (que tiene img de espada)
+	 btn = new ButtonUpgrade();
 	_buttons.push_back(btn);
 
 	_buttons[1]->setPosition(0, -100);
 	_buttons[0]->setPosition(0, 85);
 	_buttons[1]->setBtnNumber(1);
 	_buttons[0]->setBtnNumber(2);
-
-	/*Spot sp;
-	setCurrentSpot(sp);*/
 }
 
 void TowerMenu2::setCurrentTower(Tower* tw)

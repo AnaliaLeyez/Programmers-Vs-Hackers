@@ -88,12 +88,3 @@ void FileLevels::reset() {
     }
     
 }
-
-//void leerLevels() {
-//    FileLevels arc;
-//    Levels reg;
-//    for (int i = 0; i < 5; i++) {
-//        reg = arc.read(i);
-//        reg.Mostrar();
-//    }
-//}

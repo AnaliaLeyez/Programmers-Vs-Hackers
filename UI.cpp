@@ -1,8 +1,7 @@
 #include <SFML/Graphics.hpp>
-
 #include "SoundManager.h"
-
 #include "UI.h"
+
 UI::UI() {
 	if (!_textureBgPlyInfo.loadFromFile("img/complementarias/player_info_background.png")) {
 		throw std::runtime_error("Error al cargar Background Points");
@@ -35,9 +34,6 @@ UI::UI() {
 	_skull.setPosition(580, 30);
 	_skull.setScale(0.5, 0.5);
 	_skull.setOrigin(_skull.getGlobalBounds().width / 2, _skull.getGlobalBounds().height / 2);
-
-
-	//parlante
 
 	if (SoundManager::getInstance().getMusicOn())
 	{
@@ -94,21 +90,15 @@ UI::UI() {
 			break;
 		}
 		_text[i].setPosition(posX, posY);
-		_text[i].setString(texto);  //no debe ir, cambia segun cada nivel
-		//text[i].setOrigin(text[i].getGlobalBounds().getPosition().x / 2, text[i].getGlobalBounds().height / 2);
+		_text[i].setString(texto);
 		_text[i].setFillColor(sf::Color(255, 255, 255));
 	}
 }
 sf::RectangleShape UI::getSpeaker() const { return _speaker; }
-
 sf::Text UI::getText5() const { return _text[4]; }
-
-void UI::setText(int i, std::string text)
-{
-	_text[i].setString(text);
-}
-
 sf::Texture UI::getTextureSpeaker() const { return _textureSpeaker; }
+
+void UI::setText(int i, std::string text) { _text[i].setString(text); }
 void UI::setTextureSpeaker(std::string path) {
 	if (!_textureSpeaker.loadFromFile(path)) {
 		throw std::runtime_error("Error al cargar img mute");
