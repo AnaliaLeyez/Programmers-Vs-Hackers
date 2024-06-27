@@ -12,15 +12,13 @@ private:
 
 public:
 	static SoundManager& getInstance();
+	bool getMusicOn();
+	void setVolume(float);
+	void setMusicOn(bool);
 
 	void loadMusic(const std::string& route);
 	void playMusic();
 	void stopMusic();
 	void pauseMusic();
-
-	void setVolume(float);
-
-	void setMusicOn(bool);
-	bool getMusicOn();
 };
 

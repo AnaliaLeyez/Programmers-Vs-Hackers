@@ -31,12 +31,14 @@ protected:
 public:
 	virtual int attackUtn() = 0;
 	virtual void saySth() = 0;
+
 	int getLife() const;
 	sf::Vector2f getVelocity() const;
 	sf::Vector2f getDirection() const;
 	bool getBoss() const;
 	int getGoldenDrop() const;
 	bool getEnd() const;
+	void getFreezed();
 
 	void setEnd(bool);
 	void setLife(int);
@@ -46,14 +48,11 @@ public:
 	void setGoldenDrop(int);
 
 	//Comportamiento
-	virtual void moveHacker(int arr[][30]);
+	void moveHacker(int arr[][30]);
+	void takeDamage(int, int);
+	void animation(float);
+
 	sf::FloatRect getBounds() const;
 	void update(int arr[][30]);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
-
-	virtual void getFreezed();
-
-	virtual void takeDamage(int,int);
-
-	virtual void animation(float);
 };

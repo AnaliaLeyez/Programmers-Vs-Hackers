@@ -8,5 +8,4 @@ public:
 	void validateClick(int, int, sf::RenderWindow&, int&) override;
 	void setSoundText(bool);
 	void draw(sf::RenderTarget&, sf::RenderStates) const;
-	
 };

@@ -9,19 +9,13 @@ void Bullet::moveToward()
 	sf::Vector2f direction = _enemyPosition - getPosition();
 	float distanceToTarget = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 
-	if (distanceToTarget < 0.5f) // Threshold distance
-	{
-		setPosition(_enemyPosition);
-	}
-	else
-	{
-		direction /= distanceToTarget;
-		move(direction * _speed);
-	}
+	//normalizacion
+	direction /= distanceToTarget;
+	move(direction * _speed);
 }
 
 sf::FloatRect Bullet::getBounds() const
-{ 
+{
 	return _sprite.getTransform().transformRect(_sprite.getGlobalBounds());
 }
 void Bullet::loadTexture(std::string file)

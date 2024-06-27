@@ -70,8 +70,8 @@ void MenuAbstract::draw(sf::RenderTarget& target, sf::RenderStates states)const 
 }
 MenuAbstract::~MenuAbstract()
 {
-	//if (_currentMenu) {
-	//	delete _currentMenu; // Eliminar el menú actual
-	//	_currentMenu = nullptr;
-	//}
+	if (_currentMenu) {
+		delete _currentMenu; // Eliminar el menú actual
+		_currentMenu = nullptr;
+	}
 }

@@ -68,7 +68,7 @@ Level5::Level5()
 	_UTNRed.setOrigin(_UTNRed.getGlobalBounds().width / 2, _UTNRed.getGlobalBounds().height / 2);
 
 	setSpots(arr, _spots, 7);
-	_golden = 1200;
+	_golden = 900;
 	_energy = 900;
 	_ui.setText(0, std::to_string(getGolden()));
 	_ui.setText(1, std::to_string(getEnergy()));

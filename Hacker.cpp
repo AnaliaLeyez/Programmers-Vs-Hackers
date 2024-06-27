@@ -9,6 +9,14 @@ sf::Vector2f Hacker::getDirection() const { return _direction; }
 bool Hacker::getBoss() const { return _isABoss; }
 int Hacker::getGoldenDrop() const { return _goldenDrop; }
 bool Hacker::getEnd() const { return _reachedEnd; }
+void Hacker::getFreezed()
+{
+	if (!_isFreezed)
+	{
+		_isFreezed = true;
+		_velocity *= 0.5f;
+	}
+}
 
 void Hacker::setEnd(bool end) { _reachedEnd = end; }
 void Hacker::setLife(int life) { _life = life; }
@@ -63,7 +71,6 @@ void Hacker::moveHacker(int arr[][30])
 	_previousPosition = _currentPosition;
 	_currentPosition = getPosition();
 
-
 	if (_isFreezed)
 	{
 		_sprite.setColor(sf::Color(135, 206, 250, 255));
@@ -112,13 +119,4 @@ void Hacker::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
 	target.draw(_sprite, states);
-}
-
-void Hacker::getFreezed()
-{
-	if (!_isFreezed)
-	{
-		_isFreezed = true;
-		_velocity *= 0.5f;
-	}
 }

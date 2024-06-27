@@ -4,7 +4,6 @@ SoundManager* SoundManager::_currentInstance = nullptr;
 
 SoundManager::SoundManager() : _currentMusic(), _musicOn(true)
 {
-    // Constructor implementation
 }
 
 SoundManager& SoundManager::getInstance()
@@ -14,6 +13,9 @@ SoundManager& SoundManager::getInstance()
     }
     return *SoundManager::_currentInstance;
 }
+bool SoundManager::getMusicOn() { return _musicOn; }
+void SoundManager::setVolume(float volume) { _currentMusic.setVolume(volume); }
+void SoundManager::setMusicOn(bool state) { _musicOn = state; }
 
 void SoundManager::loadMusic(const std::string& route)
 {
@@ -46,21 +48,3 @@ void SoundManager::pauseMusic()
 {
     _currentMusic.pause();
 }
-
-void SoundManager::setVolume(float volume)
-{
-    _currentMusic.setVolume(volume);
-}
-
-void SoundManager::setMusicOn(bool state)
-{
-    _musicOn = state;
-}
-
-bool SoundManager::getMusicOn()
-{
-    return _musicOn;
-}
-
-
-
