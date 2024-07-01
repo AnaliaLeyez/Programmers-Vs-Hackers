@@ -57,13 +57,10 @@ void MenuAbstract::validateClick(int mousex, int mousey, sf::RenderWindow& windo
 	_currentMenu->validateClick(mousex, mousey, window, view);
 }
 
-
-
 void MenuAbstract::update(sf::Vector2i& mousePosition)
 {
 	_currentMenu->update(mousePosition);
 }
-
 
 void MenuAbstract::draw(sf::RenderTarget& target, sf::RenderStates states)const {
 	target.draw(*_currentMenu, states);
@@ -71,7 +68,7 @@ void MenuAbstract::draw(sf::RenderTarget& target, sf::RenderStates states)const 
 MenuAbstract::~MenuAbstract()
 {
 	if (_currentMenu) {
-		delete _currentMenu; // Eliminar el menú actual
+		delete _currentMenu;
 		_currentMenu = nullptr;
 	}
 }
